@@ -1,20 +1,24 @@
-"C:\Program Files\Clion\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1"
+"C:\Program Files\JetBrains\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" C:\STUFF\COLLEGE\A2\SEM1\AEDA\PROJETO
 -- The C compiler identification is GNU 8.1.0
 -- The CXX compiler identification is GNU 8.1.0
--- Check for working C compiler: C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/gcc.exe
--- Check for working C compiler: C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/gcc.exe - works
+-- Check for working C compiler: C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/gcc.exe
+-- Check for working C compiler: C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/gcc.exe - works
 -- Detecting C compiler ABI info
 -- Detecting C compiler ABI info - done
 -- Detecting C compile features
 -- Detecting C compile features - done
--- Check for working CXX compiler: C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/g++.exe
--- Check for working CXX compiler: C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/g++.exe - works
+-- Check for working CXX compiler: C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/g++.exe
+-- Check for working CXX compiler: C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/g++.exe - works
 -- Detecting CXX compiler ABI info
 -- Detecting CXX compiler ABI info - done
 -- Detecting CXX compile features
 -- Detecting CXX compile features - done
 -- Found Doxygen: C:/Program Files/doxygen/bin/doxygen.exe (found version "1.8.20 (f246dd2f1c58eea39ea3f50c108019e4d4137bd5)") found components: doxygen missing components: dot
+CMake Error: File C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/docs/Doxyfile does not exist.
+CMake Error at CMakeLists.txt:19 (configure_file):
+  configure_file Problem configuring file
+
+
 Doxygen build started
--- Configuring done
--- Generating done
--- Build files have been written to: D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/cmake-build-debug
+-- Configuring incomplete, errors occurred!
+See also "C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/cmake-build-debug/CMakeFiles/CMakeOutput.log".

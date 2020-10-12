@@ -1,5 +1,8 @@
-#include "Member.h"
+//
+// Created by Melissa Silva on 12/10/2020.
+//
 
+#include "Member.h"
 
 Member::Member(string name, int nif, vector<Book*> books) {
     this->name = name;
@@ -33,18 +36,18 @@ int Member::findBook(string title) const{
     return -1;
 }
 
-bool Member::makeRequest(int code = 0, string name = ""){
+bool Member::makeRequest(int code, string name){
     if ((code == 0) && (name == "")) {
         return false;
     }
     if (code != 0){
-        lendRequests.push_back(books[code]);
+        lendRequests.push_back(*books[code]);
         return true;
     } else if ((name != "") && (findBook(name) != -1)) {
-        lendRequests.push_back(books[findBook(name)]);
+        lendRequests.push_back(*books[findBook(name)]);
         return true;
     }
-        return false;
+    return false;
 }
 
 bool Member::showLendRequests() const {

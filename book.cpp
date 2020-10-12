@@ -1,3 +1,7 @@
+//
+// Created by Melissa Silva on 12/10/2020.
+//
+
 #include "Book.h"
 using namespace std;
 
@@ -6,9 +10,6 @@ Book::Book(int code, string title, string author){
     this->title = title;
     this->author = author;
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 int Book::getCode() {
     return code;
@@ -29,9 +30,3 @@ string Book::getAuthor() {
 bool Book::getState() {
     return state;
 }
-=======
->>>>>>> parent of 8c75a40... Book.cpp implemented thus far
-=======
->>>>>>> parent of 8c75a40... Book.cpp implemented thus far
-=======
->>>>>>> parent of 8c75a40... Book.cpp implemented thus far

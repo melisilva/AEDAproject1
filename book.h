@@ -1,3 +1,7 @@
+//
+// Created by Melissa Silva on 12/10/2020.
+//
+
 #ifndef AEDAPROJECT1_BOOK_H
 #define AEDAPROJECT1_BOOK_H
 
@@ -15,7 +19,6 @@ public:
     int getCode();
     float getRating();
     string getTitle();
-    string getAuthor();
     bool getState();
 };
 

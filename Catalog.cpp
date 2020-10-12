@@ -23,3 +23,22 @@ void Catalog::removeBook(string title, int account){
         books.erase(books.begin() + todel);
     }
 }
+
+void Catalog::showRating(int code){
+    for(unsigned i=0;i<books.size();i++){
+        if(books[i].getCode()==code){
+            cout<<"Book rating: "<<books[i].getRating()<<endl;
+        }
+    }
+}
+
+void Catalog::registerRating(int code){
+    int rate;
+    cout<<"Rank this book from 1 to 5: "<<endl;
+    cin>>rate;
+    for(unsigned i=0;i<books.size();i++){
+        if(books[i].getCode()==code){
+           books[i].calculateRating(rate);
+        }
+    }
+}

@@ -12,7 +12,7 @@ int Book::getCode() {
 }
 
 float Book::getRating() {
-    return rating;
+    return realrating;
 }
 
 string Book::getTitle() {
@@ -54,4 +54,10 @@ void Book::deleteUnit(bool gonebook){
     if(gonebook==true){
         units-=1;
     }
+}
+
+void Book::calculateRating(int rate){
+    opinions+=1;
+    sumrating+=rate;
+    realrating=sumrating/opinions;
 }

@@ -5,14 +5,15 @@
 using namespace std;
 
 class Book {
-    int code, units, opinions;
-    float rating, value;
+    int code, units, opinions=0,sumrating=0;
+    float realrating, value;
     string title, author;
     bool state;
 
 public:
     Book(int code, string title, string author);
     void calculateValue(int edition);
+    void calculateRating(int rate);
     int getCode();
     float getRating();
     string getTitle();

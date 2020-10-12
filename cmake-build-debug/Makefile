@@ -67,10 +67,10 @@ RM = "C:\Program Files\Clion\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe" -E rm -
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "D:\Users\Melissa Silva\Desktop\FEUP\2ano\Primeiro semestre\AEDA\AEDAproject1"
+CMAKE_SOURCE_DIR = "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "D:\Users\Melissa Silva\Desktop\FEUP\2ano\Primeiro semestre\AEDA\AEDAproject1\cmake-build-debug"
+CMAKE_BINARY_DIR = "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\cmake-build-debug"
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -99,9 +99,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "D:\Users\Melissa Silva\Desktop\FEUP\2ano\Primeiro semestre\AEDA\AEDAproject1\cmake-build-debug\CMakeFiles" "D:\Users\Melissa Silva\Desktop\FEUP\2ano\Primeiro semestre\AEDA\AEDAproject1\cmake-build-debug\CMakeFiles\progress.marks"
+	$(CMAKE_COMMAND) -E cmake_progress_start "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\cmake-build-debug\CMakeFiles" "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\cmake-build-debug\CMakeFiles\progress.marks"
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start "D:\Users\Melissa Silva\Desktop\FEUP\2ano\Primeiro semestre\AEDA\AEDAproject1\cmake-build-debug\CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\cmake-build-debug\CMakeFiles" 0
 .PHONY : all
 
 # The main clean target
@@ -155,86 +155,113 @@ Doxygen/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Doxygen.dir\build.make CMakeFiles/Doxygen.dir/build
 .PHONY : Doxygen/fast
 
-book.obj: book.cpp.obj
+Book.obj: Book.cpp.obj
 
-.PHONY : book.obj
-
-# target to build an object file
-book.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\AEDAproject1.dir\build.make CMakeFiles/AEDAproject1.dir/book.cpp.obj
-.PHONY : book.cpp.obj
-
-book.i: book.cpp.i
-
-.PHONY : book.i
-
-# target to preprocess a source file
-book.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\AEDAproject1.dir\build.make CMakeFiles/AEDAproject1.dir/book.cpp.i
-.PHONY : book.cpp.i
-
-book.s: book.cpp.s
-
-.PHONY : book.s
-
-# target to generate assembly for a file
-book.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\AEDAproject1.dir\build.make CMakeFiles/AEDAproject1.dir/book.cpp.s
-.PHONY : book.cpp.s
-
-catalog.obj: catalog.cpp.obj
-
-.PHONY : catalog.obj
+.PHONY : Book.obj
 
 # target to build an object file
-catalog.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\AEDAproject1.dir\build.make CMakeFiles/AEDAproject1.dir/catalog.cpp.obj
-.PHONY : catalog.cpp.obj
+Book.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\AEDAproject1.dir\build.make CMakeFiles/AEDAproject1.dir/Book.cpp.obj
+.PHONY : Book.cpp.obj
 
-catalog.i: catalog.cpp.i
+Book.i: Book.cpp.i
 
-.PHONY : catalog.i
+.PHONY : Book.i
 
 # target to preprocess a source file
-catalog.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\AEDAproject1.dir\build.make CMakeFiles/AEDAproject1.dir/catalog.cpp.i
-.PHONY : catalog.cpp.i
+Book.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\AEDAproject1.dir\build.make CMakeFiles/AEDAproject1.dir/Book.cpp.i
+.PHONY : Book.cpp.i
 
-catalog.s: catalog.cpp.s
+Book.s: Book.cpp.s
 
-.PHONY : catalog.s
+.PHONY : Book.s
 
 # target to generate assembly for a file
-catalog.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\AEDAproject1.dir\build.make CMakeFiles/AEDAproject1.dir/catalog.cpp.s
-.PHONY : catalog.cpp.s
+Book.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\AEDAproject1.dir\build.make CMakeFiles/AEDAproject1.dir/Book.cpp.s
+.PHONY : Book.cpp.s
 
-club.obj: club.cpp.obj
+Catalog.obj: Catalog.cpp.obj
 
-.PHONY : club.obj
+.PHONY : Catalog.obj
 
 # target to build an object file
-club.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\AEDAproject1.dir\build.make CMakeFiles/AEDAproject1.dir/club.cpp.obj
-.PHONY : club.cpp.obj
+Catalog.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\AEDAproject1.dir\build.make CMakeFiles/AEDAproject1.dir/Catalog.cpp.obj
+.PHONY : Catalog.cpp.obj
 
-club.i: club.cpp.i
+Catalog.i: Catalog.cpp.i
 
-.PHONY : club.i
+.PHONY : Catalog.i
 
 # target to preprocess a source file
-club.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\AEDAproject1.dir\build.make CMakeFiles/AEDAproject1.dir/club.cpp.i
-.PHONY : club.cpp.i
+Catalog.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\AEDAproject1.dir\build.make CMakeFiles/AEDAproject1.dir/Catalog.cpp.i
+.PHONY : Catalog.cpp.i
 
-club.s: club.cpp.s
+Catalog.s: Catalog.cpp.s
 
-.PHONY : club.s
+.PHONY : Catalog.s
 
 # target to generate assembly for a file
-club.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\AEDAproject1.dir\build.make CMakeFiles/AEDAproject1.dir/club.cpp.s
-.PHONY : club.cpp.s
+Catalog.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\AEDAproject1.dir\build.make CMakeFiles/AEDAproject1.dir/Catalog.cpp.s
+.PHONY : Catalog.cpp.s
+
+Club.obj: Club.cpp.obj
+
+.PHONY : Club.obj
+
+# target to build an object file
+Club.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\AEDAproject1.dir\build.make CMakeFiles/AEDAproject1.dir/Club.cpp.obj
+.PHONY : Club.cpp.obj
+
+Club.i: Club.cpp.i
+
+.PHONY : Club.i
+
+# target to preprocess a source file
+Club.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\AEDAproject1.dir\build.make CMakeFiles/AEDAproject1.dir/Club.cpp.i
+.PHONY : Club.cpp.i
+
+Club.s: Club.cpp.s
+
+.PHONY : Club.s
+
+# target to generate assembly for a file
+Club.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\AEDAproject1.dir\build.make CMakeFiles/AEDAproject1.dir/Club.cpp.s
+.PHONY : Club.cpp.s
+
+Member.obj: Member.cpp.obj
+
+.PHONY : Member.obj
+
+# target to build an object file
+Member.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\AEDAproject1.dir\build.make CMakeFiles/AEDAproject1.dir/Member.cpp.obj
+.PHONY : Member.cpp.obj
+
+Member.i: Member.cpp.i
+
+.PHONY : Member.i
+
+# target to preprocess a source file
+Member.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\AEDAproject1.dir\build.make CMakeFiles/AEDAproject1.dir/Member.cpp.i
+.PHONY : Member.cpp.i
+
+Member.s: Member.cpp.s
+
+.PHONY : Member.s
+
+# target to generate assembly for a file
+Member.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\AEDAproject1.dir\build.make CMakeFiles/AEDAproject1.dir/Member.cpp.s
+.PHONY : Member.cpp.s
 
 main.obj: main.cpp.obj
 
@@ -262,33 +289,6 @@ main.s: main.cpp.s
 main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\AEDAproject1.dir\build.make CMakeFiles/AEDAproject1.dir/main.cpp.s
 .PHONY : main.cpp.s
-
-members.obj: members.cpp.obj
-
-.PHONY : members.obj
-
-# target to build an object file
-members.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\AEDAproject1.dir\build.make CMakeFiles/AEDAproject1.dir/members.cpp.obj
-.PHONY : members.cpp.obj
-
-members.i: members.cpp.i
-
-.PHONY : members.i
-
-# target to preprocess a source file
-members.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\AEDAproject1.dir\build.make CMakeFiles/AEDAproject1.dir/members.cpp.i
-.PHONY : members.cpp.i
-
-members.s: members.cpp.s
-
-.PHONY : members.s
-
-# target to generate assembly for a file
-members.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\AEDAproject1.dir\build.make CMakeFiles/AEDAproject1.dir/members.cpp.s
-.PHONY : members.cpp.s
 
 nonMem.obj: nonMem.cpp.obj
 
@@ -327,21 +327,21 @@ help:
 	@echo ... rebuild_cache
 	@echo ... Doxygen
 	@echo ... AEDAproject1
-	@echo ... book.obj
-	@echo ... book.i
-	@echo ... book.s
-	@echo ... catalog.obj
-	@echo ... catalog.i
-	@echo ... catalog.s
-	@echo ... club.obj
-	@echo ... club.i
-	@echo ... club.s
+	@echo ... Book.obj
+	@echo ... Book.i
+	@echo ... Book.s
+	@echo ... Catalog.obj
+	@echo ... Catalog.i
+	@echo ... Catalog.s
+	@echo ... Club.obj
+	@echo ... Club.i
+	@echo ... Club.s
+	@echo ... Member.obj
+	@echo ... Member.i
+	@echo ... Member.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
-	@echo ... members.obj
-	@echo ... members.i
-	@echo ... members.s
 	@echo ... nonMem.obj
 	@echo ... nonMem.i
 	@echo ... nonMem.s

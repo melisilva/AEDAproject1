@@ -1,7 +1,3 @@
-//
-// Created by Melissa Silva on 12/10/2020.
-//
-
 #ifndef AEDAPROJECT1_CLUB_H
 #define AEDAPROJECT1_CLUB_H
 #include "Book.h"

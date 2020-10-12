@@ -4,6 +4,7 @@
 #include "catalog.h"
 #include "members.h"
 #inlcude "nonMem.h"
+using namespace std;
 
 class Club{
     Catalog catalog;

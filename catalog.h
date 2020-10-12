@@ -3,6 +3,7 @@
 #include "members.h"
 #include "nonMem.h"
 #include "book.h"
+using namespace std;
 
 class Catalog{
     vector<Book> books, lendings;

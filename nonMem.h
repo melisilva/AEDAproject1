@@ -1,7 +1,7 @@
 #ifndef PROJETO_NONMEM_H
 #define PROJETO_NONMEM_H
 #include "members.h"
-
+using namespace std;
 
 class nonMem : public members{
     vector<Book> lendRequests, lendings;

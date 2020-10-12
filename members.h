@@ -1,5 +1,11 @@
 #ifndef PROJETO_MEMBERS_H
 #define PROJETO_MEMBERS_H
+#include "book.h"
+#include <string>
+#include <vector>
+#include <iostream>
+#include <iomanip>
+using namespace std;
 
 class Member{
     vector<Book> books, lendRequests, lendings;
@@ -8,7 +14,7 @@ class Member{
     float balance;
 
     public:
-        Member(name, nif, books);
+        Member(string name, int nif, vector<Book> books);
         void showData(ofstream file) const;
         void updateData(ofstream file, string name, string account);
         void showLendRequests() const;

@@ -1,9 +1,12 @@
-#ifndef PROJETO_NONMEM_H
-#define PROJETO_NONMEM_H
-#include "members.h"
-using namespace std;
+//
+// Created by Melissa Silva on 12/10/2020.
+//
 
-class nonMem : public members{
+#ifndef AEDAPROJECT1_NONMEM_H
+#define AEDAPROJECT1_NONMEM_H
+#include "Member.h"
+
+class nonMem : public Member{
     vector<Book> lendRequests, lendings;
     string name;
     int nif, account;
@@ -16,8 +19,7 @@ public:
     int getNIF() const;
     int getAccount() const;
     string getName() const;
-    vector<Book> lendRequests() const;
 };
 
 
-#endif //PROJETO_NONMEM_H
+#endif //AEDAPROJECT1_NONMEM_H

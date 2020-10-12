@@ -1,14 +1,18 @@
-#ifndef PROJETO_CLUB_H
-#define PROJETO_CLUB_H
-#include "book.h"
-#include "catalog.h"
-#include "members.h"
-#inlcude "nonMem.h"
+//
+// Created by Melissa Silva on 12/10/2020.
+//
+
+#ifndef AEDAPROJECT1_CLUB_H
+#define AEDAPROJECT1_CLUB_H
+#include "Book.h"
+#include "Catalog.h"
+#include "Member.h"
+#include "nonMem.h"
 using namespace std;
 
-class Club{
+class Club {
     Catalog catalog;
-    vector<Members> members;
+    vector<Member> members;
 
 public:
 
@@ -23,5 +27,4 @@ public:
 };
 
 
-
-#endif //PROJETO_CLUB_H
+#endif //AEDAPROJECT1_CLUB_H

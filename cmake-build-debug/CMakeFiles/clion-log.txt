@@ -1,1 +1,6 @@
-CMakeLists.txt not found in C:\STUFF\COLLEGE\A2\SEM1\AEDA\PROJETO Select CMakeLists.txt file...
+"C:\Program Files\Clion\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" "D:\Users\Melissa Silva\Desktop\FEUP\2ano\Primeiro semestre\AEDA\AEDAproject1"
+-- Found Doxygen: C:/Program Files/doxygen/bin/doxygen.exe (found version "1.8.20 (f246dd2f1c58eea39ea3f50c108019e4d4137bd5)") found components: doxygen missing components: dot
+Doxygen build started
+-- Configuring done
+-- Generating done
+-- Build files have been written to: D:/Users/Melissa Silva/Desktop/FEUP/2ano/Primeiro semestre/AEDA/AEDAproject1/cmake-build-debug

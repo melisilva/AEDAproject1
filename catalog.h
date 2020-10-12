@@ -1,11 +1,15 @@
-#ifndef PROJETO_CATALOG_H
-#define PROJETO_CATALOG_H
-#include "members.h"
+//
+// Created by Melissa Silva on 12/10/2020.
+//
+
+#ifndef AEDAPROJECT1_CATALOG_H
+#define AEDAPROJECT1_CATALOG_H
+#include "Member.h"
 #include "nonMem.h"
-#include "book.h"
+#include "Book.h"
 using namespace std;
 
-class Catalog{
+class Catalog {
     vector<Book> books, lendings;
     vector <pair<Book, Member>> lendRequests, delays;
 
@@ -22,4 +26,5 @@ public:
 
 };
 
-#endif //PROJETO_CATALOG_H
+
+#endif //AEDAPROJECT1_CATALOG_H

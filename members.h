@@ -4,7 +4,8 @@
 class Member{
     vector<Book> books, lendRequests, lendings;
     string name;
-    int nif, account;
+    int nif;
+    float balance;
 
     public:
         Member(name, nif, books);

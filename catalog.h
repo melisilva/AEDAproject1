@@ -17,7 +17,7 @@ public:
     void lendBook(int code, int account);
     void receiveBook(int code, int account);
     void registerRating(int code);
-    void registerLendRequest(string title, int account);
+    void registerLendRequest(string title, int nif);
 
 };
 

@@ -26,3 +26,32 @@ string Book::getAuthor() {
 bool Book::getState() {
     return state;
 }
+
+void Book::calculateValue(int edition){
+    int count=0;
+    if(edition ==1) {
+        value=25;
+        count++;
+    }
+    if(edition%10==0){
+        value=25;
+        count++;
+    }
+    if(count==0){
+        value=20-edition*0.65;
+    }
+}
+
+float Book::getValue(){
+    return value;
+}
+
+int Book::getUnits(){
+    return units;
+}
+
+void Book::deleteUnit(bool gonebook){
+    if(gonebook==true){
+        units-=1;
+    }
+}

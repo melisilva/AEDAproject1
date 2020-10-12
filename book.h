@@ -5,19 +5,22 @@
 using namespace std;
 
 class Book {
-    int code, units;
+    int code, units, opinions;
     float rating, value;
     string title, author;
     bool state;
 
 public:
     Book(int code, string title, string author);
-    float calculateValue(int edition);
+    void calculateValue(int edition);
     int getCode();
     float getRating();
     string getTitle();
     bool getState();
     string getAuthor();
+    float getValue();
+    int getUnits();
+    void deleteUnit(bool gonebook);
 };
 
 

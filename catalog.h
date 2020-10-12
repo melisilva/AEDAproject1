@@ -5,12 +5,12 @@
 #include "Book.h"
 using namespace std;
 
-class Catalog {
+class Catalog:public Book {
     vector<Book> books, lendings;
     vector <pair<Book, Member>> lendRequests, delays;
 
 public:
-    void addBook(string title, int edition);
+    void addBook(string title, int edition,int code, string author);
     void removeBook(string title, int account);
     void showBooks(int account);
     void showBookWaitlist(int code);

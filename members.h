@@ -7,6 +7,7 @@ class Member{
     int nif, account;
 
     public:
+        Member(name, nif, books);
         void showData(ofstream file) const;
         void updateData(ofstream file, string name, string account);
         void showLendRequests() const;

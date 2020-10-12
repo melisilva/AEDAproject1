@@ -8,6 +8,7 @@ Book::Book(int code, string title, string author){
 }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 int Book::getCode() {
     return code;
@@ -28,6 +29,8 @@ string Book::getAuthor() {
 bool Book::getState() {
     return state;
 }
+=======
+>>>>>>> parent of 8c75a40... Book.cpp implemented thus far
 =======
 >>>>>>> parent of 8c75a40... Book.cpp implemented thus far
 =======

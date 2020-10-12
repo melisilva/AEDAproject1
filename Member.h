@@ -8,22 +8,23 @@
 
 
 class Member {
-    vector<Book> books, lendRequests, lendings;
+    vector<Book*> books, lendRequests, lendings;
     string name;
     int nif;
     float balance;
 
 public:
-    Member(string name, int nif, vector<Book> books);
+    Member(string name, int nif, vector<Book*> books);
     void showData(ofstream file) const;
     void updateData(ofstream file, string name, string account);
-    void showLendRequests() const;
-    void makeRequest() const;
+    bool showLendRequests() const;
+    bool makeRequest(int code, string name);
     void renovateRequest() const;
+    int findBook(string title) const;
     int getNIF() const;
-    int getAccount() const;
+    float getBalance() const;
     string getName() const;
-    vector<Book> getBooks() const;
+    vector<Book*> getBooks() const;
 };
 
 

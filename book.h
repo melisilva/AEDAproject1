@@ -15,6 +15,7 @@ public:
     int getCode();
     float getRating();
     string getTitle();
+    string getAuthor();
     bool getState();
 };
 

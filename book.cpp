@@ -6,3 +6,23 @@ Book::Book(int code, string title, string author){
     this->title = title;
     this->author = author;
 }
+
+int Book::getCode() {
+    return code;
+}
+
+float Book::getRating() {
+    return rating;
+}
+
+string Book::getTitle() {
+    return title;
+}
+
+string Book::getAuthor() {
+    return author;
+}
+
+bool Book::getState() {
+    return state;
+}

@@ -53,19 +53,19 @@ cmake_force:
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = "C:\Program Files\JetBrains\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe"
+CMAKE_COMMAND = "C:\Program Files\Clion\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe"
 
 # The command to remove a file.
-RM = "C:\Program Files\JetBrains\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe" -E rm -f
+RM = "C:\Program Files\Clion\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe" -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\STUFF\COLLEGE\A2\SEM1\AEDA\PROJETO
+CMAKE_SOURCE_DIR = "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\STUFF\COLLEGE\A2\SEM1\AEDA\PROJETO\cmake-build-debug
+CMAKE_BINARY_DIR = "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\cmake-build-debug"
 
 # Include any dependencies generated for this target.
 include CMakeFiles/AEDAproject1.dir/depend.make
@@ -78,86 +78,86 @@ include CMakeFiles/AEDAproject1.dir/flags.make
 
 CMakeFiles/AEDAproject1.dir/main.cpp.obj: CMakeFiles/AEDAproject1.dir/flags.make
 CMakeFiles/AEDAproject1.dir/main.cpp.obj: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\STUFF\COLLEGE\A2\SEM1\AEDA\PROJETO\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/AEDAproject1.dir/main.cpp.obj"
-	C:\mingw-w64\i686-8.1.0-posix-dwarf-rt_v6-rev0\mingw32\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\AEDAproject1.dir\main.cpp.obj -c C:\STUFF\COLLEGE\A2\SEM1\AEDA\PROJETO\main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/AEDAproject1.dir/main.cpp.obj"
+	C:\PROGRA~1\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\AEDAproject1.dir\main.cpp.obj -c "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\main.cpp"
 
 CMakeFiles/AEDAproject1.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AEDAproject1.dir/main.cpp.i"
-	C:\mingw-w64\i686-8.1.0-posix-dwarf-rt_v6-rev0\mingw32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\STUFF\COLLEGE\A2\SEM1\AEDA\PROJETO\main.cpp > CMakeFiles\AEDAproject1.dir\main.cpp.i
+	C:\PROGRA~1\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\main.cpp" > CMakeFiles\AEDAproject1.dir\main.cpp.i
 
 CMakeFiles/AEDAproject1.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AEDAproject1.dir/main.cpp.s"
-	C:\mingw-w64\i686-8.1.0-posix-dwarf-rt_v6-rev0\mingw32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\STUFF\COLLEGE\A2\SEM1\AEDA\PROJETO\main.cpp -o CMakeFiles\AEDAproject1.dir\main.cpp.s
+	C:\PROGRA~1\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\main.cpp" -o CMakeFiles\AEDAproject1.dir\main.cpp.s
 
-CMakeFiles/AEDAproject1.dir/book.cpp.obj: CMakeFiles/AEDAproject1.dir/flags.make
-CMakeFiles/AEDAproject1.dir/book.cpp.obj: ../book.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\STUFF\COLLEGE\A2\SEM1\AEDA\PROJETO\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/AEDAproject1.dir/book.cpp.obj"
-	C:\mingw-w64\i686-8.1.0-posix-dwarf-rt_v6-rev0\mingw32\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\AEDAproject1.dir\book.cpp.obj -c C:\STUFF\COLLEGE\A2\SEM1\AEDA\PROJETO\book.cpp
+CMakeFiles/AEDAproject1.dir/Book.cpp.obj: CMakeFiles/AEDAproject1.dir/flags.make
+CMakeFiles/AEDAproject1.dir/Book.cpp.obj: ../Book.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/AEDAproject1.dir/Book.cpp.obj"
+	C:\PROGRA~1\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\AEDAproject1.dir\Book.cpp.obj -c "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\Book.cpp"
 
-CMakeFiles/AEDAproject1.dir/book.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AEDAproject1.dir/book.cpp.i"
-	C:\mingw-w64\i686-8.1.0-posix-dwarf-rt_v6-rev0\mingw32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\STUFF\COLLEGE\A2\SEM1\AEDA\PROJETO\book.cpp > CMakeFiles\AEDAproject1.dir\book.cpp.i
+CMakeFiles/AEDAproject1.dir/Book.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AEDAproject1.dir/Book.cpp.i"
+	C:\PROGRA~1\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\Book.cpp" > CMakeFiles\AEDAproject1.dir\Book.cpp.i
 
-CMakeFiles/AEDAproject1.dir/book.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AEDAproject1.dir/book.cpp.s"
-	C:\mingw-w64\i686-8.1.0-posix-dwarf-rt_v6-rev0\mingw32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\STUFF\COLLEGE\A2\SEM1\AEDA\PROJETO\book.cpp -o CMakeFiles\AEDAproject1.dir\book.cpp.s
+CMakeFiles/AEDAproject1.dir/Book.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AEDAproject1.dir/Book.cpp.s"
+	C:\PROGRA~1\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\Book.cpp" -o CMakeFiles\AEDAproject1.dir\Book.cpp.s
 
 CMakeFiles/AEDAproject1.dir/Catalog.cpp.obj: CMakeFiles/AEDAproject1.dir/flags.make
 CMakeFiles/AEDAproject1.dir/Catalog.cpp.obj: ../Catalog.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\STUFF\COLLEGE\A2\SEM1\AEDA\PROJETO\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/AEDAproject1.dir/Catalog.cpp.obj"
-	C:\mingw-w64\i686-8.1.0-posix-dwarf-rt_v6-rev0\mingw32\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\AEDAproject1.dir\Catalog.cpp.obj -c C:\STUFF\COLLEGE\A2\SEM1\AEDA\PROJETO\Catalog.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/AEDAproject1.dir/Catalog.cpp.obj"
+	C:\PROGRA~1\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\AEDAproject1.dir\Catalog.cpp.obj -c "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\Catalog.cpp"
 
 CMakeFiles/AEDAproject1.dir/Catalog.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AEDAproject1.dir/Catalog.cpp.i"
-	C:\mingw-w64\i686-8.1.0-posix-dwarf-rt_v6-rev0\mingw32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\STUFF\COLLEGE\A2\SEM1\AEDA\PROJETO\Catalog.cpp > CMakeFiles\AEDAproject1.dir\Catalog.cpp.i
+	C:\PROGRA~1\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\Catalog.cpp" > CMakeFiles\AEDAproject1.dir\Catalog.cpp.i
 
 CMakeFiles/AEDAproject1.dir/Catalog.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AEDAproject1.dir/Catalog.cpp.s"
-	C:\mingw-w64\i686-8.1.0-posix-dwarf-rt_v6-rev0\mingw32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\STUFF\COLLEGE\A2\SEM1\AEDA\PROJETO\Catalog.cpp -o CMakeFiles\AEDAproject1.dir\Catalog.cpp.s
+	C:\PROGRA~1\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\Catalog.cpp" -o CMakeFiles\AEDAproject1.dir\Catalog.cpp.s
 
 CMakeFiles/AEDAproject1.dir/Member.cpp.obj: CMakeFiles/AEDAproject1.dir/flags.make
 CMakeFiles/AEDAproject1.dir/Member.cpp.obj: ../Member.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\STUFF\COLLEGE\A2\SEM1\AEDA\PROJETO\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/AEDAproject1.dir/Member.cpp.obj"
-	C:\mingw-w64\i686-8.1.0-posix-dwarf-rt_v6-rev0\mingw32\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\AEDAproject1.dir\Member.cpp.obj -c C:\STUFF\COLLEGE\A2\SEM1\AEDA\PROJETO\Member.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/AEDAproject1.dir/Member.cpp.obj"
+	C:\PROGRA~1\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\AEDAproject1.dir\Member.cpp.obj -c "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\Member.cpp"
 
 CMakeFiles/AEDAproject1.dir/Member.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AEDAproject1.dir/Member.cpp.i"
-	C:\mingw-w64\i686-8.1.0-posix-dwarf-rt_v6-rev0\mingw32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\STUFF\COLLEGE\A2\SEM1\AEDA\PROJETO\Member.cpp > CMakeFiles\AEDAproject1.dir\Member.cpp.i
+	C:\PROGRA~1\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\Member.cpp" > CMakeFiles\AEDAproject1.dir\Member.cpp.i
 
 CMakeFiles/AEDAproject1.dir/Member.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AEDAproject1.dir/Member.cpp.s"
-	C:\mingw-w64\i686-8.1.0-posix-dwarf-rt_v6-rev0\mingw32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\STUFF\COLLEGE\A2\SEM1\AEDA\PROJETO\Member.cpp -o CMakeFiles\AEDAproject1.dir\Member.cpp.s
+	C:\PROGRA~1\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\Member.cpp" -o CMakeFiles\AEDAproject1.dir\Member.cpp.s
 
 CMakeFiles/AEDAproject1.dir/Club.cpp.obj: CMakeFiles/AEDAproject1.dir/flags.make
 CMakeFiles/AEDAproject1.dir/Club.cpp.obj: ../Club.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\STUFF\COLLEGE\A2\SEM1\AEDA\PROJETO\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/AEDAproject1.dir/Club.cpp.obj"
-	C:\mingw-w64\i686-8.1.0-posix-dwarf-rt_v6-rev0\mingw32\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\AEDAproject1.dir\Club.cpp.obj -c C:\STUFF\COLLEGE\A2\SEM1\AEDA\PROJETO\Club.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/AEDAproject1.dir/Club.cpp.obj"
+	C:\PROGRA~1\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\AEDAproject1.dir\Club.cpp.obj -c "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\Club.cpp"
 
 CMakeFiles/AEDAproject1.dir/Club.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AEDAproject1.dir/Club.cpp.i"
-	C:\mingw-w64\i686-8.1.0-posix-dwarf-rt_v6-rev0\mingw32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\STUFF\COLLEGE\A2\SEM1\AEDA\PROJETO\Club.cpp > CMakeFiles\AEDAproject1.dir\Club.cpp.i
+	C:\PROGRA~1\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\Club.cpp" > CMakeFiles\AEDAproject1.dir\Club.cpp.i
 
 CMakeFiles/AEDAproject1.dir/Club.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AEDAproject1.dir/Club.cpp.s"
-	C:\mingw-w64\i686-8.1.0-posix-dwarf-rt_v6-rev0\mingw32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\STUFF\COLLEGE\A2\SEM1\AEDA\PROJETO\Club.cpp -o CMakeFiles\AEDAproject1.dir\Club.cpp.s
+	C:\PROGRA~1\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\Club.cpp" -o CMakeFiles\AEDAproject1.dir\Club.cpp.s
 
 CMakeFiles/AEDAproject1.dir/nonMem.cpp.obj: CMakeFiles/AEDAproject1.dir/flags.make
 CMakeFiles/AEDAproject1.dir/nonMem.cpp.obj: ../nonMem.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\STUFF\COLLEGE\A2\SEM1\AEDA\PROJETO\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/AEDAproject1.dir/nonMem.cpp.obj"
-	C:\mingw-w64\i686-8.1.0-posix-dwarf-rt_v6-rev0\mingw32\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\AEDAproject1.dir\nonMem.cpp.obj -c C:\STUFF\COLLEGE\A2\SEM1\AEDA\PROJETO\nonMem.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/AEDAproject1.dir/nonMem.cpp.obj"
+	C:\PROGRA~1\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\AEDAproject1.dir\nonMem.cpp.obj -c "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\nonMem.cpp"
 
 CMakeFiles/AEDAproject1.dir/nonMem.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AEDAproject1.dir/nonMem.cpp.i"
-	C:\mingw-w64\i686-8.1.0-posix-dwarf-rt_v6-rev0\mingw32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\STUFF\COLLEGE\A2\SEM1\AEDA\PROJETO\nonMem.cpp > CMakeFiles\AEDAproject1.dir\nonMem.cpp.i
+	C:\PROGRA~1\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\nonMem.cpp" > CMakeFiles\AEDAproject1.dir\nonMem.cpp.i
 
 CMakeFiles/AEDAproject1.dir/nonMem.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AEDAproject1.dir/nonMem.cpp.s"
-	C:\mingw-w64\i686-8.1.0-posix-dwarf-rt_v6-rev0\mingw32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\STUFF\COLLEGE\A2\SEM1\AEDA\PROJETO\nonMem.cpp -o CMakeFiles\AEDAproject1.dir\nonMem.cpp.s
+	C:\PROGRA~1\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\nonMem.cpp" -o CMakeFiles\AEDAproject1.dir\nonMem.cpp.s
 
 # Object files for target AEDAproject1
 AEDAproject1_OBJECTS = \
 "CMakeFiles/AEDAproject1.dir/main.cpp.obj" \
-"CMakeFiles/AEDAproject1.dir/book.cpp.obj" \
+"CMakeFiles/AEDAproject1.dir/Book.cpp.obj" \
 "CMakeFiles/AEDAproject1.dir/Catalog.cpp.obj" \
 "CMakeFiles/AEDAproject1.dir/Member.cpp.obj" \
 "CMakeFiles/AEDAproject1.dir/Club.cpp.obj" \
@@ -167,7 +167,7 @@ AEDAproject1_OBJECTS = \
 AEDAproject1_EXTERNAL_OBJECTS =
 
 AEDAproject1.exe: CMakeFiles/AEDAproject1.dir/main.cpp.obj
-AEDAproject1.exe: CMakeFiles/AEDAproject1.dir/book.cpp.obj
+AEDAproject1.exe: CMakeFiles/AEDAproject1.dir/Book.cpp.obj
 AEDAproject1.exe: CMakeFiles/AEDAproject1.dir/Catalog.cpp.obj
 AEDAproject1.exe: CMakeFiles/AEDAproject1.dir/Member.cpp.obj
 AEDAproject1.exe: CMakeFiles/AEDAproject1.dir/Club.cpp.obj
@@ -176,7 +176,7 @@ AEDAproject1.exe: CMakeFiles/AEDAproject1.dir/build.make
 AEDAproject1.exe: CMakeFiles/AEDAproject1.dir/linklibs.rsp
 AEDAproject1.exe: CMakeFiles/AEDAproject1.dir/objects1.rsp
 AEDAproject1.exe: CMakeFiles/AEDAproject1.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\STUFF\COLLEGE\A2\SEM1\AEDA\PROJETO\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable AEDAproject1.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable AEDAproject1.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\AEDAproject1.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -189,6 +189,6 @@ CMakeFiles/AEDAproject1.dir/clean:
 .PHONY : CMakeFiles/AEDAproject1.dir/clean
 
 CMakeFiles/AEDAproject1.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\STUFF\COLLEGE\A2\SEM1\AEDA\PROJETO C:\STUFF\COLLEGE\A2\SEM1\AEDA\PROJETO C:\STUFF\COLLEGE\A2\SEM1\AEDA\PROJETO\cmake-build-debug C:\STUFF\COLLEGE\A2\SEM1\AEDA\PROJETO\cmake-build-debug C:\STUFF\COLLEGE\A2\SEM1\AEDA\PROJETO\cmake-build-debug\CMakeFiles\AEDAproject1.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1" "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1" "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\cmake-build-debug" "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\cmake-build-debug" "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\cmake-build-debug\CMakeFiles\AEDAproject1.dir\DependInfo.cmake" --color=$(COLOR)
 .PHONY : CMakeFiles/AEDAproject1.dir/depend
 

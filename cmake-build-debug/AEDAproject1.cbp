@@ -8,131 +8,125 @@
 		<Option virtualFolders="CMake Files\;CMake Files\docs\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/cmake-build-debug"/>
+				<Option working_dir="D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/mingw32-make.exe -f &quot;C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/mingw32-make.exe -f &quot;C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/mingw32-make.exe -f &quot;C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/mingw32-make.exe -f &quot;C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/mingw32-make.exe -f &quot;D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/PROGRA~1/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/mingw32-make.exe -f &quot;D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/mingw32-make.exe -f &quot;D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/mingw32-make.exe -f &quot;D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/cmake-build-debug"/>
+				<Option working_dir="D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/mingw32-make.exe -f &quot;C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/mingw32-make.exe -f &quot;C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/mingw32-make.exe -f &quot;C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/mingw32-make.exe -f &quot;C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/mingw32-make.exe -f &quot;D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="C:/PROGRA~1/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/mingw32-make.exe -f &quot;D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/mingw32-make.exe -f &quot;D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/mingw32-make.exe -f &quot;D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="AEDAproject1">
-				<Option output="C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/cmake-build-debug/AEDAproject1.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/cmake-build-debug"/>
+				<Option output="D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/cmake-build-debug/AEDAproject1.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++"/>
-					<Add directory="C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++/i686-w64-mingw32"/>
-					<Add directory="C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++/backward"/>
-					<Add directory="C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include"/>
-					<Add directory="C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include-fixed"/>
-					<Add directory="C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/../../../../i686-w64-mingw32/include"/>
+					<Add directory="C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
+					<Add directory="C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/mingw32-make.exe -f &quot;C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/cmake-build-debug/Makefile&quot;  VERBOSE=1 AEDAproject1"/>
-					<CompileFile command="C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/mingw32-make.exe -f &quot;C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/mingw32-make.exe -f &quot;C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/mingw32-make.exe -f &quot;C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/mingw32-make.exe -f &quot;D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/cmake-build-debug/Makefile&quot;  VERBOSE=1 AEDAproject1"/>
+					<CompileFile command="C:/PROGRA~1/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/mingw32-make.exe -f &quot;D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/mingw32-make.exe -f &quot;D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/mingw32-make.exe -f &quot;D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="AEDAproject1/fast">
-				<Option output="C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/cmake-build-debug/AEDAproject1.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/cmake-build-debug"/>
+				<Option output="D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/cmake-build-debug/AEDAproject1.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++"/>
-					<Add directory="C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++/i686-w64-mingw32"/>
-					<Add directory="C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++/backward"/>
-					<Add directory="C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include"/>
-					<Add directory="C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include-fixed"/>
-					<Add directory="C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/../../../../i686-w64-mingw32/include"/>
+					<Add directory="C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
+					<Add directory="C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/mingw32-make.exe -f &quot;C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/cmake-build-debug/Makefile&quot;  VERBOSE=1 AEDAproject1/fast"/>
-					<CompileFile command="C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/mingw32-make.exe -f &quot;C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/mingw32-make.exe -f &quot;C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/mingw32-make.exe -f &quot;C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/mingw32-make.exe -f &quot;D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/cmake-build-debug/Makefile&quot;  VERBOSE=1 AEDAproject1/fast"/>
+					<CompileFile command="C:/PROGRA~1/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/mingw32-make.exe -f &quot;D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/mingw32-make.exe -f &quot;D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/mingw32-make.exe -f &quot;D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Doxygen">
-				<Option working_dir="C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/cmake-build-debug"/>
+				<Option working_dir="D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/mingw32-make.exe -f &quot;C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/cmake-build-debug/Makefile&quot;  VERBOSE=1 Doxygen"/>
-					<CompileFile command="C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/mingw32-make.exe -f &quot;C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/mingw32-make.exe -f &quot;C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/mingw32-make.exe -f &quot;C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/mingw32-make.exe -f &quot;D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/cmake-build-debug/Makefile&quot;  VERBOSE=1 Doxygen"/>
+					<CompileFile command="C:/PROGRA~1/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/mingw32-make.exe -f &quot;D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/mingw32-make.exe -f &quot;D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/mingw32-make.exe -f &quot;D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/cmake-build-debug"/>
+				<Option working_dir="D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/mingw32-make.exe -f &quot;C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/mingw32-make.exe -f &quot;C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/mingw32-make.exe -f &quot;C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/mingw32-make.exe -f &quot;C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/mingw32-make.exe -f &quot;D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/PROGRA~1/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/mingw32-make.exe -f &quot;D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/mingw32-make.exe -f &quot;D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/mingw32-make.exe -f &quot;D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/Catalog.cpp">
+		<Unit filename="D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/Book.cpp">
 			<Option target="AEDAproject1"/>
 		</Unit>
-		<Unit filename="C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/Catalog.h">
+		<Unit filename="D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/Book.h">
 			<Option target="AEDAproject1"/>
 		</Unit>
-		<Unit filename="C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/Club.cpp">
+		<Unit filename="D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/Catalog.cpp">
 			<Option target="AEDAproject1"/>
 		</Unit>
-		<Unit filename="C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/Club.h">
+		<Unit filename="D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/Catalog.h">
 			<Option target="AEDAproject1"/>
 		</Unit>
-		<Unit filename="C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/Member.cpp">
+		<Unit filename="D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/Club.cpp">
 			<Option target="AEDAproject1"/>
 		</Unit>
-		<Unit filename="C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/Member.h">
+		<Unit filename="D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/Club.h">
 			<Option target="AEDAproject1"/>
 		</Unit>
-		<Unit filename="C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/book.cpp">
+		<Unit filename="D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/Member.cpp">
 			<Option target="AEDAproject1"/>
 		</Unit>
-		<Unit filename="C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/book.h">
+		<Unit filename="D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/Member.h">
 			<Option target="AEDAproject1"/>
 		</Unit>
-		<Unit filename="C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/catalog.h">
+		<Unit filename="D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/main.cpp">
 			<Option target="AEDAproject1"/>
 		</Unit>
-		<Unit filename="C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/club.h">
+		<Unit filename="D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/nonMem.cpp">
 			<Option target="AEDAproject1"/>
 		</Unit>
-		<Unit filename="C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/main.cpp">
+		<Unit filename="D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/nonMem.h">
 			<Option target="AEDAproject1"/>
 		</Unit>
-		<Unit filename="C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/nonMem.cpp">
-			<Option target="AEDAproject1"/>
-		</Unit>
-		<Unit filename="C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/nonMem.h">
-			<Option target="AEDAproject1"/>
-		</Unit>
-		<Unit filename="C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/CMakeLists.txt">
+		<Unit filename="D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
-		<Unit filename="C:/STUFF/COLLEGE/A2/SEM1/AEDA/PROJETO/docs/Doxyfile">
+		<Unit filename="D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/docs/Doxyfile">
 			<Option virtualFolder="CMake Files\docs\"/>
 		</Unit>
 	</Project>

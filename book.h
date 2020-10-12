@@ -1,7 +1,3 @@
-//
-// Created by Melissa Silva on 12/10/2020.
-//
-
 #ifndef AEDAPROJECT1_BOOK_H
 #define AEDAPROJECT1_BOOK_H
 
@@ -16,10 +12,12 @@ class Book {
 
 public:
     Book(int code, string title, string author);
+    float calculateValue(int edition);
     int getCode();
     float getRating();
     string getTitle();
     bool getState();
+    string getAuthor();
 };
 
 

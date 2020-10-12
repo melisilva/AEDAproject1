@@ -63,10 +63,10 @@ RM = "C:\Program Files\Clion\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe" -E rm -
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "D:\Users\Melissa Silva\Desktop\FEUP\2ano\Primeiro semestre\AEDA\AEDAproject1"
+CMAKE_SOURCE_DIR = "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "D:\Users\Melissa Silva\Desktop\FEUP\2ano\Primeiro semestre\AEDA\AEDAproject1\cmake-build-debug"
+CMAKE_BINARY_DIR = "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\cmake-build-debug"
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -95,14 +95,14 @@ clean: CMakeFiles/Doxygen.dir/clean
 CMakeFiles/AEDAproject1.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\AEDAproject1.dir\build.make CMakeFiles/AEDAproject1.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\AEDAproject1.dir\build.make CMakeFiles/AEDAproject1.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="D:\Users\Melissa Silva\Desktop\FEUP\2ano\Primeiro semestre\AEDA\AEDAproject1\cmake-build-debug\CMakeFiles" --progress-num=1,2,3,4,5,6,7 "Built target AEDAproject1"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\cmake-build-debug\CMakeFiles" --progress-num=1,2,3,4,5,6,7 "Built target AEDAproject1"
 .PHONY : CMakeFiles/AEDAproject1.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/AEDAproject1.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "D:\Users\Melissa Silva\Desktop\FEUP\2ano\Primeiro semestre\AEDA\AEDAproject1\cmake-build-debug\CMakeFiles" 7
+	$(CMAKE_COMMAND) -E cmake_progress_start "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\cmake-build-debug\CMakeFiles" 7
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/AEDAproject1.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start "D:\Users\Melissa Silva\Desktop\FEUP\2ano\Primeiro semestre\AEDA\AEDAproject1\cmake-build-debug\CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\cmake-build-debug\CMakeFiles" 0
 .PHONY : CMakeFiles/AEDAproject1.dir/rule
 
 # Convenience name for target.
@@ -122,14 +122,14 @@ CMakeFiles/AEDAproject1.dir/clean:
 CMakeFiles/Doxygen.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Doxygen.dir\build.make CMakeFiles/Doxygen.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Doxygen.dir\build.make CMakeFiles/Doxygen.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="D:\Users\Melissa Silva\Desktop\FEUP\2ano\Primeiro semestre\AEDA\AEDAproject1\cmake-build-debug\CMakeFiles" --progress-num=8 "Built target Doxygen"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\cmake-build-debug\CMakeFiles" --progress-num=8 "Built target Doxygen"
 .PHONY : CMakeFiles/Doxygen.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Doxygen.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "D:\Users\Melissa Silva\Desktop\FEUP\2ano\Primeiro semestre\AEDA\AEDAproject1\cmake-build-debug\CMakeFiles" 1
+	$(CMAKE_COMMAND) -E cmake_progress_start "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\cmake-build-debug\CMakeFiles" 1
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/Doxygen.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start "D:\Users\Melissa Silva\Desktop\FEUP\2ano\Primeiro semestre\AEDA\AEDAproject1\cmake-build-debug\CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\cmake-build-debug\CMakeFiles" 0
 .PHONY : CMakeFiles/Doxygen.dir/rule
 
 # Convenience name for target.

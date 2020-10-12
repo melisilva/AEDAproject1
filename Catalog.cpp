@@ -14,7 +14,7 @@ void Catalog::removeBook(string title, int account){
             if(books[i].getUnits()!=1){
                 books[i].deleteUnit(true);
             }
-            else{
+            else{ //note: going with the idea that if it's the last unit, we should just remove all book info from catalog (still not sure that's best course of action but we can change it afterwards)
                 todel=i;
             }
         }

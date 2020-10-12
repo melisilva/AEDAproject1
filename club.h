@@ -14,8 +14,8 @@ public:
 
     void addMember(); //pede o nome e NIF e depois os livros;
     void removeMember();
-    void chargeDelay(int nif, int account);
-    void chargeFee(int nif, int account);
+    void chargeDelay(int nif, int account,Book book);
+    void chargeFee(int nif, int account,Book book);
     void showMembers();
     void showLendings();
     void showDelays();

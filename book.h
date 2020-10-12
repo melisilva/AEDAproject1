@@ -12,12 +12,13 @@ class Book {
 
 public:
     Book(int code, string title, string author);
-    float calculateValue(int edition);
+    void calculateValue(int edition);
     int getCode();
     float getRating();
     string getTitle();
     bool getState();
     string getAuthor();
+    float getValue();
 };
 
 

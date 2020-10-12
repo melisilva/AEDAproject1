@@ -155,33 +155,6 @@ Doxygen/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Doxygen.dir\build.make CMakeFiles/Doxygen.dir/build
 .PHONY : Doxygen/fast
 
-Book.obj: Book.cpp.obj
-
-.PHONY : Book.obj
-
-# target to build an object file
-Book.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\AEDAproject1.dir\build.make CMakeFiles/AEDAproject1.dir/Book.cpp.obj
-.PHONY : Book.cpp.obj
-
-Book.i: Book.cpp.i
-
-.PHONY : Book.i
-
-# target to preprocess a source file
-Book.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\AEDAproject1.dir\build.make CMakeFiles/AEDAproject1.dir/Book.cpp.i
-.PHONY : Book.cpp.i
-
-Book.s: Book.cpp.s
-
-.PHONY : Book.s
-
-# target to generate assembly for a file
-Book.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\AEDAproject1.dir\build.make CMakeFiles/AEDAproject1.dir/Book.cpp.s
-.PHONY : Book.cpp.s
-
 Catalog.obj: Catalog.cpp.obj
 
 .PHONY : Catalog.obj
@@ -263,6 +236,33 @@ Member.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\AEDAproject1.dir\build.make CMakeFiles/AEDAproject1.dir/Member.cpp.s
 .PHONY : Member.cpp.s
 
+book.obj: book.cpp.obj
+
+.PHONY : book.obj
+
+# target to build an object file
+book.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\AEDAproject1.dir\build.make CMakeFiles/AEDAproject1.dir/book.cpp.obj
+.PHONY : book.cpp.obj
+
+book.i: book.cpp.i
+
+.PHONY : book.i
+
+# target to preprocess a source file
+book.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\AEDAproject1.dir\build.make CMakeFiles/AEDAproject1.dir/book.cpp.i
+.PHONY : book.cpp.i
+
+book.s: book.cpp.s
+
+.PHONY : book.s
+
+# target to generate assembly for a file
+book.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\AEDAproject1.dir\build.make CMakeFiles/AEDAproject1.dir/book.cpp.s
+.PHONY : book.cpp.s
+
 main.obj: main.cpp.obj
 
 .PHONY : main.obj
@@ -327,9 +327,6 @@ help:
 	@echo ... rebuild_cache
 	@echo ... Doxygen
 	@echo ... AEDAproject1
-	@echo ... Book.obj
-	@echo ... Book.i
-	@echo ... Book.s
 	@echo ... Catalog.obj
 	@echo ... Catalog.i
 	@echo ... Catalog.s
@@ -339,6 +336,9 @@ help:
 	@echo ... Member.obj
 	@echo ... Member.i
 	@echo ... Member.s
+	@echo ... book.obj
+	@echo ... book.i
+	@echo ... book.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

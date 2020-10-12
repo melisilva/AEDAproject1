@@ -89,18 +89,18 @@ CMakeFiles/AEDAproject1.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AEDAproject1.dir/main.cpp.s"
 	C:\PROGRA~1\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\main.cpp" -o CMakeFiles\AEDAproject1.dir\main.cpp.s
 
-CMakeFiles/AEDAproject1.dir/Book.cpp.obj: CMakeFiles/AEDAproject1.dir/flags.make
-CMakeFiles/AEDAproject1.dir/Book.cpp.obj: ../Book.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/AEDAproject1.dir/Book.cpp.obj"
-	C:\PROGRA~1\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\AEDAproject1.dir\Book.cpp.obj -c "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\Book.cpp"
+CMakeFiles/AEDAproject1.dir/book.cpp.obj: CMakeFiles/AEDAproject1.dir/flags.make
+CMakeFiles/AEDAproject1.dir/book.cpp.obj: ../book.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/AEDAproject1.dir/book.cpp.obj"
+	C:\PROGRA~1\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\AEDAproject1.dir\book.cpp.obj -c "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\book.cpp"
 
-CMakeFiles/AEDAproject1.dir/Book.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AEDAproject1.dir/Book.cpp.i"
-	C:\PROGRA~1\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\Book.cpp" > CMakeFiles\AEDAproject1.dir\Book.cpp.i
+CMakeFiles/AEDAproject1.dir/book.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AEDAproject1.dir/book.cpp.i"
+	C:\PROGRA~1\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\book.cpp" > CMakeFiles\AEDAproject1.dir\book.cpp.i
 
-CMakeFiles/AEDAproject1.dir/Book.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AEDAproject1.dir/Book.cpp.s"
-	C:\PROGRA~1\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\Book.cpp" -o CMakeFiles\AEDAproject1.dir\Book.cpp.s
+CMakeFiles/AEDAproject1.dir/book.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AEDAproject1.dir/book.cpp.s"
+	C:\PROGRA~1\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1\book.cpp" -o CMakeFiles\AEDAproject1.dir\book.cpp.s
 
 CMakeFiles/AEDAproject1.dir/Catalog.cpp.obj: CMakeFiles/AEDAproject1.dir/flags.make
 CMakeFiles/AEDAproject1.dir/Catalog.cpp.obj: ../Catalog.cpp
@@ -157,7 +157,7 @@ CMakeFiles/AEDAproject1.dir/nonMem.cpp.s: cmake_force
 # Object files for target AEDAproject1
 AEDAproject1_OBJECTS = \
 "CMakeFiles/AEDAproject1.dir/main.cpp.obj" \
-"CMakeFiles/AEDAproject1.dir/Book.cpp.obj" \
+"CMakeFiles/AEDAproject1.dir/book.cpp.obj" \
 "CMakeFiles/AEDAproject1.dir/Catalog.cpp.obj" \
 "CMakeFiles/AEDAproject1.dir/Member.cpp.obj" \
 "CMakeFiles/AEDAproject1.dir/Club.cpp.obj" \
@@ -167,7 +167,7 @@ AEDAproject1_OBJECTS = \
 AEDAproject1_EXTERNAL_OBJECTS =
 
 AEDAproject1.exe: CMakeFiles/AEDAproject1.dir/main.cpp.obj
-AEDAproject1.exe: CMakeFiles/AEDAproject1.dir/Book.cpp.obj
+AEDAproject1.exe: CMakeFiles/AEDAproject1.dir/book.cpp.obj
 AEDAproject1.exe: CMakeFiles/AEDAproject1.dir/Catalog.cpp.obj
 AEDAproject1.exe: CMakeFiles/AEDAproject1.dir/Member.cpp.obj
 AEDAproject1.exe: CMakeFiles/AEDAproject1.dir/Club.cpp.obj

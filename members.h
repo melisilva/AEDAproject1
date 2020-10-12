@@ -19,8 +19,4 @@ class Member{
         vector<Book> lendRequests() const;
 };
 
-
-
-
-
 #endif //PROJETO_MEMBERS_H

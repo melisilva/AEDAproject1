@@ -45,3 +45,13 @@ void Book::calculateValue(int edition){
 float Book::getValue(){
     return value;
 }
+
+int Book::getUnits(){
+    return units;
+}
+
+void Book::deleteUnit(bool gonebook){
+    if(gonebook==true){
+        units-=1;
+    }
+}

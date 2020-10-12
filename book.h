@@ -19,6 +19,8 @@ public:
     bool getState();
     string getAuthor();
     float getValue();
+    int getUnits();
+    void deleteUnit(bool gonebook);
 };
 
 

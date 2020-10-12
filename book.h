@@ -5,7 +5,7 @@
 using namespace std;
 
 class Book {
-    int code, units;
+    int code, units, opinions;
     float rating, value;
     string title, author;
     bool state;

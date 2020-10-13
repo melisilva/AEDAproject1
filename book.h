@@ -22,6 +22,7 @@ public:
     float getValue();
     int getUnits();
     void deleteUnit(bool gonebook);
+    void showBook();
 };
 
 

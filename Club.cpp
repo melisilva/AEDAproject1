@@ -4,7 +4,7 @@
 void Club::chargeDelay(int nif, int account,Book book){
     bool ismember;
     float fine=book.getValue()*0.10;
-    for(unsigned i=0;i<members.size();i++){
+    for(unsigned int i=0;i<members.size();i++){
         if(members[i].getNIF()==nif){
             account-=fine;
             ismember=true;
@@ -18,7 +18,7 @@ void Club::chargeDelay(int nif, int account,Book book){
 void Club::chargeFee(int nif, int account,Book book){
     bool ismember;
     float fee=book.getValue()*0.05;
-    for(unsigned i=0;i<members.size();i++){
+    for(unsigned int i=0;i<members.size();i++){
         if(members[i].getNIF()==nif){
             ismember=true;
         }
@@ -61,10 +61,20 @@ void Club::addMember(){
 
 void Club::removeMember(int nif){
     unsigned todel;
-    for(unsigned i=0;i<members.size();i++){
+    for(unsigned int i=0;i<members.size();i++){
         if(members[i].getNIF()==nif){
             todel=i;
         }
     }
     members.erase(members.begin()+todel);
+}
+
+void Club::showMembers(){
+    for(unsigned int i=0;i<members.size();i++){
+        cout<<"Name: "<<members[i].getName()<<"/n"<<"NIF: "<<members[i].getNIF()<<"/n"<<"Books:"<<endl;
+        vector<Book*>books=members[i].getBooks();
+        for(unsigned int j=0;j<books.size();j++){
+            books[j]->showBook();
+        }
+    }
 }

@@ -6,7 +6,7 @@
 #include "nonMem.h"
 using namespace std;
 
-class Club {
+class Club :public Book{
     Catalog catalog;
     vector<Member> members;
 

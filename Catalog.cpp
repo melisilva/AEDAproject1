@@ -8,7 +8,7 @@ void Catalog::addBook(string title, int edition,int code, string author){
 
 void Catalog::removeBook(string title, int account){
     unsigned todel=-1;
-    for(unsigned i=0;i<books.size();i++){
+    for(unsigned int i=0;i<books.size();i++){
         if(books[i].getTitle()==title){
             account+=books[i].getValue();
             if(books[i].getUnits()!=1){
@@ -25,7 +25,7 @@ void Catalog::removeBook(string title, int account){
 }
 
 void Catalog::showRating(int code){
-    for(unsigned i=0;i<books.size();i++){
+    for(unsigned int i=0;i<books.size();i++){
         if(books[i].getCode()==code){
             cout<<"Book rating: "<<books[i].getRating()<<endl;
         }
@@ -36,7 +36,7 @@ void Catalog::registerRating(int code){
     int rate;
     cout<<"Rank this book from 1 to 5: "<<endl;
     cin>>rate;
-    for(unsigned i=0;i<books.size();i++){
+    for(unsigned int i=0;i<books.size();i++){
         if(books[i].getCode()==code){
            books[i].calculateRating(rate);
         }

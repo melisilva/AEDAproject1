@@ -1,4 +1,5 @@
 #include "Book.h"
+#include <iostream>
 using namespace std;
 
 Book::Book(int code, string title, string author){
@@ -60,4 +61,8 @@ void Book::calculateRating(int rate){
     opinions+=1;
     sumrating+=rate;
     realrating=sumrating/opinions;
+}
+
+void Book::showBook(){
+    cout<<"Title: "<<title<<"/n"<<"Author: "<<author<<"/n"<<"Code: "<<code<<"/n"<<"Rating: "<<realrating<<"/n"<<"State: "<<state<<"/n";
 }

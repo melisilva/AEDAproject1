@@ -23,7 +23,11 @@
   <component name="ChangeListManager">
     <list default="true" id="06cf1799-e7d0-4193-a4a5-7f67df7a9dc4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Book.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Book.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Book.h" beforeDir="false" afterPath="$PROJECT_DIR$/Book.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Catalog.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Catalog.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Club.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Club.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Club.h" beforeDir="false" afterPath="$PROJECT_DIR$/Club.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +54,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Desktop/FEUP/2ano/Primeiro semestre/AEDA/aeda2021_p02" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -85,7 +89,7 @@
       <workItem from="1602510447513" duration="2506000" />
       <workItem from="1602530131220" duration="542000" />
       <workItem from="1602531298216" duration="7591000" />
-      <workItem from="1602577905330" duration="5167000" />
+      <workItem from="1602577905330" duration="7907000" />
     </task>
     <servers />
   </component>
@@ -103,5 +107,11 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="421" y="96" key="FileChooserDialogImpl" timestamp="1602624246850">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="421" y="96" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1602624246850" />
   </component>
 </project>

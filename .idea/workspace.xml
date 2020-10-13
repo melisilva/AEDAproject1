@@ -23,9 +23,7 @@
   <component name="ChangeListManager">
     <list default="true" id="06cf1799-e7d0-4193-a4a5-7f67df7a9dc4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Book.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Book.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Book.h" beforeDir="false" afterPath="$PROJECT_DIR$/Book.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Catalog.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Catalog.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Club.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Club.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,11 +69,6 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="CMake Application.AEDAproject1" />
       <item itemvalue="CMake Application.Doxygen" />
@@ -91,7 +84,8 @@
       <updated>1602510445747</updated>
       <workItem from="1602510447513" duration="2506000" />
       <workItem from="1602530131220" duration="542000" />
-      <workItem from="1602531298216" duration="7385000" />
+      <workItem from="1602531298216" duration="7591000" />
+      <workItem from="1602577905330" duration="5167000" />
     </task>
     <servers />
   </component>

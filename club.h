@@ -13,7 +13,7 @@ class Club {
 public:
 
     void addMember(); //pede o nome e NIF e depois os livros;
-    void removeMember();
+    void removeMember(int nif);
     void chargeDelay(int nif, int account,Book book);
     void chargeFee(int nif, int account,Book book);
     void showMembers();

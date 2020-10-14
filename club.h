@@ -6,12 +6,12 @@
 #include "nonMem.h"
 using namespace std;
 
-class Club :public Book{
+class Club :public Book,public Member{
+protected:
     Catalog catalog;
+private:
     vector<Member> members;
-
 public:
-
     void addMember(); //pede o nome e NIF e depois os livros;
     void removeMember(int nif);
     void chargeDelay(int nif, int account,Book book);

@@ -42,3 +42,43 @@ void Catalog::registerRating(int code){
         }
     }
 }
+
+void Catalog::showBooks(){
+    for(unsigned int i=0;i<books.size();i++){
+       books[i].showBook();
+    }
+}
+
+bool Catalog::searchBook(int code){
+    for(unsigned int i=0;i<books.size();i++){
+        if(books[i].getCode()==code){
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Catalog::searchBook(string name){
+    for(unsigned int i=0;i<books.size();i++){
+        if(books[i].getTitle()==name){
+            return true;
+        }
+    }
+    return false;
+}
+
+int Catalog::convertnametocode(string name){
+    for(unsigned int i=0;i<books.size();i++){
+        if(books[i].getTitle()==name){
+            return books[i].getCode();
+        }
+    }
+}
+
+void Catalog::showBook(int code){
+    for(unsigned int i=0;i<books.size();i++){
+        if(books[i].getCode()==code){
+            books[i].showBook();
+        }
+    }
+}

@@ -6,12 +6,12 @@ void Club::chargeDelay(int nif, int account,Book book){
     float fine=book.getValue()*0.10;
     for(unsigned int i=0;i<members.size();i++){
         if(members[i].getNIF()==nif){
-            account-=fine;
+            members[i].minusBalance(fine);
             ismember=true;
         }
     }
     if(ismember==false){
-        account-=(fine*2);
+        //members[i].minusBalance(fine*2);
     }
 }
 

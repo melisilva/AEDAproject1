@@ -1,6 +1,7 @@
 #ifndef AEDAPROJECT1_MEMBER_H
 #define AEDAPROJECT1_MEMBER_H
 #include "book.h"
+#include "Club.h"
 #include <string>
 #include <vector>
 #include <iostream>
@@ -9,8 +10,9 @@
 #include <algorithm>
 
 
-class Member {
+class Member :public Club{
     vector<pair<Book*, string>> lendings, lendRequests;
+    vector<pair<int, string>> lendRequest;
     vector<Book*> books;
     string name;
     int nif;
@@ -33,6 +35,8 @@ public:
     string getName() const;
     vector<Book*> getBooks() const;
     float getBalance() const;
+    void addBalance(int change);
+    void minusBalance(int change);
 };
 
 

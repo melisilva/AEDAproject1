@@ -10,12 +10,14 @@ class nonMem : public Club{
     float balance;
 
 public:
+    nonMem(string &name, int &nif);
     void showData(ofstream file) const;
     void updateData(ofstream file, string name, string account);
     bool showLendRequests() const;
     bool makeRequest(int code=0,string name="");
     int getNIF() const;
     string getName() const;
+    float getBalance()const;
 };
 
 

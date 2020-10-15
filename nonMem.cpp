@@ -1,6 +1,17 @@
 #include "nonMem.h"
+
+nonMem::nonMem(string &name, int &nif) {
+    this->name = name;
+    this->nif = nif;
+    this->balance = 50;
+}
+
 int nonMem::getNIF() const{
     return nif;
+}
+
+float nonMem::getBalance() const {
+    return balance;
 }
 
 string nonMem::getName() const{

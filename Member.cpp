@@ -119,9 +119,10 @@ void Member::showData() const {
     }
 
     temp << "Pedidos: " << endl;
-    for (int i = 0; i < lendings.size(); i++){
+    /*for (int i = 0; i < lendings.size(); i++){
         temp << "   -" << (*lendings[i].first).getTitle() << " por " << (*lendings[i].first).getAuthor() << endl;
-    }
+    }*/
+    showLendRequests(); //Pedidos e Empréstimos em Vigor estão a dar a mesma coisa, substitui para em Pedidos, mostrar os Pedidos feitos pelo Member
 
     temp << "Empréstimos em Vigor: " << endl;
     for (int i = 0; i < lendings.size(); i++){
@@ -159,9 +160,10 @@ void Member::outputData() const {
     }
 
     temp << "Pedidos: " << endl;
-    for (int i = 0; i < lendings.size(); i++){
+    /*for (int i = 0; i < lendings.size(); i++){
         temp << "   -" << (*lendings[i].first).getTitle() << " por " << (*lendings[i].first).getAuthor() << endl;
-    }
+    }*/
+    showLendRequests(); //Pedidos e Empréstimos em Vigor estão a dar a mesma coisa, substitui para em Pedidos, mostrar os Pedidos feitos pelo Member
 
     temp << "Empréstimos em Vigor: " << endl;
     for (int i = 0; i < lendings.size(); i++){

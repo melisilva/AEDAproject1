@@ -6,7 +6,7 @@
 #include "nonMem.h"
 using namespace std;
 
-class Club :public Book,public Member{
+class Club :public Book{
 protected:
     Catalog catalog;
 private:

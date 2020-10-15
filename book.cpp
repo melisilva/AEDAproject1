@@ -66,3 +66,4 @@ void Book::calculateRating(int rate){
 void Book::showBook(){
     cout<<"Title: "<<title<<"/n"<<"Author: "<<author<<"/n"<<"Code: "<<code<<"/n"<<"Rating: "<<realrating<<"/n"<<"State: "<<state<<"/n";
 }
+

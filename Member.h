@@ -28,15 +28,12 @@ public:
     void outputData() const;
     void showLendings() const;
     void showBooks() const;
-    void updateData(string &name, string &account);
+    void updateData(string &name, int balance);
     void renovateLending() const;
     int getNIF() const;
-    int getAccount() const;
     string getName() const;
     vector<Book*> getBooks() const;
     float getBalance() const;
-    void addBalance(int change);
-    void minusBalance(int change);
 };
 
 

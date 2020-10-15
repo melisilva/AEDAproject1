@@ -6,7 +6,7 @@
 class nonMem : public Club{
     vector<pair<int, string>> lendRequest;
     string name;
-    int nif, account;
+    int nif;
     float balance;
 
 public:
@@ -15,7 +15,6 @@ public:
     bool showLendRequests() const;
     bool makeRequest(int code=0,string name="");
     int getNIF() const;
-    int getAccount() const;
     string getName() const;
 };
 

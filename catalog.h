@@ -11,12 +11,12 @@ class Catalog:public Book {
 
 public:
     void addBook(string title, int edition,int code, string author);
-    void removeBook(string title, int account);
+    void removeBook(string title, int balance);
     void showBooks(); //shows every book that exists
     void showBookWaitlist(int code);
     void showRating(int code);
-    void lendBook(int code, int account);
-    void receiveBook(int code, int account);
+    void lendBook(int code, int balance);
+    void receiveBook(int code, int balance);
     void registerRating(int code);
     void registerLendRequest(string title, int nif);
     bool searchBook(int code);

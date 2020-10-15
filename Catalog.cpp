@@ -6,11 +6,11 @@ void Catalog::addBook(string title, int edition,int code, string author){
     books.push_back(b1);
 }
 
-void Catalog::removeBook(string title, int account){
+void Catalog::removeBook(string title, int balance){
     unsigned todel=-1;
     for(unsigned int i=0;i<books.size();i++){
         if(books[i].getTitle()==title){
-            account+=books[i].getValue();
+            balance+=books[i].getValue();
             if(books[i].getUnits()!=1){
                 books[i].deleteUnit(true);
             }

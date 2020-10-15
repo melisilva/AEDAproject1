@@ -1,21 +1,21 @@
 #include "Club.h"
 #include "Book.h"
 
-void Club::chargeDelay(int nif, int account,Book book){
+void Club::chargeDelay(int nif, int balance,Book book){
     bool ismember;
     float fine=book.getValue()*0.10;
     for(unsigned int i=0;i<members.size();i++){
         if(members[i].getNIF()==nif){
-            members[i].minusBalance(fine);
+            balance-=fine;
             ismember=true;
         }
     }
     if(ismember==false){
-        //members[i].minusBalance(fine*2);
+        balance-=(fine*2);
     }
 }
 
-void Club::chargeFee(int nif, int account,Book book){
+void Club::chargeFee(int nif, int balance,Book book){
     bool ismember;
     float fee=book.getValue()*0.05;
     for(unsigned int i=0;i<members.size();i++){
@@ -24,7 +24,7 @@ void Club::chargeFee(int nif, int account,Book book){
         }
     }
     if(ismember==false){
-        account-=fee;
+        balance-=fee;
     }
 }
 

@@ -188,10 +188,4 @@ void Member::renovateLending() const {
 
 }
 
-void Member::addBalance(int change){
-    balance+=change;
-}
-void Member::minusBalance(int change){
-    balance-=change;
-}
 

@@ -2,10 +2,11 @@
 #include <iostream>
 using namespace std;
 
-Book::Book(int code, string title, string author){
+Book::Book(int code, string title, string author,string category){
     this->code = code;
     this->title = title;
     this->author = author;
+    this->category=category;
 }
 
 int Book::getCode() {
@@ -23,6 +24,11 @@ string Book::getTitle() {
 string Book::getAuthor() {
     return author;
 }
+
+string Book::getCategory() {
+    return category;
+}
+
 
 bool Book::getState() {
     return state;
@@ -64,6 +70,6 @@ void Book::calculateRating(int rate){
 }
 
 void Book::showBook(){
-    cout<<"Title: "<<title<<"/n"<<"Author: "<<author<<"/n"<<"Code: "<<code<<"/n"<<"Rating: "<<realrating<<"/n"<<"State: "<<state<<"/n";
+    cout<<"Title: "<<title<<"/n"<<"Author: "<<author<<"/n"<<"Category: "<<category<<"/n"<<"Code: "<<code<<"/n"<<"Rating: "<<realrating<<"/n"<<"State: "<<state<<"/n";
 }
 

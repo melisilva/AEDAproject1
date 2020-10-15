@@ -39,8 +39,8 @@ bool nonMem::makeRequest(int code, string name){
     //check if book with code introduced exists
     if(code!=0){
         if(catalog.searchBook(code)==false){
-           return false;
-      }
+            return false;
+        }
     }
     //check if book with name introduced exists
     if(name!=""){

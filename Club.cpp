@@ -1,9 +1,10 @@
 #include "Club.h"
 #include "Book.h"
 
-void Club::chargeDelay(int nif, int balance,Book book){
+void Club::chargeDelay(int nif, int balance,Book book,int delayp){
     bool ismember;
     float fine=book.getValue()*0.10;
+    fine=fine*delayp; //fine is measured by the book value plus the number of delay days
     for(unsigned int i=0;i<members.size();i++){
         if(members[i].getNIF()==nif){
             balance-=fine;
@@ -29,7 +30,7 @@ void Club::chargeFee(int nif, int balance,Book book){
 }
 
 void Club::addMember(){
-    string name,answer,title,author,nif_s,edition_s,code_s;
+    string name,answer,title,author,nif_s,edition_s,code_s,category;
     int nif,edition,code;
     vector<Book*>books;
     cout<<"What's your name?"<<endl;
@@ -43,14 +44,16 @@ void Club::addMember(){
         getline(cin, title);
         cout << "What's its author's name?" << endl;
         getline(cin, author);
+        cout<<"What's its category?"<<endl;
+        getline(cin,category);
         cout << "What's its edition?" << endl;
         getline(cin, edition_s);
         edition = stoi(edition_s);
         cout << "What's its code?" << endl;
         getline(cin, code_s);
         code = stoi(code_s);
-        catalog.addBook(title,edition,code,author);
-        Book b(code,title,author);
+        Book b(code,title,author,category);
+        catalog.addBook(b,edition);
         books.push_back(&b);
         cout<<"Do you want to add another one?"<<endl;
         getline(cin,answer);

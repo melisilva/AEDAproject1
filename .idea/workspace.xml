@@ -23,8 +23,11 @@
   <component name="ChangeListManager">
     <list default="true" id="06cf1799-e7d0-4193-a4a5-7f67df7a9dc4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Book.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Book.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Catalog.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Catalog.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Catalog.h" beforeDir="false" afterPath="$PROJECT_DIR$/Catalog.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Club.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Club.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Member.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Member.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Member.h" beforeDir="false" afterPath="$PROJECT_DIR$/Member.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nonMem.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/nonMem.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nonMem.h" beforeDir="false" afterPath="$PROJECT_DIR$/nonMem.h" afterDir="false" />
     </list>
@@ -90,7 +93,7 @@
       <workItem from="1602531298216" duration="7591000" />
       <workItem from="1602577905330" duration="7995000" />
       <workItem from="1602707506414" duration="5876000" />
-      <workItem from="1602749335969" duration="1616000" />
+      <workItem from="1602749335969" duration="3416000" />
     </task>
     <servers />
   </component>

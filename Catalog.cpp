@@ -1,9 +1,8 @@
 #include "Catalog.h"
 
-void Catalog::addBook(string title, int edition,int code, string author){
-    Book b1(code,title,author);
-    b1.calculateValue(edition);
-    books.push_back(b1);
+void Catalog::addBook(Book book,int edition){
+    book.calculateValue(edition);
+    books.push_back(book);
 }
 
 void Catalog::removeBook(string title, int balance){
@@ -38,14 +37,14 @@ void Catalog::registerRating(int code){
     cin>>rate;
     for(unsigned int i=0;i<books.size();i++){
         if(books[i].getCode()==code){
-           books[i].calculateRating(rate);
+            books[i].calculateRating(rate);
         }
     }
 }
 
 void Catalog::showBooks(){
     for(unsigned int i=0;i<books.size();i++){
-       books[i].showBook();
+        books[i].showBook();
     }
 }
 

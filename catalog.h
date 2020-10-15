@@ -10,7 +10,7 @@ class Catalog:public Book {
     vector <pair<Book, Member>> lendRequests, delays;
 
 public:
-    void addBook(string title, int edition,int code, string author);
+    void addBook(Book book,int edition);
     void removeBook(string title, int balance);
     void showBooks(); //shows every book that exists
     void showBookWaitlist(int code);

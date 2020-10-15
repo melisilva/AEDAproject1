@@ -34,13 +34,10 @@ vector<Book*> Member::getBooks() const {
     }
     return -1;
 }
-
 bool Member::makeRequest(int code, string name){
     string date;
-
     cout << "Indique a data no formato DD-MM-YYYY: ";
     cin >> date;
-
     if ((code == 0) && (name == "")) {
         return false;
     }
@@ -90,11 +87,9 @@ bool Member::makeRequest(int code, string name){
     if (lendRequests.size() == 0){
         return false;
     }
-
     for (int i = 0; i < lendRequests.size(); i++){
         cout << (*lendRequests[i].first).getTitle() << " por " << (*lendRequests[i].first).getAuthor();
     }
-
     return true;
 }*/
 
@@ -137,7 +132,7 @@ void Member::showData() const {
 void Member::showBooks() const {
     cout << "Livros de " << getName() << ": " << endl;
     for (int i = 0; i < books.size(); i++){
-       // cout << "   -" << (*books[i]).getTitle() << " por " << (*books[i]).getAuthor() << endl;
+        // cout << "   -" << (*books[i]).getTitle() << " por " << (*books[i]).getAuthor() << endl;
         (*books[i]).showBook();
     }
 }
@@ -189,5 +184,3 @@ void Member::renovateLending() const {
     replace(lendings.begin(), lendings.end(), lendings[temp - 1], pair<Book*, string>(lendings[temp - 1].first, date));
 
 }
-
-

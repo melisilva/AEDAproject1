@@ -64,13 +64,13 @@ void Club::addMember(){
         cout << "Introduza a sua edição, por favor:" << endl;
         getline(cin, edition_s);
         edition = stoi(edition_s);
-        cout << "Introduza o seu código, por favor:" << endl;
-        getline(cin, code_s);
+
         //Adding the book.
-        code = stoi(code_s);
+        code = catalog.books.size();
         Book b(code,title,author,category);
         catalog.addBook(b,edition);
         books.push_back(&b);
+        
         //Repeating.
         cout << "Quer adicionar outro livro?"<<endl;
         getline(cin,answer);

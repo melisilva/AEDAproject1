@@ -13,33 +13,30 @@
     catalog = temp5;
 }*/
 
+bool Club::isMember(int nif){
+    for(unsigned int i = 0; i < members.size(); i++) {
+        if (members[i].getNIF() == nif) {
+            return true;
+        }
+    }
+    return false;
+}
 void Club::chargeDelay(int nif, int balance,Book book,int delayp){
-    bool isMember;
     float fine = book.getValue()*0.10;
 
     fine = fine*delayp;
 
-    for(unsigned int i = 0; i < members.size(); i++) {
-        if (members[i].getNIF() == nif) {
-            balance -= fine;
-            isMember = true;
-        }
+    if(isMember(nif)){
+        balance -= fine;
     }
-    if(isMember == false){
+    else{
         balance -= (fine * 2);
     }
 }
 
 void Club::chargeFee(int nif, int balance,Book book){
-    bool isMember;
     float fee = book.getValue()*0.05;
-
-    for (unsigned int i = 0; i < members.size(); i++){
-        if(members[i].getNIF() == nif){
-            isMember=true;
-        }
-    }
-    if(isMember == false){
+    if(!isMember(nif)){
         balance -= fee;
     }
 }

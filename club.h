@@ -23,6 +23,9 @@ public:
     void showDelays();
     void showLendRequests();
     void saveData();
+    void showBookWaitlist(int code);
+    void retrieveData(ofstream file) const;
+    bool isMember(int nif);
 };
 
 

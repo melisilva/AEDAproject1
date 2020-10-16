@@ -8,7 +8,7 @@ void Club::chargeDelay(int nif, int balance,Book book,int delayp){
     fine = fine * delayp; //fine is measured by the book value plus the number of delay days
 
     for (unsigned int i = 0; i < members.size(); i++) {
-        if ((*members[i]).getNIF() == nif) {
+        if ((members[i]).getNIF() == nif) {
             balance -= fine;
             isMember = true;
         }
@@ -23,7 +23,7 @@ void Club::chargeFee(int nif, int balance,Book book){
     float fee = book.getValue()*0.05;
 
     for (unsigned int i = 0; i < members.size(); i++){
-        if((*members[i]).getNIF() == nif){
+        if((members[i]).getNIF() == nif){
             isMember=true;
         }
     }
@@ -56,21 +56,21 @@ void Club::addMember(){
         getline(cin, code_s);
         //Adding the book.
         code = stoi(code_s);
-        catalog.addBook(title,edition,code,author);
-        Book b(code,title,author);
+        Book b(code,title,author,category);
+        catalog.addBook(b,edition);
         books.push_back(&b);
         //Repeating.
         cout << "Do you want to add another one?"<<endl;
         getline(cin,answer);
     } while((answer=="Y") || (answer=="Yes") || (answer=="yes") || (answer=="y"));
     Member m(name,nif,books);
-    members.push_back(&m);
+    members.push_back(m);
 }
 
 void Club::removeMember(int nif){
     unsigned toDel;
     for(unsigned int i=0;i<members.size();i++){
-        if((*members[i]).getNIF()==nif){
+        if((members[i]).getNIF()==nif){
             toDel=i;
         }
     }
@@ -79,8 +79,8 @@ void Club::removeMember(int nif){
 
 void Club::showMembers(){
     for (unsigned int i = 0; i < members.size(); i++){
-        cout << "Name: " << (*members[i]).getName() << "/n" << "NIF: "<< (*members[i]).getNIF() << "/n" << "Books:" << endl;
-        vector<Book*> books = (*members[i]).getBooks();
+        cout << "Name: " << (members[i]).getName() << "/n" << "NIF: "<< (members[i]).getNIF() << "/n" << "Books:" << endl;
+        vector<Book*> books = (members[i]).getBooks();
         for (unsigned int j = 0; j < books.size(); j++){
             books[j]->showBook();
         }

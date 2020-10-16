@@ -98,3 +98,7 @@ Book Catalog::getBook(int code = 0, string name = ""){
     }
     return books[searchBook(name)];
 }
+
+void Catalog::lendBook() {
+    
+}

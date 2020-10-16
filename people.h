@@ -26,7 +26,6 @@ public:
     bool showLendRequests() const;
     void showData() const;
     string getData();
-    void retrieveData(ofstream file) const;
     void showLendings() const;
     void showBooks() const;
     void updateData(string &name, int balance);

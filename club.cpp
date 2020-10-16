@@ -1,6 +1,6 @@
 #include "club.h"
 
-/*Club::Club() {
+Club::Club() {
     vector<Member> temp;
     vector<tuple<int, string, int>> temp2, temp3;
     vector<pair<int, string>> temp4;
@@ -11,7 +11,7 @@
     lendRequests = temp4;
     delays = temp3;
     catalog = temp5;
-}*/
+}
 
 void Club::chargeDelay(int nif, int balance,Book book,int delayp){
     bool isMember;
@@ -70,7 +70,7 @@ void Club::addMember(){
         Book b(code,title,author,category);
         catalog.addBook(b,edition);
         books.push_back(&b);
-        
+
         //Repeating.
         cout << "Quer adicionar outro livro?"<<endl;
         getline(cin,answer);
@@ -100,6 +100,24 @@ void Club::showMembers(){
         for (unsigned int j = 0; j < books.size(); j++){
             books[j]->showBook();
         }
+    }
+}
+
+void Club::showLendRequests() {
+    for (unsigned int i = 0; i < lendRequests.size(); i++){
+        cout << get<0>(lendRequests[i]) << ", a " << get<1>(lendRequests[i]) << " pelo " << get<2>(lendRequests[i]) << endl;
+    }
+}
+
+void Club::showLendings() {
+    for (unsigned int i = 0; i < lendings.size(); i++){
+        cout << get<0>(lendings[i]) << ", a " << get<1>(lendings[i]) << " pelo " << get<2>(lendings[i]) << endl;
+    }
+}
+
+void Club::showDelays() {
+    for (unsigned int i = 0; i < delays.size(); i++){
+        cout << get<0>(delays[i]) << ", desde " << get<1>(delays[i]) << " pelo " << get<2>(delays[i]) << endl;
     }
 }
 

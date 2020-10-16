@@ -11,18 +11,18 @@ private:
     vector<tuple<int, string, int>> lendings, delays, lendRequests;
     Catalog catalog;
 public:
-    //construtor
-    void addMember(); //pede o nome e NIF e depois os livros;
-    void removeMember(int nif);
-    bool makeRequest();
-    int findMember(int nif);
-    void chargeDelay(int nif, int balance, Book book,int delayPrice);
-    void chargeFee(int nif, int balance,Book book);
-    void showMembers();
+    Club(); //done
+    void addMember(); //done
+    void removeMember(int nif); //done
+    bool makeRequest(); //done
+    int findMember(int nif); //done
+    void chargeDelay(int nif, int balance, Book book,int delayPrice); //done
+    void chargeFee(int nif, int balance,Book book); //done
+    void showMembers(); //done
     void showLendings();
     void showDelays();
     void showLendRequests();
-    void saveData();
+    void saveData(); //done
 };
 
 

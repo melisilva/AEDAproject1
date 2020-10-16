@@ -1,9 +1,8 @@
 #ifndef AEDAPROJECT1_CATALOG_H
 #define AEDAPROJECT1_CATALOG_H
-#include "member.h"
-#include "nonMem.h"
 #include "book.h"
 #include <vector>
+#include <iostream>
 using namespace std;
 
 class Catalog{

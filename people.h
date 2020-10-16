@@ -1,7 +1,6 @@
 #ifndef AEDAPROJECT1_MEMBER_H
 #define AEDAPROJECT1_MEMBER_H
 #include "book.h"
-#include "club.h"
 #include <string>
 #include <vector>
 #include <iostream>

@@ -1,9 +1,7 @@
 #ifndef AEDAPROJECT1_CLUB_H
 #define AEDAPROJECT1_CLUB_H
-#include "book.h"
 #include "catalog.h"
-#include "member.h"
-#include "nonMem.h"
+#include "people.h"
 #include <vector>
 
 class Club {

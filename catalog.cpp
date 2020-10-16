@@ -81,6 +81,7 @@ int Catalog::convertNameToCode(string name){
             return books[i].getCode();
         }
     }
+    return -1;
 }
 
 void Catalog::showBook(int code){

@@ -1,5 +1,5 @@
 #include <fstream>
-#include "member.h"
+#include "people.h"
 using namespace std;
 
 Member::Member(){

@@ -1,5 +1,4 @@
 #include "club.h"
-#include "Book.h"
 
 void Club::chargeDelay(int nif, int balance,Book book,int delayp){
     bool isMember;
@@ -137,4 +136,6 @@ bool Club::makeRequest(){
         cerr << "Não podemos adicionar um livro sem nos indicar uma referência dele!" << endl;
         return false;
     }
+
+    return false;
 }

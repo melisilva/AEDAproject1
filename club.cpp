@@ -48,23 +48,23 @@ void Club::addMember(){
     string name, answer, title, author, nif_s, edition_s, code_s, category;
     int nif, edition, code;
     vector<Book*>books;
-    cout<<"What's your name?"<<endl;
+    cout<<"Introduza o seu nome, por favor:"<<endl;
     getline(cin,name);
-    cout<<"What's your nif?"<<endl;
+    cout<<"Introduza o seu nif, por favor:"<<endl;
     getline(cin,nif_s);
     nif=stoi(nif_s);
-    cout << "Add a book please" << endl;
+    cout << "Adicione um livro, por favor:"<< endl;
     do {
-        cout << "What's its title" << endl;
+        cout <<"Introduza o seu título, por favor:"<< endl;
         getline(cin, title);
-        cout << "What's its author's name?" << endl;
+        cout << "Introduza o nome do seu escritor(a), por favor:" << endl;
         getline(cin, author);
-        cout<<"What's its category?"<<endl;
+        cout<<"Introduza a sua categoria, por favor:"<<endl;
         getline(cin,category);
-        cout << "What's its edition?" << endl;
+        cout << "Introduza a sua edição, por favor:" << endl;
         getline(cin, edition_s);
         edition = stoi(edition_s);
-        cout << "What's its code?" << endl;
+        cout << "Introduza o seu código, por favor:" << endl;
         getline(cin, code_s);
         //Adding the book.
         code = stoi(code_s);
@@ -72,9 +72,9 @@ void Club::addMember(){
         catalog.addBook(b,edition);
         books.push_back(&b);
         //Repeating.
-        cout << "Do you want to add another one?"<<endl;
+        cout << "Quer adicionar outro livro?"<<endl;
         getline(cin,answer);
-    } while((answer=="Y") || (answer=="Yes") || (answer=="yes") || (answer=="y"));
+    } while((answer=="S") || (answer=="Sim") || (answer=="sim") || (answer=="s"));
     Member m(name,nif,books);
     members.push_back(m);
 }
@@ -95,7 +95,7 @@ void Club::removeMember(int nif){
 
 void Club::showMembers(){
     for (unsigned int i = 0; i < members.size(); i++){
-        cout << "Name: " << members[i].getName() << "/n" << "NIF: "<< members[i].getNIF() << "/n" << "Books:" << endl;
+        cout << "Nome: " << members[i].getName() << "/n" << "NIF: "<< members[i].getNIF() << "/n" << "Livros:" << endl;
         vector<Book*> books = members[i].getBooks();
         for (unsigned int j = 0; j < books.size(); j++){
             books[j]->showBook();

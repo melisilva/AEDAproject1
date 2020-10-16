@@ -1,5 +1,4 @@
 #include "Book.h"
-#include <iostream>
 using namespace std;
 
 Book::Book(){
@@ -76,5 +75,13 @@ void Book::calculateRating(int rate){
 }
 
 void Book::showBook(){
-    cout<<"Title: "<<title<< endl <<"Author: "<<author<< endl <<"Category: "<<category<< endl <<"Code: "<<code<< endl <<"Rating: "<<realRating<< endl <<"State: "<<state<< endl;
+    cout << "   - " << title << ", de " << author << " ( " << realRating << "/5)" << endl;
+}
+
+string Book::getData(){
+    stringstream temp;
+
+    temp << getCode() << "," << getTitle() << "," << getAuthor() << "," << getCategory() << "," << getValue() << "," << getRating();
+
+    return temp.str();
 }

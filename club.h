@@ -1,14 +1,14 @@
 #ifndef AEDAPROJECT1_CLUB_H
 #define AEDAPROJECT1_CLUB_H
 #include "catalog.h"
+#include <fstream>
 #include "people.h"
 #include <vector>
 
 class Club {
 private:
     vector<Member> members;
-    vector<tuple<int, string, int>> lendings;
-    vector<pair<int, string>> lendRequests, delays;
+    vector<tuple<int, string, int>> lendings, delays, lendRequests;
     Catalog catalog;
 public:
     void addMember(); //pede o nome e NIF e depois os livros;
@@ -21,6 +21,7 @@ public:
     void showLendings();
     void showDelays();
     void showLendRequests();
+    void saveData();
 };
 
 

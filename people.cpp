@@ -67,7 +67,7 @@ bool Member::showLendRequests() const {
 void Member::showData() const {
     stringstream temp;
 
-    temp << "Nome: " << name << endl << "NIF: " << nif << endl << "Livros: " << endl;
+    temp << "Nome: " << name << endl << "NIF: " << nif << endl;
 
     cout << temp.str();
     showBooks();
@@ -91,37 +91,21 @@ void Member::showLendings() const {
     }
 }
 
-void Member::saveData() {
+string Member::getData() {
     string tmp = to_string(nif) + ".txt";
-
-    ofstream file(tmp, ios::binary);
 
     stringstream temp;
 
-    temp << name << "," << nif << ";";
+    temp << name << "," << nif << endl;
     for (int i = 0; i < books.size(); i++){
         if (i < books.size() - 1 ) {
             temp << (*books[i]).getCode() << ",";
         } else if (i == books.size() - 1){
-            temp << (*books[i]).getCode() << ";";
+            temp << (*books[i]).getCode() << endl;
         }
     }
 
-    for (int i = 0; i < lendRequest.size(); i++){
-        if (i < lendRequest.size() - 1 ) {
-            temp << lendRequest[i].first << "," << lendRequest[i].second << ",";
-        }
-    }
-
-    for (int i = 0; i < lendings.size(); i++){
-        if (i < lendings.size() - 1 ) {
-            temp << lendings[i].first << "," << lendings[i].second << ",";
-        } else if (i == books.size() - 1){
-            temp << lendings[i].first << "," << lendings[i].second << ";";
-        }
-    }
-
-    file << temp.str();
+    return temp.str();
 }
 
 void Member::renovateLending() {

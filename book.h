@@ -2,6 +2,8 @@
 #define AEDAPROJECT1_BOOK_H
 
 #include <string>
+#include <sstream>
+#include <iostream>
 using namespace std;
 
 class Book {
@@ -25,6 +27,7 @@ public:
     int getUnits();
     void deleteUnit(bool gonebook);
     void showBook();
+    string getData();
 };
 
 

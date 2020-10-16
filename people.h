@@ -25,7 +25,7 @@ public:
     bool registerRequest(int code, string name);
     bool showLendRequests() const;
     void showData() const;
-    void saveData();
+    string getData();
     void retrieveData(ofstream file) const;
     void showLendings() const;
     void showBooks() const;

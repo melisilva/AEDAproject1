@@ -1,5 +1,18 @@
 #include "club.h"
 
+/*Club::Club() {
+    vector<Member> temp;
+    vector<tuple<int, string, int>> temp2, temp3;
+    vector<pair<int, string>> temp4;
+    Catalog temp5;
+
+    members = temp;
+    lendings = temp2;
+    lendRequests = temp4;
+    delays = temp3;
+    catalog = temp5;
+}*/
+
 void Club::chargeDelay(int nif, int balance,Book book,int delayp){
     bool isMember;
     float fine = book.getValue()*0.10;
@@ -138,4 +151,32 @@ bool Club::makeRequest(){
     }
 
     return false;
+}
+
+void Club::saveData(){
+    string membs = "members.txt", lends = "lendings.txt", lendRs = "lendRequests.txt";
+
+    ofstream file(membs, ios::binary);
+    ofstream filee(lends, ios::binary);
+    ofstream fileee(lendRs, ios::binary);
+
+    stringstream temp1, temp2, temp3; 
+
+    for (int i = 0; i < members.size(); i++){
+        temp1 << members[i].getData() << endl;
+    }
+
+    file << temp1.str();
+
+    for (int i = 0; i < lendings.size(); i++){
+        temp2 << get<0>(lendings[i]) << ", " << get<1>(lendings[i]) << get<2>(lendings[i]) << endl;
+    }
+
+    filee << temp2.str();
+
+    for (int i = 0; i < lendRequests.size(); i++){
+        temp3 << get<0>(lendRequests[i]) << ", " << get<1>(lendRequests[i]) << get<2>(lendRequests[i]) << endl;
+    }
+
+    fileee << temp3.str();
 }

@@ -3,6 +3,7 @@
 using namespace std;
 
 int main() {
+    Club temp;
     string nome = "Joao", livro = "Aristotle & Dante Discover the Secrets of the Universe", aut = "Benjamin Alire-Saénz", gen = "Cont";
     int nif = 123456789, code = 1;
     vector<Book*> books;
@@ -10,6 +11,6 @@ int main() {
     books.push_back(&a);
     Member b(nome, nif, books);
 
-    b.saveData();
+    cout << b.getData();
     b.showData();
 }

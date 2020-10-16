@@ -8,11 +8,11 @@
 #include <iomanip>
 #include <sstream>
 #include <algorithm>
+using namespace std;
 
 
-class Member :public Club{
+class Member {
     vector<pair<Book*, string>> lendings, lendRequests;
-    vector<pair<int, string>> lendRequest;
     vector<Book*> books;
     string name;
     int nif;
@@ -25,7 +25,7 @@ public:
     bool showLendRequests() const;
     void showData() const;
     void saveData() const;
-    void outputData() const;
+    void retrieveData(ofstream file) const;
     void showLendings() const;
     void showBooks() const;
     void updateData(string &name, int balance);

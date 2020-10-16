@@ -25,7 +25,7 @@ vector<Book*> Member::getBooks() const {
     return books;
 }
 
-/*int Member::findBook(string title) const{
+int Member::findBook(string title) const{
     for (int i = 0; i < books.size(); i++){
         if (name == (*books[i]).getTitle()){
             return i;
@@ -34,22 +34,7 @@ vector<Book*> Member::getBooks() const {
     }
     return -1;
 }
-bool Member::makeRequest(int code, string name){
-    string date;
-    cout << "Indique a data no formato DD-MM-YYYY: ";
-    cin >> date;
-    if ((code == 0) && (name == "")) {
-        return false;
-    }
-    if (code != 0){
-        lendRequests.push_back(make_pair(books[code], date));
-        return true;
-    } else if ((name != "") && (findBook(name) != -1)) {
-        lendRequests.push_back(make_pair(books[findBook(name)], date));
-        return true;
-    }
-    return false;
-}*/
+
 
 bool Member::makeRequest(int code, string name){
     string date;
@@ -83,23 +68,14 @@ bool Member::makeRequest(int code, string name){
     return false;
 }
 
-/*bool Member::showLendRequests() const {
+bool Member::showLendRequests() const {
     if (lendRequests.size() == 0){
         return false;
     }
+
+    cout << "Pedidos: " << endl;
     for (int i = 0; i < lendRequests.size(); i++){
-        cout << (*lendRequests[i].first).getTitle() << " por " << (*lendRequests[i].first).getAuthor();
-    }
-    return true;
-}*/
-
-bool Member::showLendRequests() const {
-    if (lendRequest.size() == 0){
-        return false;
-    }
-
-    for (int i = 0; i < lendRequest.size(); i++){
-        catalog.showBook(lendRequest[i].first);
+        cout << "   -" << (*lendRequests[i].first).getTitle() << " por " << (*lendRequests[i].first).getAuthor() << endl;
     }
 
     return true;
@@ -109,30 +85,18 @@ void Member::showData() const {
     stringstream temp;
 
     temp << "Nome: " << name << endl << "NIF: " << nif << endl << "Livros: " << endl;
-    for (int i = 0; i < books.size(); i++){
-        temp << "   -" << (*books[i]).getTitle() << " por " << (*books[i]).getAuthor() << endl;
-    }
+    showBooks();
 
-    temp << "Pedidos: " << endl;
-    /*for (int i = 0; i < lendings.size(); i++){
-        temp << "   -" << (*lendings[i].first).getTitle() << " por " << (*lendings[i].first).getAuthor() << endl;
-    }*/
-    showLendRequests(); //Pedidos e Empréstimos em Vigor estão a dar a mesma coisa, substitui para em Pedidos, mostrar os Pedidos feitos pelo Member
+    showLendRequests();
 
-    temp << "Empréstimos em Vigor: " << endl;
-    for (int i = 0; i < lendings.size(); i++){
-        temp << "   -" << (*lendings[i].first).getTitle() << " por " << (*lendings[i].first).getAuthor() << endl;
-    }
+    showLendings();
 
     cout << temp.str();
-
-    cout << "meh";
 }
 
 void Member::showBooks() const {
     cout << "Livros de " << getName() << ": " << endl;
     for (int i = 0; i < books.size(); i++){
-        // cout << "   -" << (*books[i]).getTitle() << " por " << (*books[i]).getAuthor() << endl;
         (*books[i]).showBook();
     }
 }
@@ -144,25 +108,34 @@ void Member::showLendings() const {
     }
 }
 
-void Member::outputData() const {
-    ofstream file("Member.txt");
+void Member::saveData() const {
+    ofstream file(to_string(nif), ios::binary); //Como dar nomes aos ficheiros através dos dados que possuímos?
 
     stringstream temp;
 
-    temp << "Nome: " << name << endl << "NIF: " << nif << endl << "Livros: " << endl;
+    temp << name << "," << nif << ";";
     for (int i = 0; i < books.size(); i++){
-        temp << "   -" << (*books[i]).getTitle() << " por " << (*books[i]).getAuthor() << endl;
+        if (i < books.size() - 1 ) {
+            temp << (*books[i]).getCode() << ",";
+        } else if (i == books.size() - 1){
+            temp << (*books[i]).getCode() << ";";
+        }
     }
 
-    temp << "Pedidos: " << endl;
-    /*for (int i = 0; i < lendings.size(); i++){
-        temp << "   -" << (*lendings[i].first).getTitle() << " por " << (*lendings[i].first).getAuthor() << endl;
-    }*/
-    showLendRequests(); //Pedidos e Empréstimos em Vigor estão a dar a mesma coisa, substitui para em Pedidos, mostrar os Pedidos feitos pelo Member
+    for (int i = 0; i < lendRequests.size(); i++){
+        if (i < lendRequests.size() - 1 ) {
+            temp << (*lendRequests[i].first).getCode() << "," << lendRequests[i].second << ",";
+        } else if (i == books.size() - 1){
+            temp << (*lendRequests[i].first).getCode() << "," << lendRequests[i].second << ";";
+        }
+    }
 
-    temp << "Empréstimos em Vigor: " << endl;
     for (int i = 0; i < lendings.size(); i++){
-        temp << "   -" << (*lendings[i].first).getTitle() << " por " << (*lendings[i].first).getAuthor() << endl;
+        if (i < lendings.size() - 1 ) {
+            temp << (*lendings[i].first).getCode() << "," << lendings[i].second << ",";
+        } else if (i == books.size() - 1){
+            temp << (*lendings[i].first).getCode() << "," << lendings[i].second << ";";
+        }
     }
 
     file << temp.str();
@@ -183,4 +156,11 @@ void Member::renovateLending() const {
     //Preciso testar que a data está nos últimos 3 dias do empréstimo em vigor!
     replace(lendings.begin(), lendings.end(), lendings[temp - 1], pair<Book*, string>(lendings[temp - 1].first, date));
 
+}
+
+int main() {
+    Book a(1, "Aristotle & Dante Discover the Secrets of the Universe", "Benjamin Alire-Saénz", "Contemporary");
+    vector<Book*> books;
+    books.push_back(&a);
+    Member a("João", 123456789, &books);
 }

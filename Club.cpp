@@ -2,37 +2,41 @@
 #include "Book.h"
 
 void Club::chargeDelay(int nif, int balance,Book book,int delayp){
-    bool ismember;
-    float fine=book.getValue()*0.10;
-    fine=fine*delayp; //fine is measured by the book value plus the number of delay days
-    for(unsigned int i=0;i<members.size();i++){
-        if(members[i].getNIF()==nif){
-            balance-=fine;
-            ismember=true;
+    bool isMember;
+    float fine = book.getValue()*0.10;
+
+    fine = fine * delayp; //fine is measured by the book value plus the number of delay days
+
+    for (unsigned int i = 0; i < members.size(); i++){
+        if((*members[i]).getNIF() == nif){
+            balance -= fine;
+            isMember = true;
         }
     }
-    if(ismember==false){
-        balance-=(fine*2);
+    if(isMember == false){
+        balance -= (fine * 2);
     }
 }
 
 void Club::chargeFee(int nif, int balance,Book book){
-    bool ismember;
-    float fee=book.getValue()*0.05;
-    for(unsigned int i=0;i<members.size();i++){
-        if(members[i].getNIF()==nif){
-            ismember=true;
+    bool isMember;
+    float fee = book.getValue()*0.05;
+
+    for (unsigned int i = 0; i < members.size(); i++){
+        if((*members[i]).getNIF() == nif){
+            isMember=true;
         }
     }
-    if(ismember==false){
-        balance-=fee;
+    if(isMember == false){
+        balance -= fee;
     }
 }
 
 void Club::addMember(){
-    string name,answer,title,author,nif_s,edition_s,code_s,category;
-    int nif,edition,code;
+    string name, answer, title, author, nif_s, edition_s, code_s, category;
+    int nif, edition, code;
     vector<Book*>books;
+
     cout<<"What's your name?"<<endl;
     getline(cin,name);
     cout<<"What's your nif?"<<endl;
@@ -42,42 +46,58 @@ void Club::addMember(){
     do {
         cout << "What's its title" << endl;
         getline(cin, title);
+
         cout << "What's its author's name?" << endl;
         getline(cin, author);
+
         cout<<"What's its category?"<<endl;
         getline(cin,category);
+
         cout << "What's its edition?" << endl;
         getline(cin, edition_s);
         edition = stoi(edition_s);
+
         cout << "What's its code?" << endl;
         getline(cin, code_s);
+
+        //Adding the book.
         code = stoi(code_s);
         Book b(code,title,author,category);
         catalog.addBook(b,edition);
         books.push_back(&b);
-        cout<<"Do you want to add another one?"<<endl;
+
+        //Repeating.
+        cout << "Do you want to add another one?"<<endl;
         getline(cin,answer);
-    }while(answer=="Y"||answer=="Yes"||answer=="yes"||answer=="y");
+    } while((answer=="Y") || (answer=="Yes") || (answer=="yes") || (answer=="y"));
+
     Member m(name,nif,books);
-    members.push_back(m);
+    members.push_back(&m);
 }
 
 void Club::removeMember(int nif){
-    unsigned todel;
+    unsigned toDel;
     for(unsigned int i=0;i<members.size();i++){
-        if(members[i].getNIF()==nif){
-            todel=i;
+        if((*members[i]).getNIF()==nif){
+            toDel=i;
         }
     }
-    members.erase(members.begin()+todel);
+    members.erase(members.begin()+toDel);
 }
 
 void Club::showMembers(){
-    for(unsigned int i=0;i<members.size();i++){
-        cout<<"Name: "<<members[i].getName()<<"/n"<<"NIF: "<<members[i].getNIF()<<"/n"<<"Books:"<<endl;
-        vector<Book*>books=members[i].getBooks();
-        for(unsigned int j=0;j<books.size();j++){
+    for (unsigned int i = 0; i < members.size(); i++){
+        cout << "Name: " << (*members[i]).getName() << "/n" << "NIF: "<< (*members[i]).getNIF() << "/n" << "Books:" << endl;
+
+        vector<Book*> books = (*members[i]).getBooks();
+
+        for (unsigned int j = 0; j < books.size(); j++){
             books[j]->showBook();
         }
     }
+}
+
+Club::Club(Catalog catalog, vector<Member *> members) {
+    this->catalog = catalog;
+    this->members = members;
 }

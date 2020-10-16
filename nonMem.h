@@ -3,8 +3,10 @@
 #include "Member.h"
 #include "Club.h"
 
-class nonMem : public Club{
-    vector<pair<int, string>> lendRequest;
+class Member;
+
+class nonMem : public Member {
+    vector<pair<int, string>> lendRequests;
     string name;
     int nif;
     float balance;

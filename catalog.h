@@ -3,11 +3,10 @@
 #include "Member.h"
 #include "nonMem.h"
 #include "Book.h"
-using namespace std;
 
-class Catalog:public Book {
-    vector<Book> books, lendings;
-    vector <pair<Book, Member>> lendRequests, delays;
+class Catalog {
+    std::vector<Book*> books;
+    std::vector <pair<Book*, Member*>> lendRequests, delays;
 
 public:
     void addBook(Book book,int edition);

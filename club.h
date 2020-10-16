@@ -5,17 +5,16 @@
 #include "Member.h"
 #include "nonMem.h"
 
-class Club {
+class Club :public Book,public Member{
 protected:
     Catalog catalog;
 private:
-    std::vector<Member*> members;
+    vector<Member> members;
 public:
-    Club(Catalog catalog, std::vector<Member*> members);
     void addMember(); //pede o nome e NIF e depois os livros;
     void removeMember(int nif);
     void chargeDelay(int nif, int balance, Book book,int delayPrice);
-    void chargeFee(int nif, int balance,Book book);
+void chargeFee(int nif, int balance,Book book);
     void showMembers();
     void showLendings();
     void showDelays();

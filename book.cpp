@@ -29,7 +29,6 @@ string Book::getCategory() {
     return category;
 }
 
-
 bool Book::getState() {
     return state;
 }

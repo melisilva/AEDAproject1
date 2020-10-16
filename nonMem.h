@@ -5,8 +5,8 @@
 
 class Member;
 
-class nonMem : public Member {
-    vector<pair<int, string>> lendRequests;
+class nonMem : public Club{
+    vector<pair<int, string>> lendRequest;
     string name;
     int nif;
     float balance;

@@ -37,14 +37,14 @@ void Catalog::registerRating(int code){
     cin>>rate;
     for(unsigned int i=0;i<books.size();i++){
         if(books[i].getCode()==code){
-            books[i].calculateRating(rate);
+           books[i].calculateRating(rate);
         }
     }
 }
 
 void Catalog::showBooks(){
     for(unsigned int i=0;i<books.size();i++){
-        books[i].showBook();
+       books[i].showBook();
     }
 }
 

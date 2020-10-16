@@ -90,12 +90,6 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/Book.cpp">
-			<Option target="AEDAproject1"/>
-		</Unit>
-		<Unit filename="D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/Book.h">
-			<Option target="AEDAproject1"/>
-		</Unit>
 		<Unit filename="D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/Catalog.cpp">
 			<Option target="AEDAproject1"/>
 		</Unit>
@@ -112,6 +106,18 @@
 			<Option target="AEDAproject1"/>
 		</Unit>
 		<Unit filename="D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/Member.h">
+			<Option target="AEDAproject1"/>
+		</Unit>
+		<Unit filename="D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/book.cpp">
+			<Option target="AEDAproject1"/>
+		</Unit>
+		<Unit filename="D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/book.h">
+			<Option target="AEDAproject1"/>
+		</Unit>
+		<Unit filename="D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/catalog.h">
+			<Option target="AEDAproject1"/>
+		</Unit>
+		<Unit filename="D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/club.h">
 			<Option target="AEDAproject1"/>
 		</Unit>
 		<Unit filename="D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/main.cpp">

@@ -11,8 +11,9 @@
 using namespace std;
 
 
-class Member {
+class Member :public Club {
     vector<pair<Book*, string>> lendings, lendRequests;
+    vector<pair<int, string>> lendRequest;
     vector<Book*> books;
     string name;
     int nif;

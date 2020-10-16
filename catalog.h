@@ -5,8 +5,8 @@
 #include "Book.h"
 
 class Catalog {
-    std::vector<Book*> books;
-    std::vector <pair<Book*, Member*>> lendRequests, delays;
+    vector<Book> books, lendings;
+    vector <pair<Book, Member>> lendRequests, delays;
 
 public:
     void addBook(Book book,int edition);

@@ -35,6 +35,24 @@ int Member::findBook(string title) const{
     return -1;
 }
 
+/*bool Member::makeRequest(int code, string name){
+    string date;
+
+    cout << "Indique a data no formato DD-MM-YYYY: ";
+    cin >> date;
+
+    if ((code == 0) && (name == "")) {
+        return false;
+    }
+    if (code != 0){
+        lendRequests.push_back(make_pair(books[code], date));
+        return true;
+    } else if ((name != "") && (findBook(name) != -1)) {
+        lendRequests.push_back(make_pair(books[findBook(name)], date));
+        return true;
+    }
+    return false;
+}*/
 
 bool Member::makeRequest(int code, string name){
     string date;
@@ -68,14 +86,26 @@ bool Member::makeRequest(int code, string name){
     return false;
 }
 
-bool Member::showLendRequests() const {
+/*bool Member::showLendRequests() const {
     if (lendRequests.size() == 0){
         return false;
     }
 
-    cout << "Pedidos: " << endl;
     for (int i = 0; i < lendRequests.size(); i++){
-        cout << "   -" << (*lendRequests[i].first).getTitle() << " por " << (*lendRequests[i].first).getAuthor() << endl;
+        cout << (*lendRequests[i].first).getTitle() << " por " << (*lendRequests[i].first).getAuthor();
+    }
+
+    return true;
+}*/
+
+bool Member::showLendRequests() const {
+    if (lendRequest.size() == 0){
+        return false;
+    }
+
+    cout << "Pedidos: " << endl;
+    for (int i = 0; i < lendRequest.size(); i++){
+        catalog.showBook(lendRequest[i].first);
     }
 
     return true;
@@ -97,8 +127,9 @@ void Member::showData() const {
 void Member::showBooks() const {
     cout << "Livros de " << getName() << ": " << endl;
     for (int i = 0; i < books.size(); i++){
-        (*books[i]).showBook();
+        (*books[i].showBook());
     }
+       // cout << "   -" << (*books[i]).getTitle() << " por " << (*books[i]).getAuthor() << endl;
 }
 
 void Member::showLendings() const {
@@ -122,11 +153,9 @@ void Member::saveData() const {
         }
     }
 
-    for (int i = 0; i < lendRequests.size(); i++){
-        if (i < lendRequests.size() - 1 ) {
-            temp << (*lendRequests[i].first).getCode() << "," << lendRequests[i].second << ",";
-        } else if (i == books.size() - 1){
-            temp << (*lendRequests[i].first).getCode() << "," << lendRequests[i].second << ";";
+    for (int i = 0; i < lendRequest.size(); i++){
+        if (i < lendRequest.size() - 1 ) {
+            temp << (lendRequest[i].first) << "," << lendRequest[i].second << ",";
         }
     }
 
@@ -156,11 +185,4 @@ void Member::renovateLending() const {
     //Preciso testar que a data está nos últimos 3 dias do empréstimo em vigor!
     replace(lendings.begin(), lendings.end(), lendings[temp - 1], pair<Book*, string>(lendings[temp - 1].first, date));
 
-}
-
-int main() {
-    Book a(1, "Aristotle & Dante Discover the Secrets of the Universe", "Benjamin Alire-Saénz", "Contemporary");
-    vector<Book*> books;
-    books.push_back(&a);
-    Member a("João", 123456789, &books);
 }

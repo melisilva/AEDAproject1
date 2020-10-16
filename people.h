@@ -19,21 +19,21 @@ protected:
     float balance;
 
 public:
-    Member();
-    Member(string &name, int &nif, vector<Book*> &books);
-    int findBook(string title)const;
-    bool registerRequest(int code, string name);
-    bool showLendRequests() const;
-    void showData() const;
-    string getData();
-    void showLendings() const;
-    void showBooks() const;
+    Member(); //done
+    Member(string &name, int &nif, vector<Book*> &books); //done
+    int findBook(string title)const; //done
+    bool registerRequest(int code, string name); //done
+    bool showLendRequests() const; //done
+    void showData() const; //done
+    string getData(); //done
+    void showLendings() const; //done
+    void showBooks() const; //done
     void updateData(string &name, int balance);
-    void renovateLending();
-    int getNIF() const;
-    string getName() const;
-    vector<Book*> getBooks() const;
-    float getBalance() const;
+    void renovateLending(); //done
+    int getNIF() const; //done
+    string getName() const; //done
+    vector<Book*> getBooks() const; //done
+    float getBalance() const; //done
 };
 
 class nonMem : public Member {

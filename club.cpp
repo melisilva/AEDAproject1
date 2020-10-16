@@ -21,6 +21,7 @@ bool Club::isMember(int nif){
     }
     return false;
 }
+
 void Club::chargeDelay(int nif, int balance,Book book,int delayp){
     float fine = book.getValue()*0.10;
 

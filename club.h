@@ -19,9 +19,9 @@ public:
     void chargeDelay(int nif, int balance, Book book,int delayPrice); //done
     void chargeFee(int nif, int balance,Book book); //done
     void showMembers(); //done
-    void showLendings();
-    void showDelays();
-    void showLendRequests();
+    void showLendings(); //done
+    void showDelays(); //done
+    void showLendRequests(); //done
     void saveData(); //done
 };
 

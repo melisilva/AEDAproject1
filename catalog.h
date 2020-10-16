@@ -5,26 +5,22 @@
 #include <iostream>
 using namespace std;
 
-class Catalog{
-protected:    
+class Catalog{  
     vector<Book> books;
 public:
-    Catalog();
-    Catalog(vector<Book> books);
-    void addBook(Book book, int edition);
-    void removeBook(string title, int balance);
-    Book getBook(int code, string name);
-    void showBooks(); //shows every book that exists
-    void showBookWaitlist(int code);
-    void showRating(int code);
-    void lendBook(int code, int balance);
-    void receiveBook(int code, int balance);
-    void registerRating(int code);
-    void registerLendRequest(string title, int nif);
-    int searchBook(int code);
-    int searchBook(string name);
-    int convertNameToCode(string name);
-    void showBook(int code);
+    Catalog(); //done
+    Catalog(vector<Book> books); //done
+    void addBook(Book book, int edition); //done
+    void removeBook(string title, int balance); //done
+    Book getBook(int code, string name); //done
+    void showBooks(); //done
+    void lendBook(int code, int nif);
+    void receiveBook(int code, int nif);
+    void registerRating(int code); //done
+    int searchBook(int code); //done
+    int searchBook(string name); //done
+    int convertNameToCode(string name); //done
+    void showBook(int code); //done
 
 };
 

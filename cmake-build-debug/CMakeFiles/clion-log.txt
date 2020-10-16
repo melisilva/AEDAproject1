@@ -1,5 +1,0 @@
-"C:\Program Files\Clion\CLion 2020.2.3\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" "D:\Users\Melissa Silva\Documents\GitHub\AEDAproject1"
-Doxygen build started
--- Configuring done
--- Generating done
--- Build files have been written to: D:/Users/Melissa Silva/Documents/GitHub/AEDAproject1/cmake-build-debug

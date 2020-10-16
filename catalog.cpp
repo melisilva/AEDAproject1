@@ -1,5 +1,14 @@
 #include "catalog.h"
 
+Catalog::Catalog(){
+    vector<Book> temp;
+    this->books = temp;
+}
+
+Catalog::Catalog(vector<Book> books){
+    this->books = books;
+}
+
 void Catalog::addBook(Book book,int edition){
     book.calculateValue(edition);
     books.push_back(book);
@@ -48,25 +57,25 @@ void Catalog::showBooks(){
     }
 }
 
-bool Catalog::searchBook(int code){
+int Catalog::searchBook(int code){
     for(unsigned int i=0;i<books.size();i++){
         if(books[i].getCode()==code){
-            return true;
+            return i;
         }
     }
-    return false;
+    return -1;
 }
 
-bool Catalog::searchBook(string name){
+int Catalog::searchBook(string name){
     for(unsigned int i=0;i<books.size();i++){
         if(books[i].getTitle()==name){
-            return true;
+            return i;
         }
     }
-    return false;
+    return -1;
 }
 
-int Catalog::convertnametocode(string name){
+int Catalog::convertNameToCode(string name){
     for(unsigned int i=0;i<books.size();i++){
         if(books[i].getTitle()==name){
             return books[i].getCode();
@@ -80,4 +89,11 @@ void Catalog::showBook(int code){
             books[i].showBook();
         }
     }
+}
+
+Book Catalog::getBook(int code = 0, string name = ""){
+    if (code != 0){
+        return books[searchBook(code)];
+    }
+    return books[searchBook(name)];
 }

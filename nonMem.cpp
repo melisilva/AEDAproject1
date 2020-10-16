@@ -1,12 +1,12 @@
-#include "nonMem.h"
+/*#include "nonMem.h"
 
-nonMem::nonMem(string &name, int &nif) {
+nonMem::nonMem(string &name, int &nif) : Member() {
     this->name = name;
     this->nif = nif;
     this->balance = 50;
 }
 
-int nonMem::getNIF() const{
+/*int nonMem::getNIF() const{
     return nif;
 }
 
@@ -24,7 +24,7 @@ bool nonMem::showLendRequests() const {
     }
 
     for (int i = 0; i < lendRequest.size(); i++){
-        catalog.showBook(lendRequest[i].first);
+        lendRequest.showBook(lendRequest[i].first);
     }
 
     return true;
@@ -43,7 +43,7 @@ bool nonMem::makeRequest(int code, string name){
       }
     }
     //check if book with name introduced exists
-    if(name!=""){
+    if(name != ""){
         if(catalog.searchBook(name)==false){
             return false;
         }
@@ -60,4 +60,4 @@ bool nonMem::makeRequest(int code, string name){
         return true;
     }
     return false;
-}
+}*/

@@ -5,10 +5,8 @@ void Club::chargeDelay(int nif, int balance,Book book,int delayp){
     bool isMember;
     float fine = book.getValue()*0.10;
 
-    fine = fine * delayp; //fine is measured by the book value plus the number of delay days
-
-    for (unsigned int i = 0; i < members.size(); i++) {
-        if ((members[i]).getNIF() == nif) {
+    for(unsigned int i = 0; i < members.size(); i++) {
+        if (members[i].getNIF() == nif) {
             balance -= fine;
             isMember = true;
         }
@@ -23,7 +21,7 @@ void Club::chargeFee(int nif, int balance,Book book){
     float fee = book.getValue()*0.05;
 
     for (unsigned int i = 0; i < members.size(); i++){
-        if((members[i]).getNIF() == nif){
+        if(members[i].getNIF() == nif){
             isMember=true;
         }
     }
@@ -67,22 +65,74 @@ void Club::addMember(){
     members.push_back(m);
 }
 
-void Club::removeMember(int nif){
-    unsigned toDel;
+int Club::findMember(int nif){
     for(unsigned int i=0;i<members.size();i++){
-        if((members[i]).getNIF()==nif){
-            toDel=i;
+        if(members[i].getNIF()==nif){
+            return i;
         }
     }
+    return -1;
+}
+
+void Club::removeMember(int nif){
+    unsigned toDel = findMember(nif);
     members.erase(members.begin()+toDel);
 }
 
 void Club::showMembers(){
     for (unsigned int i = 0; i < members.size(); i++){
-        cout << "Name: " << (members[i]).getName() << "/n" << "NIF: "<< (members[i]).getNIF() << "/n" << "Books:" << endl;
-        vector<Book*> books = (members[i]).getBooks();
+        cout << "Name: " << members[i].getName() << "/n" << "NIF: "<< members[i].getNIF() << "/n" << "Books:" << endl;
+        vector<Book*> books = members[i].getBooks();
         for (unsigned int j = 0; j < books.size(); j++){
             books[j]->showBook();
         }
+    }
+}
+
+bool Club::makeRequest(){
+    int nif, code;
+    string date, name;
+
+    cout << "Indique o seu NIF: ";
+    cin >> nif;
+
+    cout << "Indique a data no formato DD-MM-YYYY: ";
+    cin >> date;
+
+    cout << "Indique o código do livro (se não o souber, introduza 0 e dê ENTER): ";
+    cin >> code;
+
+    if (code == 0) {
+        cout << "Indique, então, o título do livro: ";
+        cin >> name;
+    }
+
+    //check if book with code introduced exists
+    if(code != 0){
+        if(catalog.searchBook(code)== -1){
+            cerr << "Não há nenhum livro com esse código!" << endl;
+            return false;
+        }
+
+        this->lendings.push_back(make_tuple(code, date, nif));
+        members[findMember(nif)].registerRequest(code, date);
+        return true;
+    }
+
+    //Check if book with name introduced exists
+    if(name != ""){
+        if(catalog.searchBook(name)== -1){
+            cerr << "Não há nenhum livro com esse título!" << endl;
+            return false;
+        }
+
+        lendings.push_back(make_tuple(catalog.convertNameToCode(name), date, nif));
+        members[findMember(nif)].registerRequest(code, date);
+        return true;
+    }
+
+    if ((code == 0) && (name == "")) {
+        cerr << "Não podemos adicionar um livro sem nos indicar uma referência dele!" << endl;
+        return false;
     }
 }

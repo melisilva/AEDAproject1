@@ -1,12 +1,10 @@
-#ifndef AEDAPROJECT1_NONMEM_H
+/*#ifndef AEDAPROJECT1_NONMEM_H
 #define AEDAPROJECT1_NONMEM_H
 #include "member.h"
-#include "club.h"
+#include <vector>
 
-class Member;
-
-class nonMem : public Club{
-    vector<pair<int, string>> lendRequest;
+class nonMem : public Member {
+    vector<pair<int, string>> lendRequest, lendings;
     string name;
     int nif;
     float balance;
@@ -24,3 +22,4 @@ public:
 
 
 #endif //AEDAPROJECT1_NONMEM_H
+*/

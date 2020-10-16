@@ -2,6 +2,13 @@
 #include <iostream>
 using namespace std;
 
+Book::Book(){
+    code = -1;
+    title = "";
+    author = "";
+    category = "";
+}
+
 Book::Book(int code, string title, string author,string category){
     this->code = code;
     this->title = title;
@@ -14,7 +21,7 @@ int Book::getCode() {
 }
 
 float Book::getRating() {
-    return realrating;
+    return realRating;
 }
 
 string Book::getTitle() {
@@ -64,10 +71,10 @@ void Book::deleteUnit(bool gonebook){
 
 void Book::calculateRating(int rate){
     opinions+=1;
-    sumrating+=rate;
-    realrating=sumrating/opinions;
+    sumRating+=rate;
+    realRating=sumRating/opinions;
 }
 
 void Book::showBook(){
-    cout<<"Title: "<<title<<"/n"<<"Author: "<<author<<"/n"<<"Category: "<<category<<"/n"<<"Code: "<<code<<"/n"<<"Rating: "<<realrating<<"/n"<<"State: "<<state<<"/n";
+    cout<<"Title: "<<title<< endl <<"Author: "<<author<< endl <<"Category: "<<category<< endl <<"Code: "<<code<< endl <<"Rating: "<<realRating<< endl <<"State: "<<state<< endl;
 }

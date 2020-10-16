@@ -2,15 +2,19 @@
 #define AEDAPROJECT1_CATALOG_H
 #include "member.h"
 #include "nonMem.h"
-#include "Book.h"
+#include "book.h"
+#include <vector>
+using namespace std;
 
-class Catalog {
-    vector<Book> books, lendings;
-    vector <pair<Book, Member>> lendRequests, delays;
-
+class Catalog{
+protected:    
+    vector<Book> books;
 public:
-    void addBook(Book book,int edition);
+    Catalog();
+    Catalog(vector<Book> books);
+    void addBook(Book book, int edition);
     void removeBook(string title, int balance);
+    Book getBook(int code, string name);
     void showBooks(); //shows every book that exists
     void showBookWaitlist(int code);
     void showRating(int code);
@@ -18,9 +22,9 @@ public:
     void receiveBook(int code, int balance);
     void registerRating(int code);
     void registerLendRequest(string title, int nif);
-    bool searchBook(int code);
-    bool searchBook(string name);
-    int convertnametocode(string name);
+    int searchBook(int code);
+    int searchBook(string name);
+    int convertNameToCode(string name);
     void showBook(int code);
 
 };

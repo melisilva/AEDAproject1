@@ -75,7 +75,7 @@ void Book::calculateRating(int rate){
 }
 
 void Book::showBook(){
-    cout << "   - " << title << ", de " << author << " ( " << realRating << "/5)" << endl;
+    cout << "   - " << title << ", de " << author << " (" << realRating << "/5)" << endl;
 }
 
 string Book::getData(){

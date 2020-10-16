@@ -11,6 +11,7 @@ private:
     vector<tuple<int, string, int>> lendings, delays, lendRequests;
     Catalog catalog;
 public:
+    //construtor
     void addMember(); //pede o nome e NIF e depois os livros;
     void removeMember(int nif);
     bool makeRequest();

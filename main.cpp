@@ -3,7 +3,6 @@
 using namespace std;
 
 int main() {
-    Club temp;
     string nome = "Joao", livro = "Aristotle & Dante Discover the Secrets of the Universe", aut = "Benjamin Alire-Saénz", gen = "Cont";
     int nif = 123456789, code = 1;
     vector<Book*> books;

@@ -1,7 +1,7 @@
 #ifndef AEDAPROJECT1_NONMEM_H
 #define AEDAPROJECT1_NONMEM_H
-#include "Member.h"
-#include "Club.h"
+#include "member.h"
+#include "club.h"
 
 class Member;
 

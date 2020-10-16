@@ -1,4 +1,4 @@
-#include "Catalog.h"
+#include "catalog.h"
 
 void Catalog::addBook(Book book,int edition){
     book.calculateValue(edition);

@@ -3,7 +3,7 @@ project(AEDAproject1)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(AEDAproject1 main.cpp Book.cpp Book.h Catalog.cpp Catalog.h Member.cpp Member.h Club.cpp Club.h nonMem.cpp nonMem.h)
+add_executable(AEDAproject1 main.cpp Book.cpp Book.h catalog.cpp catalog.h member.cpp member.h club.cpp club.h nonMem.cpp nonMem.h)
 
 # Doxygen Build
 

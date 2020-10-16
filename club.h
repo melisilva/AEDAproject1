@@ -1,8 +1,8 @@
 #ifndef AEDAPROJECT1_CLUB_H
 #define AEDAPROJECT1_CLUB_H
 #include "Book.h"
-#include "Catalog.h"
-#include "Member.h"
+#include "catalog.h"
+#include "member.h"
 #include "nonMem.h"
 
 class Club :public Book,public Member{

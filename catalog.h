@@ -1,6 +1,6 @@
 #ifndef AEDAPROJECT1_CATALOG_H
 #define AEDAPROJECT1_CATALOG_H
-#include "Member.h"
+#include "member.h"
 #include "nonMem.h"
 #include "Book.h"
 

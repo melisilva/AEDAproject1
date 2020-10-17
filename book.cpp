@@ -15,6 +15,54 @@ Book::Book(int code, string title, string author,string category){
     this->category=category;
 }
 
+void Book::setState() {
+    if (units == 0){
+        state = false;
+    } else {
+        state = true;
+    }
+}
+
+void Book::setCode(int code){
+    this->code = code;
+}
+
+void Book::setUnits(int units){
+    this->units = units;
+}
+
+void Book::setOpinions(int opinions){
+    this->opinions = opinions;
+}
+
+void Book::setSumR(int sumRating){
+    this->sumRating = sumRating;
+}
+
+void Book::setRating(float realRating){
+    this->realRating = realRating;
+}
+
+void Book::setValue(float value){
+    this->value = value;
+}
+
+void Book::setTitle(string title){
+    this->title = title;
+}
+
+void Book::setAuthor(string author){
+    this->author = author;
+}
+
+void Book::setCat(string category){
+    this->category = category;
+}
+
+void Book::setEdition(int edition){
+    this->edition = edition;
+}
+
 int Book::getCode() {
     return code;
 }
@@ -33,14 +81,6 @@ string Book::getAuthor() {
 
 string Book::getCategory() {
     return category;
-}
-
-void Book::setState() {
-    if (units == 0){
-        state = false;
-    } else {
-        state = true;
-    }
 }
 
 bool Book::getState() {
@@ -82,42 +122,6 @@ void Book::calculateRating(int rate){
     realRating=sumRating/opinions;
 }
 
-void Book::setCode(int code){
-    this->code = code;
-}
-
-void Book::setUnits(int units){
-    this->units = units;
-}
-
-void Book::setOpinions(int opinions){
-    this->opinions = opinions;
-}
-
-void Book::setSumR(int sumRating){
-    this->sumRating = sumRating;
-}
-
-void Book::setRating(float realRating){
-    this->realRating = realRating;
-}
-
-void Book::setValue(float value){
-    this->value = value;
-}
-
-void Book::setTitle(string title){
-    this->title = title;
-}
-
-void Book::setAuthor(string author){
-    this->author = author;
-}
-
-void Book::setCat(string category){
-    this->category = category;
-}
-
 void Book::showBook(){
     cout << "   - " << title << ", de " << author << " (" << realRating << "/5)" << endl;
 }
@@ -125,7 +129,7 @@ void Book::showBook(){
 string Book::getData(){
     stringstream temp;
 
-    temp << getCode() << endl << getTitle() << endl << getAuthor() << endl << getCategory() << endl << getValue() << endl << getRating() << endl << getUnits() << endl << opinions << endl << sumRating << endl << getState() << endl << endl;
+    temp << getCode() << endl << getTitle() << endl << getAuthor() << endl << edition << getCategory() << endl << getValue() << endl << getRating() << endl << getUnits() << endl << opinions << endl << sumRating << endl << getState();
 
     return temp.str();
 }

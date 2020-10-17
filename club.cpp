@@ -169,7 +169,7 @@ bool Club::makeRequest(){
 }
 
 void Club::saveData(){
-    string membs = "members.txt", lends = "lendings.txt", lendRs = "lendRequests.txt", bks = "books.txt";
+    string membs = "members1.txt", lends = "lendings.txt", lendRs = "lendRequests.txt", bks = "books1.txt";
 
     ofstream file(membs, ios::binary);
     ofstream filee(lends, ios::binary);
@@ -179,7 +179,11 @@ void Club::saveData(){
     stringstream temp1, temp2, temp3, temp4; 
 
     for (int i = 0; i < members.size(); i++){
-        temp1 << members[i].getData() << endl;
+        if (i < members.size() -1) {
+            temp1 << members[i].getData() << endl << endl;
+        } else if (i = members.size() - 1){
+            temp1 << members[i].getData() << endl << "END";
+        }
     }
 
     file << temp1.str();
@@ -197,7 +201,11 @@ void Club::saveData(){
     fileee << temp3.str();
 
     for (int i = 0; i < catalog.books.size(); i++){
-        temp4 << catalog.books[i].getData() << endl;
+        if (i < catalog.books.size() -1) {
+             temp4 << catalog.books[i].getData() << endl << endl;
+        } else if (i = members.size() - 1){
+            temp4 << members[i].getData() << endl << "END";
+        }
     }
     
     fileeee << temp4.str();
@@ -215,10 +223,10 @@ void Club::retrieveData(){
 
     //Getting Books data.
     string title, author, category;
-    int code_bk, units, opinions, sumRating;
+    int code_bk, units, opinions, sumRating, edition;
     float realRating, value;
     bool state;
-    while (!bks_file.eof()){
+    while (temp != "END"){
         getline(bks_file, temp);
         bks.str("");
         bks.clear();
@@ -234,6 +242,11 @@ void Club::retrieveData(){
         bks.clear();
         bks << temp;
         author = bks.str();
+        getline(bks_file, temp);
+        bks.str("");
+        bks.clear();
+        bks << temp;
+        bks >> edition;
         getline(bks_file, temp);
         bks.str("");
         bks.clear();
@@ -272,13 +285,21 @@ void Club::retrieveData(){
         Book bk;
         bk.setAuthor(author); bk.setTitle(title); bk.setCat(category); bk.setCode(code_bk); bk.setUnits(units);
         bk.setOpinions(opinions); bk.setRating(realRating); bk.setSumR(sumRating); bk.setValue(value); bk.setState();
+        bk.setEdition(edition);
         catalog.books.push_back(bk);
+        getline(bks_file, temp);
+        bks.str("");
+        bks.clear();
+        getline(bks_file, temp);
+        bks.str("");
+        bks.clear();
     }
 
     //Getting Member data.
+    temp = "";
     string name;
     int nif, code;
-    while (!memb_file.eof()){
+    while (temp != "END"){
         vector<Book *> memb_bks;
         getline(memb_file, temp);
         membs.str("");
@@ -300,6 +321,9 @@ void Club::retrieveData(){
             memb_bks.push_back(&catalog.books[ind]);
         } while (sep != ';');
         members.push_back(Member(name, nif, memb_bks));
+        getline(memb_file, temp);
+        membs.str("");
+        membs.clear();
         getline(memb_file, temp);
         membs.str("");
         membs.clear();

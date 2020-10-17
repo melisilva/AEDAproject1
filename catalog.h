@@ -5,7 +5,7 @@
 #include <iostream>
 using namespace std;
 
-class Catalog{
+class Catalog{  
 public:
     vector<Book> books;
     Catalog(); //done

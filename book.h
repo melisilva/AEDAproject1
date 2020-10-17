@@ -7,16 +7,24 @@
 using namespace std;
 
 class Book {
-    int code, units, opinions = 0, sumRating = 0;
+    int code, units, opinions = 0, sumRating = 0, edition;
     float realRating, value;
     string title, author, category;
     bool state;
 
 public:
     Book();
-    Book(int code, string title, string author, string category);   
+    Book(int code, string title, string author, string category);
     void calculateValue(int edition);
     void calculateRating(int rate);
+    int getCode();
+    float getRating();
+    string getTitle();
+    bool getState();
+    string getAuthor();
+    string getCategory();
+    float getValue();
+    int getUnits();
     void setCode(int code);
     void setUnits(int units);
     void setOpinions(int opinions);
@@ -26,15 +34,8 @@ public:
     void setTitle(string title);
     void setAuthor(string author);
     void setCat(string category);
-    int getCode();
-    float getRating();
-    string getTitle();
     void setState();
-    bool getState();
-    string getAuthor();
-    string getCategory();
-    float getValue();
-    int getUnits();
+    void setEdition(int edition);
     void deleteUnit(bool gonebook);
     void showBook();
     string getData();

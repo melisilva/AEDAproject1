@@ -9,15 +9,16 @@ using namespace std;
 class Book {
     int code, units, opinions = 0, sumRating = 0, edition;
     float realRating, value;
-    string title, author, category;
+    string title, author, category, writ_ops;
     bool state;
 
 public:
     Book();
-    Book(int code, string title, string author, string category);
-    void calculateValue(int edition);
+    Book(int code, string title, string author, string category,int edition);
+    void calculateValue();
     void calculateRating(int rate);
     int getCode();
+    int getEdition();
     float getRating();
     string getTitle();
     bool getState();
@@ -39,6 +40,7 @@ public:
     void deleteUnit(bool gonebook);
     void showBook();
     string getData();
+    void addUnits();
 };
 
 

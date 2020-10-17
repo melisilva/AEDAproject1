@@ -9,16 +9,29 @@ Catalog::Catalog(vector<Book> books){
     this->books = books;
 }
 
-void Catalog::addBook(Book book,int edition){
-    book.calculateValue(edition);
-    books.push_back(book);
+void Catalog::addBook(Book book){
+    bool newb=true;
+    for(unsigned int i=0;i<books.size();i++){
+        if(books[i].getCode()==book.getCode()){
+            if(books[i].getEdition()==book.getEdition()){
+                books[i].addUnits();
+                newb=false;
+            }
+        }
+    }
+    if(newb) {
+        book.calculateValue();
+        books.push_back(book);
+    }
 }
 
-void Catalog::removeBook(string title, int balance){
+void Catalog::removeBook(string title, int balance,int edition){
     for(unsigned int i=0;i<books.size();i++){
-        if(books[i].getTitle()==title){
-            balance+=books[i].getValue();
-            books[i].deleteUnit(true); //even if the units are 0, we still keep the book info (ratings and opinions) unless a new member comes with an unit of this book
+        if(books[i].getTitle()==title) {
+            if (books[i].getEdition() == edition) {
+                balance += books[i].getValue();
+                books[i].deleteUnit(true);
+            }
         }
     }
 }
@@ -44,7 +57,7 @@ void Catalog::registerRating(int code){
 
 void Catalog::showBooks(){
     for(unsigned int i=0;i<books.size();i++){
-       books[i].showBook();
+        books[i].showBook();
     }
 }
 
@@ -88,8 +101,4 @@ Book Catalog::getBook(int code = 0, string name = ""){
         return books[searchBook(code)];
     }
     return books[searchBook(name)];
-}
-
-void Catalog::lendBook() {
-    
 }

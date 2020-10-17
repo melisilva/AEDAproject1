@@ -64,8 +64,8 @@ void Club::addMember(){
 
         //Adding the book.
         code = catalog.books.size();
-        Book b(code,title,author,category);
-        catalog.addBook(b,edition);
+        Book b(code,title,author,category,edition);
+        catalog.addBook(b);
         books.push_back(&b);
 
         //Repeating.
@@ -169,14 +169,13 @@ bool Club::makeRequest(){
 }
 
 void Club::saveData(){
-    string membs = "members1.txt", lends = "lendings.txt", lendRs = "lendRequests.txt", bks = "books1.txt";
+    string membs = "members.txt", lends = "lendings.txt", lendRs = "lendRequests.txt", bks = "books.txt";
 
     ofstream file(membs, ios::binary);
     ofstream filee(lends, ios::binary);
     ofstream fileee(lendRs, ios::binary);
-    ofstream fileeee(bks, ios::binary);
 
-    stringstream temp1, temp2, temp3, temp4; 
+    stringstream temp1, temp2, temp3;
 
     for (int i = 0; i < members.size(); i++){
         if (i < members.size() -1) {

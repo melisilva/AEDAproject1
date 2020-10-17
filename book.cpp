@@ -6,13 +6,15 @@ Book::Book(){
     title = "";
     author = "";
     category = "";
+    edition = -1;
 }
 
-Book::Book(int code, string title, string author,string category){
+Book::Book(int code, string title, string author,string category,int edition){
     this->code = code;
     this->title = title;
     this->author = author;
     this->category=category;
+    this->edition=edition;
 }
 
 void Book::setState() {
@@ -75,6 +77,10 @@ string Book::getTitle() {
     return title;
 }
 
+int Book::getEdition(){
+    return edition;
+}
+
 string Book::getAuthor() {
     return author;
 }
@@ -87,7 +93,7 @@ bool Book::getState() {
     return state;
 }
 
-void Book::calculateValue(int edition){
+void Book::calculateValue(){
     int count=0;
     if(edition ==1) {
         value=25;
@@ -132,4 +138,8 @@ string Book::getData(){
     temp << getCode() << endl << getTitle() << endl << getAuthor() << endl << edition << getCategory() << endl << getValue() << endl << getRating() << endl << getUnits() << endl << opinions << endl << sumRating << endl << getState();
 
     return temp.str();
+}
+
+void Book::addUnits(){
+    units+=1;
 }

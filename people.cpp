@@ -1,5 +1,6 @@
 #include <fstream>
 #include "people.h"
+#include "date.h"
 using namespace std;
 
 Member::Member(){
@@ -110,18 +111,33 @@ string Member::getData() {
 
 void Member::renovateLending() {
     int temp;
-    string date,str_temp;
+    string date1, date2, str_temp;
+    int month1, year1, day1, month2, year2, day2;
 
     //Informamos o utilizador dos empréstimos em vigor.
     showLendings();
 
     cout << "Por favor, indique a ordem do empréstimo: ";
-    getline(cin,str_temp);
-    temp=stoi(str_temp);
+    getline(cin, str_temp);
+    temp = stoi(str_temp);
     cout << "Por favor, indique a data de hoje (formato DD-MM-YY): ";
-    getline(cin,date);
+    getline(cin, date1);
 
-    //Preciso testar que a data está nos últimos 3 dias do empréstimo em vigor!
-    lendings[temp - 1].second = date;
+    if (date1.size() != 10) {
+        cerr << "Data inválida" << endl;
+    }
 
+    day1 = stoi(date1.substr(0, 2));
+    month1 = stoi(date1.substr(3, 2));
+    year1 = stoi(date1.substr(6));
+    Date dt1 = {day1, month1, year1};
+
+    lendings[temp - 1].second = date2;
+    day2 = stoi(date2.substr(0, 2));
+    month2 = stoi(date2.substr(3, 2));
+    year2 = stoi(date2.substr(6));
+    Date dt2 = {day2, month2, year2};
+
+    if (abs(getDifference(dt1, dt2)) == 3) {
+    }
 }

@@ -1,4 +1,5 @@
 #include "club.h"
+#include "date.h"
 
 Club::Club() {
     vector<Member> temp;
@@ -114,6 +115,33 @@ void Club::showLendings() {
 void Club::showDelays() {
     for (unsigned int i = 0; i < delays.size(); i++){
         cout << get<0>(delays[i]) << ", desde " << get<1>(delays[i]) << " pelo " << get<2>(delays[i]) << endl;
+    }
+}
+
+void Club::checkDelays(){
+    string date1,date2;
+    int day1,month1,year1,day2,month2,year2;
+    /*cout << "Por favor, indique a data de hoje (formato DD-MM-YY): ";
+    getline(cin,date2);
+
+    if(date2.size()!=10){
+        cerr<<"Data inválida"<<endl;
+    }
+
+    day2 = stoi(date2.substr(0, 2));
+    month2 = stoi(date2.substr(3, 2));
+    year2 = stoi(date2.substr(6));
+    Date d2={day2,month2,year2};*/
+    for (unsigned int i = 0; i < lendings.size(); i++){
+        date1=get<1>(lendings[i]);
+        day1 = stoi(date1.substr(0, 2));
+        month1 = stoi(date1.substr(3, 2));
+        year1 = stoi(date1.substr(6));
+        Date d1={day1,month1,year1};
+        //if(abs(timePeriod(d1,d2)))
+        if(abs(timePeriod(dttoday, d1))>=7){ //Consider lending period is 7 days
+            this->delays.push_back(make_tuple(get<0>(lendings[i]),get<1>(lendings[i]),get<2>(lendings[i])));
+        }
     }
 }
 
@@ -330,4 +358,5 @@ void Club::retrieveData(){
         membs.clear();
     }
 }
+
 

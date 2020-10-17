@@ -8,6 +8,7 @@
 class Club {
 private:
     vector<Member> members;
+    vector<nonMem> nonmembers;
     vector<tuple<int, string, int>> lendings, delays, lendRequests;
     Catalog catalog;
 public:
@@ -16,10 +17,11 @@ public:
     void removeMember(int nif); //done
     bool makeRequest(); //done
     int findMember(int nif); //done
-    void chargeDelay(int nif, int balance, Book book,int delayPrice); //done
+    void chargeDelay(int nif, int balance, Book book,int delayp); //done
     void chargeFee(int nif, int balance,Book book); //done
     void showMembers(); //done
     void showBookWaitlist(int code);
+    void checkDelays();
     void retrieveData();
     bool isMember(int nif); //done
     void showLendings(); //done

@@ -1,10 +1,21 @@
 #ifndef AEDAPROJECT1_DATE_H
 #define AEDAPROJECT1_DATE_H
 
+#include <ctime>
+
+
 struct Date
 {
     int day, month, year;
 };
+
+time_t t = time(0);
+struct tm *now = localtime(&t);
+int todayd=now->tm_mday;
+int todaym=now->tm_mon+1;
+int todayy=now->tm_year+1900;
+
+Date dttoday={todayd,todaym,todayy};
 
 const int monthDays[12] = { 31, 28, 31, 30, 31, 30,
                             31, 31, 30, 31, 30, 31 };
@@ -27,7 +38,7 @@ int countLeapYears(Date d)
             nly++;
         }
     }
-    
+
     return nly;
 
 }
@@ -50,4 +61,5 @@ int getDifference(Date dt1, Date dt2)
 
     return (n2 - n1);
 }
+
 #endif //AEDAPROJECT1_DATE_H

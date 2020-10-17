@@ -138,6 +138,6 @@ void Member::renovateLending() {
     year2 = stoi(date2.substr(6));
     Date dt2 = { day2,month2,year2 };
 
-    if(abs(getDifference(dttoday, dt2))==3){
+    if(abs(timePeriod(dttoday, dt2))==3){
     }
 }

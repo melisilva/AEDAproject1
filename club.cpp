@@ -125,7 +125,7 @@ bool Club::makeRequest(){
     cout << "Indique o seu NIF: ";
     cin >> nif;
 
-    cout << "Indique a data no formato DD-MM-YYYY: ";
+    cout << "Indique a data no formato DD-MM-AAAA: ";
     cin >> date;
 
     cout << "Indique o código do livro (se não o souber, introduza 0 e dê ENTER): ";

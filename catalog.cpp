@@ -117,8 +117,8 @@ void Catalog::showBook(int code){
     }
 }
 
-Book Catalog::getBook(int code = 0, string name = ""){
-    if (code != 0){
+Book Catalog::getBook(int code = -1, string name = ""){
+    if (code != -1){
         return books[searchBook(code)];
     }
     return books[searchBook(name)];

@@ -37,7 +37,7 @@ void Book::setOpinions(int opinions){
     this->opinions = opinions;
 }
 
-void Book::setSumR(int sumRating){
+void Book::setSumR(float sumRating){
     this->sumRating = sumRating;
 }
 
@@ -130,7 +130,7 @@ void Book::deleteUnit(bool gonebook){
     }
 }
 
-void Book::calculateRating(int rate){
+void Book::calculateRating(float rate){
     opinions+=1;
     sumRating+=rate;
     realRating=sumRating/opinions;

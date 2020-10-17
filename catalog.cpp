@@ -45,12 +45,33 @@ void Catalog::showRating(int code){
 }
 
 void Catalog::registerRating(int code){
-    int rate;
+    float rate;
     cout<<"Classifique o livro, de 1 a 5: "<<endl;
     cin>>rate;
     for(unsigned int i=0;i<books.size();i++){
         if(books[i].getCode()==code){
             books[i].calculateRating(rate);
+        }
+    }
+}
+
+void Catalog::showComments(int code){
+    for(unsigned int i=0;i<books.size();i++){
+        if(books[i].getCode()==code){
+            cout<<"Comentários sobre o livro: "<<books[i].getWritops()<<endl;
+        }
+    }
+}
+
+void Catalog::registerComments(int code){
+    string comments,answer;
+    cout<<"Deseja deixar um comentário sobre o livro?"<<endl;
+    getline(cin,answer);
+    if(answer=="sim"||answer=="s"||answer=="Sim"||answer="S"){
+        cout<<"Escreva o seu comentário:"<<endl;
+        getline(cin,comments);
+        for(unsigned int i=0;i<books.size();i++){
+            books[i].setWritops(comments);
         }
     }
 }

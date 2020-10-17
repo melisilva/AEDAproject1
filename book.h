@@ -7,8 +7,8 @@
 using namespace std;
 
 class Book {
-    int code, units, opinions = 0, sumRating = 0, edition;
-    float realRating, value;
+    int code, units, opinions = 0, edition;
+    float realRating, value, sumRating = 0;
     string title, author, category, writ_ops;
     bool state;
 
@@ -16,7 +16,7 @@ public:
     Book();
     Book(int code, string title, string author, string category,int edition);
     void calculateValue();
-    void calculateRating(int rate);
+    void calculateRating(float rate);
     int getCode();
     int getEdition();
     float getRating();
@@ -30,7 +30,7 @@ public:
     void setCode(int code);
     void setUnits(int units);
     void setOpinions(int opinions);
-    void setSumR(int sumRating);
+    void setSumR(float sumRating);
     void setRating(float realRating);
     void setValue(float value);
     void setTitle(string title);
@@ -44,7 +44,6 @@ public:
     string getData();
     void addUnits();
 };
-
 
 
 #endif //AEDAPROJECT1_BOOK_H

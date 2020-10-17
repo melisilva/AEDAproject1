@@ -21,7 +21,7 @@ public:
     void showMembers(); //done
     void showBookWaitlist(int code);
     void retrieveData(ofstream file) const;
-    bool isMember(int nif);
+    bool isMember(int nif); //done
     void showLendings(); //done
     void showDelays(); //done
     void showLendRequests(); //done

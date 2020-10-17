@@ -15,20 +15,11 @@ void Catalog::addBook(Book book,int edition){
 }
 
 void Catalog::removeBook(string title, int balance){
-    unsigned todel=-1;
     for(unsigned int i=0;i<books.size();i++){
         if(books[i].getTitle()==title){
             balance+=books[i].getValue();
-            if(books[i].getUnits()!=1){
-                books[i].deleteUnit(true);
-            }
-            else{ //note: going with the idea that if it's the last unit, we should just remove all book info from catalog (still not sure if that's the best course of action but we can change it afterwards)
-                todel=i;
-            }
+            books[i].deleteUnit(true); //even if the units are 0, we still keep the book info (ratings and opinions) unless a new member comes with an unit of this book
         }
-    }
-    if(todel!=-1) {
-        books.erase(books.begin() + todel);
     }
 }
 

@@ -6,8 +6,8 @@
 using namespace std;
 
 class Catalog{
-    vector<Book> books;
 public:
+    vector<Book> books;
     Catalog(); //done
     Catalog(vector<Book> books); //done
     void addBook(Book book, int edition); //done

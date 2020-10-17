@@ -2,8 +2,7 @@
 
 Club::Club() {
     vector<Member> temp;
-    vector<tuple<int, string, int>> temp2, temp3;
-    vector<pair<int, string>> temp4;
+    vector<tuple<int, string, int>> temp2, temp3,temp4;
     Catalog temp5;
 
     members = temp;

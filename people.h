@@ -42,6 +42,7 @@ private:
 public:
     nonMem(string &name, int &nif);
     bool registerRequest(int code, string date);
+    bool showLendRequests()const;
 };
 
 

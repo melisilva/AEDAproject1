@@ -70,6 +70,18 @@ bool Member::showLendRequests() const {
     return true;
 }
 
+bool nonMem::showLendRequests() const {
+    if (lendRequest.size() == 0){
+        return false;
+    }
+
+    for (int i = 0; i < lendRequest.size(); i++){
+        cout << "Empréstimo do " << lendRequest[i].first << " a " << lendRequest[i].second << endl;
+    }
+
+    return true;
+}
+
 void Member::showData() const {
     stringstream temp;
 

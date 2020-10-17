@@ -5,7 +5,7 @@
 #include <iostream>
 using namespace std;
 
-class Catalog{  
+class Catalog{
     vector<Book> books;
 public:
     Catalog(); //done
@@ -14,6 +14,7 @@ public:
     void removeBook(string title, int balance); //done
     Book getBook(int code, string name); //done
     void showBooks(); //done
+    void showRating(int code); //done
     void lendBook(int code, int nif);
     void receiveBook(int code, int nif);
     void registerRating(int code); //done
@@ -23,6 +24,5 @@ public:
     void showBook(int code); //done
 
 };
-
 
 #endif //AEDAPROJECT1_CATALOG_H

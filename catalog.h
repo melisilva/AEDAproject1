@@ -5,9 +5,9 @@
 #include <iostream>
 using namespace std;
 
-class Catalog{  
-    vector<Book> books;
+class Catalog{
 public:
+    vector<Book> books;
     Catalog(); //done
     Catalog(vector<Book> books); //done
     void addBook(Book book, int edition); //done
@@ -17,6 +17,8 @@ public:
     void lendBook(int code, int nif);
     void receiveBook(int code, int nif);
     void registerRating(int code); //done
+    void showRating(int code);
+    void lendBook();
     int searchBook(int code); //done
     int searchBook(string name); //done
     int convertNameToCode(string name); //done

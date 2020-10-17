@@ -2,8 +2,7 @@
 
 Club::Club() {
     vector<Member> temp;
-    vector<tuple<int, string, int>> temp2, temp3;
-    vector<pair<int, string>> temp4;
+    vector<tuple<int, string, int>> temp2, temp3, temp4;
     Catalog temp5;
 
     members = temp;
@@ -172,13 +171,14 @@ bool Club::makeRequest(){
 }
 
 void Club::saveData(){
-    string membs = "members.txt", lends = "lendings.txt", lendRs = "lendRequests.txt";
+    string membs = "members.txt", lends = "lendings.txt", lendRs = "lendRequests.txt", bks = "books.txt";
 
     ofstream file(membs, ios::binary);
     ofstream filee(lends, ios::binary);
     ofstream fileee(lendRs, ios::binary);
+    ofstream fileeee(bks, ios::binary);
 
-    stringstream temp1, temp2, temp3; 
+    stringstream temp1, temp2, temp3, temp4; 
 
     for (int i = 0; i < members.size(); i++){
         temp1 << members[i].getData() << endl;
@@ -197,4 +197,55 @@ void Club::saveData(){
     }
 
     fileee << temp3.str();
+
+    for (int i = 0; i < catalog.books.size(); i++){
+        temp4 << catalog.books[i].getData() << endl;
+    }
+    
+    fileeee << temp4.str();
+}
+
+void Club::retrieveData(){
+    ifstream memb_file; memb_file.open("members.txt");
+    ifstream bks_file; bks_file.open("books.txt");
+    ifstream lendRs_file; lendRs_file.open("lendRequests.txt");
+    ifstream lends_file; lends_file.open("lendings.txt");
+    string temp;
+    char sep;
+    stringstream membs, bks, lendRs, lends;
+
+
+    //Getting Books data.
+    string title, author, category;
+    int code_bk, units, opinions, sumRating;
+    float realRating, value;
+    bool state;
+    while (!bks_file.eof()){
+        getline(bks_file, temp);
+        bks << temp;
+        bks >> code_bk >> sep >> title >> sep >> author >> sep >> category >> sep >> value >> sep >> realRating >> sep >> units >> sep >> opinions >> sep >> sumRating >> sep >> state >> sep;
+        Book bk;
+        bk.setAuthor(author); bk.setTitle(title); bk.setCat(category); bk.setCode(code_bk); bk.setUnits(units);
+        bk.setOpinions(opinions); bk.setRating(realRating); bk.setSumR(sumRating); bk.setValue(value); bk.setState();
+        catalog.books.push_back(bk);
+    }
+
+    //Getting Member data.
+    string name;
+    int nif, code;
+    while (!memb_file.eof()){
+        vector<Book *> memb_bks;
+        getline(memb_file, temp);
+        membs << temp;
+        membs >> name >> sep >> nif;
+        getline(memb_file, temp);
+        membs << temp;
+        do {
+            membs >> code >> sep;
+            int ind = catalog.searchBook(code);
+            memb_bks.push_back(&catalog.books[ind]);
+        } while (sep != ';');
+        members.push_back(Member(name, nif, memb_bks));
+        getline(memb_file, temp);
+    } 
 }

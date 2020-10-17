@@ -92,8 +92,6 @@ void Member::showLendings() const {
 }
 
 string Member::getData() {
-    string tmp = to_string(nif) + ".txt";
-
     stringstream temp;
 
     temp << name << "," << nif << endl;

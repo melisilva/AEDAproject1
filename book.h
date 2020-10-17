@@ -14,12 +14,22 @@ class Book {
 
 public:
     Book();
-    Book(int code, string title, string author, string category);
+    Book(int code, string title, string author, string category);   
     void calculateValue(int edition);
     void calculateRating(int rate);
+    void setCode(int code);
+    void setUnits(int units);
+    void setOpinions(int opinions);
+    void setSumR(int sumRating);
+    void setRating(float realRating);
+    void setValue(float value);
+    void setTitle(string title);
+    void setAuthor(string author);
+    void setCat(string category);
     int getCode();
     float getRating();
     string getTitle();
+    void setState();
     bool getState();
     string getAuthor();
     string getCategory();

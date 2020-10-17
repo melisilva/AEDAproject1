@@ -35,6 +35,14 @@ string Book::getCategory() {
     return category;
 }
 
+void Book::setState() {
+    if (units == 0){
+        state = false;
+    } else {
+        state = true;
+    }
+}
+
 bool Book::getState() {
     return state;
 }
@@ -74,6 +82,42 @@ void Book::calculateRating(int rate){
     realRating=sumRating/opinions;
 }
 
+void Book::setCode(int code){
+    this->code = code;
+}
+
+void Book::setUnits(int units){
+    this->units = units;
+}
+
+void Book::setOpinions(int opinions){
+    this->opinions = opinions;
+}
+
+void Book::setSumR(int sumRating){
+    this->sumRating = sumRating;
+}
+
+void Book::setRating(float realRating){
+    this->realRating = realRating;
+}
+
+void Book::setValue(float value){
+    this->value = value;
+}
+
+void Book::setTitle(string title){
+    this->title = title;
+}
+
+void Book::setAuthor(string author){
+    this->author = author;
+}
+
+void Book::setCat(string category){
+    this->category = category;
+}
+
 void Book::showBook(){
     cout << "   - " << title << ", de " << author << " (" << realRating << "/5)" << endl;
 }
@@ -81,7 +125,7 @@ void Book::showBook(){
 string Book::getData(){
     stringstream temp;
 
-    temp << getCode() << "," << getTitle() << "," << getAuthor() << "," << getCategory() << "," << getValue() << "," << getRating();
+    temp << getCode() << "," << getTitle() << "," << getAuthor() << "," << getCategory() << "," << getValue() << "," << getRating() << "," << getUnits() << "," << opinions << "," << sumRating << "," << getState();
 
     return temp.str();
 }

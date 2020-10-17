@@ -203,7 +203,7 @@ void Club::saveData(){
         if (i < catalog.books.size() -1) {
              temp4 << catalog.books[i].getData() << endl << endl;
         } else if (i = members.size() - 1){
-            temp4 << members[i].getData() << endl << "END";
+            temp4 << catalog.books[i].getData() << endl << "END";
         }
     }
     

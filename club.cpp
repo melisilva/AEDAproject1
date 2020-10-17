@@ -199,8 +199,23 @@ bool Club::makeRequest(){
             return false;
         }
 
-        this->lendings.push_back(make_tuple(code, date, nif));
-        members[findMember(nif)].registerRequest(code, date);
+        //this->lendings.push_back(make_tuple(code, date, nif)); //We can't lend a book immediately, we need to check if we can do it first
+        this->lendRequests.push_back(make_tuple(code,date,nif));
+        if(findMember(nif)!=-1) {
+            members[findMember(nif)].registerRequest(code, date);
+        }
+        else{ //it's not a member than it's a nonMem
+            string namem,nif_s;
+            int nif;
+            cout<<"Introduza o seu nome, por favor:"<<endl;
+            getline(cin,namem);
+            cout<<"Introduza o seu nif, por favor:"<<endl;
+            getline(cin,nif_s);
+            nif=stoi(nif_s);
+            nonMem m(namem,nif);
+            nonmembers.push_back(m);
+            m.registerRequest(code, date);
+        }
         return true;
     }
 
@@ -211,8 +226,23 @@ bool Club::makeRequest(){
             return false;
         }
 
-        lendings.push_back(make_tuple(catalog.convertNameToCode(name), date, nif));
-        members[findMember(nif)].registerRequest(code, date);
+        //this->lendings.push_back(make_tuple(code, date, nif)); //We can't lend a book immediately, we need to check if we can do it first
+        this->lendRequests.push_back(make_tuple(code,date,nif));
+        if(findMember(nif)!=-1) {
+            members[findMember(nif)].registerRequest(code, date);
+        }
+        else{ //it's not a member than it's a nonMem
+            string namem,nif_s;
+            int nif;
+            cout<<"Introduza o seu nome, por favor:"<<endl;
+            getline(cin,namem);
+            cout<<"Introduza o seu nif, por favor:"<<endl;
+            getline(cin,nif_s);
+            nif=stoi(nif_s);
+            nonMem m(namem,nif);
+            nonmembers.push_back(m);
+            m.registerRequest(code, date);
+        }
         return true;
     }
 

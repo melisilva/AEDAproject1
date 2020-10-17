@@ -53,6 +53,11 @@ bool Member::registerRequest(int code, string date){
     return true;
 }
 
+bool nonMem::registerRequest(int code, string date){
+    lendRequest.push_back(make_pair(code, date));
+    return true;
+}
+
 bool Member::showLendRequests() const {
     if (lendRequest.size() == 0){
         return false;

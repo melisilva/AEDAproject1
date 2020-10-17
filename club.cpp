@@ -42,6 +42,33 @@ void Club::chargeFee(int nif, int balance,Book book){
     }
 }
 
+int Club::calculateDelay(){
+    int delayp;
+    string date1,date2;
+    int day1,month1,year1,day2,month2,year2;
+    /*cout << "Por favor, indique a data de hoje (formato DD-MM-YY): ";
+    getline(cin,date2);
+
+    if(date2.size()!=10){
+        cerr<<"Data inválida"<<endl;
+    }
+
+    day2 = stoi(date2.substr(0, 2));
+    month2 = stoi(date2.substr(3, 2));
+    year2 = stoi(date2.substr(6));
+    Date d2={day2,month2,year2};*/
+    for (unsigned int i = 0; i < delays.size(); i++){
+        date1=get<1>(delays[i]);
+        day1 = stoi(date1.substr(0, 2));
+        month1 = stoi(date1.substr(3, 2));
+        year1 = stoi(date1.substr(6));
+        Date d1={day1,month1,year1};
+        delayp=abs(timePeriod(dttoday,d1));
+        //delayp=abs(timePeriod(d2,d1));
+    }
+    return delayp;
+}
+
 void Club::addMember(){
     string name, answer, title, author, nif_s, edition_s, code_s, category;
     int nif, edition, code;

@@ -19,6 +19,7 @@ public:
     int findMember(int nif); //done
     void chargeDelay(int nif, int balance, Book book,int delayp); //done
     void chargeFee(int nif, int balance,Book book); //done
+    int calculateDelay();
     void showMembers(); //done
     void showBookWaitlist(int code);
     void checkDelays();

@@ -99,7 +99,7 @@ string Member::getData() {
         if (i < books.size() - 1 ) {
             temp << (*books[i]).getCode() << ",";
         } else if (i == books.size() - 1){
-            temp << (*books[i]).getCode() << ";";
+            temp << (*books[i]).getCode() << endl;
         }
     }
 

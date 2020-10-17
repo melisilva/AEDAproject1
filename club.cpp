@@ -209,7 +209,7 @@ void Club::retrieveData(){
     ifstream lendRs_file; lendRs_file.open("lendRequests.txt");
     ifstream lends_file; lends_file.open("lendings.txt");
     string temp;
-    char sep;
+    char sep = ',';
     stringstream membs, bks, lendRs, lends;
 
 
@@ -220,8 +220,55 @@ void Club::retrieveData(){
     bool state;
     while (!bks_file.eof()){
         getline(bks_file, temp);
+        bks.str("");
+        bks.clear();
         bks << temp;
-        bks >> code_bk >> sep >> title >> sep >> author >> sep >> category >> sep >> value >> sep >> realRating >> sep >> units >> sep >> opinions >> sep >> sumRating >> sep >> state >> sep;
+        bks >> code_bk;
+        getline(bks_file, temp);
+        bks.str("");
+        bks.clear();
+        bks << temp;
+        title = bks.str();
+        getline(bks_file, temp);
+        bks.str("");
+        bks.clear();
+        bks << temp;
+        author = bks.str();
+        getline(bks_file, temp);
+        bks.str("");
+        bks.clear();
+        bks << temp;
+        bks >> category;
+        getline(bks_file, temp);
+        bks.str("");
+        bks.clear();
+        bks << temp;
+        bks >> value;
+        getline(bks_file, temp);
+        bks.str("");
+        bks.clear();
+        bks << temp;
+        bks >> realRating;
+        getline(bks_file, temp);
+        bks.str("");
+        bks.clear();
+        bks << temp;
+        bks >> units;
+        getline(bks_file, temp);
+        bks.str("");
+        bks.clear();
+        bks << temp;
+        bks >> opinions;
+        getline(bks_file, temp);
+        bks.str("");
+        bks.clear();
+        bks << temp;
+        bks >> sumRating;
+        getline(bks_file, temp);
+        bks.str("");
+        bks.clear();
+        bks << temp;
+        bks >> state;
         Book bk;
         bk.setAuthor(author); bk.setTitle(title); bk.setCat(category); bk.setCode(code_bk); bk.setUnits(units);
         bk.setOpinions(opinions); bk.setRating(realRating); bk.setSumR(sumRating); bk.setValue(value); bk.setState();
@@ -234,9 +281,18 @@ void Club::retrieveData(){
     while (!memb_file.eof()){
         vector<Book *> memb_bks;
         getline(memb_file, temp);
+        membs.str("");
+        membs.clear();
         membs << temp;
-        membs >> name >> sep >> nif;
+        membs >> name;
         getline(memb_file, temp);
+        membs.str("");
+        membs.clear();
+        membs << temp;
+        membs >> nif;
+        getline(memb_file, temp);
+        membs.str("");
+        membs.clear();
         membs << temp;
         do {
             membs >> code >> sep;
@@ -245,6 +301,8 @@ void Club::retrieveData(){
         } while (sep != ';');
         members.push_back(Member(name, nif, memb_bks));
         getline(memb_file, temp);
+        membs.str("");
+        membs.clear();
     } 
 }
 

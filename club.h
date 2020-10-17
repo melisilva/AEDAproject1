@@ -20,7 +20,7 @@ public:
     void chargeFee(int nif, int balance,Book book); //done
     void showMembers(); //done
     void showBookWaitlist(int code);
-    void retrieveData(ofstream file) const;
+    void retrieveData();
     bool isMember(int nif); //done
     void showLendings(); //done
     void showDelays(); //done

@@ -65,8 +65,7 @@ void Club::addMember(){
         //Adding the book.
         code = catalog.books.size();
         Book b(code,title,author,category,edition);
-        catalog.addBook(b);
-        books.push_back(&b);
+        catalog.books.push_back(b);
 
         //Repeating.
         cout << "Quer adicionar outro livro?"<<endl;
@@ -174,8 +173,9 @@ void Club::saveData(){
     ofstream file(membs, ios::binary);
     ofstream filee(lends, ios::binary);
     ofstream fileee(lendRs, ios::binary);
+    ofstream fileeee(bks, ios::binary);
 
-    stringstream temp1, temp2, temp3;
+    stringstream temp1, temp2, temp3, temp4;
 
     for (int i = 0; i < members.size(); i++){
         if (i < members.size() -1) {

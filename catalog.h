@@ -14,10 +14,10 @@ public:
     void removeBook(string title, int balance); //done
     Book getBook(int code, string name); //done
     void showBooks(); //done
+    void showRating(int code); //done
     void lendBook(int code, int nif);
     void receiveBook(int code, int nif);
     void registerRating(int code); //done
-    void showRating(int code);
     void lendBook();
     int searchBook(int code); //done
     int searchBook(string name); //done
@@ -25,6 +25,5 @@ public:
     void showBook(int code); //done
 
 };
-
 
 #endif //AEDAPROJECT1_CATALOG_H

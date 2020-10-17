@@ -9,7 +9,7 @@ Catalog::Catalog(vector<Book> books){
     this->books = books;
 }
 
-void Catalog::addBook(Book book, int edition){
+void Catalog::addBook(Book book){
     bool newb=true;
     for(unsigned int i=0;i<books.size();i++){
         if(books[i].getCode()==book.getCode()){

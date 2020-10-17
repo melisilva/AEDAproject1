@@ -119,24 +119,26 @@ void Club::showDelays() {
 
 bool Club::makeRequest(){
     int nif, code;
-    string date, name;
+    string date, name,nif_str,date_str,code_str;
 
     cout << "Indique o seu NIF: ";
-    cin >> nif;
+    getline(cin,nif_str);
+    nif=stoi(nif_str);
 
     cout << "Indique a data no formato DD-MM-AAAA: ";
-    cin >> date;
+    getline(cin,date);
 
-    cout << "Indique o código do livro (se não o souber, introduza 0 e dê ENTER): ";
-    cin >> code;
+    cout << "Indique o código do livro (se não o souber, introduza -1 e dê ENTER): ";
+    getline(cin,code_str);
+    code=stoi(code_str);
 
-    if (code == 0) {
+    if (code == -1 ){
         cout << "Indique, então, o título do livro: ";
-        cin >> name;
+        getline(cin,name);
     }
 
     //check if book with code introduced exists
-    if(code != 0){
+    if(code != -1){
         if(catalog.searchBook(code)== -1){
             cerr << "Não há nenhum livro com esse código!" << endl;
             return false;
@@ -159,7 +161,7 @@ bool Club::makeRequest(){
         return true;
     }
 
-    if ((code == 0) && (name == "")) {
+    if ((code == -1) && (name == "")) {
         cerr << "Não podemos adicionar um livro sem nos indicar uma referência dele!" << endl;
         return false;
     }
@@ -175,7 +177,7 @@ void Club::saveData(){
     ofstream fileee(lendRs, ios::binary);
     ofstream fileeee(bks, ios::binary);
 
-    stringstream temp1, temp2, temp3, temp4;
+    stringstream temp1, temp2, temp3,temp4;
 
     for (int i = 0; i < members.size(); i++){
         if (i < members.size() -1) {
@@ -201,12 +203,12 @@ void Club::saveData(){
 
     for (int i = 0; i < catalog.books.size(); i++){
         if (i < catalog.books.size() -1) {
-             temp4 << catalog.books[i].getData() << endl << endl;
+            temp4 << catalog.books[i].getData() << endl << endl;
         } else if (i = members.size() - 1){
             temp4 << catalog.books[i].getData() << endl << "END";
         }
     }
-    
+
     fileeee << temp4.str();
 }
 
@@ -326,6 +328,6 @@ void Club::retrieveData(){
         getline(memb_file, temp);
         membs.str("");
         membs.clear();
-    } 
+    }
 }
 

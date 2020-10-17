@@ -110,15 +110,16 @@ string Member::getData() {
 
 void Member::renovateLending() {
     int temp;
-    string date;
+    string date,str_temp;
 
     //Informamos o utilizador dos empréstimos em vigor.
     showLendings();
 
     cout << "Por favor, indique a ordem do empréstimo: ";
-    cin >> temp;
+    getline(cin,str_temp);
+    temp=stoi(str_temp);
     cout << "Por favor, indique a data de hoje (formato DD-MM-YY): ";
-    cin >> date;
+    getline(cin,date);
 
     //Preciso testar que a data está nos últimos 3 dias do empréstimo em vigor!
     lendings[temp - 1].second = date;

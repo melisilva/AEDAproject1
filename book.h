@@ -21,6 +21,7 @@ public:
     int getEdition();
     float getRating();
     string getTitle();
+    string getWritops();
     bool getState();
     string getAuthor();
     string getCategory();
@@ -36,12 +37,14 @@ public:
     void setAuthor(string author);
     void setCat(string category);
     void setState();
+    void setWritops(string writ_ops);
     void setEdition(int edition);
     void deleteUnit(bool gonebook);
     void showBook();
     string getData();
     void addUnits();
 };
+
 
 
 #endif //AEDAPROJECT1_BOOK_H

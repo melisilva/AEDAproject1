@@ -65,8 +65,16 @@ void Book::setEdition(int edition){
     this->edition = edition;
 }
 
+void Book::setWritops(string writ_ops){
+    this->writ_ops=writ_ops;
+}
+
 int Book::getCode() {
     return code;
+}
+
+string Book::getWritops(){
+    return writ_ops;
 }
 
 float Book::getRating() {

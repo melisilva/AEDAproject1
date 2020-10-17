@@ -7,29 +7,21 @@
 using namespace std;
 
 class Book {
-    int code, units, opinions = 0, sumRating = 0;
+    int code, units, opinions=0,sumRating = 0;
+    int edition;
     float realRating, value;
-    string title, author, category;
+    string title, author, category, writ_ops;
     bool state;
 
 public:
     Book();
-    Book(int code, string title, string author, string category);   
-    void calculateValue(int edition);
+    Book(int code, string title, string author, string category,int edition);
+    void calculateValue();
     void calculateRating(int rate);
-    void setCode(int code);
-    void setUnits(int units);
-    void setOpinions(int opinions);
-    void setSumR(int sumRating);
-    void setRating(float realRating);
-    void setValue(float value);
-    void setTitle(string title);
-    void setAuthor(string author);
-    void setCat(string category);
     int getCode();
+    int getEdition();
     float getRating();
     string getTitle();
-    void setState();
     bool getState();
     string getAuthor();
     string getCategory();
@@ -38,6 +30,7 @@ public:
     void deleteUnit(bool gonebook);
     void showBook();
     string getData();
+    void addUnits();
 };
 
 

@@ -26,7 +26,6 @@ public:
     void showDelays(); //done
     void showLendRequests(); //done
     void saveData(); //done
-    void retrieveData();
 };
 
 

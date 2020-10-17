@@ -2,6 +2,7 @@
 #define AEDAPROJECT1_DATE_H
 #include <ctime>
 
+
 struct Date
 {
     int day, month, year;
@@ -15,9 +16,19 @@ int todayy=now->tm_year+1900;
 
 Date dttoday={todayd,todaym,todayy};
 
-const int mdays[12] = { 31, 28, 31, 30, 31, 30,
-                        31, 31, 30, 31, 30, 31 };
+int mdays[12] = { 31, 28, 31, 30, 31, 30,
+                  31, 31, 30, 31, 30, 31 };
 
+bool isleapYear(int year){
+    bool result=false;
+    if (year% 4 == 0 && year % 100 != 0) {
+        result=true;
+    }
+    if (year% 400 == 0 && year% 100 == 0) {
+        result=true;
+    }
+    return result;
+}
 
 int nly(Date d)
 {
@@ -29,10 +40,7 @@ int nly(Date d)
     }
 
     for (int i = 1800; i <= year; i++) { //leap years are multiples of 4 but not of 100 or multiples of 400 and 100
-        if (i% 4 == 0 && i % 100 != 0) {
-            nly++;
-        }
-        if (i% 400 == 0 && i% 100 == 0) {
+        if (isleapYear(year)) {
             nly++;
         }
     }
@@ -60,5 +68,64 @@ int timePeriod(Date dt1, Date dt2)
 
     return (n2 - n1);
 }
+
+string extendTime(Date dt1) {
+    string d, m, y, date = "", block = "/";
+    int rest, extrad = 10;
+    //days plus months
+    int n1 = dt1.day ;
+    for (int i = 0; i < dt1.month - 1; i++) {
+        n1 += mdays[i];
+    }
+    if (isleapYear(dt1.year) && dt1.month > 2) { //check if the fact that it's a leap year or not affect calculations
+        n1 += 1;
+    }
+    if (isleapYear(dt1.year)) {
+        rest = 366 - n1;
+    }
+    else {
+        rest = 365 - n1;
+    }
+    if (extrad <= rest) { //year doesn't change
+        n1 += extrad;
+        cout << "Holo" << endl;
+    }
+    else {
+        cout << "sup" << endl;
+        extrad -= rest;
+        dt1.year += 1;
+        int days;
+        if (isleapYear(dt1.year)) {
+            days = 366;
+        }
+        else {
+            days = 365;
+        }
+        while (extrad >= days) {
+            extrad -= days;
+        }
+        n1 = extrad;
+    }
+    if (isleapYear(dt1.year)) {
+        mdays[1] = 29;
+        cout << "leap" << endl;
+    }
+    int i;
+    cout << n1 << endl;
+    for (i = 0; i < 12; i++) {
+        if (n1 <= mdays[i]) {
+            break;
+        }
+        n1 -= mdays[i];
+    }
+    dt1.day = n1;
+    dt1.month = i+1;
+    d = to_string(dt1.day);
+    m = to_string(dt1.month);
+    y = to_string(dt1.year);
+    date += d + block + m + block + y;
+    return date;
+}
+
 
 #endif //AEDAPROJECT1_DATE_H

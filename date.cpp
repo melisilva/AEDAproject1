@@ -21,7 +21,7 @@ void Date::showDate(){
     cout<<day<<"/"<<month<<"/"<<year;
 }
 
-string Date::getDateStr(){
+string Date::getDateStr() const{
     string d,m,y,date,block="/";
     d = to_string(day);
     m = to_string(month);
@@ -30,7 +30,7 @@ string Date::getDateStr(){
     return date;
 }
 
-Date Date::getDate(string date){
+Date Date::getDate(string date) const{
     int day,month,year;
     day = stoi(date.substr(0, 2));
     month = stoi(date.substr(3, 2));

@@ -518,4 +518,43 @@ void Club::retrieveData(){
         membs.str("");
         membs.clear();
     }
+
+    //Getting lendRequests data.
+    temp = "";
+    string date;
+    Date tmp;
+    do {
+        getline(lendRs_file, temp);
+
+        if (temp == "END"){
+            break;
+        }
+
+        lendRs.str("");
+        lendRs.clear();
+        lendRs << temp;
+        lendRs >> code >> sep >> date >> sep >> nif;
+        lendRequests.push_back(make_tuple(code, tmp.getDate(date), nif));
+        members[findMember(nif)].registerRequest(code, tmp.getDate(date));
+    } while (true);
+
+    //Getting lendings data.
+    temp = "";
+    Date tmp2;
+    do {
+        getline(lends_file, temp);
+
+        if (temp == "END"){
+            break;
+        }
+
+        lends.str("");
+        lends.clear();
+        lends << temp;
+        lends >> code >> sep >> date >> sep >> nif;
+        lendings.push_back(make_tuple(code, tmp2.getDate(date), nif));
+        members[findMember(nif)].registerLending(code, tmp2.getDate(date));
+    } while (true);
+
+
 }

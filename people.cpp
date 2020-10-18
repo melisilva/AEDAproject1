@@ -71,7 +71,7 @@ bool Member::showLendRequests() const {
     }
 
     for (int i = 0; i < lendRequest.size(); i++){
-        cout << "Empréstimo do " << lendRequest[i].first << " a " << getDateStr(lendRequest[i].second) << endl;
+        cout << "Empréstimo do " << lendRequest[i].first << " a " << (lendRequest[i].second).getDateStr() << endl;
     }
 
     return true;
@@ -83,7 +83,7 @@ bool nonMem::showLendRequests() const {
     }
 
     for (int i = 0; i < lendRequest.size(); i++){
-        cout << "Empréstimo do " << lendRequest[i].first << " a " << getDateStr(lendRequest[i].second) << endl;
+        cout << "Empréstimo do " << lendRequest[i].first << " a " << lendRequest[i].second.getDateStr() << endl;
     }
 
     return true;
@@ -112,8 +112,18 @@ void Member::showBooks() const {
 void Member::showLendings() const {
     cout << "Empréstimos em Vigor: " << endl;
     for (int i = 0; i < lendings.size(); i++){
-        cout << "   " << i + 1 << " - " << lendings[i].first << " a " << getDateStr(lendings[i].second) << endl;
+        cout << "   " << i + 1 << " - " << lendings[i].first << " a " << lendings[i].second.getDateStr() << endl;
     }
+}
+
+bool Member::registerLending(int code, Date date) {
+    lendings.push_back(make_pair(code, date));
+    return true;
+}
+
+bool nonMem::registerLending(int code, Date date) {
+    lendings.push_back(make_pair(code, date));
+    return true;
 }
 
 string Member::getData() {

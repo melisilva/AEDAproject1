@@ -14,8 +14,8 @@ public:
     Date();
     Date(int day,int month,int year);
     void showDate();
-    string getDateStr();
-    Date getDate(string date);
+    string getDateStr() const;
+    Date getDate(string date) const;
     bool isleapYear();
     int nly();
     int timePeriod(Date dt2);

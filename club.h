@@ -5,6 +5,7 @@
 #include <fstream>
 #include "people.h"
 #include <vector>
+#include <stdio.h>
 
 class Club {
 private:

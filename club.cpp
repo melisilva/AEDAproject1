@@ -44,19 +44,8 @@ void Club::chargeFee(int nif, int balance,Book book){
 
 int Club::calculateDelay(){
     int delayp;
-    string date1,date2;
-    int day1,month1,year1,day2,month2,year2;
-    /*cout << "Por favor, indique a data de hoje (formato DD-MM-YY): ";
-    getline(cin,date2);
-
-    if(date2.size()!=10){
-        cerr<<"Data inválida"<<endl;
-    }
-
-    day2 = stoi(date2.substr(0, 2));
-    month2 = stoi(date2.substr(3, 2));
-    year2 = stoi(date2.substr(6));
-    Date d2={day2,month2,year2};*/
+    string date1;
+    int day1,month1,year1;
     for (unsigned int i = 0; i < delays.size(); i++){
         date1=get<1>(delays[i]);
         day1 = stoi(date1.substr(0, 2));
@@ -64,7 +53,6 @@ int Club::calculateDelay(){
         year1 = stoi(date1.substr(6));
         Date d1={day1,month1,year1};
         delayp=abs(timePeriod(dttoday,d1));
-        //delayp=abs(timePeriod(d2,d1));
     }
     return delayp;
 }
@@ -146,27 +134,15 @@ void Club::showDelays() {
 }
 
 void Club::checkDelays(){
-    string date1,date2;
-    int day1,month1,year1,day2,month2,year2;
-    /*cout << "Por favor, indique a data de hoje (formato DD-MM-YY): ";
-    getline(cin,date2);
-
-    if(date2.size()!=10){
-        cerr<<"Data inválida"<<endl;
-    }
-
-    day2 = stoi(date2.substr(0, 2));
-    month2 = stoi(date2.substr(3, 2));
-    year2 = stoi(date2.substr(6));
-    Date d2={day2,month2,year2};*/
+    string date1;
+    int day1,month1,year1;
     for (unsigned int i = 0; i < lendings.size(); i++){
         date1=get<1>(lendings[i]);
         day1 = stoi(date1.substr(0, 2));
         month1 = stoi(date1.substr(3, 2));
         year1 = stoi(date1.substr(6));
         Date d1={day1,month1,year1};
-        //if(abs(timePeriod(d1,d2)))
-        if(abs(timePeriod(dttoday, d1))>=7){ //Consider lending period is 7 days
+        if(abs(timePeriod(dttoday, d1))>=10){ //Consider lending period is 10 days
             this->delays.push_back(make_tuple(get<0>(lendings[i]),get<1>(lendings[i]),get<2>(lendings[i])));
         }
     }

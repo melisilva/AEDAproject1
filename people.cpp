@@ -126,10 +126,10 @@ string Member::getData() {
     return temp.str();
 }
 
-void Member::renovateLending() {
+void Member::renovateLending() { //include check if it's last unit in club or where we call this
     int temp;
-    string date1,date2,str_temp;
-    int month1,year1,day1,month2,year2,day2;
+    string date1,str_temp;
+    int month1,year1,day1;
 
     //Informamos o utilizador dos empréstimos em vigor.
     showLendings();
@@ -137,30 +137,10 @@ void Member::renovateLending() {
     cout << "Por favor, indique a ordem do empréstimo: ";
     getline(cin,str_temp);
     temp=stoi(str_temp);
-    /*cout << "Por favor, indique a data de hoje (formato DD-MM-YY): ";
-    getline(cin,date1);
-
-    if(date1.size()!=10){
-        cerr<<"Data inválida"<<endl;
+    lendings[temp - 1].second = date1;
+    struct Date dt1=getDate(date1);
+    if(abs(timePeriod(dttoday, dt1))<=3){
+        extendTime(dt1);
     }
-
-    day1 = stoi(date1.substr(0, 2));
-    month1 = stoi(date1.substr(3, 2));
-    year1 = stoi(date1.substr(6));*/
-
-
-    lendings[temp - 1].second = date2;
-    day2 = stoi(date2.substr(0, 2));
-    month2 = stoi(date2.substr(3, 2));
-    year2 = stoi(date2.substr(6));
-    Date dt2 = { day2,month2,year2 };
-
-    if(abs(timePeriod(dttoday, dt2))<=3){
-        extendTime(dt2);
-    }
-    /*
-     if(abs(timePeriod(dt1, dt2))<=3){
-        extendTime(dt2);
-    }
-     */
 }
+

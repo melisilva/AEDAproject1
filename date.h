@@ -19,6 +19,28 @@ Date dttoday={todayd,todaym,todayy};
 int mdays[12] = { 31, 28, 31, 30, 31, 30,
                   31, 31, 30, 31, 30, 31 };
 
+void showDate(){
+    cout<<dttoday.day<<"/"<<dttoday.month<<"/"<<dttoday.year<<endl;
+}
+
+string getDateStr(struct Date dt1){
+    string d,m,y,date,block="/";
+    d = to_string(dt1.day);
+    m = to_string(dt1.month);
+    y = to_string(dt1.year);
+    date += d + block + m + block + y;
+    return date;
+}
+
+struct Date getDate(string date){
+    int day,month,year;
+    day = stoi(date.substr(0, 2));
+    month = stoi(date.substr(3, 2));
+    year = stoi(date.substr(6));
+    Date dt1 = { day,month,year };
+    return dt1;
+}
+
 bool isleapYear(int year){
     bool result=false;
     if (year% 4 == 0 && year % 100 != 0) {
@@ -70,7 +92,6 @@ int timePeriod(Date dt1, Date dt2)
 }
 
 string extendTime(Date dt1) {
-    string d, m, y, date = "", block = "/";
     int rest, extrad = 10;
     //days plus months
     int n1 = dt1.day ;
@@ -88,10 +109,8 @@ string extendTime(Date dt1) {
     }
     if (extrad <= rest) { //year doesn't change
         n1 += extrad;
-        cout << "Holo" << endl;
     }
     else {
-        cout << "sup" << endl;
         extrad -= rest;
         dt1.year += 1;
         int days;
@@ -120,11 +139,7 @@ string extendTime(Date dt1) {
     }
     dt1.day = n1;
     dt1.month = i+1;
-    d = to_string(dt1.day);
-    m = to_string(dt1.month);
-    y = to_string(dt1.year);
-    date += d + block + m + block + y;
-    return date;
+    return getDateStr(dt1);
 }
 
 

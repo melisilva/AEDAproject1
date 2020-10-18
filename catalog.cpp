@@ -41,10 +41,10 @@ void Catalog::showComments(int code){
 }
 
 void Catalog::registerComments(int code){
-    string comments,answer;
+    string comments, answer;
     cout<<"Deseja deixar um comentário sobre o livro?"<<endl;
     getline(cin,answer);
-    if(answer=="sim"||answer=="s"||answer=="Sim"||answer="S"){
+    if((answer=="sim")||(answer=="s")||(answer=="Sim")||(answer =="S")){
         cout<<"Escreva o seu comentário:"<<endl;
         getline(cin,comments);
         for(unsigned int i=0;i<books.size();i++){

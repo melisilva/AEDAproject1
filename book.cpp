@@ -130,6 +130,10 @@ int Book::getUnits(){
     return units;
 }
 
+int Book::getOwner(){
+    return owner;
+}
+
 void Book::deleteUnit(bool gonebook){
     if(gonebook==true){
         units-=1;
@@ -149,7 +153,7 @@ void Book::showBook(){
 string Book::getData(){
     stringstream temp;
 
-    temp << getCode() << endl << getTitle() << endl << getAuthor() << endl << getEdition()<< endl<<getCategory() << endl << getValue() << endl << getRating() << endl << getUnits() << endl << opinions << endl << sumRating << endl << getState();
+    temp << getCode() << endl << getTitle() << endl << getAuthor() << endl << getOwner() << endl << getEdition() << endl << getCategory() << endl << getValue() << endl << getRating() << endl << getUnits() << endl << opinions << endl << sumRating << endl << getState();
 
     return temp.str();
 }

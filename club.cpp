@@ -2,7 +2,7 @@
 
 Club::Club() {
     vector<Member> temp;
-    vector<tuple<int, string, int>> temp2, temp3,temp4;
+    vector<tuple<int, Date, int>> temp2, temp3,temp4;
     Catalog temp5;
 
     members = temp;
@@ -36,6 +36,7 @@ bool Club::makeLending() {
      * - o pedido não foi feito (o pedido não está em lendRequests);
      * - o pedido não pode ser feito (por haver um membro que fez um pedido antes de não-Membro);
      */
+    return true;
 }
 
 bool Club::returnLending() {
@@ -47,6 +48,7 @@ bool Club::returnLending() {
      * Deverá lançar exceção no seguinte caso:
      * - caso o empréstimo não exista.
      */
+    return true;
 }
 
 bool Club::isMember(int nif){
@@ -83,8 +85,7 @@ int Club::calculateDelay(){
     string date1;
     int day1,month1,year1;
     for (unsigned int i = 0; i < delays.size(); i++){
-        date1=get<1>(delays[i]);
-        delayp=abs(timePeriod(dttoday,getDate(date1)));
+        delayp=abs(timePeriod(dttoday,get<1>(delays[i])));
     }
     return delayp;
 }
@@ -123,15 +124,15 @@ void Club::removeMember(int nif){
 
     //Remover todos os livros do membro!
     for (int i = 0; i < catalog.books.size(); i++){
-        if (catalog.books[i].owner == nif) {
+        if (catalog.books[i].getOwner() == nif) {
             catalog.books.erase(catalog.books.begin() + i);
         }
     }
 }
 
-void Club::addBook(Book book){
+void Club::addBook(){
     string title, author, category, edition_s, owner_s;
-    int edition, owner;
+    int edition, owner, code;
 
     cout <<"Introduza o seu título, por favor:"<< endl;
     getline(cin, title);
@@ -142,11 +143,11 @@ void Club::addBook(Book book){
     cout << "Introduza a sua edição, por favor:" << endl;
     getline(cin, edition_s);
     cout << "Introduza o dono do livro, por favor (NIF):" << endl;
-    getline(cin, owner);
+    getline(cin, owner_s);
     edition = stoi(edition_s);
     owner = stoi(owner_s);
     code = catalog.books.size();
-    Book b(code,title,author,category,edition);
+    Book b(code,title,author,category,edition, owner);
     catalog.addBook(b);
 }
 
@@ -164,7 +165,7 @@ void Catalog::removeBook(string title, int balance,int edition){
 
 void Club::showMembers(){
     for (unsigned int i = 0; i < members.size(); i++){
-        cout << "Nome: " << members[i].getName() << "/n" << "NIF: "<< members[i].getNIF() << '/n' << "Livros:" << endl;
+        cout << "Nome: " << members[i].getName() << "/n" << "NIF: "<< members[i].getNIF() << endl << "Livros:" << endl;
         vector<Book*> books = members[i].getBooks();
         for (unsigned int j = 0; j < books.size(); j++){
             books[j]->showBook();
@@ -174,19 +175,19 @@ void Club::showMembers(){
 
 void Club::showLendRequests() {
     for (unsigned int i = 0; i < lendRequests.size(); i++){
-        cout << get<0>(lendRequests[i]) << ", a " << get<1>(lendRequests[i]) << " pelo " << get<2>(lendRequests[i]) << endl;
+        cout << get<0>(lendRequests[i]) << ", a " << getDateStr(get<1>(lendRequests[i])) << " pelo " << get<2>(lendRequests[i]) << endl;
     }
 }
 
 void Club::showLendings() {
     for (unsigned int i = 0; i < lendings.size(); i++){
-        cout << get<0>(lendings[i]) << ", a " << get<1>(lendings[i]) << " pelo " << get<2>(lendings[i]) << endl;
+        cout << get<0>(lendings[i]) << ", a " << getDateStr(get<1>(lendings[i])) << " pelo " << get<2>(lendings[i]) << endl;
     }
 }
 
 void Club::showDelays() {
     for (unsigned int i = 0; i < delays.size(); i++){
-        cout << get<0>(delays[i]) << ", desde " << get<1>(delays[i]) << " pelo " << get<2>(delays[i]) << endl;
+        cout << get<0>(delays[i]) << ", desde " << getDateStr(get<1>(delays[i])) << " pelo " << get<2>(delays[i]) << endl;
     }
 }
 
@@ -194,7 +195,7 @@ void Club::checkDelays(){
     string date1;
     int day1,month1,year1;
     for (unsigned int i = 0; i < lendings.size(); i++){
-        date1=get<1>(lendings[i]);
+        date1=getDateStr(get<1>(lendings[i]));
         if(abs(timePeriod(dttoday, getDate(date1)))>=10){ //Consider lending period is 10 days
             this->delays.push_back(make_tuple(get<0>(lendings[i]),get<1>(lendings[i]),get<2>(lendings[i])));
         }
@@ -208,9 +209,6 @@ bool Club::makeRequest(){
     cout << "Indique o seu NIF: ";
     getline(cin,nif_str);
     nif=stoi(nif_str);
-
-    cout << "Indique a data no formato DD-MM-AAAA: ";
-    getline(cin,date);
 
     cout << "Indique o código do livro (se não o souber, introduza -1 e dê ENTER): ";
     getline(cin,code_str);
@@ -228,9 +226,9 @@ bool Club::makeRequest(){
             return false;
         }
 
-        this->lendRequests.push_back(make_tuple(code,date,nif));
+        this->lendRequests.push_back(make_tuple(code,dttoday,nif));
         if(findMember(nif)!=-1) {
-            members[findMember(nif)].registerRequest(code, date);
+            members[findMember(nif)].registerRequest(code, dttoday);
         }
         else{ //it's not a member than it's a nonMem
             string namem,nif_s;
@@ -242,7 +240,7 @@ bool Club::makeRequest(){
             nif=stoi(nif_s);
             nonMem m(namem,nif);
             nonmembers.push_back(m);
-            m.registerRequest(code, date);
+            m.registerRequest(code, dttoday);
         }
         return true;
     }
@@ -257,7 +255,7 @@ bool Club::makeRequest(){
         vector<Book> possibleBooks;
         vector<int> possibleCodes;
         for (int i = 0; i < catalog.books.size(); i++){
-            if ((catalog.books[i].title == name) && (catalog.books[i].state == true)){
+            if ((catalog.books[i].getTitle() == name) && (catalog.books[i].getState() == true)){
                 possibleBooks.push_back(catalog.books[i]);
                 possibleCodes.push_back(catalog.books[i].getCode());
             }
@@ -282,10 +280,10 @@ bool Club::makeRequest(){
             }
         } while (true);
 
-        this->lendRequests.push_back(make_tuple(code,date,nif));
+        this->lendRequests.push_back(make_tuple(code,dttoday,nif));
 
         if(findMember(nif)!=-1) {
-            members[findMember(nif)].registerRequest(code, date);
+            members[findMember(nif)].registerRequest(code, dttoday);
         }
         else{ //it's not a member than it's a nonMem
             string namem,nif_s;
@@ -297,7 +295,7 @@ bool Club::makeRequest(){
             nif=stoi(nif_s);
             nonMem m(namem,nif);
             nonmembers.push_back(m);
-            m.registerRequest(code, date);
+            m.registerRequest(code, dttoday);
         }
         return true;
     }
@@ -311,7 +309,7 @@ bool Club::makeRequest(){
 }
 
 void Club::saveData(){
-    string membs = "members.txt", lends = "lendings.txt", lendRs = "lendRequests.txt", bks = "books.txt", fileeeee = "delays.txt";
+    string membs = "members.txt", lends = "lendings.txt", lendRs = "lendRequests.txt", bks = "books.txt", dels = "delays.txt";
 
     ofstream file(membs, ios::binary);
     ofstream filee(lends, ios::binary);
@@ -333,9 +331,9 @@ void Club::saveData(){
 
     for (int i = 0; i < lendings.size(); i++){
         if (i < members.size() -1) {
-            temp2 << get<0>(lendings[i]) << ", " << get<1>(lendings[i]).showDate() << get<2>(lendings[i]) << endl;  //código do livro, data, membro
+            temp2 << get<0>(lendings[i]) << ", " << getDateStr(get<1>(lendings[i])) << get<2>(lendings[i]) << endl;  //código do livro, data, membro
         } else if (i = members.size() - 1){
-            temp2 << get<0>(lendings[i]) << ", " << get<1>(lendings[i]).showDate() << get<2>(lendings[i]) << endl << "END";
+            temp2 << get<0>(lendings[i]) << ", " << getDateStr(get<1>(lendings[i])) << get<2>(lendings[i]) << endl << "END";
         }
     }
 
@@ -343,9 +341,9 @@ void Club::saveData(){
 
     for (int i = 0; i < lendRequests.size(); i++){
         if (i < members.size() -1) {
-            temp3 << get<0>(lendRequests[i]) << ", " << get<1>(lendRequests[i]).showDate() << get<2>(lendRequests[i]) << endl;  //código do livro, data, membro
+            temp3 << get<0>(lendRequests[i]) << ", " << getDateStr(get<1>(lendRequests[i])) << get<2>(lendRequests[i]) << endl;  //código do livro, data, membro
         } else if (i = members.size() - 1){
-            temp3 << get<0>(lendRequests[i]) << ", " << get<1>(lendRequests[i]).showDate() << get<2>(lendRequests[i]) << endl << "END";
+            temp3 << get<0>(lendRequests[i]) << ", " << getDateStr(get<1>(lendRequests[i])) << get<2>(lendRequests[i]) << endl << "END";
         }
     }
 
@@ -363,9 +361,9 @@ void Club::saveData(){
 
     for (int i = 0; i < delays.size(); i++){
         if (i < members.size() -1) {
-            temp5 << get<0>(delays[i]) << ", " << get<1>(delays[i]) << get<2>(delays[i]) << endl;  //código do livro, data, membro
+            temp5 << get<0>(delays[i]) << ", " << getDateStr(get<1>(delays[i])) << get<2>(delays[i]) << endl;  //código do livro, data, membro
         } else if (i = members.size() - 1){
-            temp5 << get<0>(delays[i]) << ", " << get<1>(delays[i]) << get<2>(delays[i]) << endl << "END";
+            temp5 << get<0>(delays[i]) << ", " << getDateStr(get<1>(delays[i])) << get<2>(delays[i]) << endl << "END";
         }
     }
 
@@ -385,7 +383,7 @@ void Club::retrieveData(){
 
     //Getting Books data.
     string title, author, category;
-    int code_bk, units, opinions, sumRating, edition;
+    int code_bk, units, opinions, sumRating, edition, owner;
     float realRating, value;
     bool state;
     while (temp != "END"){
@@ -409,6 +407,11 @@ void Club::retrieveData(){
         bks.clear();
         bks << temp;
         bks >> edition;
+        getline(bks_file, temp);
+        bks.str("");
+        bks.clear();
+        bks << temp;
+        bks >> owner;
         getline(bks_file, temp);
         bks.str("");
         bks.clear();
@@ -447,7 +450,7 @@ void Club::retrieveData(){
         Book bk;
         bk.setAuthor(author); bk.setTitle(title); bk.setCat(category); bk.setCode(code_bk); bk.setUnits(units);
         bk.setOpinions(opinions); bk.setRating(realRating); bk.setSumR(sumRating); bk.setValue(value); bk.setState();
-        bk.setEdition(edition);
+        bk.setEdition(edition); bk.setOwner(owner);
         catalog.books.push_back(bk);
         getline(bks_file, temp);
         bks.str("");

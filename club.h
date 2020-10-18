@@ -3,7 +3,6 @@
 #include "catalog.h"
 #include <fstream>
 #include "people.h"
-#include "date.h"
 #include <vector>
 
 class Club {

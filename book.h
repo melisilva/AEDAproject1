@@ -1,6 +1,5 @@
 #ifndef AEDAPROJECT1_BOOK_H
 #define AEDAPROJECT1_BOOK_H
-
 #include <string>
 #include <sstream>
 #include <iostream>
@@ -18,6 +17,7 @@ public:
     void calculateValue();
     void calculateRating(float rate);
     int getCode();
+    int getOwner();
     int getEdition();
     float getRating();
     string getTitle();

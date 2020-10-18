@@ -1,6 +1,5 @@
 #include <fstream>
 #include "people.h"
-#include "date.h"
 using namespace std;
 
 Member::Member(){
@@ -48,12 +47,12 @@ int Member::findBook(string title) const{
     return -1;
 }
 
-bool Member::registerRequest(int code, string date){
+bool Member::registerRequest(int code, Date date){
     lendRequest.push_back(make_pair(code, date));
     return true;
 }
 
-bool nonMem::registerRequest(int code, string date){
+bool nonMem::registerRequest(int code, Date date){
     lendRequest.push_back(make_pair(code, date));
     return true;
 }
@@ -64,7 +63,7 @@ bool Member::showLendRequests() const {
     }
 
     for (int i = 0; i < lendRequest.size(); i++){
-        cout << "Empréstimo do " << lendRequest[i].first << " a " << lendRequest[i].second << endl;
+        cout << "Empréstimo do " << lendRequest[i].first << " a " << getDateStr(lendRequest[i].second) << endl;
     }
 
     return true;
@@ -76,7 +75,7 @@ bool nonMem::showLendRequests() const {
     }
 
     for (int i = 0; i < lendRequest.size(); i++){
-        cout << "Empréstimo do " << lendRequest[i].first << " a " << lendRequest[i].second << endl;
+        cout << "Empréstimo do " << lendRequest[i].first << " a " << getDateStr(lendRequest[i].second) << endl;
     }
 
     return true;
@@ -105,7 +104,7 @@ void Member::showBooks() const {
 void Member::showLendings() const {
     cout << "Empréstimos em Vigor: " << endl;
     for (int i = 0; i < lendings.size(); i++){
-        cout << "   " << i + 1 << " - " << lendings[i].first << " a " << lendings[i].second << endl;
+        cout << "   " << i + 1 << " - " << lendings[i].first << " a " << getDateStr(lendings[i].second) << endl;
     }
 }
 
@@ -137,7 +136,7 @@ void Member::renovateLending() { //include check if it's last unit in club or wh
     cout << "Por favor, indique a ordem do empréstimo: ";
     getline(cin,str_temp);
     temp=stoi(str_temp);
-    lendings[temp - 1].second = date1;
+    lendings[temp - 1].second = getDate(date1);
     struct Date dt1=getDate(date1);
     if(abs(timePeriod(dttoday, dt1))<=3){
         extendTime(dt1);

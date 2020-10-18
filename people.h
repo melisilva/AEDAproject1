@@ -1,6 +1,7 @@
 #ifndef AEDAPROJECT1_MEMBER_H
 #define AEDAPROJECT1_MEMBER_H
 #include "book.h"
+#include "date.h"
 #include <string>
 #include <vector>
 #include <iostream>
@@ -12,7 +13,7 @@ using namespace std;
 
 class Member {
 protected:
-    vector<pair<int, string>> lendRequest, lendings;
+    vector<pair<int, Date>> lendRequest, lendings;
     vector<Book*> books;
     string name;
     int nif;
@@ -22,7 +23,7 @@ public:
     Member(); //done
     Member(string &name, int &nif, vector<Book*> &books); //done
     int findBook(string title)const; //done
-    virtual bool registerRequest(int code, string date); //done
+    virtual bool registerRequest(int code, Date date); //done
     bool showLendRequests() const; //done
     void showData() const; //done
     string getData(); //done
@@ -38,10 +39,10 @@ public:
 
 class nonMem : public Member {
 private:
-    vector<pair<int, string>> lendRequest;
+    vector<pair<int, Date>> lendRequest;
 public:
     nonMem(string &name, int &nif);
-    bool registerRequest(int code, string date);
+    bool registerRequest(int code, Date date);
     bool showLendRequests()const;
 };
 

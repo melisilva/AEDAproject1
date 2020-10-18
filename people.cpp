@@ -138,12 +138,9 @@ void Member::renovateLending() { //include check if it's last unit in club or wh
     getline(cin,str_temp);
     temp=stoi(str_temp);
     lendings[temp - 1].second = date1;
-    day1 = stoi(date1.substr(0, 2));
-    month1 = stoi(date1.substr(3, 2));
-    year1 = stoi(date1.substr(6));
-    Date dt1 = { day1,month1,year1 };
-
+    struct Date dt1=getDate(date1);
     if(abs(timePeriod(dttoday, dt1))<=3){
         extendTime(dt1);
     }
 }
+

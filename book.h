@@ -7,14 +7,14 @@
 using namespace std;
 
 class Book {
-    int code, units, opinions = 0, edition;
+    int code, units, opinions = 0, edition, owner;
     float realRating, value, sumRating = 0;
     string title, author, category, writ_ops;
     bool state;
 
 public:
     Book();
-    Book(int code, string title, string author, string category,int edition);
+    Book(int code, string title, string author, string category,int edition, int owner);
     void calculateValue();
     void calculateRating(float rate);
     int getCode();
@@ -27,6 +27,7 @@ public:
     string getCategory();
     float getValue();
     int getUnits();
+    void setOwner(int owner);
     void setCode(int code);
     void setUnits(int units);
     void setOpinions(int opinions);

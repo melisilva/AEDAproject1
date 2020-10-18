@@ -9,39 +9,16 @@ Catalog::Catalog(vector<Book> books){
     this->books = books;
 }
 
-void Catalog::addBook(Book book){
-    bool newb=true;
-    for(unsigned int i=0;i<books.size();i++){
-        if(books[i].getCode()==book.getCode()){
-            if(books[i].getEdition()==book.getEdition()){
-                books[i].addUnits();
-                newb=false;
-            }
-        }
-    }
-    if(newb) {
-        book.calculateValue();
-        books.push_back(book);
-    }
-}
-
-void Catalog::removeBook(string title, int balance,int edition){
-    for(unsigned int i=0;i<books.size();i++){
-        if(books[i].getTitle()==title) {
-            if (books[i].getEdition() == edition) {
-                balance += books[i].getValue();
-                books[i].deleteUnit(true);
-            }
-        }
-    }
-}
-
 void Catalog::showRating(int code){
     for(unsigned int i=0;i<books.size();i++){
         if(books[i].getCode()==code){
             cout<<"Classificação do livro: "<<books[i].getRating()<<endl;
         }
     }
+}
+
+void Catalog::addBook(Book book){
+    books.push_back(book);
 }
 
 void Catalog::registerRating(int code){

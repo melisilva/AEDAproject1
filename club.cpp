@@ -1,5 +1,4 @@
 #include "club.h"
-#include "date.h"
 
 Club::Club() {
     vector<Member> temp;
@@ -11,6 +10,43 @@ Club::Club() {
     lendRequests = temp4;
     delays = temp3;
     catalog = temp5;
+}
+
+void Club::run(){
+    /*
+     * Esta função irá ditar como corre o programa desde o início, inciando com uma descrição
+     * de como utilizar o programa e recuperando os dados em ficheiros já guardados,
+     * (códigos de execução e por aí fora) e depois o seu uso. Quando esta
+     * função terminar, o programa fecha, guardando os dados todos possuídos no clube em ficheiros.
+     */
+}
+
+void Club::beginningInfo() {
+    /*
+     * Pura e simplesmente ajuda o utilizador com o inicial, para diminuir o tamanho de run.
+     */
+}
+
+bool Club::makeLending() {
+    /*
+     * Deverá checar se um empréstimo que se quer fazer está já registado como pedido.
+     * Se sim, irá adicioná-lo a "lendings" (no Club e no membro respetivo) e tirá-lo de
+     * "lendRequests" (no Club e Membro respetivo).
+     * Deverá lançar exceções nos seguintes casos:
+     * - o pedido não foi feito (o pedido não está em lendRequests);
+     * - o pedido não pode ser feito (por haver um membro que fez um pedido antes de não-Membro);
+     */
+}
+
+bool Club::returnLending() {
+    /*
+     * Deverá retornar um livro ao catálogo, passando por:
+     * - adicionar um exemplar ao livro correto (catalog);
+     * - retirar o livro do registo de empréstimos (ao nivel de Club e Member respetivo);
+     * - pedir opinião do livro em questão e registá-la na Book respetiva;
+     * Deverá lançar exceção no seguinte caso:
+     * - caso o empréstimo não exista.
+     */
 }
 
 bool Club::isMember(int nif){
@@ -46,17 +82,6 @@ int Club::calculateDelay(){
     int delayp;
     string date1,date2;
     int day1,month1,year1,day2,month2,year2;
-    /*cout << "Por favor, indique a data de hoje (formato DD-MM-YY): ";
-    getline(cin,date2);
-
-    if(date2.size()!=10){
-        cerr<<"Data inválida"<<endl;
-    }
-
-    day2 = stoi(date2.substr(0, 2));
-    month2 = stoi(date2.substr(3, 2));
-    year2 = stoi(date2.substr(6));
-    Date d2={day2,month2,year2};*/
     for (unsigned int i = 0; i < delays.size(); i++){
         date1=get<1>(delays[i]);
         day1 = stoi(date1.substr(0, 2));
@@ -115,11 +140,51 @@ int Club::findMember(int nif){
 void Club::removeMember(int nif){
     unsigned toDel = findMember(nif);
     members.erase(members.begin()+toDel);
+
+    //Remover todos os livros do membro!
+    for (int i = 0; i < catalog.books.size(); i++){
+        if (catalog.books[i].owner == nif) {
+            catalog.books.erase(catalog.books.begin() + i);
+        }
+    }
 }
+
+void Club::addBook(Book book){
+    string title, author, category, edition_s, owner_s;
+    int edition, owner;
+
+    cout <<"Introduza o seu título, por favor:"<< endl;
+    getline(cin, title);
+    cout << "Introduza o nome do seu escritor(a), por favor:" << endl;
+    getline(cin, author);
+    cout<<"Introduza a sua categoria, por favor:"<<endl;
+    getline(cin,category);
+    cout << "Introduza a sua edição, por favor:" << endl;
+    getline(cin, edition_s);
+    cout << "Introduza o dono do livro, por favor (NIF):" << endl;
+    getline(cin, owner);
+    edition = stoi(edition_s);
+    owner = stoi(owner_s);
+    code = catalog.books.size();
+    Book b(code,title,author,category,edition);
+    catalog.addBook(b);
+}
+
+void Catalog::removeBook(string title, int balance,int edition){
+    for(unsigned int i=0;i<books.size();i++){
+        if(books[i].getTitle()==title) {
+            if (books[i].getEdition() == edition) {
+                balance += books[i].getValue();
+                books[i].deleteUnit(true);
+            }
+        }
+    }
+}
+
 
 void Club::showMembers(){
     for (unsigned int i = 0; i < members.size(); i++){
-        cout << "Nome: " << members[i].getName() << "/n" << "NIF: "<< members[i].getNIF() << "/n" << "Livros:" << endl;
+        cout << "Nome: " << members[i].getName() << "/n" << "NIF: "<< members[i].getNIF() << '/n' << "Livros:" << endl;
         vector<Book*> books = members[i].getBooks();
         for (unsigned int j = 0; j < books.size(); j++){
             books[j]->showBook();
@@ -148,24 +213,12 @@ void Club::showDelays() {
 void Club::checkDelays(){
     string date1,date2;
     int day1,month1,year1,day2,month2,year2;
-    /*cout << "Por favor, indique a data de hoje (formato DD-MM-YY): ";
-    getline(cin,date2);
-
-    if(date2.size()!=10){
-        cerr<<"Data inválida"<<endl;
-    }
-
-    day2 = stoi(date2.substr(0, 2));
-    month2 = stoi(date2.substr(3, 2));
-    year2 = stoi(date2.substr(6));
-    Date d2={day2,month2,year2};*/
     for (unsigned int i = 0; i < lendings.size(); i++){
         date1=get<1>(lendings[i]);
         day1 = stoi(date1.substr(0, 2));
         month1 = stoi(date1.substr(3, 2));
         year1 = stoi(date1.substr(6));
         Date d1={day1,month1,year1};
-        //if(abs(timePeriod(d1,d2)))
         if(abs(timePeriod(dttoday, d1))>=7){ //Consider lending period is 7 days
             this->delays.push_back(make_tuple(get<0>(lendings[i]),get<1>(lendings[i]),get<2>(lendings[i])));
         }
@@ -199,7 +252,6 @@ bool Club::makeRequest(){
             return false;
         }
 
-        //this->lendings.push_back(make_tuple(code, date, nif)); //We can't lend a book immediately, we need to check if we can do it first
         this->lendRequests.push_back(make_tuple(code,date,nif));
         if(findMember(nif)!=-1) {
             members[findMember(nif)].registerRequest(code, date);
@@ -226,7 +278,6 @@ bool Club::makeRequest(){
             return false;
         }
 
-        //this->lendings.push_back(make_tuple(code, date, nif)); //We can't lend a book immediately, we need to check if we can do it first
         this->lendRequests.push_back(make_tuple(code,date,nif));
         if(findMember(nif)!=-1) {
             members[findMember(nif)].registerRequest(code, date);
@@ -255,14 +306,15 @@ bool Club::makeRequest(){
 }
 
 void Club::saveData(){
-    string membs = "members.txt", lends = "lendings.txt", lendRs = "lendRequests.txt", bks = "books.txt";
+    string membs = "members.txt", lends = "lendings.txt", lendRs = "lendRequests.txt", bks = "books.txt", fileeeee = "delays.txt";
 
     ofstream file(membs, ios::binary);
     ofstream filee(lends, ios::binary);
     ofstream fileee(lendRs, ios::binary);
     ofstream fileeee(bks, ios::binary);
+    ofstream fileeeee(dels, ios::binary);
 
-    stringstream temp1, temp2, temp3,temp4;
+    stringstream temp1, temp2, temp3, temp4, temp5;
 
     for (int i = 0; i < members.size(); i++){
         if (i < members.size() -1) {
@@ -275,13 +327,21 @@ void Club::saveData(){
     file << temp1.str();
 
     for (int i = 0; i < lendings.size(); i++){
-        temp2 << get<0>(lendings[i]) << ", " << get<1>(lendings[i]) << get<2>(lendings[i]) << endl;
+        if (i < members.size() -1) {
+            temp2 << get<0>(lendings[i]) << ", " << get<1>(lendings[i]).showDate() << get<2>(lendings[i]) << endl;  //código do livro, data, membro
+        } else if (i = members.size() - 1){
+            temp2 << get<0>(lendings[i]) << ", " << get<1>(lendings[i]).showDate() << get<2>(lendings[i]) << endl << "END";
+        }
     }
 
     filee << temp2.str();
 
     for (int i = 0; i < lendRequests.size(); i++){
-        temp3 << get<0>(lendRequests[i]) << ", " << get<1>(lendRequests[i]) << get<2>(lendRequests[i]) << endl;
+        if (i < members.size() -1) {
+            temp3 << get<0>(lendRequests[i]) << ", " << get<1>(lendRequests[i]).showDate() << get<2>(lendRequests[i]) << endl;  //código do livro, data, membro
+        } else if (i = members.size() - 1){
+            temp3 << get<0>(lendRequests[i]) << ", " << get<1>(lendRequests[i]).showDate() << get<2>(lendRequests[i]) << endl << "END";
+        }
     }
 
     fileee << temp3.str();
@@ -295,6 +355,16 @@ void Club::saveData(){
     }
 
     fileeee << temp4.str();
+
+    for (int i = 0; i < delays.size(); i++){
+        if (i < members.size() -1) {
+            temp5 << get<0>(delays[i]) << ", " << get<1>(delays[i]) << get<2>(delays[i]) << endl;  //código do livro, data, membro
+        } else if (i = members.size() - 1){
+            temp5 << get<0>(delays[i]) << ", " << get<1>(delays[i]) << get<2>(delays[i]) << endl << "END";
+        }
+    }
+
+    fileeeee << temp5.str();
 }
 
 void Club::retrieveData(){
@@ -302,9 +372,10 @@ void Club::retrieveData(){
     ifstream bks_file; bks_file.open("books.txt");
     ifstream lendRs_file; lendRs_file.open("lendRequests.txt");
     ifstream lends_file; lends_file.open("lendings.txt");
+    ifstream dels_file; dels_file.open("delays.txt");
     string temp;
     char sep = ',';
-    stringstream membs, bks, lendRs, lends;
+    stringstream membs, bks, lendRs, lends, dels;
 
 
     //Getting Books data.

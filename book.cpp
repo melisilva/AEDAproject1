@@ -9,12 +9,18 @@ Book::Book(){
     edition = -1;
 }
 
-Book::Book(int code, string title, string author,string category,int edition){
+Book::Book(int code, string title, string author,string category,int edition, int owner){
     this->code = code;
     this->title = title;
     this->author = author;
     this->category=category;
     this->edition=edition;
+    this->owner = owner;
+    calculateValue();
+}
+
+void Book::setOwner(int owner) {
+    this->owner = owner;
 }
 
 void Book::setState() {

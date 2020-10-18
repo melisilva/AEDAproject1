@@ -31,7 +31,7 @@ bool Club::makeLending() {
     /*
      * Deverá checar se um empréstimo que se quer fazer está já registado como pedido.
      * Se sim, irá adicioná-lo a "lendings" (no Club e no membro respetivo) e tirá-lo de
-     * "lendRequests" (no Club e Membro respetivo).
+     * "lendRequests" (no Club e Membro respetivo), atualizando o estado do livro no catalog.
      * Deverá lançar exceções nos seguintes casos:
      * - o pedido não foi feito (o pedido não está em lendRequests);
      * - o pedido não pode ser feito (por haver um membro que fez um pedido antes de não-Membro);
@@ -100,22 +100,7 @@ void Club::addMember(){
     nif=stoi(nif_s);
     cout << "Adicione um livro, por favor:"<< endl;
     do {
-        cout <<"Introduza o seu título, por favor:"<< endl;
-        getline(cin, title);
-        cout << "Introduza o nome do seu escritor(a), por favor:" << endl;
-        getline(cin, author);
-        cout<<"Introduza a sua categoria, por favor:"<<endl;
-        getline(cin,category);
-        cout << "Introduza a sua edição, por favor:" << endl;
-        getline(cin, edition_s);
-        edition = stoi(edition_s);
-
-        //Adding the book.
-        code = catalog.books.size();
-        Book b(code,title,author,category,edition);
-        catalog.books.push_back(b);
-
-        //Repeating.
+        addBook();
         cout << "Quer adicionar outro livro?"<<endl;
         getline(cin,answer);
     } while((answer=="S") || (answer=="Sim") || (answer=="sim") || (answer=="s"));
@@ -265,11 +250,40 @@ bool Club::makeRequest(){
     //Check if book with name introduced exists
     if(name != ""){
         if(catalog.searchBook(name)== -1){
-            cerr << "Não há nenhum livro com esse título!" << endl;
+            cerr << "Não há nenhum livro com esse título!" << endl; //EXCEÇÃO
             return false;
         }
 
+        vector<Book> possibleBooks;
+        vector<int> possibleCodes;
+        for (int i = 0; i < catalog.books.size(); i++){
+            if ((catalog.books[i].title == name) && (catalog.books[i].state == true)){
+                possibleBooks.push_back(catalog.books[i]);
+                possibleCodes.push_back(catalog.books[i].getCode());
+            }
+        }
+
+        cout << "Estas são as edições dos livros que pode escolher: " << endl;
+        for (int i = 0; i < possibleBooks.size(); i++){
+            possibleBooks[i].showBook();
+        }
+
+        do {
+            cout << "Indique o código do livro que prefere requisitar: " << endl;
+            getline(cin, code_str);
+            code = stoi(code_str);
+
+            for (int i = 0; i < possibleCodes.size(); i++){
+                if (code == possibleCodes[i]){
+                    break;
+                } else {
+                    continue;
+                }
+            }
+        } while (true);
+
         this->lendRequests.push_back(make_tuple(code,date,nif));
+
         if(findMember(nif)!=-1) {
             members[findMember(nif)].registerRequest(code, date);
         }

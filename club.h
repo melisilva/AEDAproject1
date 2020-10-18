@@ -20,21 +20,21 @@ public:
     void beginningInfo();
     void addMember(); //done
     void removeMember(int nif); //done
-    void addBook();
-    void removeBook(string title,string owner,int edition);
+    void addBook(); //done
+    void removeBook(string title,string owner,int edition); 
     bool makeRequest(); //done
     bool makeLending();
     bool returnLending();
     int findMember(int nif); //done
     void chargeDelay(int nif, Book book,int delayp); //done
     void chargeFee(int nif,Book book); //done
-    int calculateDelay();
+    int calculateDelay(); //done
     void showMembers(); //done
     void showBookWaitlist(int code);
     void checkDelays();
-    void retrieveData();
+    void retrieveData(); //done
     int isMember(int nif); //done
-    int isnonMem(int nif);
+    int isnonMem(int nif); 
     void showLendings(); //done
     void showDelays(); //done
     void showLendRequests(); //done

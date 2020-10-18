@@ -1,6 +1,7 @@
 #ifndef AEDAPROJECT1_CLUB_H
 #define AEDAPROJECT1_CLUB_H
 #include "catalog.h"
+#include "date.h"
 #include <fstream>
 #include "people.h"
 #include <vector>
@@ -11,6 +12,7 @@ private:
     vector<nonMem> nonmembers;
     vector<tuple<int, Date, int>> lendings, delays, lendRequests;
     Catalog catalog;
+    Date today;
 public:
     Club(); //done
     void run();

@@ -1,6 +1,5 @@
 #include <fstream>
 #include "people.h"
-#include "date.h"
 using namespace std;
 
 Member::Member(){
@@ -56,12 +55,12 @@ int Member::findBook(string title) const{
     return -1;
 }
 
-bool Member::registerRequest(int code, struct Date date){
+bool Member::registerRequest(int code, Date date){
     lendRequest.push_back(make_pair(code, date));
     return true;
 }
 
-bool nonMem::registerRequest(int code, struct Date date){
+bool nonMem::registerRequest(int code, Date date){
     lendRequest.push_back(make_pair(code, date));
     return true;
 }
@@ -144,8 +143,9 @@ void Member::renovateLending() { //include check if it's last unit in club or wh
     cout << "Por favor, indique a ordem do empréstimo: ";
     getline(cin,str_temp);
     temp=stoi(str_temp);
-    struct Date dt1=lendings[temp - 1].second;
-    if(abs(timePeriod(dttoday, dt1))<=3){
-        extendTime(dt1);
+    Date dt1=lendings[temp - 1].second;
+    Date dt2;
+    if(abs(dt1.timePeriod(dt2))<=3){
+        dt1.extendTime();
     }
 }

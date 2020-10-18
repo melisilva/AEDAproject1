@@ -1,5 +1,4 @@
 #include "club.h"
-#include "date.h"
 
 Club::Club() {
     vector<Member> temp;
@@ -96,7 +95,7 @@ void Club::chargeFee(int nif, Book book){
 int Club::calculateDelay(){
     int delayp;
     for (unsigned int i = 0; i < delays.size(); i++){
-        delayp=abs(timePeriod(dttoday,get<1>(delays[i])));
+        delayp=abs(today.timePeriod(get<1>(delays[i])));
     }
     return delayp;
 }
@@ -202,19 +201,19 @@ void Club::showMembers(){
 
 void Club::showLendRequests() {
     for (unsigned int i = 0; i < lendRequests.size(); i++){
-        cout << get<0>(lendRequests[i]) << ", a " << getDateStr(get<1>(lendRequests[i])) << " pelo " << get<2>(lendRequests[i]) << endl;
+        cout << get<0>(lendRequests[i]) << ", a " << get<1>(lendRequests[i]).getDateStr()<< " pelo " << get<2>(lendRequests[i]) << endl;
     }
 }
 
 void Club::showLendings() {
     for (unsigned int i = 0; i < lendings.size(); i++){
-        cout << get<0>(lendings[i]) << ", a " << getDateStr(get<1>(lendings[i])) << " pelo " << get<2>(lendings[i]) << endl;
+        cout << get<0>(lendings[i]) << ", a " << get<1>(lendings[i]).getDateStr() << " pelo " << get<2>(lendings[i]) << endl;
     }
 }
 
 void Club::showDelays() {
     for (unsigned int i = 0; i < delays.size(); i++){
-        cout << get<0>(delays[i]) << ", desde " << getDateStr(get<1>(delays[i])) << " pelo " << get<2>(delays[i]) << endl;
+        cout << get<0>(delays[i]) << ", desde " << get<1>(delays[i]).getDateStr() << " pelo " << get<2>(delays[i]) << endl;
     }
 }
 
@@ -222,7 +221,7 @@ void Club::checkDelays(){
     string date1;
     int day1,month1,year1;
     for (unsigned int i = 0; i < lendings.size(); i++){
-        if(abs(timePeriod(dttoday, get<1>(lendings[i])))>=10){ //Consider lending period is 10 days
+        if(abs(today.timePeriod(get<1>(lendings[i])))>=10){ //Consider lending period is 10 days
             this->delays.push_back(make_tuple(get<0>(lendings[i]),get<1>(lendings[i]),get<2>(lendings[i])));
         }
     }
@@ -252,9 +251,9 @@ bool Club::makeRequest(){
             return false;
         }
 
-        this->lendRequests.push_back(make_tuple(code,dttoday,nif));
+        this->lendRequests.push_back(make_tuple(code,today,nif));
         if(findMember(nif)!=-1) {
-            members[findMember(nif)].registerRequest(code, dttoday);
+            members[findMember(nif)].registerRequest(code, today);
         }
         else{ //it's not a member than it's a nonMem
             string namem,nif_s;
@@ -266,7 +265,7 @@ bool Club::makeRequest(){
             nif=stoi(nif_s);
             nonMem m(namem,nif);
             nonmembers.push_back(m);
-            m.registerRequest(code, dttoday);
+            m.registerRequest(code, today);
         }
         return true;
     }
@@ -306,10 +305,10 @@ bool Club::makeRequest(){
             }
         } while (true);
 
-        this->lendRequests.push_back(make_tuple(code,dttoday,nif));
+        this->lendRequests.push_back(make_tuple(code,today,nif));
 
         if(findMember(nif)!=-1) {
-            members[findMember(nif)].registerRequest(code, dttoday);
+            members[findMember(nif)].registerRequest(code, today);
         }
         else{ //it's not a member than it's a nonMem
             string namem,nif_s;
@@ -321,7 +320,7 @@ bool Club::makeRequest(){
             nif=stoi(nif_s);
             nonMem m(namem,nif);
             nonmembers.push_back(m);
-            m.registerRequest(code, dttoday);
+            m.registerRequest(code, today);
         }
         return true;
     }
@@ -357,9 +356,9 @@ void Club::saveData(){
 
     for (int i = 0; i < lendings.size(); i++){
         if (i < members.size() -1) {
-            temp2 << get<0>(lendings[i]) << ", " << getDateStr(get<1>(lendings[i])) << get<2>(lendings[i]) << endl;  //código do livro, data, membro
+            temp2 << get<0>(lendings[i]) << ", " << get<1>(lendings[i]).getDateStr() << get<2>(lendings[i]) << endl;  //código do livro, data, membro
         } else if (i = members.size() - 1){
-            temp2 << get<0>(lendings[i]) << ", " << getDateStr(get<1>(lendings[i])) << get<2>(lendings[i]) << endl << "END";
+            temp2 << get<0>(lendings[i]) << ", " << get<1>(lendings[i]).getDateStr() << get<2>(lendings[i]) << endl << "END";
         }
     }
 
@@ -367,9 +366,9 @@ void Club::saveData(){
 
     for (int i = 0; i < lendRequests.size(); i++){
         if (i < members.size() -1) {
-            temp3 << get<0>(lendRequests[i]) << ", " << getDateStr(get<1>(lendRequests[i])) << get<2>(lendRequests[i]) << endl;  //código do livro, data, membro
+            temp3 << get<0>(lendRequests[i]) << ", " << get<1>(lendRequests[i]).getDateStr() << get<2>(lendRequests[i]) << endl;  //código do livro, data, membro
         } else if (i = members.size() - 1){
-            temp3 << get<0>(lendRequests[i]) << ", " << getDateStr(get<1>(lendRequests[i])) << get<2>(lendRequests[i]) << endl << "END";
+            temp3 << get<0>(lendRequests[i]) << ", " << get<1>(lendRequests[i]).getDateStr() << get<2>(lendRequests[i]) << endl << "END";
         }
     }
 
@@ -387,9 +386,9 @@ void Club::saveData(){
 
     for (int i = 0; i < delays.size(); i++){
         if (i < members.size() -1) {
-            temp5 << get<0>(delays[i]) << ", " << getDateStr(get<1>(delays[i])) << get<2>(delays[i]) << endl;  //código do livro, data, membro
+            temp5 << get<0>(delays[i]) << ", " << get<1>(delays[i]).getDateStr() << get<2>(delays[i]) << endl;  //código do livro, data, membro
         } else if (i = members.size() - 1){
-            temp5 << get<0>(delays[i]) << ", " << getDateStr(get<1>(delays[i])) << get<2>(delays[i]) << endl << "END";
+            temp5 << get<0>(delays[i]) << ", " << get<1>(delays[i]).getDateStr() << get<2>(delays[i]) << endl << "END";
         }
     }
 
@@ -520,6 +519,3 @@ void Club::retrieveData(){
         membs.clear();
     }
 }
-
-
-

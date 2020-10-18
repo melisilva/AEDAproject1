@@ -130,7 +130,7 @@ string Member::getData() {
 
     stringstream temp;
 
-    temp << name << "," << nif << endl;
+    temp << name << endl << nif << endl;
     for (int i = 0; i < books.size(); i++){
         if (i < books.size() - 1 ) {
             temp << (*books[i]).getCode() << "," << endl;

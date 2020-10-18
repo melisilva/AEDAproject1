@@ -347,7 +347,7 @@ void Club::saveData(){
 
     for (int i = 0; i < members.size(); i++){
         if (i < members.size() -1) {
-            temp1 << members[i].getData() << endl << endl << "NEW" << endl;
+            temp1 << members[i].getData() << endl << endl << endl;
         } else if (i = members.size() - 1){
             temp1 << members[i].getData() << endl << endl << "END";
         }
@@ -356,8 +356,8 @@ void Club::saveData(){
     file << temp1.str();
 
     for (int i = 0; i < lendings.size(); i++){
-        if (i < members.size() -1) {
-            temp2 << get<0>(lendings[i]) << endl << get<1>(lendings[i]).getDateStr() << endl << get<2>(lendings[i]) << endl << endl << "NEW" << endl;  //código do livro, data, membro
+        if (i < lendings.size() -1) {
+            temp2 << get<0>(lendings[i]) << endl << get<1>(lendings[i]).getDateStr() << endl << get<2>(lendings[i]) << endl << endl  << endl;  //código do livro, data, membro
         } else if (i = members.size() - 1){
             temp2 << get<0>(lendings[i]) << endl << get<1>(lendings[i]).getDateStr() << endl << get<2>(lendings[i]) << endl << endl << "END";
         }
@@ -366,8 +366,8 @@ void Club::saveData(){
     filee << temp2.str();
 
     for (int i = 0; i < lendRequests.size(); i++){
-        if (i < members.size() -1) {
-            temp3 << get<0>(lendRequests[i]) << endl << get<1>(lendRequests[i]).getDateStr() << endl << get<2>(lendRequests[i]) << endl << endl << "NEW" << endl;  //código do livro, data, membro
+        if (i < lendRequests.size() -1) {
+            temp3 << get<0>(lendRequests[i]) << endl << get<1>(lendRequests[i]).getDateStr() << endl << get<2>(lendRequests[i]) << endl << endl  << endl;  //código do livro, data, membro
         } else if (i = members.size() - 1){
             temp3 << get<0>(lendRequests[i]) << endl << get<1>(lendRequests[i]).getDateStr() << endl << get<2>(lendRequests[i]) << endl << endl << "END";
         }
@@ -377,7 +377,7 @@ void Club::saveData(){
 
     for (int i = 0; i < catalog.books.size(); i++){
         if (i < catalog.books.size() -1) {
-            temp4 << catalog.books[i].getData() << endl << endl << "NEW" << endl;
+            temp4 << catalog.books[i].getData() << endl << endl  << endl;
         } else if (i = members.size() - 1){
             temp4 << catalog.books[i].getData() << endl << endl << "END";
         }
@@ -387,7 +387,7 @@ void Club::saveData(){
 
     for (int i = 0; i < delays.size(); i++){
         if (i < members.size() -1) {
-            temp5 << get<0>(delays[i]) << endl << get<1>(delays[i]).getDateStr() << endl << get<2>(delays[i]) << endl << endl << "NEW" << endl;  //código do livro, data, membro
+            temp5 << get<0>(delays[i]) << endl << get<1>(delays[i]).getDateStr() << endl << get<2>(delays[i]) << endl << endl  << endl;  //código do livro, data, membro
         } else if (i = members.size() - 1){
             temp5 << get<0>(delays[i]) << endl << get<1>(delays[i]).getDateStr() << endl << get<2>(delays[i]) << endl << endl << "END";
         }
@@ -598,7 +598,7 @@ void Club::retrieveData(){
         dels.clear();
         dels << temp;
         dels >> nif;
-        lendings.push_back(make_tuple(code, tmp3.getDate(date), nif));
+        delays.push_back(make_tuple(code, tmp3.getDate(date), nif));
         getline(dels_file, temp);
         dels.str("");
         dels.clear();
@@ -607,11 +607,17 @@ void Club::retrieveData(){
         dels.clear();
     }    
 
-    /*remove("members.txt");
-    remove("delays.txt");
-    remove("books.txt");
-    remove("lendRequests.txt");
-    remove("lendings.txt");*/
-
+    //This cleans the files.
+    bks_file.close();
+    bks_file.open("books.txt", std::ofstream::out | std::ofstream::trunc);
+    memb_file.close();
+    memb_file.open("members.txt", std::ofstream::out | std::ofstream::trunc);
+    dels_file.close();
+    dels_file.open("delays.txt", std::ofstream::out | std::ofstream::trunc);
+    lends_file.close();
+    lends_file.open("lendings.txt", std::ofstream::out | std::ofstream::trunc);
+    lendRs_file.close();
+    lendRs_file.open("lendRequests.txt", std::ofstream::out | std::ofstream::trunc);
+    
     cout << "Files successfully removed!";
 }

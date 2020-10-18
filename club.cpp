@@ -1,4 +1,5 @@
 #include "club.h"
+using namespace std;
 
 Club::Club() {
     vector<Member> temp;
@@ -346,9 +347,9 @@ void Club::saveData(){
 
     for (int i = 0; i < members.size(); i++){
         if (i < members.size() -1) {
-            temp1 << members[i].getData() << endl << endl;
+            temp1 << members[i].getData() << endl << endl << "NEW" << endl;
         } else if (i = members.size() - 1){
-            temp1 << members[i].getData() << endl << "END";
+            temp1 << members[i].getData() << endl << endl << "END";
         }
     }
 
@@ -356,9 +357,9 @@ void Club::saveData(){
 
     for (int i = 0; i < lendings.size(); i++){
         if (i < members.size() -1) {
-            temp2 << get<0>(lendings[i]) << ", " << get<1>(lendings[i]).getDateStr() << get<2>(lendings[i]) << endl;  //código do livro, data, membro
+            temp2 << get<0>(lendings[i]) << endl << get<1>(lendings[i]).getDateStr() << endl << get<2>(lendings[i]) << endl << endl << "NEW" << endl;  //código do livro, data, membro
         } else if (i = members.size() - 1){
-            temp2 << get<0>(lendings[i]) << ", " << get<1>(lendings[i]).getDateStr() << get<2>(lendings[i]) << endl << "END";
+            temp2 << get<0>(lendings[i]) << endl << get<1>(lendings[i]).getDateStr() << endl << get<2>(lendings[i]) << endl << endl << "END";
         }
     }
 
@@ -366,9 +367,9 @@ void Club::saveData(){
 
     for (int i = 0; i < lendRequests.size(); i++){
         if (i < members.size() -1) {
-            temp3 << get<0>(lendRequests[i]) << ", " << get<1>(lendRequests[i]).getDateStr() << get<2>(lendRequests[i]) << endl;  //código do livro, data, membro
+            temp3 << get<0>(lendRequests[i]) << endl << get<1>(lendRequests[i]).getDateStr() << endl << get<2>(lendRequests[i]) << endl << endl << "NEW" << endl;  //código do livro, data, membro
         } else if (i = members.size() - 1){
-            temp3 << get<0>(lendRequests[i]) << ", " << get<1>(lendRequests[i]).getDateStr() << get<2>(lendRequests[i]) << endl << "END";
+            temp3 << get<0>(lendRequests[i]) << endl << get<1>(lendRequests[i]).getDateStr() << endl << get<2>(lendRequests[i]) << endl << endl << "END";
         }
     }
 
@@ -376,9 +377,9 @@ void Club::saveData(){
 
     for (int i = 0; i < catalog.books.size(); i++){
         if (i < catalog.books.size() -1) {
-            temp4 << catalog.books[i].getData() << endl << endl;
+            temp4 << catalog.books[i].getData() << endl << endl << "NEW" << endl;
         } else if (i = members.size() - 1){
-            temp4 << catalog.books[i].getData() << endl << "END";
+            temp4 << catalog.books[i].getData() << endl << endl << "END";
         }
     }
 
@@ -386,9 +387,9 @@ void Club::saveData(){
 
     for (int i = 0; i < delays.size(); i++){
         if (i < members.size() -1) {
-            temp5 << get<0>(delays[i]) << ", " << get<1>(delays[i]).getDateStr() << get<2>(delays[i]) << endl;  //código do livro, data, membro
+            temp5 << get<0>(delays[i]) << endl << get<1>(delays[i]).getDateStr() << endl << get<2>(delays[i]) << endl << endl << "NEW" << endl;  //código do livro, data, membro
         } else if (i = members.size() - 1){
-            temp5 << get<0>(delays[i]) << ", " << get<1>(delays[i]).getDateStr() << get<2>(delays[i]) << endl << "END";
+            temp5 << get<0>(delays[i]) << endl << get<1>(delays[i]).getDateStr() << endl << get<2>(delays[i]) << endl << endl << "END";
         }
     }
 
@@ -501,11 +502,11 @@ void Club::retrieveData(){
         membs.clear();
         membs << temp;
         membs >> nif;
-        getline(memb_file, temp);
-        membs.str("");
-        membs.clear();
-        membs << temp;
         do {
+            getline(memb_file, temp);
+            membs.str("");
+            membs.clear();
+            membs << temp;
             membs >> code >> sep;
             int ind = catalog.searchBook(code);
             memb_bks.push_back(&catalog.books[ind]);
@@ -523,38 +524,94 @@ void Club::retrieveData(){
     temp = "";
     string date;
     Date tmp;
-    do {
+    while (temp != "END") {
         getline(lendRs_file, temp);
-
-        if (temp == "END"){
-            break;
-        }
-
         lendRs.str("");
         lendRs.clear();
         lendRs << temp;
-        lendRs >> code >> sep >> date >> sep >> nif;
+        lendRs >> code;
+        getline(lendRs_file, temp);
+        lendRs.str("");
+        lendRs.clear();
+        lendRs << temp;
+        lendRs >> date;
+        getline(lendRs_file, temp);
+        lendRs.str("");
+        lendRs.clear();
+        lendRs << temp;
+        lendRs >> nif;
         lendRequests.push_back(make_tuple(code, tmp.getDate(date), nif));
         members[findMember(nif)].registerRequest(code, tmp.getDate(date));
-    } while (true);
+        getline(lendRs_file, temp);
+        lendRs.str("");
+        lendRs.clear();
+        getline(lendRs_file, temp);
+        lendRs.str("");
+        lendRs.clear();
+    }
 
     //Getting lendings data.
     temp = "";
     Date tmp2;
-    do {
+    while (temp != "END") {
         getline(lends_file, temp);
-
-        if (temp == "END"){
-            break;
-        }
-
         lends.str("");
         lends.clear();
         lends << temp;
-        lends >> code >> sep >> date >> sep >> nif;
-        lendings.push_back(make_tuple(code, tmp2.getDate(date), nif));
-        members[findMember(nif)].registerLending(code, tmp2.getDate(date));
-    } while (true);
+        lends >> code;
+        getline(lends_file, temp);
+        lends.str("");
+        lends.clear();
+        lends << temp;
+        lends >> date;
+        getline(lends_file, temp);
+        lends.str("");
+        lends.clear();
+        lends << temp;
+        lends >> nif;
+        lendings.push_back(make_tuple(code, tmp.getDate(date), nif));
+        members[findMember(nif)].registerLending(code, tmp.getDate(date));
+        getline(lends_file, temp);
+        lends.str("");
+        lends.clear();
+        getline(lends_file, temp);
+        lends.str("");
+        lends.clear();
+    }
 
+    //Getting delays data.
+    temp = "";
+    Date tmp3;
+    while (temp != "END") {
+        getline(dels_file, temp);
+        dels.str("");
+        dels.clear();
+        dels << temp;
+        dels >> code;
+        getline(dels_file, temp);
+        dels.str("");
+        dels.clear();
+        dels << temp;
+        dels >> date;
+        getline(dels_file, temp);
+        dels.str("");
+        dels.clear();
+        dels << temp;
+        dels >> nif;
+        lendings.push_back(make_tuple(code, tmp3.getDate(date), nif));
+        getline(dels_file, temp);
+        dels.str("");
+        dels.clear();
+        getline(dels_file, temp);
+        dels.str("");
+        dels.clear();
+    }    
 
+    /*remove("members.txt");
+    remove("delays.txt");
+    remove("books.txt");
+    remove("lendRequests.txt");
+    remove("lendings.txt");*/
+
+    cout << "Files successfully removed!";
 }

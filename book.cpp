@@ -153,7 +153,7 @@ void Book::showBook(){
 string Book::getData(){
     stringstream temp;
 
-    temp << getCode() << endl << getTitle() << endl << getAuthor() << endl << getOwner() << endl << getEdition() << endl << getCategory() << endl << getValue() << endl << getRating() << endl << getUnits() << endl << opinions << endl << sumRating << endl << getState();
+    temp << getCode() << endl << getTitle() << endl << getAuthor() << endl << getEdition() << endl << getOwner() << endl << getCategory() << endl << getValue() << endl << getRating() << endl << getUnits() << endl << opinions << endl << sumRating << endl << getState();
 
     return temp.str();
 }

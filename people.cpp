@@ -133,13 +133,11 @@ string Member::getData() {
     temp << name << "," << nif << endl;
     for (int i = 0; i < books.size(); i++){
         if (i < books.size() - 1 ) {
-            temp << (*books[i]).getCode() << ",";
+            temp << (*books[i]).getCode() << "," << endl;
         } else if (i == books.size() - 1){
             temp << (*books[i]).getCode() << ";";
         }
     }
-
-    temp << endl;
     return temp.str();
 }
 

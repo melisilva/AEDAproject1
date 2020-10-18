@@ -4,5 +4,5 @@ using namespace std;
 
 int main() {
     Club a;
-    a.run();
+    a.retrieveData();
 }

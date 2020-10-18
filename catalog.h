@@ -19,6 +19,7 @@ public:
     void receiveBook(int code, int nif);
     void registerRating(int code); //done
     void registerComments(int code);
+    void updateCodes(); //done
     int searchBook(int code); //done
     int searchBook(string name); //done
     int convertNameToCode(string name); //done

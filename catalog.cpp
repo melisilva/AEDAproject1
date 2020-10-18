@@ -9,6 +9,12 @@ Catalog::Catalog(vector<Book> books){
     this->books = books;
 }
 
+void Catalog::updateCodes(){
+    for (int i = 0; i < books.size(); i++){
+        books[i].setCode(i);
+    }
+}
+
 void Catalog::showRating(int code){
     for(unsigned int i=0;i<books.size();i++){
         if(books[i].getCode()==code){

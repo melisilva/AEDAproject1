@@ -169,6 +169,8 @@ void Club::removeMember(int nif){
             catalog.books.erase(catalog.books.begin() + (toDelv[j]-j));
         }
     }
+
+    catalog.updateCodes();
 }
 
 void Club::removeBook(string title,string owner,int edition){

@@ -1,5 +1,6 @@
 #include <fstream>
 #include "people.h"
+#include "date.h"
 using namespace std;
 
 Member::Member(){
@@ -29,6 +30,14 @@ float Member::getBalance() const {
     return balance;
 }
 
+void Member::addBalance(int quantity){
+    balance+=quantity;
+}
+
+void Member::minusBalance(int quantity){
+    balance-=quantity;
+}
+
 string Member::getName() const {
     return name;
 }
@@ -47,12 +56,12 @@ int Member::findBook(string title) const{
     return -1;
 }
 
-bool Member::registerRequest(int code, Date date){
+bool Member::registerRequest(int code, struct Date date){
     lendRequest.push_back(make_pair(code, date));
     return true;
 }
 
-bool nonMem::registerRequest(int code, Date date){
+bool nonMem::registerRequest(int code, struct Date date){
     lendRequest.push_back(make_pair(code, date));
     return true;
 }
@@ -127,8 +136,7 @@ string Member::getData() {
 
 void Member::renovateLending() { //include check if it's last unit in club or where we call this
     int temp;
-    string date1,str_temp;
-    int month1,year1,day1;
+    string str_temp;
 
     //Informamos o utilizador dos empréstimos em vigor.
     showLendings();
@@ -136,10 +144,8 @@ void Member::renovateLending() { //include check if it's last unit in club or wh
     cout << "Por favor, indique a ordem do empréstimo: ";
     getline(cin,str_temp);
     temp=stoi(str_temp);
-    lendings[temp - 1].second = getDate(date1);
-    struct Date dt1=getDate(date1);
+    struct Date dt1=lendings[temp - 1].second;
     if(abs(timePeriod(dttoday, dt1))<=3){
         extendTime(dt1);
     }
 }
-

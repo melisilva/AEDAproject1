@@ -11,7 +11,6 @@ public:
     Catalog(); //done
     Catalog(vector<Book> books); //done
     void addBook(Book book); //done
-    void removeBook(string title, int balance,int edition); //done
     Book getBook(int code, string name); //done
     void showBooks(); //done
     void showRating(int code); //done

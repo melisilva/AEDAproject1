@@ -18,19 +18,20 @@ public:
     void addMember(); //done
     void removeMember(int nif); //done
     void addBook();
-    void removeBook();
+    void removeBook(string title,string owner,int edition);
     bool makeRequest(); //done
     bool makeLending();
     bool returnLending();
     int findMember(int nif); //done
-    void chargeDelay(int nif, int balance, Book book,int delayp); //done
-    void chargeFee(int nif, int balance,Book book); //done
+    void chargeDelay(int nif, Book book,int delayp); //done
+    void chargeFee(int nif,Book book); //done
     int calculateDelay();
     void showMembers(); //done
     void showBookWaitlist(int code);
     void checkDelays();
     void retrieveData();
-    bool isMember(int nif); //done
+    int isMember(int nif); //done
+    int isnonMem(int nif);
     void showLendings(); //done
     void showDelays(); //done
     void showLendRequests(); //done

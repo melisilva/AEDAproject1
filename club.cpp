@@ -1,4 +1,5 @@
 #include "club.h"
+#include "date.h"
 
 Club::Club() {
     vector<Member> temp;
@@ -51,43 +52,74 @@ bool Club::returnLending() {
     return true;
 }
 
-bool Club::isMember(int nif){
+int Club::isMember(int nif){ //returns member index or -1 if it doesn't exist
     for(unsigned int i = 0; i < members.size(); i++) {
         if (members[i].getNIF() == nif) {
-            return true;
+            return i;
         }
     }
-    return false;
+    return -1;
 }
 
-void Club::chargeDelay(int nif, int balance,Book book,int delayp){
+int Club::isnonMem(int nif){ //returns member index or -1 if it doesn't exist
+    for(unsigned int i = 0; i < nonmembers.size(); i++) {
+        if (nonmembers[i].getNIF() == nif) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+void Club::chargeDelay(int nif,Book book,int delayp){
     float fine = book.getValue()*0.10;
 
     fine = fine*delayp;
 
-    if(isMember(nif)){
-        balance -= fine;
+    int index=isMember(nif);
+
+    if(isMember(nif)!=-1){
+        members[index].minusBalance(fine);
     }
     else{
-        balance -= (fine * 2);
+        nonmembers[isnonMem(nif)].minusBalance(fine*2);
     }
 }
 
-void Club::chargeFee(int nif, int balance,Book book){
+void Club::chargeFee(int nif, Book book){
     float fee = book.getValue()*0.05;
-    if(!isMember(nif)){
-        balance -= fee;
+    int index=isnonMem(nif);
+    if(isnonMem(nif)!=-1){
+        nonmembers[index].minusBalance(fee);
     }
 }
 
 int Club::calculateDelay(){
     int delayp;
-    string date1;
-    int day1,month1,year1;
     for (unsigned int i = 0; i < delays.size(); i++){
         delayp=abs(timePeriod(dttoday,get<1>(delays[i])));
     }
     return delayp;
+}
+
+void Club::addBook(){
+    string title, author, category, edition_s, owner_s;
+    int edition, owner, code;
+
+    cout <<"Introduza o seu título, por favor:"<< endl;
+    getline(cin, title);
+    cout << "Introduza o nome do seu escritor(a), por favor:" << endl;
+    getline(cin, author);
+    cout<<"Introduza a sua categoria, por favor:"<<endl;
+    getline(cin,category);
+    cout << "Introduza a sua edição, por favor:" << endl;
+    getline(cin, edition_s);
+    cout << "Introduza o dono do livro, por favor (NIF):" << endl;
+    getline(cin, owner_s);
+    edition = stoi(edition_s);
+    owner = stoi(owner_s);
+    code = catalog.books.size();
+    Book b(code,title,author,category,edition, owner);
+    catalog.addBook(b);
 }
 
 void Club::addMember(){
@@ -120,52 +152,47 @@ int Club::findMember(int nif){
 
 void Club::removeMember(int nif){
     unsigned toDel = findMember(nif);
+    vector <unsigned int> toDelv;
     members.erase(members.begin()+toDel);
 
     //Remover todos os livros do membro!
-    for (int i = 0; i < catalog.books.size(); i++){
+    for (unsigned int i = 0; i < catalog.books.size(); i++){
         if (catalog.books[i].getOwner() == nif) {
-            catalog.books.erase(catalog.books.begin() + i);
+            toDelv.push_back(i);
+        }
+    }
+    for(unsigned int j=0;j<toDelv.size();j++){
+        if(j==0){
+            catalog.books.erase(catalog.books.begin() + toDelv[j]);
+        }
+        else{
+            catalog.books.erase(catalog.books.begin() + (toDelv[j]-j));
         }
     }
 }
 
-void Club::addBook(){
-    string title, author, category, edition_s, owner_s;
-    int edition, owner, code;
-
-    cout <<"Introduza o seu título, por favor:"<< endl;
-    getline(cin, title);
-    cout << "Introduza o nome do seu escritor(a), por favor:" << endl;
-    getline(cin, author);
-    cout<<"Introduza a sua categoria, por favor:"<<endl;
-    getline(cin,category);
-    cout << "Introduza a sua edição, por favor:" << endl;
-    getline(cin, edition_s);
-    cout << "Introduza o dono do livro, por favor (NIF):" << endl;
-    getline(cin, owner_s);
-    edition = stoi(edition_s);
-    owner = stoi(owner_s);
-    code = catalog.books.size();
-    Book b(code,title,author,category,edition, owner);
-    catalog.addBook(b);
-}
-
-void Catalog::removeBook(string title, int balance,int edition){
-    for(unsigned int i=0;i<books.size();i++){
-        if(books[i].getTitle()==title) {
-            if (books[i].getEdition() == edition) {
-                balance += books[i].getValue();
-                books[i].deleteUnit(true);
+void Club::removeBook(string title,string owner,int edition){
+    string memName;
+    int value;
+    for(unsigned int i=0;i<catalog.books.size();i++){
+        if(catalog.books[i].getTitle()==title) {
+            if (catalog.books[i].getEdition() == edition) {
+                memName=catalog.books[i].getOwner();
+                value=catalog.books[i].getValue();
+                catalog.books[i].deleteUnit(true);
             }
         }
     }
+    for(unsigned int i=0;i<members.size();i++){
+        if(members[i].getName()==memName){
+            members[i].addBalance(value);
+        }
+    }
 }
-
 
 void Club::showMembers(){
     for (unsigned int i = 0; i < members.size(); i++){
-        cout << "Nome: " << members[i].getName() << "/n" << "NIF: "<< members[i].getNIF() << endl << "Livros:" << endl;
+        cout << "Nome: " << members[i].getName() << "/n" << "NIF: "<< members[i].getNIF() << "/n" << "Livros:" << endl;
         vector<Book*> books = members[i].getBooks();
         for (unsigned int j = 0; j < books.size(); j++){
             books[j]->showBook();
@@ -195,8 +222,7 @@ void Club::checkDelays(){
     string date1;
     int day1,month1,year1;
     for (unsigned int i = 0; i < lendings.size(); i++){
-        date1=getDateStr(get<1>(lendings[i]));
-        if(abs(timePeriod(dttoday, getDate(date1)))>=10){ //Consider lending period is 10 days
+        if(abs(timePeriod(dttoday, get<1>(lendings[i])))>=10){ //Consider lending period is 10 days
             this->delays.push_back(make_tuple(get<0>(lendings[i]),get<1>(lendings[i]),get<2>(lendings[i])));
         }
     }
@@ -494,5 +520,6 @@ void Club::retrieveData(){
         membs.clear();
     }
 }
+
 
 

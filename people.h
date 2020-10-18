@@ -23,7 +23,7 @@ public:
     Member(); //done
     Member(string &name, int &nif, vector<Book*> &books); //done
     int findBook(string title)const; //done
-    virtual bool registerRequest(int code, Date date); //done
+    virtual bool registerRequest(int code, struct Date date); //done
     bool showLendRequests() const; //done
     void showData() const; //done
     string getData(); //done
@@ -35,14 +35,16 @@ public:
     string getName() const; //done
     vector<Book*> getBooks() const; //done
     float getBalance() const; //done
+    void addBalance(int quantity);
+    void minusBalance(int quantity);
 };
 
 class nonMem : public Member {
 private:
-    vector<pair<int, Date>> lendRequest;
+    vector<pair<int,struct Date>> lendRequest;
 public:
     nonMem(string &name, int &nif);
-    bool registerRequest(int code, Date date);
+    bool registerRequest(int code, struct Date date);
     bool showLendRequests()const;
 };
 

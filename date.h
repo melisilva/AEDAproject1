@@ -20,7 +20,7 @@ int mdays[12] = { 31, 28, 31, 30, 31, 30,
                   31, 31, 30, 31, 30, 31 };
 
 void showDate(){
-    cout<<dttoday.day<<"/"<<dttoday.month<<"/"<<dttoday.year<<endl;
+    cout<<dttoday.day<<"/"<<dttoday.month<<"/"<<dttoday.year;
 }
 
 string getDateStr(struct Date dt1){
@@ -141,6 +141,7 @@ string extendTime(Date dt1) {
     dt1.month = i+1;
     return getDateStr(dt1);
 }
+
 
 
 #endif //AEDAPROJECT1_DATE_H

@@ -21,6 +21,15 @@ nonMem::nonMem(string &name, int &nif) : Member() {
     this->balance = 50;
 }
 
+void Member::setName(string name){
+    this->name = name;
+}
+
+void Member::setNif(int nif){
+    this->nif = nif;
+}
+
+
 int Member::getNIF() const {
     return nif;
 }
@@ -45,9 +54,9 @@ vector<Book*> Member::getBooks() const {
     return books;
 }
 
-int Member::findBook(string title) const{
+int Member::findBook(int code) const{
     for (int i = 0; i < books.size(); i++){
-        if (name == (*books[i]).getTitle()){
+        if (code == (*books[i]).getCode()){
             return i;
         }
         continue;
@@ -55,15 +64,23 @@ int Member::findBook(string title) const{
     return -1;
 }
 
+void Member::removeBook(int index) {
+    books.erase(books.begin()+index);
+}
+
 bool Member::registerRequest(int code, Date date){
     lendRequest.push_back(make_pair(code, date));
     return true;
 }
 
-bool nonMem::registerRequest(int code, Date date){
+void Member::addBook(Book &book){
+    this->books.push_back(&book);
+}
+
+/*bool nonMem::registerRequest(int code, Date date){
     lendRequest.push_back(make_pair(code, date));
     return true;
-}
+}*/
 
 bool Member::showLendRequests() const {
     if (lendRequest.size() == 0){
@@ -77,7 +94,7 @@ bool Member::showLendRequests() const {
     return true;
 }
 
-bool nonMem::showLendRequests() const {
+/*bool nonMem::showLendRequests() const {
     if (lendRequest.size() == 0){
         return false;
     }
@@ -87,7 +104,7 @@ bool nonMem::showLendRequests() const {
     }
 
     return true;
-}
+}*/
 
 void Member::showData() const {
     stringstream temp;
@@ -112,7 +129,7 @@ void Member::showBooks() const {
 void Member::showLendings() const {
     cout << "Empréstimos em Vigor: " << endl;
     for (int i = 0; i < lendings.size(); i++){
-        cout << "   " << i + 1 << " - " << lendings[i].first << " a " << lendings[i].second.getDateStr() << endl;
+        cout << "   " << i << " - " << lendings[i].first << " a " << lendings[i].second.getDateStr() << endl;
     }
 }
 
@@ -121,10 +138,10 @@ bool Member::registerLending(int code, Date date) {
     return true;
 }
 
-bool nonMem::registerLending(int code, Date date) {
+/*bool nonMem::registerLending(int code, Date date) {
     lendings.push_back(make_pair(code, date));
     return true;
-}
+}*/
 
 string Member::getData() {
 
@@ -155,5 +172,28 @@ void Member::renovateLending() { //include check if it's last unit in club or wh
     Date dt2;
     if(abs(dt1.timePeriod(dt2))<=3){
         dt1.extendTime();
+    }
+}
+
+void Member::updateData(string &name, float quantity){
+    this->name = name;
+    addBalance(quantity);
+}
+
+void Member::finishLending(int code, Date date){
+    for (int i = 0; i < lendings.size(); i++){
+        if ((lendings[i].first == code) && (lendings[i].second == date)){
+            lendings.erase(lendings.begin()+i);
+            break;
+        }
+    }
+}
+
+void Member::finishRequest(int code, Date date){
+    for (int i = 0; i < lendRequest.size(); i++){
+        if ((lendRequest[i].first == code) && (lendRequest[i].second == date)){
+            lendRequest.erase(lendRequest.begin()+i);
+            break;
+        }
     }
 }

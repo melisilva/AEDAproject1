@@ -15,16 +15,12 @@ void Catalog::updateCodes(){
     }
 }
 
-void Catalog::showRating(int code){
-    for(unsigned int i=0;i<books.size();i++){
-        if(books[i].getCode()==code){
-            cout<<"Classificação do livro: "<<books[i].getRating()<<endl;
-        }
-    }
-}
+/*void Catalog::showRating(int code){
+    cout<<"Classificação do livro: "<< books[code].getRating() << endl;
+}*/
 
 void Catalog::addBook(Book book){
-    book.addUnits();
+    //book.addUnits();
     books.push_back(book);
 }
 
@@ -40,13 +36,10 @@ void Catalog::registerRating(int code){
     }
 }
 
-void Catalog::showComments(int code){
-    for(unsigned int i=0;i<books.size();i++){
-        if(books[i].getCode()==code){
-            cout<<"Comentários sobre o livro: "<<books[i].getWritops()<<endl;
-        }
-    }
-}
+/*void Catalog::showComments(int code){
+    cout<<"Comentários sobre o livro: "<< endl;
+    cout << books[code].getWritops() << endl;
+}*/
 
 void Catalog::registerComments(int code){
     string comments,answer;
@@ -56,7 +49,7 @@ void Catalog::registerComments(int code){
         cout<<"Escreva o seu comentário:"<<endl;
         getline(cin,comments);
         for(unsigned int i=0;i<books.size();i++){
-            books[i].setWritops(comments);
+            books[i].addWritops(comments);
         }
     }
 }
@@ -76,35 +69,37 @@ int Catalog::searchBook(int code){
     return -1;
 }
 
-int Catalog::searchBook(string name){
+bool Catalog::searchBook(string name){
+    int count = 0;
     for(unsigned int i=0;i<books.size();i++){
         if(books[i].getTitle()==name){
-            return i;
+            showBook(i);
+            count++;
         }
     }
-    return -1;
+    
+    if (count == 0){
+        cout << "Não há livros com esse nome." << endl;
+        return false;
+    }
+    
+    return true;
 }
 
-int Catalog::convertNameToCode(string name){
+
+/*int Catalog::convertNameToCode(string name){
     for(unsigned int i=0;i<books.size();i++){
         if(books[i].getTitle()==name){
             return books[i].getCode();
         }
     }
     return -1;
-}
+}*/
 
 void Catalog::showBook(int code){
-    for(unsigned int i=0;i<books.size();i++){
-        if(books[i].getCode()==code){
-            books[i].showBook();
-        }
-    }
+    books[code].showBook();
 }
 
-Book Catalog::getBook(int code = -1, string name = ""){
-    if (code != -1){
-        return books[searchBook(code)];
-    }
-    return books[searchBook(name)];
+Book Catalog::getBook(int code){
+    return books[searchBook(code)];
 }

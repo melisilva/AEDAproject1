@@ -7,6 +7,12 @@ Book::Book(){
     author = "";
     category = "";
     edition = -1;
+    units = 1;
+    opinions = 0;
+    sumRating = 0;
+    realRating = 0;
+    writ_ops = "";
+    setState();
 }
 
 Book::Book(int code, string title, string author,string category,int edition, int owner){
@@ -16,7 +22,29 @@ Book::Book(int code, string title, string author,string category,int edition, in
     this->category=category;
     this->edition=edition;
     this->owner = owner;
+    this->units = 1;
+    this->opinions = 0;
+    this->sumRating = 0;
+    this->realRating = 0;
+    this->writ_ops = "";
     calculateValue();
+    setState();
+}
+
+void Book::calculateValue(){
+    int count=0;
+    if(edition == 1) {
+        value=25;
+        count++;
+    }
+    if(edition%10==0){
+        value=25;
+        count++;
+    }
+
+    if(count==0){
+        value=20-edition*0.65;
+    }
 }
 
 void Book::setOwner(int owner) {
@@ -71,8 +99,11 @@ void Book::setEdition(int edition){
     this->edition = edition;
 }
 
-void Book::setWritops(string writ_ops){
-    this->writ_ops=writ_ops;
+void Book::addWritops(string writ_ops){
+    stringstream temp;
+    temp << writ_ops << endl;
+    writ_ops += temp.str();
+
 }
 
 int Book::getCode() {
@@ -107,21 +138,6 @@ bool Book::getState() {
     return state;
 }
 
-void Book::calculateValue(){
-    int count=0;
-    if(edition ==1) {
-        value=25;
-        count++;
-    }
-    if(edition%10==0){
-        value=25;
-        count++;
-    }
-    if(count==0){
-        value=20-edition*0.65;
-    }
-}
-
 float Book::getValue(){
     return value;
 }
@@ -135,9 +151,10 @@ int Book::getOwner(){
 }
 
 void Book::deleteUnit(bool gonebook){
-    if(gonebook==true){
+    if (gonebook==true) {
         units-=1;
     }
+    setState();
 }
 
 void Book::calculateRating(float rate){
@@ -147,7 +164,7 @@ void Book::calculateRating(float rate){
 }
 
 void Book::showBook(){
-    cout << "   - " << title << "(" << code << "), de " << author << ", "<< edition << " edicao" <<" (" << realRating << "/5), do membro " << owner << endl;
+    cout << "   - " << title << "(" << code << "), de " << author << ", "<< edition << " edicao" <<" (" << realRating << "/5), do membro " << owner << endl << "Comentários do Livro: " << endl << writ_ops;
 }
 
 string Book::getData(){
@@ -161,4 +178,5 @@ string Book::getData(){
 
 void Book::addUnits(){
     units+=1;
+    setState();
 }

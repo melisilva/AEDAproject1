@@ -11,6 +11,13 @@ Date::Date(){
     this->year=todayy;
 }
 
+bool Date::operator==(Date d1){
+    if ((day == d1.day) && (month == d1.month) && (year == d1.year)){
+        return true;
+    }
+    return false;
+}
+
 Date::Date(int day,int month,int year){
     this->day=day;
     this->month=month;

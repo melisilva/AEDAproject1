@@ -22,32 +22,38 @@ protected:
 public:
     Member(); //done
     Member(string &name, int &nif, vector<Book*> &books); //done
-    int findBook(string title)const; //done
-    virtual bool registerRequest(int code, Date date); //done
-    virtual bool registerLending(int code, Date date); //done
-    bool showLendRequests() const; //done
-    void showData() const; //done
+    void addBalance(int quantity);
+    int findBook(int code) const; //done
     string getData(); //done
-    void showLendings() const; //done
-    void showBooks() const; //done
-    void updateData(string &name, int balance);
-    void renovateLending();
     int getNIF() const; //done
     string getName() const; //done
-    vector<Book*> getBooks() const; //done
+    virtual vector<Book*> getBooks() const; //done
     float getBalance() const; //done
-    void addBalance(int quantity);
     void minusBalance(int quantity);
+    /*virtual*/ bool registerRequest(int code, Date date); //done
+    /*virtual*/ bool registerLending(int code, Date date); //done
+    void renovateLending();
+    void removeBook(int index);
+    void setName(string name);
+    void setNif(int nif);
+    bool showLendRequests() const; //done
+    void showData() const; //done
+    void showLendings() const; //done
+    void showBooks() const; //done
+    void updateData(string &name, float quantity);
+    void finishLending(int code, Date date);
+    void finishRequest(int code, Date date);
+    void addBook(Book &book);
 };
 
 class nonMem : public Member {
-private:
-    vector<pair<int, Date>> lendRequest;
+/*private:
+    vector<pair<int, Date>> lendRequest;*/
 public:
     nonMem(string &name, int &nif); //done
-    bool registerRequest(int code, Date date); //done
-    bool registerLending(int code, Date date); //done
-    bool showLendRequests() const; //done
+    /*bool registerRequest(int code, Date date); //done
+    bool registerLending(int code, Date date); //done*/
+    //bool showLendRequests() const; //done
 };
 
 

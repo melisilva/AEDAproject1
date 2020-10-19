@@ -20,7 +20,7 @@ public:
     int nly();
     int timePeriod(Date dt2);
     string extendTime();
-
+    bool operator==(Date d1);
 
 };
 

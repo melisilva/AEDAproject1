@@ -1,5 +1,4 @@
 #include "club.h"
-using namespace std;
 
 Club::Club() {
     vector<Member> temp;
@@ -97,10 +96,6 @@ void Club::chargeFee(int nif, Book book){
 }
 
 int Club::calculateDelay(Date date){
-    /*int delayp;
-    for (unsigned int i = 0; i < delays.size(); i++){
-        delayp=abs(today.timePeriod(get<1>(delays[i])));
-    }*/
     return abs(today.timePeriod(date));
 }
 
@@ -160,26 +155,6 @@ void Club::removeMember(int nif){
     for (int i = 0; i < toDelv.size(); i++){
         catalog.books.erase(catalog.books.begin() + (*toDelv[i]).getCode());
     }
-    
-    /*unsigned toDel = isMember(nif);
-    vector <unsigned int> toDelv;
-    members.erase(members.begin()+toDel);
-
-    //Remover todos os livros do membro!
-    for (unsigned int i = 0; i < catalog.books.size(); i++){
-        if (catalog.books[i].getOwner() == nif) {
-            toDelv.push_back(i);
-        }
-    }
-    for(unsigned int j=0;j<toDelv.size();j++){
-        if(j==0){
-            catalog.books.erase(catalog.books.begin() + toDelv[j]);
-        }
-        else{
-            catalog.books.erase(catalog.books.begin() + (toDelv[j]-j));
-        }
-    }*/
-
     catalog.updateCodes();
     members.erase(members.begin() + index);
 }
@@ -188,32 +163,23 @@ void Club::removeBook(tuple<int, Date, int> lostBook){
     float value = catalog.books[get<0>(lostBook)].getValue();
     int owner = isMember(catalog.books[get<0>(lostBook)].getOwner());
     int perp = isMember(get<2>(lostBook));
+    if(perp==-1){
+        perp=isnonMem(get<2>(lostBook))
+    }
     int index = members[owner].findBook(get<0>(lostBook));
 
     members[owner].addBalance(value);
-    members[perp].minusBalance(value);
-    members[perp].removeBook(index);
+    if(perp!=-1){
+        members[perp].minusBalance(value);
+    }
+    else{
+        nonmembers[perp].minusBalance(value);
+    }
+    members[owner].removeBook(index);
     catalog.books.erase(catalog.books.begin() + get<0>(lostBook));
 
 
     catalog.updateCodes();
-    
-    /*string memName;
-    int value;
-    for(unsigned int i=0;i<catalog.books.size();i++){
-        if(catalog.books[i].getTitle()==title) {
-            if (catalog.books[i].getEdition() == edition) {
-                memName=catalog.books[i].getOwner();
-                value=catalog.books[i].getValue();
-                catalog.books[i].deleteUnit(true);
-            }
-        }
-    }
-    for(unsigned int i=0;i<members.size();i++){
-        if(members[i].getName()==memName){
-            members[i].addBalance(value);
-        }
-    }*/
 }
 
 void Club::showMembers(){
@@ -320,33 +286,31 @@ void Club::registerLoss(){
     } else {
         members[isMember(nif)].finishLending(code, temp);
     }
-
-    
 }
 
-bool Club::makeRequest(){
+bool Club::makeRequest() {
     int nif, code;
-    string date, name,nif_str,date_str,code_str;
+    string date, name, nif_str, date_str, code_str;
 
     cout << "Indique o seu NIF: ";
-    getline(cin,nif_str);
-    nif=stoi(nif_str);
+    getline(cin, nif_str);
+    nif = stoi(nif_str);
 
     cout << "Indique o código do livro (se não o souber, introduza -1 e dê ENTER): ";
-    getline(cin,code_str);
-    code=stoi(code_str);
+    getline(cin, code_str);
+    code = stoi(code_str);
 
-    while((code <= -1) || code >= catalog.books.size() || cin.fail()){
+    while ((code <= -1) || code >= catalog.books.size() || cin.fail()) {
         cout << "Indique, então, o título do livro: ";
-        getline(cin,name);
+        getline(cin, name);
 
-        if (catalog.searchBook(name) == false){
+        if (catalog.searchBook(name) == false) {
             cerr << "EXCEÇÃO: não há livro com esse título.";
             continue;
         } else {
             cout << "Os livros disponíveis com esse título são: " << endl;
-            for (int i = 0; i < catalog.books.size(); i++){
-                if ((catalog.books[i].getTitle() == name) && (catalog.books[i].getState() == true)){
+            for (int i = 0; i < catalog.books.size(); i++) {
+                if ((catalog.books[i].getTitle() == name) && (catalog.books[i].getState() == true)) {
                     catalog.books[i].showBook();
                 }
             }
@@ -358,21 +322,21 @@ bool Club::makeRequest(){
     }
 
     //And now, to register it in Members or NonMembers.
-    if(isMember(nif)!=-1) {
-        if (members[isMember(nif)].getBalance() <= 0){
+    if (isMember(nif) != -1) {
+        if (members[isMember(nif)].getBalance() <= 0) {
             //EXCEÇÃO! NÃO PODE FAZER PEDIDOS CASO O BALANÇO ESTEJA NEGATIVO/NULO.
             return false;
         }
         members[isMember(nif)].registerRequest(code, today);
         catalog.books[code].deleteUnit(true);
     } else { //it's not a member then it's a nonMem
-        while (true){
-            if (isnonMem(nif) == -1){
-                string namem,nif_s;
+        while (true) {
+            if (isnonMem(nif) == -1) {
+                string namem, nif_s;
                 int nif;
-                cout<<"Introduza o seu nome, por favor: "<<endl;
-                getline(cin,namem);
-                nonMem m(namem,nif);
+                cout << "Introduza o seu nome, por favor: " << endl;
+                getline(cin, namem);
+                nonMem m(namem, nif);
                 m.registerRequest(code, today);
                 catalog.books[code].deleteUnit(true);
                 nonmembers.push_back(m);
@@ -391,66 +355,9 @@ bool Club::makeRequest(){
         }
     }
 
-        lendRequests.push_back(make_tuple(code,today,nif)); //registering the request in club
-        return true;
+    lendRequests.push_back(make_tuple(code, today, nif)); //registering the request in club
+    return true;
 
-    /*//Check if book with name introduced exists
-    if(name != ""){
-
-        vector<Book> possibleBooks;
-        vector<int> possibleCodes;
-        for (int i = 0; i < catalog.books.size(); i++){
-            if ((catalog.books[i].getTitle() == name) && (catalog.books[i].getState() == true)){
-                possibleBooks.push_back(catalog.books[i]);
-                possibleCodes.push_back(catalog.books[i].getCode());
-            }
-        }
-
-        cout << "Estas são as edições dos livros que pode escolher: " << endl;
-        for (int i = 0; i < possibleBooks.size(); i++){
-            possibleBooks[i].showBook();
-        }
-
-        do {
-            cout << "Indique o código do livro que prefere requisitar: " << endl;
-            getline(cin, code_str);
-            code = stoi(code_str);
-
-            for (int i = 0; i < possibleCodes.size(); i++){
-                if (code == possibleCodes[i]){
-                    break;
-                } else {
-                    continue;
-                }
-            }
-        } while (true);
-
-        this->lendRequests.push_back(make_tuple(code,today,nif));
-
-        if(isMember(nif)!=-1) {
-            members[isMember(nif)].registerRequest(code, today);
-        }
-        else{ //it's not a member than it's a nonMem
-            string namem,nif_s;
-            int nif;
-            cout<<"Introduza o seu nome, por favor:"<<endl;
-            getline(cin,namem);
-            cout<<"Introduza o seu nif, por favor:"<<endl;
-            getline(cin,nif_s);
-            nif=stoi(nif_s);
-            nonMem m(namem,nif);
-            nonmembers.push_back(m);
-            m.registerRequest(code, today);
-        }
-        return true;
-    }
-
-    if ((code == -1) && (name == "")) {
-        cerr << "Não podemos adicionar um livro sem nos indicar uma referência dele!" << endl;
-        return false;
-    }
-
-    return false;*/
 }
 
 void Club::saveData(){

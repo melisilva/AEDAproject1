@@ -11,7 +11,6 @@ public:
     Catalog(); //done
     Catalog(vector<Book> books); //done
     void addBook(Book book); //done
-    //int convertNameToCode(string name); //done
     Book getBook(int code); //done
     void lendBook(int code, int nif);
     void receiveBook(int code, int nif);
@@ -21,8 +20,6 @@ public:
     bool searchBook(string name); //done
     void showBook(int code); //done
     void showBooks(); //done
-    //void showComments(int code); //done
-    //void showRating(int code); //done
     void updateCodes(); //done
 };
 

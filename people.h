@@ -30,8 +30,8 @@ public:
     virtual vector<Book*> getBooks() const; //done
     float getBalance() const; //done
     void minusBalance(int quantity);
-    /*virtual*/ bool registerRequest(int code, Date date); //done
-    /*virtual*/ bool registerLending(int code, Date date); //done
+    bool registerRequest(int code, Date date); //done
+    bool registerLending(int code, Date date); //done
     void renovateLending();
     void removeBook(int index);
     void setName(string name);
@@ -47,13 +47,8 @@ public:
 };
 
 class nonMem : public Member {
-/*private:
-    vector<pair<int, Date>> lendRequest;*/
 public:
     nonMem(string &name, int &nif); //done
-    /*bool registerRequest(int code, Date date); //done
-    bool registerLending(int code, Date date); //done*/
-    //bool showLendRequests() const; //done
 };
 
 

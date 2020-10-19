@@ -77,11 +77,6 @@ void Member::addBook(Book &book){
     this->books.push_back(&book);
 }
 
-/*bool nonMem::registerRequest(int code, Date date){
-    lendRequest.push_back(make_pair(code, date));
-    return true;
-}*/
-
 bool Member::showLendRequests() const {
     if (lendRequest.size() == 0){
         return false;
@@ -93,18 +88,6 @@ bool Member::showLendRequests() const {
 
     return true;
 }
-
-/*bool nonMem::showLendRequests() const {
-    if (lendRequest.size() == 0){
-        return false;
-    }
-
-    for (int i = 0; i < lendRequest.size(); i++){
-        cout << "Empréstimo do " << lendRequest[i].first << " a " << lendRequest[i].second.getDateStr() << endl;
-    }
-
-    return true;
-}*/
 
 void Member::showData() const {
     stringstream temp;
@@ -137,11 +120,6 @@ bool Member::registerLending(int code, Date date) {
     lendings.push_back(make_pair(code, date));
     return true;
 }
-
-/*bool nonMem::registerLending(int code, Date date) {
-    lendings.push_back(make_pair(code, date));
-    return true;
-}*/
 
 string Member::getData() {
 

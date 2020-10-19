@@ -15,10 +15,6 @@ void Catalog::updateCodes(){
     }
 }
 
-/*void Catalog::showRating(int code){
-    cout<<"Classificação do livro: "<< books[code].getRating() << endl;
-}*/
-
 void Catalog::addBook(Book book){
     //book.addUnits();
     books.push_back(book);
@@ -35,11 +31,6 @@ void Catalog::registerRating(int code){
         }
     }
 }
-
-/*void Catalog::showComments(int code){
-    cout<<"Comentários sobre o livro: "<< endl;
-    cout << books[code].getWritops() << endl;
-}*/
 
 void Catalog::registerComments(int code){
     string comments,answer;
@@ -85,16 +76,6 @@ bool Catalog::searchBook(string name){
     
     return true;
 }
-
-
-/*int Catalog::convertNameToCode(string name){
-    for(unsigned int i=0;i<books.size();i++){
-        if(books[i].getTitle()==name){
-            return books[i].getCode();
-        }
-    }
-    return -1;
-}*/
 
 void Catalog::showBook(int code){
     books[code].showBook();

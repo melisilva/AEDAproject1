@@ -336,7 +336,7 @@ bool Club::makeRequest(){
     getline(cin,code_str);
     code=stoi(code_str);
 
-    while((code <= -1) || code >= catalog.books.size() || cin.fail() || code == ""){
+    while((code <= -1) || code >= catalog.books.size() || cin.fail()){
         cout << "Indique, então, o título do livro: ";
         getline(cin,name);
 

@@ -18,6 +18,8 @@ public:
     Club(); //done
     void run();
     void beginningInfo();
+    void help();
+    void updatePerson();
     void addMember(); //done
     void removeMember(int nif); //done
     void addBook(); //done
@@ -26,7 +28,7 @@ public:
     bool makeRequest(); //done
     bool makeLending();
     bool returnLending();
-    void chargeDelay(int nif, Book book,int delayp); //done
+    void chargeFirstDelay(int nif, Book book); //done
     void chargeFee(int nif,Book book); //done, precisa ser usada
     int calculateDelay(Date date); //done
     void showMembers(); //done

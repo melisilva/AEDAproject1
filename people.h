@@ -42,7 +42,7 @@ public:
     void showBooks() const; //done
     void updateData(string &name, float quantity);
     void finishLending(int code, Date date);
-    void finishRequest(int code, Date date);
+    void finishRequest(int code);
     void addBook(Book &book);
 };
 

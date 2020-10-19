@@ -22,37 +22,190 @@ void Club::run(){
 }
 
 void Club::beginningInfo() {
-    /*
-     * Pura e simplesmente ajuda o utilizador com o inicial, para diminuir o tamanho de run.
-     */
+	cout << "Seja bem-vindo ao Sistema Informático do Clube de Leitura." << endl;
+	cout << "Entre quaisquer processos, poderá relembrar-se dos códigos de acesso às" << endl;
+	cout << "diferentes operações através da inserção do comando HELP/help seguida de ENTER." << endl;
+	cout << "Durante a execução de uma operação (ex.: adição de um livro ao catálogo)," << endl;
+	cout << "o que precisar de saber ser-lhe-à pedido de forma simples e sempre a procurar ajudá-lo." << endl;
+	cout << "Poderá fechar o programa entre operações, inserindo o comando END/end seguida de ENTER." << endl;
+	cout << "ATENÇÃO: Os dados do programa não são guardados (e, portanto, passa a ser impossível" << endl;
+	cout << "recuperá-los na próxima vez que abrir o programa) caso não efetue a operação de término" << endl;
+	cout << "especificada acima! O programa não possui implementação de protocolos de recuperação de dados:" << endl;
+	cout << "dados perdidos, ficam perdidos para sempre!"<< endl;
+	cout << "Desejamos que o SICL seja do seu agrado!" << endl;
+	cout << endl;
+	cout << endl;
+	help();
+}
+
+void Club::help() {
+	cout << "----- CÓDIGOS DE EXECUÇÃO -----" << endl;
+	cout << endl;
+	cout << " --- PROTOCOLOS AO NÍVEL DE FREQUÊNCIA (por Membros e não-Membros)  ---" << endl;
+	cout << " ADD_M: adicionar membro" << endl;
+	cout << " REM_M: remover membro" << endl;
+	cout << " ATL_P: atualizar frequentador (para adição de saldo ou mudança de nome)" << endl;
+	cout << endl;
+	cout << " --- PROTOCOLOS AO NÍVEL DO CATÁLOGO --- " << endl;
+	cout << " ADD_L: adicionar livro" << endl;
+	cout << " LOSS: perda de livro" << endl;
+	cout << " ADD_L: adicionar livro" << endl;
+	cout << " REG_P: registar pedido" << endl;
+	cout << " MK_L: fazer/iniciar empréstimo" << endl;
+	cout << " END_L: finalizar empréstimo" << endl;
+	cout << endl;
+	cout << " --- PROTOCOLOS AO NÍVEL DO SICL --- " << endl;
+	cout << " HELP: ajuda" << endl;
+	cout << " END: terminar/fechar programa" << endl;
+	cout << endl;
+	cout << " --- A NÃO ESQUECER --- " << endl;
+	cout << "- Membros têm prioridade a fazer empréstimos" << endl;
+	cout << "- Qualquer frequentante do Clube fica inibido de fazer pedidos ou empréstimos se o seu saldo for nulo/negativo" << endl;
+	cout << "- Atrasos são registados automaticamente, havendo taxas cumulativas cobradas dirariamente" << endl;
+	cout << "- Para qualquer frequentante poder fazer um empréstimo, tem de fazer pedido do livro primeiro" << endl;
+	cout << "- Fechar sempre o SICL com o comando END" << endl;
+    cout << endl;
+    cout << endl;
+}
+
+void Club::updatePerson() {
+	string answer, name;
+    int nif;
+    float quantity;
+	cout << "Poderá mudar o nome e atualizar o saldo." << endl;
+    cout << "Caso só deseje mudar o saldo, insira o mesmo nome abaixo." << endl;
+    cout << "Caso só deseje mudar o nome, insira 0 na quantia abaixo." << endl;
+    cout << "Indique o nome: ";
+    getline(cin, answer);
+    name = answer;
+    cout << "Indique a quantia a adicionar (ex: 19.43): ";
+    getline(cin, answer);
+    quantity = stof(answer);
+    cout << "Indique o NIF do frequentante: ";
+	getline(cin, answer);
+    nif = stoi(answer);
+	
+
+    if (true){
+        //erros
+    }
+
+    int per = isMember(nif);
+
+    if (per == -1){
+        nonmembers[isnonMem(nif)].updateData(name, quantity);
+    } else {
+        members[per].updateData(name, quantity);
+    }
 }
 
 bool Club::makeLending() {
-    /*
-     * Deverá checar se um empréstimo que se quer fazer está já registado como pedido.
-     * Se sim, irá adicioná-lo a "lendings" (no Club e no membro respetivo) e tirá-lo de
-     * "lendRequests" (no Club e Membro respetivo), atualizando o estado do livro no catalog.
-     * Deverá lançar exceções nos seguintes casos:
-     * - o pedido não foi feito (o pedido não está em lendRequests);
-     * - o pedido não pode ser feito (por haver um membro que fez um pedido antes de não-Membro);
-     */
+    int nif = 0, code = -1, temp, i;
+    string name, nif_str, code_str;
+    bool nonMem = false;
 
-    //m.minusBalance(0.10*catalog.books[code].getValue());
-    //nonmembers[isnonMem(nif)].minusBalance(0.10*catalog.books[code].getValue());
+    while (isMember(nif) == isnonMem(nif) || ((catalog.searchBook(code) == -1) && (code != -1))){
+        cout << "Indique o seu NIF: ";
+        getline(cin, nif_str);
+        nif = stoi(nif_str);
+
+        cout << "Indique o código do livro (se não o souber, insira -1 e dê ENTER): ";
+        getline(cin, code_str);
+        code = stoi(code_str);
+        code = catalog.searchBook(code);
+
+        if (code == -1){
+            showLendRequests();
+        }
+    }
+
+    //Is it a member or a nonMember?
+    int pers = isMember(nif);
+    if (pers == -1){
+        pers = isnonMem(nif);
+        nonMem = true;
+    } 
+    
+    if (!nonMem){
+        //Members do lendings per order of arrival.
+        for (int i = 0; i < lendRequests.size(); i++){
+            if ((get<0>(lendRequests[i]) == code) && (get<2>(lendRequests[i]) == nif)){
+                catalog.books[code].deleteUnit();
+                lendings.push_back(make_tuple(get<0>(lendRequests[i]), today, get<2>(lendRequests[i])));
+                lendRequests.erase(lendRequests.begin()+ i);
+                members[pers].registerLending(code, today);
+                members[pers].finishRequest(code);
+                break;
+            }
+        }
+        return true;
+    } else {
+        //Checking priorities...
+        for (int i = 0; i < lendRequests.size(); i++){
+            if ((get<0>(lendRequests[i]) == code) && (get<2>(lendRequests[i]) != nif)){
+                //throw
+                return false;
+            } else {
+                temp = i;
+            }
+        }
+        catalog.books[code].deleteUnit();
+        lendings.push_back(make_tuple(get<0>(lendRequests[temp]), today, get<2>(lendRequests[temp])));
+        lendRequests.erase(lendRequests.begin()+ i);
+        nonmembers[pers].registerLending(code, today);
+        nonmembers[pers].finishRequest(code);
+    }
     return true;
 }
 
 bool Club::returnLending() {
-    /*
-     * Deverá retornar um livro ao catálogo, passando por:
-     * - adicionar um exemplar ao livro correto (catalog);
-     * - retirar o livro do registo de empréstimos (ao nivel de Club e Member respetivo);
-     * - pedir opinião do livro em questão e registá-la na Book respetiva;
-     * Deverá lançar exceção no seguinte caso:
-     * - caso o empréstimo não exista.
-     */
-    return true;
-}
+    int nif = 0, code = -1;
+    string name, nif_str, code_str, answer;
+    bool nonMem = false;
+
+    while (isMember(nif) == isnonMem(nif) || ((catalog.searchBook(code) == -1) && (code != -1))){
+        cout << "Indique o seu NIF: ";
+        getline(cin, nif_str);
+        nif = stoi(nif_str);
+
+        cout << "Indique o código do livro (se não o souber, insira -1 e dê ENTER): ";
+        getline(cin, code_str);
+        code = stoi(code_str);
+        code = catalog.searchBook(code);
+
+        cout << "Este é um atraso (S/N)? " << endl;
+        getline(cin, answer);
+
+        if (code == -1){
+            showLendings();
+            showDelays();
+        }
+    }
+
+    int pers = isMember(nif);
+    if (pers == -1){
+        pers = isnonMem(nif);
+    }
+
+    catalog.books[code].addUnits();
+    if (answer == "S" || answer == "s"){
+        for (int i = 0; i < delays.size(); i++){
+            if (get<0>(delays[i]) == code && get<2>(delays[i]) == nif){
+                delays.erase(delays.begin()+i);
+                return true;
+            }
+        }
+    } else if (answer == "N" || answer == "n"){
+        for (int i = 0; i < lendings.size(); i++){
+            if (get<0>(lendings[i]) == code && get<2>(lendings[i]) == nif){
+                lendings.erase(lendings.begin()+i);
+                return true;
+            }
+        }
+    }
+    //throw a tantrum!
+    return false;
+}    
 
 int Club::isMember(int nif){ //returns member index or -1 if it doesn't exist
     for(unsigned int i = 0; i < members.size(); i++) {
@@ -72,10 +225,8 @@ int Club::isnonMem(int nif){ //returns member index or -1 if it doesn't exist
     return -1;
 }
 
-void Club::chargeDelay(int nif,Book book,int delayp){
+void Club::chargeFirstDelay(int nif,Book book){
     float fine = book.getValue()*0.10;
-
-    fine = fine*delayp;
 
     int index=isMember(nif);
 
@@ -164,7 +315,7 @@ void Club::removeBook(tuple<int, Date, int> lostBook){
     int owner = isMember(catalog.books[get<0>(lostBook)].getOwner());
     int perp = isMember(get<2>(lostBook));
     if(perp==-1){
-        perp=isnonMem(get<2>(lostBook))
+        perp=isnonMem(get<2>(lostBook));
     }
     int index = members[owner].findBook(get<0>(lostBook));
 
@@ -199,12 +350,14 @@ void Club::showLendRequests() {
 }
 
 void Club::showLendings() {
+    cout << "EMPRÉSTIMOS EM VIGOR:" << endl;
     for (unsigned int i = 0; i < lendings.size(); i++){
         cout << get<0>(lendings[i]) << ", a " << get<1>(lendings[i]).getDateStr() << " pelo membro " << get<2>(lendings[i]) << endl;
     }
 }
 
 void Club::showDelays() {
+    cout << "ATRASOS:" << endl;
     for (unsigned int i = 0; i < delays.size(); i++){
         cout << get<0>(delays[i]) << ", desde " << get<1>(delays[i]).getDateStr() << " pelo membro " << get<2>(delays[i]) << endl;
     }
@@ -213,10 +366,21 @@ void Club::showDelays() {
 void Club::checkDelays(){
     string date1;
     int day1,month1,year1;
+
+    for (int i = 0; i < delays.size(); i++){
+        int perp = isMember(get<2>(delays[i]));
+        if (perp == -1){
+            perp = isnonMem(get<2>(delays[i]));
+            nonmembers[perp].minusBalance(4);
+        } else {
+            members[perp].minusBalance(2);
+        }
+    }
+
     for (unsigned int i = 0; i < lendings.size(); i++){
         if(abs(today.timePeriod(get<1>(lendings[i])))>=10){ //Consider lending period is 10 days
             this->delays.push_back(make_tuple(get<0>(lendings[i]),today,get<2>(lendings[i])));
-            chargeDelay(get<2>(lendings[i]), catalog.getBook(get<0>(lendings[i])), calculateDelay(get<1>(lendings[i])));
+            chargeFirstDelay(get<2>(lendings[i]), catalog.getBook(get<0>(lendings[i])));
             
             if (isMember(get<2>(lendings[i])) == -1){
                 nonmembers[isnonMem(get<2>(lendings[i]))].finishLending(get<0>(lendings[i]), get<1>(lendings[i]));
@@ -227,6 +391,8 @@ void Club::checkDelays(){
             lendings.erase(lendings.begin() + i);
         }
     }
+
+
 }
 
 void Club::registerLoss(){
@@ -328,7 +494,7 @@ bool Club::makeRequest() {
             return false;
         }
         members[isMember(nif)].registerRequest(code, today);
-        catalog.books[code].deleteUnit(true);
+        catalog.books[code].deleteUnit();
     } else { //it's not a member then it's a nonMem
         while (true) {
             if (isnonMem(nif) == -1) {
@@ -338,7 +504,7 @@ bool Club::makeRequest() {
                 getline(cin, namem);
                 nonMem m(namem, nif);
                 m.registerRequest(code, today);
-                catalog.books[code].deleteUnit(true);
+                catalog.books[code].deleteUnit();
                 nonmembers.push_back(m);
                 break;
             } else {

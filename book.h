@@ -18,7 +18,7 @@ public:
     void addWritops(string writ_ops); //nice
     void calculateValue(); //nice
     void calculateRating(float rate); //nice
-    void deleteUnit(bool gonebook);//nice
+    void deleteUnit(); //nice
     int getCode(); //nice
     int getOwner(); //nice
     int getEdition(); //nice
@@ -44,6 +44,7 @@ public:
     void setEdition(int edition); //nice
     void showBook(); //nice
     string getData(); //nice
+    bool operator==(Book b1);
 };
 
 

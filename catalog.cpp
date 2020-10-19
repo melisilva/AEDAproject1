@@ -16,8 +16,21 @@ void Catalog::updateCodes(){
 }
 
 void Catalog::addBook(Book book){
-    //book.addUnits();
-    books.push_back(book);
+    bool already=false;
+    if(books.size()!=0){
+        for(unsigned int i=0;i<books.size();i++){
+            if(books[i]==book){
+                books[i].addUnits();
+                already=true;
+            }
+        }
+        if(!already){
+            books.push_back(book);
+        }
+    }
+    else{
+        books.push_back(book);
+    }
 }
 
 
@@ -68,12 +81,12 @@ bool Catalog::searchBook(string name){
             count++;
         }
     }
-    
+
     if (count == 0){
         cout << "Não há livros com esse nome." << endl;
         return false;
     }
-    
+
     return true;
 }
 
@@ -81,6 +94,8 @@ void Catalog::showBook(int code){
     books[code].showBook();
 }
 
-Book Catalog::getBook(int code){
-    return books[searchBook(code)];
+Book Catalog::getBook(int code = -1){
+    if (code != -1){
+        return books[searchBook(code)];
+    }
 }

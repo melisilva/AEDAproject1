@@ -150,10 +150,8 @@ int Book::getOwner(){
     return owner;
 }
 
-void Book::deleteUnit(bool gonebook){
-    if (gonebook==true) {
-        units-=1;
-    }
+void Book::deleteUnit(){
+    units-=1;
     setState();
 }
 
@@ -179,4 +177,13 @@ string Book::getData(){
 void Book::addUnits(){
     units+=1;
     setState();
+}
+
+bool Book::operator==(Book b1){
+    if(code==b1.getCode() && title==b1.getTitle() && author==b1.getAuthor() && category==b1.getCategory() && edition==b1.getEdition()){
+        return true;
+    }
+    else{
+        return false;
+    }
 }

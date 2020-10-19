@@ -65,7 +65,12 @@ int Member::findBook(int code) const{
 }
 
 void Member::removeBook(int index) {
-    books.erase(books.begin()+index);
+    if(books[index]->getUnits()>1){
+        books[index]->deleteUnit();
+    }
+    else{
+        books.erase(books.begin()+index);
+    }
 }
 
 bool Member::registerRequest(int code, Date date){
@@ -74,7 +79,20 @@ bool Member::registerRequest(int code, Date date){
 }
 
 void Member::addBook(Book &book){
-    this->books.push_back(&book);
+    bool already=false;
+    if(books.size()!=0){
+        for(unsigned int i=0;i<books.size();i++){
+            if(&book==books[i]){
+                books[i]->addUnits();
+                already=true;
+            }
+        }
+        if(!already){
+            this->books.push_back(&book);
+        }
+    }else{
+        this->books.push_back(&book);
+    }
 }
 
 bool Member::showLendRequests() const {

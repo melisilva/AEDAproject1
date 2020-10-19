@@ -21,7 +21,8 @@ protected:
 
 public:
     Member(); //done
-    Member(string &name, int &nif, vector<Book*> &books); //done
+    Member(string &name, int &nif, vector<Book*> &books, float &balance); //done
+    void deleteRequest(int code);
     void addBalance(int quantity);
     int findBook(int code) const; //done
     string getData(); //done
@@ -48,7 +49,7 @@ public:
 
 class nonMem : public Member {
 public:
-    nonMem(string &name, int &nif); //done
+    nonMem(string &name, int &nif, float &balance); //done
 };
 
 

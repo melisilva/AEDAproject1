@@ -327,7 +327,33 @@ void Club::removeBook(tuple<int, Date, int> lostBook){
         nonmembers[perp].minusBalance(value);
     }
     members[owner].removeBook(index);
+    vector<int> codes, codes2;
+    int code;
+    for (int i = 0; i < lendRequests.size(); i++){
+        if (get<0>(lendRequests[i]) == get<0>(lostBook)){
+            codes.push_back(i);
+        }
+    }
+
+    for (int i = 0; i < delays.size(); i++){
+        if (get<0>(delays[i]) == get<0>(lostBook) && get<2>(delays[i]) == get<2>(delays[i])){
+            codes2.push_back(i);
+        }
+    }
+    
+    for (int i = 0; i < codes.size(); i++){
+        if (isMember(get<2>(lendings[codes[i]])) == -1){
+            nonmembers[isnonMem(get<2>(lendings[codes[i]]))].deleteRequest(get<0>(lostBook));
+        } else {
+            members[isMember(get<2>(lendings[codes[i]]))].deleteRequest(get<0>(lostBook));
+        }
+        lendRequests.erase(lendRequests.begin() + codes[i]);
+    }
+    for (int i = 0; i < codes2.size(); i++){
+        delays.erase(delays.begin() + codes2[i]);
+    }
     catalog.books.erase(catalog.books.begin() + get<0>(lostBook));
+
 
 
     catalog.updateCodes();
@@ -502,7 +528,8 @@ bool Club::makeRequest() {
                 int nif;
                 cout << "Introduza o seu nome, por favor: " << endl;
                 getline(cin, namem);
-                nonMem m(namem, nif);
+                float balance = 50;
+                nonMem m(namem, nif, balance);
                 m.registerRequest(code, today);
                 catalog.books[code].deleteUnit();
                 nonmembers.push_back(m);
@@ -527,15 +554,16 @@ bool Club::makeRequest() {
 }
 
 void Club::saveData(){
-    string membs = "members.txt", lends = "lendings.txt", lendRs = "lendRequests.txt", bks = "books.txt", dels = "delays.txt";
+    string membs = "members.txt", nonmembs = "nonmembers.txt", lends = "lendings.txt", lendRs = "lendRequests.txt", bks = "books.txt", dels = "delays.txt";
 
     ofstream file(membs, ios::binary);
     ofstream filee(lends, ios::binary);
     ofstream fileee(lendRs, ios::binary);
     ofstream fileeee(bks, ios::binary);
     ofstream fileeeee(dels, ios::binary);
+    ofstream fileeeeee(nonmembs, ios::binary);
 
-    stringstream temp1, temp2, temp3, temp4, temp5;
+    stringstream temp1, temp2, temp3, temp4, temp5, temp6;
 
     for (int i = 0; i < members.size(); i++){
         if (i < members.size() -1) {
@@ -546,6 +574,16 @@ void Club::saveData(){
     }
 
     file << temp1.str();
+
+    for (int i = 0; i < nonmembers.size(); i++){
+        if (i < nonmembers.size() -1) {
+            temp6 << nonmembers[i].getData() << endl << endl;
+        } else if (i = members.size() - 1){
+            temp6 << nonmembers[i].getData() << endl << "END";
+        }
+    }
+
+    fileeeeee << temp6.str();
 
     for (int i = 0; i < lendings.size(); i++){
         if (i < lendings.size() -1) {
@@ -594,9 +632,10 @@ void Club::retrieveData(){
     ifstream lendRs_file; lendRs_file.open("lendRequests.txt");
     ifstream lends_file; lends_file.open("lendings.txt");
     ifstream dels_file; dels_file.open("delays.txt");
+    ifstream nmemb_file; nmemb_file.open("nonmembers.txt");
     string temp;
     char sep = ',';
-    stringstream membs, bks, lendRs, lends, dels;
+    stringstream membs, bks, lendRs, lends, dels, nmembs;
 
 
     //Getting Books data.
@@ -682,6 +721,7 @@ void Club::retrieveData(){
     temp = "";
     string name;
     int nif, code;
+    float balance;
     while (temp != "END"){
         vector<Book *> memb_bks;
         getline(memb_file, temp);
@@ -694,6 +734,11 @@ void Club::retrieveData(){
         membs.clear();
         membs << temp;
         membs >> nif;
+        getline(memb_file, temp);
+        membs.str("");
+        membs.clear();
+        membs << temp;
+        membs >> balance;
         do {
             getline(memb_file, temp);
             membs.str("");
@@ -703,13 +748,40 @@ void Club::retrieveData(){
             int ind = catalog.searchBook(code);
             memb_bks.push_back(&catalog.books[ind]);
         } while (sep != ';');
-        members.push_back(Member(name, nif, memb_bks));
+        members.push_back(Member(name, nif, memb_bks, balance));
         getline(memb_file, temp);
         membs.str("");
         membs.clear();
         getline(memb_file, temp);
         membs.str("");
         membs.clear();
+    }
+
+    //Getting nonMembers data.
+    temp = "";
+    while (temp != "END"){
+        getline(nmemb_file, temp);
+        nmembs.str("");
+        nmembs.clear();
+        nmembs << temp;
+        nmembs >> name;
+        getline(nmemb_file, temp);
+        nmembs.str("");
+        nmembs.clear();
+        nmembs << temp;
+        nmembs >> nif;
+        getline(nmemb_file, temp);
+        nmembs.str("");
+        nmembs.clear();
+        nmembs << temp;
+        nmembs >> balance;
+        nonmembers.push_back(nonMem(name, nif, balance));
+        getline(nmemb_file, temp);
+        nmembs.str("");
+        nmembs.clear();
+        getline(nmemb_file, temp);
+        nmembs.str("");
+        nmembs.clear();
     }
 
     //Getting lendRequests data.
@@ -733,7 +805,11 @@ void Club::retrieveData(){
         lendRs << temp;
         lendRs >> nif;
         lendRequests.push_back(make_tuple(code, tmp.getDate(date), nif));
-        members[isMember(nif)].registerRequest(code, tmp.getDate(date));
+        if (isMember(nif) != -1){
+            members[isMember(nif)].registerRequest(code, tmp.getDate(date));
+        } else {
+            nonmembers[isnonMem(nif)].registerRequest(code, tmp.getDate(date));
+        }
         getline(lendRs_file, temp);
         lendRs.str("");
         lendRs.clear();
@@ -762,7 +838,11 @@ void Club::retrieveData(){
         lends << temp;
         lends >> nif;
         lendings.push_back(make_tuple(code, tmp.getDate(date), nif));
-        members[isMember(nif)].registerLending(code, tmp.getDate(date));
+        if (isMember(nif) != -1){
+            members[isMember(nif)].registerLending(code, tmp.getDate(date));
+        } else {
+            nonmembers[isnonMem(nif)].registerLending(code, tmp.getDate(date));
+        }
         getline(lends_file, temp);
         lends.str("");
         lends.clear();
@@ -812,4 +892,6 @@ void Club::retrieveData(){
     lendRs_file.open("lendRequests.txt", std::ofstream::out | std::ofstream::trunc);
     
     cout << "Files successfully removed!";
+
+    checkDelays();
 }

@@ -17,22 +17,22 @@ private:
 public:
     Club(); //done
     void run();
-    void beginningInfo();
-    void help();
-    void updatePerson();
+    void beginningInfo(); //done
+    void help(); //done
+    void updatePerson(); //done
     void addMember(); //done
     void removeMember(int nif); //done
     void addBook(); //done
     void registerLoss(); //done
-    void removeBook(tuple<int, Date, int> lostBook); 
+    void removeBook(tuple<int, Date, int> lostBook); //done
     bool makeRequest(); //done
-    bool makeLending();
-    bool returnLending();
+    bool makeLending(); //done
+    bool returnLending(); //done
     void chargeFirstDelay(int nif, Book book); //done
     void chargeFee(int nif,Book book); //done, precisa ser usada
     int calculateDelay(Date date); //done
     void showMembers(); //done
-    void checkDelays();
+    void checkDelays(); //done
     void retrieveData(); //done, tem de checar delays
     int isMember(int nif); //done
     int isnonMem(int nif); //done

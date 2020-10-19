@@ -8,17 +8,17 @@ Member::Member(){
     balance = 50;
 }
 
-Member::Member(string &name, int &nif, vector<Book*> &books) {
+Member::Member(string &name, int &nif, vector<Book*> &books, float &balance) {
     this->name = name;
     this->nif = nif;
     this->books = books;
-    this->balance = 50;
+    this->balance = balance;
 }
 
-nonMem::nonMem(string &name, int &nif) : Member() {
+nonMem::nonMem(string &name, int &nif, float &balance) : Member() {
     this->name = name;
     this->nif = nif;
-    this->balance = 50;
+    this->balance = balance;
 }
 
 void Member::setName(string name){
@@ -192,4 +192,15 @@ void Member::finishRequest(int code){
             break;
         }
     }
+}
+
+void Member::deleteRequest(int code){
+    int temp;
+    for (int i = 0; i < lendRequest.size(); i++){
+        if (lendRequest[i].first == code){
+            temp = i;
+            break;
+        }
+    }
+    lendRequest.erase(lendRequest.begin()+temp);
 }

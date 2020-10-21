@@ -20,6 +20,7 @@ void Club::run(){
      * função terminar, o programa fecha, guardando os dados todos possuídos no clube em ficheiros.
      */
     string input;
+    retrieveData();
     beginningInfo();
     do {
         getline(cin, input);

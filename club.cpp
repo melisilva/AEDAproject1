@@ -19,6 +19,48 @@ void Club::run(){
      * (códigos de execução e por aí fora) e depois o seu uso. Quando esta
      * função terminar, o programa fecha, guardando os dados todos possuídos no clube em ficheiros.
      */
+    string input;
+    beginningInfo();
+    do {
+        getline(cin, input);
+        for_each(input.begin(), input.end(), [](char &c) {
+            c = ::toupper(c);
+        });
+        if (input == "ADD_M"){
+            addMember();
+        }
+        if (input == "REM_M"){
+            string nif_s;
+            int nif;
+            cout<<"Lamentamos que nos esteja a deixar..."<<endl;
+            cout<<"Por favor digamos o seu NIF para proceder"<<endl;
+            getline(cin,nif_s);
+            nif=stoi(nif_s);
+            removeMember(nif);
+        }
+        if (input == "ATL_P"){
+            updatePerson();
+        }
+        if (input == "ADD_L"){
+            addBook();
+        }
+        if (input == "LOSS"){
+            registerLoss();
+        }
+        if (input == "REG_P"){
+            makeRequest();
+        }
+        if (input == "MK_L"){
+            makeLending();
+        }
+        if (input == "END_L"){
+            returnLending();
+        }
+        if (input == "HELP"){
+            help();
+        }
+    } while(input!="END");
+    saveData();
 }
 
 void Club::beginningInfo() {
@@ -49,7 +91,6 @@ void Club::help() {
 	cout << " --- PROTOCOLOS AO NÍVEL DO CATÁLOGO --- " << endl;
 	cout << " ADD_L: adicionar livro" << endl;
 	cout << " LOSS: perda de livro" << endl;
-	cout << " ADD_L: adicionar livro" << endl;
 	cout << " REG_P: registar pedido" << endl;
 	cout << " MK_L: fazer/iniciar empréstimo" << endl;
 	cout << " END_L: finalizar empréstimo" << endl;
@@ -262,7 +303,7 @@ void Club::addBook(){
     getline(cin,category);
     cout << "Introduza a sua edição, por favor:" << endl;
     getline(cin, edition_s);
-    cout << "Introduza o dono do livro, por favor (NIF):" << endl;
+    cout << "Introduza o seu NIF, por favor, para registarmos o livro na sua conta:" << endl;
     getline(cin, owner_s);
     edition = stoi(edition_s);
     owner = stoi(owner_s);

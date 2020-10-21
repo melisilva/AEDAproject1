@@ -599,12 +599,12 @@ bool Club::makeRequest() {
 void Club::saveData(){
     string membs = "members.txt", nonmembs = "nonmembers.txt", lends = "lendings.txt", lendRs = "lendRequests.txt", bks = "books.txt", dels = "delays.txt";
 
-    ofstream file(membs, ios::binary);
-    ofstream filee(lends, ios::binary);
-    ofstream fileee(lendRs, ios::binary);
-    ofstream fileeee(bks, ios::binary);
-    ofstream fileeeee(dels, ios::binary);
-    ofstream fileeeeee(nonmembs, ios::binary);
+    ofstream file(membs, std::ofstream::out | std::ofstream::trunc);
+    ofstream filee(lends, std::ofstream::out | std::ofstream::trunc);
+    ofstream fileee(lendRs, std::ofstream::out | std::ofstream::trunc);
+    ofstream fileeee(bks, std::ofstream::out | std::ofstream::trunc);
+    ofstream fileeeee(dels, std::ofstream::out | std::ofstream::trunc);
+    ofstream fileeeeee(nonmembs, std::ofstream::out | std::ofstream::trunc);
 
     stringstream temp1, temp2, temp3, temp4, temp5, temp6;
 
@@ -921,20 +921,6 @@ void Club::retrieveData(){
         dels.str("");
         dels.clear();
     }    
-
-    //This cleans the files.
-    bks_file.close();
-    bks_file.open("books.txt", std::ofstream::out | std::ofstream::trunc);
-    memb_file.close();
-    memb_file.open("members.txt", std::ofstream::out | std::ofstream::trunc);
-    dels_file.close();
-    dels_file.open("delays.txt", std::ofstream::out | std::ofstream::trunc);
-    lends_file.close();
-    lends_file.open("lendings.txt", std::ofstream::out | std::ofstream::trunc);
-    lendRs_file.close();
-    lendRs_file.open("lendRequests.txt", std::ofstream::out | std::ofstream::trunc);
-    
-    cout << "Files successfully removed!";
 
     checkDelays();
 }

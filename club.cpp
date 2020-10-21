@@ -197,6 +197,7 @@ bool Club::makeLending() {
         lendRequests.erase(lendRequests.begin()+ i);
         nonmembers[pers].registerLending(code, today);
         nonmembers[pers].finishRequest(code);
+        chargeFee(pers, catalog.books[code]);
     }
     return true;
 }
@@ -604,7 +605,7 @@ void Club::saveData(){
     ofstream fileee(lendRs, std::ofstream::out | std::ofstream::trunc);
     ofstream fileeee(bks, std::ofstream::out | std::ofstream::trunc);
     ofstream fileeeee(dels, std::ofstream::out | std::ofstream::trunc);
-    ofstream fileeeeee(nonmembs, std::ofstream::out | std::ofstream::trunc);
+    ofstream fileeeeee(nonmembs, ios::binary);
 
     stringstream temp1, temp2, temp3, temp4, temp5, temp6;
 

@@ -23,6 +23,7 @@ void Club::run(){
     retrieveData();
     beginningInfo();
     do {
+        cout << "O que pretende fazer? ";
         getline(cin, input);
         for_each(input.begin(), input.end(), [](char &c) {
             c = ::toupper(c);
@@ -34,7 +35,7 @@ void Club::run(){
             string nif_s;
             int nif;
             cout<<"Lamentamos que nos esteja a deixar..."<<endl;
-            cout<<"Por favor digamos o seu NIF para proceder"<<endl;
+            cout<<"Por favor, insira o seu NIF para proceder: ";
             getline(cin,nif_s);
             nif=stoi(nif_s);
             removeMember(nif);

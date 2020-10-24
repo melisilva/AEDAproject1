@@ -24,7 +24,7 @@ public:
     Member(string &name, int &nif, vector<Book*> &books, float &balance); //done
     void deleteRequest(int code);
     void addBalance(int quantity);
-    int findBook(int code) const; //done
+    virtual int findBook(int code) const; //done
     string getData(); //done
     int getNIF() const; //done
     string getName() const; //done
@@ -34,17 +34,17 @@ public:
     bool registerRequest(int code, Date date); //done
     bool registerLending(int code, Date date); //done
     void renovateLending();
-    void removeBook(int index);
+    virtual void removeBook(int index);
     void setName(string name);
     void setNif(int nif);
     bool showLendRequests() const; //done
     void showData() const; //done
     void showLendings() const; //done
-    void showBooks() const; //done
+    virtual void showBooks() const; //done
     void updateData(string &name, float quantity);
     void finishLending(int code, Date date);
     void finishRequest(int code);
-    void addBook(Book &book);
+    virtual void addBook(Book &book);
 };
 
 class nonMem : public Member {

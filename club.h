@@ -19,10 +19,11 @@ public:
     void run();
     void beginningInfo(); //done
     void help(); //done
+    void showBooks(); //done
     void updatePerson(); //done
     void addMember(); //done
     void removeMember(int nif); //done
-    void addBook(); //done
+    void addBook(int nif); //done
     void registerLoss(); //done
     void removeBook(tuple<int, Date, int> lostBook); //done
     bool makeRequest(); //done
@@ -32,6 +33,7 @@ public:
     void chargeFee(int nif,Book book); //done, precisa ser usada
     int calculateDelay(Date date); //done
     void showMembers(); //done
+    void showNonMembers(); //done
     void checkDelays(); //done
     void retrieveData(); //done, tem de checar delays
     int isMember(int nif); //done

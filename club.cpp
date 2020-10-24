@@ -25,6 +25,7 @@ void Club::run(){
     do {
         cout << "O que pretende fazer? ";
         getline(cin, input);
+        cout << endl;
         for_each(input.begin(), input.end(), [](char &c) {
             c = ::toupper(c);
         });
@@ -35,7 +36,7 @@ void Club::run(){
             string nif_s;
             int nif;
             cout<<"Lamentamos que nos esteja a deixar..."<<endl;
-            cout<<"Por favor, insira o seu NIF para proceder: ";
+            cout<<"Por favor, insira um NIF para proceder: ";
             getline(cin,nif_s);
             nif=stoi(nif_s);
             removeMember(nif);
@@ -44,7 +45,7 @@ void Club::run(){
             updatePerson();
         }
         if (input == "ADD_L"){
-            addBook();
+            addBook(0);
         }
         if (input == "LOSS"){
             registerLoss();
@@ -61,14 +62,37 @@ void Club::run(){
         if (input == "HELP"){
             help();
         }
+        if (input == "SHO_M"){
+            showMembers();
+        }
+        if (input == "SHO_A"){
+            showDelays();
+        }
+        if (input == "SHO_E"){
+            showLendings();
+        }
+        if (input == "SHO_N"){
+            showNonMembers();
+        }
+        if (input == "SHO_P"){
+            showLendRequests();
+        }
+
+        if (input == "SHO_L"){
+            showBooks();
+        }
     } while(input!="END");
     saveData();
 }
 
+void Club::showBooks(){
+    catalog.showBooks();
+}
+
 void Club::beginningInfo() {
-	cout << "Seja bem-vindo ao Sistema Informático do Clube de Leitura." << endl;
-	cout << "Entre quaisquer processos, poderá relembrar-se dos códigos de acesso às" << endl;
-	cout << "diferentes operações através da inserção do comando HELP/help seguida de ENTER." << endl;
+	cout << "Seja bem-vindo ao Sistema Informático do Clube de Leitura." << endl << endl;
+	cout << "Entre quaisquer processos, poderá relembrar-se dos códigos de acesso" << endl;
+    cout << "às diferentes operações através da inserção do comando HELP + pressionar ENTER." << endl;
 	cout << "Durante a execução de uma operação (ex.: adição de um livro ao catálogo)," << endl;
 	cout << "o que precisar de saber ser-lhe-à pedido de forma simples e sempre a procurar ajudá-lo." << endl;
 	cout << "Poderá fechar o programa entre operações, inserindo o comando END/end seguida de ENTER." << endl;
@@ -89,6 +113,8 @@ void Club::help() {
 	cout << " ADD_M: adicionar membro" << endl;
 	cout << " REM_M: remover membro" << endl;
 	cout << " ATL_P: atualizar frequentador (para adição de saldo ou mudança de nome)" << endl;
+    cout << " SHO_M: mostrar membros" << endl;
+    cout << " SHO_N: mostrar não-membros" << endl;
 	cout << endl;
 	cout << " --- PROTOCOLOS AO NÍVEL DO CATÁLOGO --- " << endl;
 	cout << " ADD_L: adicionar livro" << endl;
@@ -96,6 +122,10 @@ void Club::help() {
 	cout << " REG_P: registar pedido" << endl;
 	cout << " MK_L: fazer/iniciar empréstimo" << endl;
 	cout << " END_L: finalizar empréstimo" << endl;
+    cout << " SHO_L: mostrar livros" << endl;
+    cout << " SHO_E: mostrar empréstimos" << endl;
+    cout << " SHO_A: mostrar atrasos" << endl;
+    cout << " SHO_P: mostrar pedidos" << endl;
 	cout << endl;
 	cout << " --- PROTOCOLOS AO NÍVEL DO SICL --- " << endl;
 	cout << " HELP: ajuda" << endl;
@@ -294,22 +324,34 @@ int Club::calculateDelay(Date date){
     return abs(today.timePeriod(date));
 }
 
-void Club::addBook(){
+void Club::addBook(int nif = 0){
     string title, author, category, edition_s, owner_s;
     int edition, owner, code;
 
-    cout <<"Introduza o seu título, por favor:"<< endl;
+    cout <<"Introduza o seu título, por favor: ";
     getline(cin, title);
-    cout << "Introduza o nome do seu escritor(a), por favor:" << endl;
+    cout << endl;
+    cout << "Introduza o nome do seu escritor(a), por favor: " ;
     getline(cin, author);
-    cout<<"Introduza a sua categoria, por favor:"<<endl;
+    cout << endl;
+    cout<<"Introduza a sua categoria, por favor: ";
     getline(cin,category);
-    cout << "Introduza a sua edição, por favor:" << endl;
+    cout << endl;
+    cout << "Introduza a sua edição, por favor: ";
     getline(cin, edition_s);
-    cout << "Introduza o seu NIF, por favor, para registarmos o livro na sua conta:" << endl;
-    getline(cin, owner_s);
+    cout << endl;
+    if (nif == 0){
+        cout << "Introduza o NIF, por favor, para registarmos o livro na conta respetiva: ";
+        getline(cin, owner_s);
+    }
+    cout << endl;
     edition = stoi(edition_s);
-    owner = stoi(owner_s);
+    owner = nif;
+
+    if (owner == 0){
+        owner = stoi(owner_s);
+    }
+
     code = catalog.books.size();
     Book b(code,title,author,category,edition, owner);
     catalog.books.push_back(b);
@@ -317,21 +359,23 @@ void Club::addBook(){
 }
 
 void Club::addMember(){
-    string name, answer, title, author, nif_s, edition_s, code_s, category;
+    string name = "", answer, title, author, nif_s, edition_s, code_s, category;
     int nif, edition, code;
-    Member mem;
     vector<Book*>books;
-    cout<<"Introduza o seu nome, por favor:"<<endl;
+    Member mem;
+    cout<<"Introduza o nome, por favor: ";
     getline(cin,name);
+    cout << endl;
     mem.setName(name);
-    cout<<"Introduza o seu nif, por favor:"<<endl;
+    cout<<"Introduza o NIF, por favor: ";
     getline(cin,nif_s);
+    cout << endl;
     nif=stoi(nif_s);
     mem.setNif(nif);
     members.push_back(mem);
-    cout << "Adicione um livro, por favor:"<< endl;
+    cout << "Adicione um livro, por favor!" << endl << endl;
     do {
-        addBook();
+        addBook(nif);
         cout << "Quer adicionar outro livro?"<<endl;
         getline(cin,answer);
 
@@ -405,11 +449,19 @@ void Club::removeBook(tuple<int, Date, int> lostBook){
 
 void Club::showMembers(){
     for (unsigned int i = 0; i < members.size(); i++){
-        cout << "Nome: " << members[i].getName() << "/n" << "NIF: "<< members[i].getNIF() << "/n" << "Livros:" << endl;
+        cout << "Nome: " << members[i].getName() << endl << "NIF: "<< members[i].getNIF() << endl << "Livros:" << endl;
         vector<Book*> books = members[i].getBooks();
         for (unsigned int j = 0; j < books.size(); j++){
             books[j]->showBook();
         }
+        cout << endl << endl;
+    }
+}
+
+void Club::showNonMembers(){
+    for (unsigned int i = 0; i < members.size(); i++){
+        cout << "Nome: " << members[i].getName() << endl << "NIF: "<< members[i].getNIF() << endl;
+        cout << endl;
     }
 }
 
@@ -417,6 +469,7 @@ void Club::showLendRequests() {
     for (unsigned int i = 0; i < lendRequests.size(); i++){
         cout << get<0>(lendRequests[i]) << ", a " << get<1>(lendRequests[i]).getDateStr()<< " pelo " << get<2>(lendRequests[i]) << endl;
     }
+    cout << endl << endl;
 }
 
 void Club::showLendings() {
@@ -424,6 +477,7 @@ void Club::showLendings() {
     for (unsigned int i = 0; i < lendings.size(); i++){
         cout << get<0>(lendings[i]) << ", a " << get<1>(lendings[i]).getDateStr() << " pelo membro " << get<2>(lendings[i]) << endl;
     }
+    cout << endl << endl;
 }
 
 void Club::showDelays() {
@@ -431,6 +485,7 @@ void Club::showDelays() {
     for (unsigned int i = 0; i < delays.size(); i++){
         cout << get<0>(delays[i]) << ", desde " << get<1>(delays[i]).getDateStr() << " pelo membro " << get<2>(delays[i]) << endl;
     }
+    cout << endl << endl;
 }
 
 void Club::checkDelays(){
@@ -528,17 +583,23 @@ bool Club::makeRequest() {
     int nif, code;
     string date, name, nif_str, date_str, code_str;
 
-    cout << "Indique o seu NIF: ";
+    cout << "Indique o NIF: ";
     getline(cin, nif_str);
+    cout << endl;
+    cout << endl;
     nif = stoi(nif_str);
 
     cout << "Indique o código do livro (se não o souber, introduza -1 e dê ENTER): ";
     getline(cin, code_str);
+    cout << endl;
+    cout << endl;
     code = stoi(code_str);
 
     while ((code <= -1) || code >= catalog.books.size() || cin.fail()) {
         cout << "Indique, então, o título do livro: ";
         getline(cin, name);
+        cout << endl;
+        cout << endl;
 
         if (catalog.searchBook(name) == false) {
             cerr << "EXCEÇÃO: não há livro com esse título.";
@@ -570,7 +631,7 @@ bool Club::makeRequest() {
             if (isnonMem(nif) == -1) {
                 string namem, nif_s;
                 int nif;
-                cout << "Introduza o seu nome, por favor: " << endl;
+                cout << "Introduza o nome, por favor: " << endl;
                 getline(cin, namem);
                 float balance = 50;
                 nonMem m(namem, nif, balance);
@@ -600,12 +661,20 @@ bool Club::makeRequest() {
 void Club::saveData(){
     string membs = "members.txt", nonmembs = "nonmembers.txt", lends = "lendings.txt", lendRs = "lendRequests.txt", bks = "books.txt", dels = "delays.txt";
 
-    ofstream file(membs, std::ofstream::out | std::ofstream::trunc);
-    ofstream filee(lends, std::ofstream::out | std::ofstream::trunc);
-    ofstream fileee(lendRs, std::ofstream::out | std::ofstream::trunc);
-    ofstream fileeee(bks, std::ofstream::out | std::ofstream::trunc);
-    ofstream fileeeee(dels, std::ofstream::out | std::ofstream::trunc);
-    ofstream fileeeeee(nonmembs, ios::binary);
+    ofstream file; //(membs, ios::binary);
+    ofstream filee; //(lends, ios::binary);
+    ofstream fileee; //(lendRs, ios::binary);
+    ofstream fileeee; //(bks, ios::binary);
+    ofstream fileeeee; //(dels, ios::binary);
+    ofstream fileeeeee; //(nonmembs, ios::binary);
+
+    file.open("members.txt", std::ofstream::out | std::ofstream::trunc);
+    filee.open("lendings.txt", std::ofstream::out | std::ofstream::trunc);
+    fileee.open("lendRequests.txt", std::ofstream::out | std::ofstream::trunc);
+    fileeee.open("books.txt", std::ofstream::out | std::ofstream::trunc);
+    fileeeee.open("delays.txt", std::ofstream::out | std::ofstream::trunc);
+    fileeeeee.open("nonmembers.txt", std::ofstream::out | std::ofstream::trunc);
+
 
     stringstream temp1, temp2, temp3, temp4, temp5, temp6;
 
@@ -923,5 +992,5 @@ void Club::retrieveData(){
         dels.clear();
     }    
 
-    checkDelays();
+    checkDelays();  
 }

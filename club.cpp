@@ -389,19 +389,29 @@ void Club::addMember(){
 
 }
 
-void Club::removeMember(int nif){
+bool Club::removeMember(int nif){
     if (isMember(nif) == -1){
         //exceção
     }
 
+
     int index = isMember(nif);
     vector<Book> toDelv = members[index].getBooks();
+
+    for (int i = 0; i < toDelv.size(); i++){
+        if (toDelv[i].getState() == false){
+            cout << "Não é possível eliminar um membro que tenha livros emprestados." << endl;
+            cout << "Verifique os empréstimos e informe o membro da data em que poderá deixar o Clube." << endl;
+            return false;
+        }
+    }
 
     for (int i = 0; i < toDelv.size(); i++){
         catalog.books.erase(catalog.books.begin() + (toDelv[i]).getCode());
     }
     catalog.updateCodes();
     members.erase(members.begin() + index);
+    return true;
 }
 
 void Club::removeBook(tuple<int, Date, int> lostBook){

@@ -22,7 +22,7 @@ public:
     void showBooks(); //done
     void updatePerson(); //done
     void addMember(); //done
-    void removeMember(int nif); //done
+    bool removeMember(int nif); //done
     void addBook(int nif); //done
     void registerLoss(); //done
     void removeBook(tuple<int, Date, int> lostBook); //done

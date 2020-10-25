@@ -106,47 +106,47 @@ void Book::addWritops(string writ_ops){
 
 }
 
-int Book::getCode() {
+int Book::getCode() const {
     return code;
 }
 
-string Book::getWritops(){
+string Book::getWritops() const{
     return writ_ops;
 }
 
-float Book::getRating() {
+float Book::getRating() const {
     return realRating;
 }
 
-string Book::getTitle() {
+string Book::getTitle() const {
     return title;
 }
 
-int Book::getEdition(){
+int Book::getEdition() const{
     return edition;
 }
 
-string Book::getAuthor() {
+string Book::getAuthor() const{
     return author;
 }
 
-string Book::getCategory() {
+string Book::getCategory() const{
     return category;
 }
 
-bool Book::getState() {
+bool Book::getState() const{
     return state;
 }
 
-float Book::getValue(){
+float Book::getValue() const{
     return value;
 }
 
-int Book::getUnits(){
+int Book::getUnits() const{
     return units;
 }
 
-int Book::getOwner(){
+int Book::getOwner() const{
     return owner;
 }
 
@@ -161,11 +161,11 @@ void Book::calculateRating(float rate){
     realRating=sumRating/opinions;
 }
 
-void Book::showBook(){
+void Book::showBook() const{
     cout << "   - " << title << " (" << code << "), de " << author << ", "<< edition << " edicao" <<" (" << realRating << "/5), do membro " << owner << endl << "Comentários do Livro: " << endl << writ_ops;
 }
 
-string Book::getData(){
+string Book::getData() const{
     stringstream temp;
 
     temp << code << endl << title << endl << author << endl << edition << endl << owner << endl << category << endl << value << endl << realRating << endl << units << endl << opinions << endl << sumRating << endl << state;

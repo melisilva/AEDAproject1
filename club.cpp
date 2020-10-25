@@ -83,6 +83,7 @@ void Club::run(){
         }
     } while(input!="END");
     saveData();
+    exit(0);
 }
 
 void Club::showBooks(){
@@ -353,30 +354,29 @@ void Club::addBook(int nif = 0){
     }
 
     code = catalog.books.size();
-    Book b(code,title,author,category,edition, owner);
-    catalog.books.push_back(b);
-    members[isMember(owner)].addBook(b);
+    Book* b = new Book(code,title,author,category,edition, owner);
+    catalog.books.push_back((*b));
+    members[isMember(owner)].addBook((*b));
 }
 
 void Club::addMember(){
     string name = "", answer, title, author, nif_s, edition_s, code_s, category;
     int nif, edition, code;
-    vector<Book*>books;
-    Member mem;
+    Member* mem = new Member;
     cout<<"Introduza o nome, por favor: ";
     getline(cin,name);
     cout << endl;
-    mem.setName(name);
+    (*mem).setName(name);
     cout<<"Introduza o NIF, por favor: ";
     getline(cin,nif_s);
     cout << endl;
     nif=stoi(nif_s);
-    mem.setNif(nif);
-    members.push_back(mem);
+    (*mem).setNif(nif);
+    members.push_back((*mem));
     cout << "Adicione um livro, por favor!" << endl << endl;
     do {
         addBook(nif);
-        cout << "Quer adicionar outro livro?"<<endl;
+        cout << "Quer adicionar outro livro? ";
         getline(cin,answer);
 
     } while((answer=="S") || (answer=="Sim") || (answer=="sim") || (answer=="s"));
@@ -389,10 +389,10 @@ void Club::removeMember(int nif){
     }
 
     int index = isMember(nif);
-    vector<Book*> toDelv = members[index].getBooks();
+    vector<Book> toDelv = members[index].getBooks();
 
     for (int i = 0; i < toDelv.size(); i++){
-        catalog.books.erase(catalog.books.begin() + (*toDelv[i]).getCode());
+        catalog.books.erase(catalog.books.begin() + (toDelv[i]).getCode());
     }
     catalog.updateCodes();
     members.erase(members.begin() + index);
@@ -448,11 +448,11 @@ void Club::removeBook(tuple<int, Date, int> lostBook){
 }
 
 void Club::showMembers(){
-    for (unsigned int i = 0; i < members.size(); i++){
+    for (int i = 0; i < members.size(); i++){
         cout << "Nome: " << members[i].getName() << endl << "NIF: "<< members[i].getNIF() << endl << "Livros:" << endl;
-        vector<Book*> books = members[i].getBooks();
-        for (unsigned int j = 0; j < books.size(); j++){
-            books[j]->showBook();
+        vector<Book> books = members[i].getBooks();
+        for (int j = 0; j < books.size(); j++){
+            books[j].showBook();
         }
         cout << endl << endl;
     }
@@ -691,7 +691,7 @@ void Club::saveData(){
     for (int i = 0; i < nonmembers.size(); i++){
         if (i < nonmembers.size() -1) {
             temp6 << nonmembers[i].getData() << endl << endl;
-        } else if (i = members.size() - 1){
+        } else if (i = nonmembers.size() - 1){
             temp6 << nonmembers[i].getData() << endl << "END";
         }
     }
@@ -836,7 +836,7 @@ void Club::retrieveData(){
     int nif, code;
     float balance;
     while (temp != "END"){
-        vector<Book *> memb_bks;
+        vector<Book> memb_bks;
         getline(memb_file, temp);
         membs.str("");
         membs.clear();
@@ -859,7 +859,7 @@ void Club::retrieveData(){
             membs << temp;
             membs >> code >> sep;
             int ind = catalog.searchBook(code);
-            memb_bks.push_back(&catalog.books[ind]);
+            memb_bks.push_back(catalog.books[ind]);
         } while (sep != ';');
         members.push_back(Member(name, nif, memb_bks, balance));
         getline(memb_file, temp);

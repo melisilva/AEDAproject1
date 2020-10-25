@@ -19,17 +19,17 @@ public:
     void calculateValue(); //nice
     void calculateRating(float rate); //nice
     void deleteUnit(); //nice
-    int getCode(); //nice
-    int getOwner(); //nice
-    int getEdition(); //nice
-    float getRating(); //nice
-    string getTitle(); //nice
-    string getWritops(); //nice
-    bool getState(); //nice
-    string getAuthor(); //nice
-    string getCategory(); //nice
-    float getValue(); //nice
-    int getUnits(); //nice
+    int getCode() const; //nice
+    int getOwner() const; //nice
+    int getEdition() const; //nice
+    float getRating() const; //nice
+    string getTitle() const; //nice
+    string getWritops() const; //nice
+    bool getState() const; //nice
+    string getAuthor() const; //nice
+    string getCategory() const; //nice
+    float getValue() const; //nice
+    int getUnits() const; //nice
     void setOwner(int owner); //nice
     void setCode(int code); //nice
     void setUnits(int units); //nice
@@ -42,8 +42,8 @@ public:
     void setCat(string category); //nice
     void setState(); //nice
     void setEdition(int edition); //nice
-    void showBook(); //nice
-    string getData(); //nice
+    void showBook() const; //nice
+    string getData() const; //nice
     bool operator==(Book b1);
 };
 

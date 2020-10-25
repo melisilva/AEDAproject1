@@ -8,7 +8,7 @@ Member::Member(){
     balance = 50;
 }
 
-Member::Member(string &name, int &nif, vector<Book*> &books, float &balance) {
+Member::Member(string &name, int &nif, vector<Book> &books, float &balance) {
     this->name = name;
     this->nif = nif;
     this->books = books;
@@ -28,7 +28,6 @@ void Member::setName(string name){
 void Member::setNif(int nif){
     this->nif = nif;
 }
-
 
 int Member::getNIF() const {
     return nif;
@@ -50,13 +49,13 @@ string Member::getName() const {
     return name;
 }
 
-vector<Book*> Member::getBooks() const {
+vector<Book> Member::getBooks() const {
     return books;
 }
 
 int Member::findBook(int code) const{
     for (int i = 0; i < books.size(); i++){
-        if (code == (*books[i]).getCode()){
+        if (code == books[i].getCode()){
             return i;
         }
         continue;
@@ -65,8 +64,8 @@ int Member::findBook(int code) const{
 }
 
 void Member::removeBook(int index) {
-    if(books[index]->getUnits()>1){
-        books[index]->deleteUnit();
+    if(books[index].getUnits()>1){
+        books[index].deleteUnit();
     }
     else{
         books.erase(books.begin()+index);
@@ -82,16 +81,16 @@ void Member::addBook(Book &book){
     bool already=false;
     if(books.size()!=0){
         for(unsigned int i=0;i<books.size();i++){
-            if(&book==books[i]){
-                books[i]->addUnits();
+            if(book.getData()==books[i].getData()){
+                books[i].addUnits();
                 already=true;
             }
         }
         if(!already){
-            this->books.push_back(&book);
+            books.push_back(book);
         }
     }else{
-        this->books.push_back(&book);
+        books.push_back(book);
     }
 }
 
@@ -123,7 +122,7 @@ void Member::showData() const {
 void Member::showBooks() const {
     cout << "Livros de " << getName() << ": " << endl;
     for (int i = 0; i < books.size(); i++){
-        (*books[i]).showBook();
+        books[i].showBook();
     }
 }
 
@@ -146,9 +145,9 @@ string Member::getData() {
     temp << name << endl << nif << endl;
     for (int i = 0; i < books.size(); i++){
         if (i < books.size() - 1 ) {
-            temp << (*books[i]).getCode() << "," << endl;
+            temp << books[i].getCode() << "," << endl;
         } else if (i == books.size() - 1){
-            temp << (*books[i]).getCode() << ";";
+            temp << books[i].getCode() << ";";
         }
     }
     return temp.str();
@@ -203,4 +202,12 @@ void Member::deleteRequest(int code){
         }
     }
     lendRequest.erase(lendRequest.begin()+temp);
+}
+
+string nonMem::getData() {
+
+    stringstream temp;
+
+    temp << name << endl << nif << endl;
+    return temp.str();
 }

@@ -14,21 +14,21 @@ using namespace std;
 class Member {
 protected:
     vector<pair<int, Date>> lendRequest, lendings;
-    vector<Book*> books;
+    vector<Book> books;
     string name;
     int nif;
     float balance;
 
 public:
     Member(); //done
-    Member(string &name, int &nif, vector<Book*> &books, float &balance); //done
+    Member(string &name, int &nif, vector<Book> &books, float &balance); //done
     void deleteRequest(int code);
     void addBalance(int quantity);
     virtual int findBook(int code) const; //done
-    string getData(); //done
+    virtual string getData(); //done
     int getNIF() const; //done
     string getName() const; //done
-    virtual vector<Book*> getBooks() const; //done
+    virtual vector<Book> getBooks() const; //done
     float getBalance() const; //done
     void minusBalance(int quantity);
     bool registerRequest(int code, Date date); //done
@@ -50,6 +50,7 @@ public:
 class nonMem : public Member {
 public:
     nonMem(string &name, int &nif, float &balance); //done
+    string getData();
 };
 
 

@@ -243,7 +243,7 @@ bool Club::returnLending() {
     int isMem = isMember(nif), isNMem = isnonMem(nif);
 
     while ( (isMem == isNMem) || ((catalog.searchBook(code) == -1) && (code != -1))){
-        cout << "Indique o seu NIF: ";
+        cout << "Indique o NIF: ";
         getline(cin, nif_str);
         nif = stoi(nif_str);
         isMem = isMember(nif);

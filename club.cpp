@@ -923,7 +923,7 @@ void Club::retrieveData(){
     }
 
     //Getting Member data.
-    temp = "";
+    temp = "BEGIN";
     string name;
     int nif, code;
     float balance;
@@ -963,7 +963,7 @@ void Club::retrieveData(){
     }
 
     //Getting nonMembers data.
-    temp = "";
+    temp = "BEGIN";
     while (temp != "END"){
         getline(nmemb_file, temp);
         nmembs.str("");
@@ -990,8 +990,8 @@ void Club::retrieveData(){
     }
 
     //Getting lendRequests data.
-    temp = "";
-    string date;
+    temp = "BEGIN";
+    string date = "temp";
     Date tmp;
     while (temp != "END") {
         getline(lendRs_file, temp);
@@ -1024,7 +1024,7 @@ void Club::retrieveData(){
     }
 
     //Getting lendings data.
-    temp = "";
+    temp = "BEGIN";
     Date tmp2;
     while (temp != "END") {
         getline(lends_file, temp);
@@ -1057,7 +1057,7 @@ void Club::retrieveData(){
     }
 
     //Getting delays data.
-    temp = "";
+    temp = "BEGIN";
     Date tmp3;
     while (temp != "END") {
         getline(dels_file, temp);

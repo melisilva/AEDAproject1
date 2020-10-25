@@ -142,7 +142,7 @@ string Member::getData() {
 
     stringstream temp;
 
-    temp << name << endl << nif << endl;
+    temp << name << endl << nif << endl << to_string(balance) << endl;
     for (int i = 0; i < books.size(); i++){
         if (i < books.size() - 1 ) {
             temp << books[i].getCode() << "," << endl;
@@ -208,6 +208,6 @@ string nonMem::getData() {
 
     stringstream temp;
 
-    temp << name << endl << nif << endl;
+    temp << name << endl << nif << endl << to_string(balance) << endl;
     return temp.str();
 }

@@ -179,7 +179,7 @@ bool Club::makeLending() {
     bool nonMem = false;
 
     while (isMember(nif) == isnonMem(nif) || ((catalog.searchBook(code) == -1) && (code != -1))){
-        cout << "Indique o seu NIF: ";
+        cout << "Indique o NIF: ";
         getline(cin, nif_str);
         nif = stoi(nif_str);
 
@@ -459,8 +459,8 @@ void Club::showMembers(){
 }
 
 void Club::showNonMembers(){
-    for (unsigned int i = 0; i < members.size(); i++){
-        cout << "Nome: " << members[i].getName() << endl << "NIF: "<< members[i].getNIF() << endl;
+    for (unsigned int i = 0; i < nonmembers.size(); i++){
+        cout << "Nome: " << nonmembers[i].getName() << endl << "NIF: "<< nonmembers[i].getNIF() << endl;
         cout << endl;
     }
 }
@@ -629,15 +629,14 @@ bool Club::makeRequest() {
     } else { //it's not a member then it's a nonMem
         while (true) {
             if (isnonMem(nif) == -1) {
-                string namem, nif_s;
-                int nif;
-                cout << "Introduza o nome, por favor: " << endl;
+                string namem;
+                cout << "Introduza o nome, por favor: ";
                 getline(cin, namem);
                 float balance = 50;
-                nonMem m(namem, nif, balance);
-                m.registerRequest(code, today);
+                nonMem* p = new nonMem(namem, nif, balance);
+                (*p).registerRequest(code, today);
                 catalog.books[code].deleteUnit();
-                nonmembers.push_back(m);
+                nonmembers.push_back((*p));
                 break;
             } else {
                 if ((isnonMem(nif) != -1) && (nonmembers[isnonMem(nif)].getBalance() > 0)) {
@@ -701,7 +700,7 @@ void Club::saveData(){
     for (int i = 0; i < lendings.size(); i++){
         if (i < lendings.size() -1) {
             temp2 << get<0>(lendings[i]) << endl << get<1>(lendings[i]).getDateStr() << endl << get<2>(lendings[i]) << endl << endl  << endl;  //código do livro, data, membro
-        } else if (i = members.size() - 1){
+        } else if (i = lendings.size() - 1){
             temp2 << get<0>(lendings[i]) << endl << get<1>(lendings[i]).getDateStr() << endl << get<2>(lendings[i]) << endl << endl << "END";
         }
     }
@@ -711,7 +710,7 @@ void Club::saveData(){
     for (int i = 0; i < lendRequests.size(); i++){
         if (i < lendRequests.size() -1) {
             temp3 << get<0>(lendRequests[i]) << endl << get<1>(lendRequests[i]).getDateStr() << endl << get<2>(lendRequests[i]) << endl << endl  << endl;  //código do livro, data, membro
-        } else if (i = members.size() - 1){
+        } else if (i = lendRequests.size() - 1){
             temp3 << get<0>(lendRequests[i]) << endl << get<1>(lendRequests[i]).getDateStr() << endl << get<2>(lendRequests[i]) << endl << endl << "END";
         }
     }
@@ -721,7 +720,7 @@ void Club::saveData(){
     for (int i = 0; i < catalog.books.size(); i++){
         if (i < catalog.books.size() -1) {
             temp4 << catalog.books[i].getData() << endl << endl  << endl;
-        } else if (i = members.size() - 1){
+        } else if (i = catalog.books.size() - 1){
             temp4 << catalog.books[i].getData() << endl << endl << "END";
         }
     }
@@ -729,9 +728,9 @@ void Club::saveData(){
     fileeee << temp4.str();
 
     for (int i = 0; i < delays.size(); i++){
-        if (i < members.size() -1) {
+        if (i < delays.size() - 1) {
             temp5 << get<0>(delays[i]) << endl << get<1>(delays[i]).getDateStr() << endl << get<2>(delays[i]) << endl << endl  << endl;  //código do livro, data, membro
-        } else if (i = members.size() - 1){
+        } else if (i = delays.size() - 1){
             temp5 << get<0>(delays[i]) << endl << get<1>(delays[i]).getDateStr() << endl << get<2>(delays[i]) << endl << endl << "END";
         }
     }

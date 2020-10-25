@@ -77,7 +77,6 @@ bool Catalog::searchBook(string name){
     int count = 0;
     for(unsigned int i=0;i<books.size();i++){
         if(books[i].getTitle()==name){
-            showBook(i);
             count++;
         }
     }

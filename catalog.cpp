@@ -59,13 +59,13 @@ void Catalog::registerComments(int code){
 }
 
 void Catalog::showBooks(){
-    for(unsigned int i=0;i<books.size();i++){
+    for(int i=0;i<books.size();i++){
         books[i].showBook();
     }
 }
 
 int Catalog::searchBook(int code){
-    for(unsigned int i=0;i<books.size();i++){
+    for(int i=0; i<books.size(); i++){
         if(books[i].getCode()==code){
             return i;
         }

@@ -177,11 +177,14 @@ bool Club::makeLending() {
     int nif = 0, code = -1, temp, i;
     string name, nif_str, code_str;
     bool nonMem = false;
+    int isMem = isMember(nif), isNMem = isnonMem(nif);
 
-    while (isMember(nif) == isnonMem(nif) || ((catalog.searchBook(code) == -1) && (code != -1))){
+    while ( (isMem == isNMem) || ((catalog.searchBook(code) == -1) && (code != -1))){
         cout << "Indique o NIF: ";
         getline(cin, nif_str);
         nif = stoi(nif_str);
+        isMem = isMember(nif);
+        isNMem = isnonMem(nif);
 
         cout << "Indique o código do livro (se não o souber, insira -1 e dê ENTER): ";
         getline(cin, code_str);
@@ -237,11 +240,14 @@ bool Club::returnLending() {
     int nif = 0, code = -1;
     string name, nif_str, code_str, answer;
     bool nonMem = false;
+    int isMem = isMember(nif), isNMem = isnonMem(nif);
 
-    while (isMember(nif) == isnonMem(nif) || ((catalog.searchBook(code) == -1) && (code != -1))){
+    while ( (isMem == isNMem) || ((catalog.searchBook(code) == -1) && (code != -1))){
         cout << "Indique o seu NIF: ";
         getline(cin, nif_str);
         nif = stoi(nif_str);
+        isMem = isMember(nif);
+        isNMem = isnonMem(nif);
 
         cout << "Indique o código do livro (se não o souber, insira -1 e dê ENTER): ";
         getline(cin, code_str);
@@ -283,7 +289,7 @@ bool Club::returnLending() {
 }    
 
 int Club::isMember(int nif){ //returns member index or -1 if it doesn't exist
-    for(unsigned int i = 0; i < members.size(); i++) {
+    for(int i = 0; i < members.size(); i++) {
         if (members[i].getNIF() == nif) {
             return i;
         }

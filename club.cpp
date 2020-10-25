@@ -837,7 +837,7 @@ void Club::retrieveData(){
     string title, author, category;
     int code_bk, units, opinions, sumRating, edition, owner, oguni;
     float realRating, value;
-    bool state;
+    bool state, multi;
     while (temp != "END"){
         getline(bks_file, temp);
         bks.str("");
@@ -904,10 +904,15 @@ void Club::retrieveData(){
         bks.clear();
         bks << temp;
         bks >> state;
+        getline(bks_file, temp);
+        bks.str("");
+        bks.clear();
+        bks << temp;
+        bks >> multi;
         Book bk;
         bk.setAuthor(author); bk.setTitle(title); bk.setCat(category); bk.setCode(code_bk); bk.setUnits(units);
         bk.setOpinions(opinions); bk.setRating(realRating); bk.setSumR(sumRating); bk.setValue(value); bk.setState();
-        bk.setEdition(edition); bk.setOwner(owner); bk.setOgunit(oguni);
+        bk.setEdition(edition); bk.setOwner(owner); bk.setOgunit(oguni); bk.setMulti();
         catalog.books.push_back(bk);
         getline(bks_file, temp);
         bks.str("");

@@ -43,6 +43,7 @@ public:
     void setCat(string category); //nice
     void setState(); //nice
     void setEdition(int edition); //nice
+    void setOgunit(int oguni);
     void showBook() const; //nice
     string getData() const; //nice
     bool operator==(Book b1);

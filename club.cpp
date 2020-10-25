@@ -19,7 +19,7 @@ Club::Club() {
      * função terminar, o programa fecha, guardando os dados todos possuídos no clube em ficheiros.
      */
 void Club::run(){
-    string input;
+    string input = "";
     retrieveData();
     beginningInfo();
     do {
@@ -79,7 +79,6 @@ void Club::run(){
         if (input == "SHO_P"){
             showLendRequests();
         }
-
         if (input == "SHO_L"){
             showBooks();
         }
@@ -277,7 +276,7 @@ bool Club::renovateLending(){
                 if (abs(get<1>(lendings[i]).timePeriod(get<1>(lendings[i]).extendTime())) <= 3) {
                     get<1>(lendings[i])=today;
                     cout<<endl;
-                    members[isMem].renovateLending(code,today);
+                    members[isMem].renovateLending(code, today);
                     return true;
                 } else {
                     cout
@@ -836,7 +835,7 @@ void Club::retrieveData(){
 
     //Getting Books data.
     string title, author, category;
-    int code_bk, units, opinions, sumRating, edition, owner;
+    int code_bk, units, opinions, sumRating, edition, owner, oguni;
     float realRating, value;
     bool state;
     while (temp != "END"){
@@ -889,6 +888,11 @@ void Club::retrieveData(){
         bks.str("");
         bks.clear();
         bks << temp;
+        bks >> oguni;
+        getline(bks_file, temp);
+        bks.str("");
+        bks.clear();
+        bks << temp;
         bks >> opinions;
         getline(bks_file, temp);
         bks.str("");
@@ -903,7 +907,7 @@ void Club::retrieveData(){
         Book bk;
         bk.setAuthor(author); bk.setTitle(title); bk.setCat(category); bk.setCode(code_bk); bk.setUnits(units);
         bk.setOpinions(opinions); bk.setRating(realRating); bk.setSumR(sumRating); bk.setValue(value); bk.setState();
-        bk.setEdition(edition); bk.setOwner(owner);
+        bk.setEdition(edition); bk.setOwner(owner); bk.setOgunit(oguni);
         catalog.books.push_back(bk);
         getline(bks_file, temp);
         bks.str("");
@@ -934,7 +938,7 @@ void Club::retrieveData(){
         membs.str("");
         membs.clear();
         membs << temp;
-        membs >> balance;
+        balance = stof(temp);
         do {
             getline(memb_file, temp);
             membs.str("");
@@ -970,7 +974,7 @@ void Club::retrieveData(){
         nmembs.str("");
         nmembs.clear();
         nmembs << temp;
-        nmembs >> balance;
+        balance = stof(temp);
         nonmembers.push_back(nonMem(name, nif, balance));
         getline(nmemb_file, temp);
         nmembs.str("");

@@ -33,7 +33,7 @@ public:
     void minusBalance(int quantity);
     bool registerRequest(int code, Date date); //done
     bool registerLending(int code, Date date); //done
-    void renovateLending();
+    void renovateLending(int code, Date date);
     virtual void removeBook(int index);
     void setName(string name);
     void setNif(int nif);

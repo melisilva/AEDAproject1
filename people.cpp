@@ -81,7 +81,7 @@ void Member::addBook(Book &book){
     bool already=false;
     if(books.size()!=0){
         for(unsigned int i=0;i<books.size();i++){
-            if(book.getData()==books[i].getData()){
+            if(book==books[i]){
                 books[i].addUnits();
                 already=true;
             }

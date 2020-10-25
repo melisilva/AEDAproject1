@@ -361,7 +361,7 @@ void Club::addBook(int nif = 0){
 
     code = catalog.books.size();
     Book* b = new Book(code,title,author,category,edition, owner);
-    catalog.books.push_back((*b));
+    catalog.addBook((*b));
     members[isMember(owner)].addBook((*b));
 }
 

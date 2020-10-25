@@ -162,7 +162,7 @@ void Book::calculateRating(float rate){
 }
 
 void Book::showBook() const{
-    cout << "   - " << title << " (" << code << "), de " << author << ", "<< edition << " edicao" <<" (" << realRating << "/5), do membro " << owner << endl << "Comentários do Livro: " << endl << writ_ops;
+    cout << "   - " << title << " (" << code << "), de " << author << ", "<< edition << " edicao" <<" (" << realRating << "/5), do membro " << owner <<", "<<units<<" unidades"<<endl << "Comentários do Livro: " << endl << writ_ops;
 }
 
 string Book::getData() const{
@@ -174,13 +174,15 @@ string Book::getData() const{
     return temp.str();
 }
 
+
+
 void Book::addUnits(){
     units+=1;
     setState();
 }
 
 bool Book::operator==(Book b1){
-    if(code==b1.getCode() && title==b1.getTitle() && author==b1.getAuthor() && category==b1.getCategory() && edition==b1.getEdition()){
+    if(title==b1.getTitle() && author==b1.getAuthor() && category==b1.getCategory() && edition==b1.getEdition() && owner==b1.owner){
         return true;
     }
     else{

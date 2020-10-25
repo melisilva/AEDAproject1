@@ -1,21 +1,28 @@
-001
-Aristotle and Dante Discover the Secrets of the Universe
-Benjamin Alire-Saénz
+0
+Ari and Dante
+Benjamin Alire-Saenz
+1
+123456789
 Contemporary
 19.43
 5
 1
 10
 50
-true
+1
 
-002
-Aristotle and Dante Discover the Secrets of the Universe
-Benjamin Alire-Saénz
+
+1
+DaVinci's Code
+Dan Brown
+1
+123456789
 Contemporary
 19.43
 5
 1
 10
 50
-true
+1
+
+END

@@ -684,7 +684,7 @@ void Club::saveData(){
     for (int i = 0; i < members.size(); i++){
         if (i < members.size() -1) {
             temp1 << members[i].getData() << endl << endl << endl;
-        } else if (i == members.size() - 1){
+        } else if (i = members.size() - 1){
             temp1 << members[i].getData() << endl << endl << "END";
         }
     }
@@ -694,7 +694,7 @@ void Club::saveData(){
     for (int i = 0; i < nonmembers.size(); i++){
         if (i < nonmembers.size() -1) {
             temp6 << nonmembers[i].getData() << endl << endl;
-        } else if (i == nonmembers.size() - 1){
+        } else if (i = nonmembers.size() - 1){
             temp6 << nonmembers[i].getData() << endl << "END";
         }
     }
@@ -704,7 +704,7 @@ void Club::saveData(){
     for (int i = 0; i < lendings.size(); i++){
         if (i < lendings.size() -1) {
             temp2 << get<0>(lendings[i]) << endl << get<1>(lendings[i]).getDateStr() << endl << get<2>(lendings[i]) << endl << endl  << endl;  //código do livro, data, membro
-        } else if (i == lendings.size() - 1){
+        } else if (i = lendings.size() - 1){
             temp2 << get<0>(lendings[i]) << endl << get<1>(lendings[i]).getDateStr() << endl << get<2>(lendings[i]) << endl << endl << "END";
         }
     }
@@ -714,7 +714,7 @@ void Club::saveData(){
     for (int i = 0; i < lendRequests.size(); i++){
         if (i < lendRequests.size() -1) {
             temp3 << get<0>(lendRequests[i]) << endl << get<1>(lendRequests[i]).getDateStr() << endl << get<2>(lendRequests[i]) << endl << endl  << endl;  //código do livro, data, membro
-        } else if (i == lendRequests.size() - 1){
+        } else if (i = lendRequests.size() - 1){
             temp3 << get<0>(lendRequests[i]) << endl << get<1>(lendRequests[i]).getDateStr() << endl << get<2>(lendRequests[i]) << endl << endl << "END";
         }
     }
@@ -724,7 +724,7 @@ void Club::saveData(){
     for (int i = 0; i < catalog.books.size(); i++){
         if (i < catalog.books.size() -1) {
             temp4 << catalog.books[i].getData() << endl << endl  << endl;
-        } else if (i == catalog.books.size() - 1){
+        } else if (i = catalog.books.size() - 1){
             temp4 << catalog.books[i].getData() << endl << endl << "END";
         }
     }
@@ -734,7 +734,7 @@ void Club::saveData(){
     for (int i = 0; i < delays.size(); i++){
         if (i < delays.size() - 1) {
             temp5 << get<0>(delays[i]) << endl << get<1>(delays[i]).getDateStr() << endl << get<2>(delays[i]) << endl << endl  << endl;  //código do livro, data, membro
-        } else if (i == delays.size() - 1){
+        } else if (i = delays.size() - 1){
             temp5 << get<0>(delays[i]) << endl << get<1>(delays[i]).getDateStr() << endl << get<2>(delays[i]) << endl << endl << "END";
         }
     }
@@ -743,12 +743,12 @@ void Club::saveData(){
 }
 
 void Club::retrieveData(){
-    ifstream memb_file; memb_file.open("members.txt", ios::in);
-    ifstream bks_file; bks_file.open("books.txt", ios::in);
-    ifstream lendRs_file; lendRs_file.open("lendRequests.txt", ios::in);
-    ifstream lends_file; lends_file.open("lendings.txt", ios::in);
-    ifstream dels_file; dels_file.open("delays.txt", ios::in);
-    ifstream nmemb_file; nmemb_file.open("nonmembers.txt", ios::in);
+    ifstream memb_file; memb_file.open("members.txt");
+    ifstream bks_file; bks_file.open("books.txt");
+    ifstream lendRs_file; lendRs_file.open("lendRequests.txt");
+    ifstream lends_file; lends_file.open("lendings.txt");
+    ifstream dels_file; dels_file.open("delays.txt");
+    ifstream nmemb_file; nmemb_file.open("nonmembers.txt");
     string temp;
     char sep = ',';
     stringstream membs, bks, lendRs, lends, dels, nmembs;
@@ -854,7 +854,7 @@ void Club::retrieveData(){
         membs.str("");
         membs.clear();
         membs << temp;
-        balance = stof(temp);
+        membs >> balance;
         do {
             getline(memb_file, temp);
             membs.str("");
@@ -890,7 +890,7 @@ void Club::retrieveData(){
         nmembs.str("");
         nmembs.clear();
         nmembs << temp;
-        balance = stof(temp);
+        nmembs >> balance;
         nonmembers.push_back(nonMem(name, nif, balance));
         getline(nmemb_file, temp);
         nmembs.str("");
@@ -993,14 +993,7 @@ void Club::retrieveData(){
         getline(dels_file, temp);
         dels.str("");
         dels.clear();
-    }
-    dels_file.close();
-    memb_file.close();
-    nmemb_file.close();
-    lendRs_file.close();
-    lends_file.close();
-    bks_file.close();
-
+    }    
 
     checkDelays();  
 }

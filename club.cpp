@@ -631,7 +631,6 @@ bool Club::makeRequest() {
             return false;
         }
         members[isMember(nif)].registerRequest(code, today);
-        catalog.books[code].deleteUnit();
     } else { //it's not a member then it's a nonMem
         while (true) {
             if (isnonMem(nif) == -1) {
@@ -641,7 +640,6 @@ bool Club::makeRequest() {
                 float balance = 50;
                 nonMem* p = new nonMem(namem, nif, balance);
                 (*p).registerRequest(code, today);
-                catalog.books[code].deleteUnit();
                 nonmembers.push_back((*p));
                 break;
             } else {

@@ -210,6 +210,7 @@ bool Club::makeLending() {
         for (int i = 0; i < lendRequests.size(); i++){
             if ((get<0>(lendRequests[i]) == code) && (get<2>(lendRequests[i]) == nif)){
                 catalog.books[code].deleteUnit();
+                members[isMember(catalog.books[code].getOwner())].removeBook(members[isMember(catalog.books[code].getOwner())].findBook(code));
                 lendings.push_back(make_tuple(get<0>(lendRequests[i]), today, get<2>(lendRequests[i])));
                 lendRequests.erase(lendRequests.begin()+ i);
                 members[pers].registerLending(code, today);
@@ -229,6 +230,7 @@ bool Club::makeLending() {
             }
         }
         catalog.books[code].deleteUnit();
+        members[isMember(catalog.books[code].getOwner())].removeBook(members[isMember(catalog.books[code].getOwner())].findBook(code));
         lendings.push_back(make_tuple(get<0>(lendRequests[temp]), today, get<2>(lendRequests[temp])));
         lendRequests.erase(lendRequests.begin()+ i);
         nonmembers[pers].registerLending(code, today);

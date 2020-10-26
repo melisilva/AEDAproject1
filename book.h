@@ -31,6 +31,7 @@ public:
     string getCategory() const; //nice
     float getValue() const; //nice
     int getUnits() const; //nice
+    int getOguni() const;
     void setOwner(int owner); //nice
     void setCode(int code); //nice
     void setUnits(int units); //nice

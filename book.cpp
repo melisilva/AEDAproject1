@@ -164,6 +164,10 @@ int Book::getUnits() const{
     return units;
 }
 
+int Book::getOguni()const{
+    return oguni;
+}
+
 int Book::getOwner() const{
     return owner;
 }

@@ -763,7 +763,7 @@ void Club::saveData(){
     for (int i = 0; i < members.size(); i++){
         if (i < members.size() -1) {
             temp1 << members[i].getData() << endl << endl << endl;
-        } else if (i = members.size() - 1){
+        } else if (i == members.size() - 1){
             temp1 << members[i].getData() << endl << endl << "END";
         }
     }
@@ -773,7 +773,7 @@ void Club::saveData(){
     for (int i = 0; i < nonmembers.size(); i++){
         if (i < nonmembers.size() -1) {
             temp6 << nonmembers[i].getData() << endl << endl;
-        } else if (i = nonmembers.size() - 1){
+        } else if (i == nonmembers.size() - 1){
             temp6 << nonmembers[i].getData() << endl << "END";
         }
     }
@@ -783,7 +783,7 @@ void Club::saveData(){
     for (int i = 0; i < lendings.size(); i++){
         if (i < lendings.size() -1) {
             temp2 << get<0>(lendings[i]) << endl << get<1>(lendings[i]).getDateStr() << endl << get<2>(lendings[i]) << endl << endl  << endl;  //código do livro, data, membro
-        } else if (i = lendings.size() - 1){
+        } else if (i == lendings.size() - 1){
             temp2 << get<0>(lendings[i]) << endl << get<1>(lendings[i]).getDateStr() << endl << get<2>(lendings[i]) << endl << endl << "END";
         }
     }
@@ -793,7 +793,7 @@ void Club::saveData(){
     for (int i = 0; i < lendRequests.size(); i++){
         if (i < lendRequests.size() -1) {
             temp3 << get<0>(lendRequests[i]) << endl << get<1>(lendRequests[i]).getDateStr() << endl << get<2>(lendRequests[i]) << endl << endl  << endl;  //código do livro, data, membro
-        } else if (i = lendRequests.size() - 1){
+        } else if (i == lendRequests.size() - 1){
             temp3 << get<0>(lendRequests[i]) << endl << get<1>(lendRequests[i]).getDateStr() << endl << get<2>(lendRequests[i]) << endl << endl << "END";
         }
     }
@@ -803,7 +803,7 @@ void Club::saveData(){
     for (int i = 0; i < catalog.books.size(); i++){
         if (i < catalog.books.size() -1) {
             temp4 << catalog.books[i].getData() << endl << endl  << endl;
-        } else if (i = catalog.books.size() - 1){
+        } else if (i == catalog.books.size() - 1){
             temp4 << catalog.books[i].getData() << endl << endl << "END";
         }
     }
@@ -813,7 +813,7 @@ void Club::saveData(){
     for (int i = 0; i < delays.size(); i++){
         if (i < delays.size() - 1) {
             temp5 << get<0>(delays[i]) << endl << get<1>(delays[i]).getDateStr() << endl << get<2>(delays[i]) << endl << endl  << endl;  //código do livro, data, membro
-        } else if (i = delays.size() - 1){
+        } else if (i == delays.size() - 1){
             temp5 << get<0>(delays[i]) << endl << get<1>(delays[i]).getDateStr() << endl << get<2>(delays[i]) << endl << endl << "END";
         }
     }

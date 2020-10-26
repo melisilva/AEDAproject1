@@ -200,6 +200,6 @@ string nonMem::getData() {
 
     stringstream temp;
 
-    temp << name << endl << nif << endl << to_string(balance) << endl;
+    temp << name << endl << nif << endl << to_string(balance);
     return temp.str();
 }

@@ -772,9 +772,9 @@ void Club::saveData(){
 
     for (int i = 0; i < nonmembers.size(); i++){
         if (i < nonmembers.size() -1) {
-            temp6 << nonmembers[i].getData() << endl << endl;
+            temp6 << nonmembers[i].getData() << endl << endl << endl;
         } else if (i == nonmembers.size() - 1){
-            temp6 << nonmembers[i].getData() << endl << "END";
+            temp6 << nonmembers[i].getData() << endl << endl << "END";
         }
     }
 

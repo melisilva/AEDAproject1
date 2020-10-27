@@ -13,7 +13,7 @@ class Book {
 
 public:
     Book(); //nice
-    Book(int code, string title, string author, string category,int edition, int owner); //nice
+    Book(int code, string title, string author, string category,int edition, int owner,int units,int oguni); //nice
     void addUnits(); //nice (usable when returning a book)
     void addWritops(string writ_ops); //nice
     void calculateValue(); //nice

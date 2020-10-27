@@ -145,3 +145,53 @@ Date Date::extendTime() {
     Date result={day,month,year};
     return result;
 }
+
+Date Date::delayDate() {
+    int rest, extrad = 11;
+    //days plus months
+    int n1 = day ;
+    for (int i = 0; i < month - 1; i++) {
+        n1 += mdays[i];
+    }
+    if (isleapYear() && month > 2) { //check if the fact that it's a leap year or not affect calculations
+        n1 += 1;
+    }
+    if (isleapYear()) {
+        rest = 366 - n1;
+    }
+    else {
+        rest = 365 - n1;
+    }
+    if (extrad <= rest) { //year doesn't change
+        n1 += extrad;
+    }
+    else {
+        extrad -= rest;
+        year += 1;
+        int days;
+        if (isleapYear()) {
+            days = 366;
+        }
+        else {
+            days = 365;
+        }
+        while (extrad >= days) {
+            extrad -= days;
+        }
+        n1 = extrad;
+    }
+    if (isleapYear()) {
+        mdays[1] = 29;
+    }
+    int i;
+    for (i = 0; i < 12; i++) {
+        if (n1 <= mdays[i]) {
+            break;
+        }
+        n1 -= mdays[i];
+    }
+    day = n1;
+    month = i+1;
+    Date result={day,month,year};
+    return result;
+}

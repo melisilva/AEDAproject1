@@ -18,15 +18,15 @@ Book::Book(){
 
 }
 
-Book::Book(int code, string title, string author,string category,int edition, int owner){
+Book::Book(int code, string title, string author,string category,int edition, int owner,int units,int oguni){
     this->code = code;
     this->title = title;
     this->author = author;
     this->category=category;
     this->edition=edition;
     this->owner = owner;
-    this->units = 1;
-    this->oguni=1;
+    this->units = units;
+    this->oguni=oguni;
     this->opinions = 0;
     this->sumRating = 0;
     this->realRating = 0;
@@ -164,7 +164,7 @@ int Book::getUnits() const{
     return units;
 }
 
-int Book::getOguni()const{
+int Book::getOguni() const{
     return oguni;
 }
 
@@ -195,7 +195,7 @@ void Book::showBook() const{
 string Book::getData() const{
     stringstream temp;
 
-    temp << code << endl << title << endl << author << endl << edition << endl << owner << endl << category << endl << value << endl << realRating << endl << units << endl << oguni << endl << opinions << endl << sumRating << endl << state << endl << multi; 
+    temp << code << endl << title << endl << author << endl << edition << endl << owner << endl << category << endl << value << endl << realRating << endl << units << endl << oguni << endl << opinions << endl << sumRating << endl << state << endl << multi;
 
     string tmp = temp.str();
     return temp.str();

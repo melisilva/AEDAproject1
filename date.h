@@ -20,6 +20,7 @@ public:
     int nly();
     int timePeriod(Date dt2);
     Date extendTime();
+    Date delayDate();
     bool operator==(Date d1);
 
 };

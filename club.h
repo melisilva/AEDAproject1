@@ -2,10 +2,12 @@
 #define AEDAPROJECT1_CLUB_H
 #include "catalog.h"
 #include "date.h"
+#include <windows.h>
 #include <fstream>
 #include "people.h"
 #include <vector>
 #include <stdio.h>
+#include <iomanip>
 
 class Club {
 private:
@@ -29,7 +31,7 @@ public:
     bool makeRequest(); //done
     bool makeLending(); //done
     bool returnLending(); //done
-    void chargeFirstDelay(int nif, Book book); //done
+    void chargeFirstDelay(int nif, Book book,int days); //done
     void chargeFee(int nif,Book book); //done, precisa ser usada
     int calculateDelay(Date date); //done
     void showMembers(); //done
@@ -43,6 +45,8 @@ public:
     void showDelays(); //done
     void showLendRequests(); //done
     void saveData(); //done
+    void getOpinions(int code);
+    void colorText(char ch); //add color to the interface
 };
 
 

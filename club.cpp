@@ -1,4 +1,5 @@
 #include "club.h"
+//int sys_counter;
 
 Club::Club() {
     vector<Member> temp;
@@ -20,6 +21,7 @@ Club::Club() {
      */
 void Club::run(){
     string input = "";
+    bool valid=false;
     retrieveData();
     beginningInfo();
     do {
@@ -30,9 +32,11 @@ void Club::run(){
             c = ::toupper(c);
         });
         if (input == "ADD_M"){
+            valid=true;
             addMember();
         }
         if (input == "REM_M"){
+            valid=true;
             string nif_s;
             int nif;
             cout<<"Insira um NIF para proceder: ";
@@ -41,46 +45,65 @@ void Club::run(){
             removeMember(nif);
         }
         if (input == "ATL_P"){
+            valid=true;
             updatePerson();
         }
         if (input == "ADD_L"){
+            valid=true;
             addBook(0);
         }
         if (input == "LOSS"){
+            valid=true;
             registerLoss();
         }
         if (input == "REG_P"){
+            valid=true;
             makeRequest();
         }
         if (input == "MK_L"){
+            valid=true;
             makeLending();
         }
         if (input == "END_L"){
+            valid=true;
             returnLending();
         }
         if(input=="REN_L"){
+            valid=true;
             renovateLending();
         }
         if (input == "HELP"){
+            valid=true;
             help();
         }
         if (input == "SHO_M"){
+            valid=true;
             showMembers();
         }
         if (input == "SHO_A"){
+            valid=true;
             showDelays();
         }
         if (input == "SHO_E"){
+            valid=true;
             showLendings();
         }
         if (input == "SHO_N"){
+            valid=true;
             showNonMembers();
         }
         if (input == "SHO_P"){
+            valid=true;
             showLendRequests();
         }
         if (input == "SHO_L"){
+            valid=true;
             showBooks();
+        }
+        if(!valid){
+            colorText('C');
+            cout<<"Input inválido...por favor tente de novo"<<endl;
+            colorText('F');
         }
     } while(input!="END");
     saveData();
@@ -111,6 +134,7 @@ void Club::beginningInfo() {
 void Club::help() {
     cout << "----- CÓDIGOS DE EXECUÇÃO -----" << endl;
     cout << endl;
+    colorText('C');
     cout << " --- PROTOCOLOS AO NÍVEL DE FREQUÊNCIA (por Membros e não-Membros)  ---" << endl;
     cout << " ADD_M: adicionar membro" << endl;
     cout << " REM_M: remover membro" << endl;
@@ -118,6 +142,7 @@ void Club::help() {
     cout << " SHO_M: mostrar membros" << endl;
     cout << " SHO_N: mostrar não-membros" << endl;
     cout << endl;
+    colorText('B');
     cout << " --- PROTOCOLOS AO NÍVEL DO CATÁLOGO --- " << endl;
     cout << " ADD_L: adicionar livro" << endl;
     cout << " LOSS: perda de livro" << endl;
@@ -130,16 +155,20 @@ void Club::help() {
     cout << " SHO_A: mostrar atrasos" << endl;
     cout << " SHO_P: mostrar pedidos" << endl;
     cout << endl;
+    colorText('D');
     cout << " --- PROTOCOLOS AO NÍVEL DO SICL --- " << endl;
     cout << " HELP: ajuda" << endl;
     cout << " END: terminar/fechar programa" << endl;
     cout << endl;
+    colorText('F');
     cout << " --- A NÃO ESQUECER --- " << endl;
     cout << "- Membros têm prioridade a fazer empréstimos" << endl;
     cout << "- Qualquer frequentante do Clube fica inibido de fazer pedidos ou empréstimos se o seu saldo for nulo/negativo" << endl;
     cout << "- Atrasos são registados automaticamente, havendo taxas cumulativas cobradas dirariamente" << endl;
     cout << "- Para qualquer frequentante poder fazer um empréstimo, tem de fazer pedido do livro primeiro" << endl;
+    colorText('C');
     cout << "- Fechar sempre o SICL com o comando END" << endl;
+    colorText('F');
     cout << endl;
     cout << endl;
 }
@@ -205,17 +234,36 @@ bool Club::makeLending() {
         nonMem = true;
     }
 
+    int counter=0;
+
     if (!nonMem){
         //Members do lendings per order of arrival.
         for (int i = 0; i < lendRequests.size(); i++){
+            if(get<0>(lendRequests[i])==code){
+                counter++;
+            }
             if ((get<0>(lendRequests[i]) == code) && (get<2>(lendRequests[i]) == nif)){
-                catalog.books[code].deleteUnit();
-                members[isMember(catalog.books[code].getOwner())].removeBook(members[isMember(catalog.books[code].getOwner())].findBook(code));
-                lendings.push_back(make_tuple(get<0>(lendRequests[i]), today, get<2>(lendRequests[i])));
-                lendRequests.erase(lendRequests.begin()+ i);
-                members[pers].registerLending(code, today);
-                members[pers].finishRequest(code);
-                break;
+                if(counter==1){
+                    if(catalog.books[code].getUnits()!=0){
+                        catalog.books[code].deleteUnit();
+                        members[isMember(catalog.books[code].getOwner())].removeBook(members[isMember(catalog.books[code].getOwner())].findBook(code));
+                        lendings.push_back(make_tuple(get<0>(lendRequests[i]), today, get<2>(lendRequests[i])));
+                        lendRequests.erase(lendRequests.begin()+ i);
+                        members[pers].registerLending(code, today);
+                        members[pers].finishRequest(code);
+                        break;
+                    }
+                    else{
+                        colorText('C');
+                        cout<<"Infelizmente, este livro não se encontra disponível"<<endl;
+                        colorText('F');
+                    }
+                }
+                else{
+                    colorText('C');
+                    cout<<"Peço desculpa mas esse livro foi pedido por outro membro primeiro. Terá de aguardar a sua vez."<<endl;
+                    colorText('F');
+                }
             }
         }
         return true;
@@ -229,13 +277,20 @@ bool Club::makeLending() {
                 temp = i;
             }
         }
-        catalog.books[code].deleteUnit();
-        members[isMember(catalog.books[code].getOwner())].removeBook(members[isMember(catalog.books[code].getOwner())].findBook(code));
-        lendings.push_back(make_tuple(get<0>(lendRequests[temp]), today, get<2>(lendRequests[temp])));
-        lendRequests.erase(lendRequests.begin()+ i);
-        nonmembers[pers].registerLending(code, today);
-        nonmembers[pers].finishRequest(code);
-        chargeFee(pers, catalog.books[code]);
+        if(catalog.books[code].getUnits()!=0){
+            catalog.books[code].deleteUnit();
+            members[isMember(catalog.books[code].getOwner())].removeBook(members[isMember(catalog.books[code].getOwner())].findBook(code));
+            lendings.push_back(make_tuple(get<0>(lendRequests[temp]), today, get<2>(lendRequests[temp])));
+            lendRequests.erase(lendRequests.begin()+ i);
+            nonmembers[pers].registerLending(code, today);
+            nonmembers[pers].finishRequest(code);
+            chargeFee(pers, catalog.books[code]);
+        }
+        else{
+            colorText('C');
+            cout<<"Infelizmente, este livro não se encontra disponível"<<endl;
+            colorText('F');
+        }
     }
     return true;
 }
@@ -244,30 +299,54 @@ bool Club::renovateLending(){
     int nif = 0, code = -1;
     string name, nif_str, code_str, answer;
     bool nonMem = false;
+    bool valid=false;
     int isMem = isMember(nif), isNMem = isnonMem(nif);
-    while ( (isMem == isNMem) || ((catalog.searchBook(code) == -1) && (code != -1))) {
-        cout << "Indique o NIF: ";
-        getline(cin, nif_str);
-        nif = stoi(nif_str);
-        isMem = isMember(nif);
-        cout << isMem << endl;
-        isNMem = isnonMem(nif);
-        if (isMem != -1) {
-            cout << "Indique o código do livro (se não o souber, insira -1 e dê ENTER): ";
-            getline(cin, code_str);
-            code = stoi(code_str);
-            code = catalog.searchBook(code);
-            if (code == -1) {
-                showLendings();
-                showDelays();
+    while ( ((isMem == isNMem) || ((catalog.searchBook(code) == -1) && (code != -1)))) {
+        while(!valid){
+            cout << "Indique o NIF: ";
+            getline(cin, nif_str);
+            if(isdigit(nif_str[0])){
+                valid=true;
+                nif = stoi(nif_str);
             }
-        } else {
-            cout << "Peço desculpa, mas apenas membros podem renovar livros" << endl;
-            return false;
+            else{
+                valid=false;
+                colorText('C');
+                cout<<"Input inválido...por favor tente de novo"<<endl;
+                colorText('F');
+            }
+            isMem = isMember(nif);
+            isNMem = isnonMem(nif);
+            if (isMem != -1) {
+                cout << "Indique o código do livro (se não o souber, insira -1 e dê ENTER): ";
+                getline(cin, code_str);
+                if(isdigit(code_str[0])){
+                    code = stoi(code_str);
+                    valid=true;
+                }
+                else{
+                    valid=false;
+                    colorText('C');
+                    cout<<"Input inválido...por favor tente de novo"<<endl;
+                    colorText('F');
+                }
+            }else {
+                colorText('C');
+                cout << "Peço desculpa, mas apenas membros podem renovar livros" << endl;
+                colorText('F');
+                return false;
+            }
+        }
+        code = catalog.searchBook(code);
+        if (code == -1) {
+            showLendings();
+            showDelays();
         }
     }
     if(catalog.books[code].getUnits()==0){
+        colorText('C');
         cout<<"Peço desculpa mas não é possível renovar esse livro, já que se trata da única unidade existente"<<endl;
+        colorText('F');
         return false;
     }
     else{
@@ -281,9 +360,10 @@ bool Club::renovateLending(){
                     members[isMem].renovateLending(code, today);
                     return true;
                 } else {
-                    cout
-                            << "Ainda não é possível renovar o livro em questão. Só é possível quando faltar 3 ou menos dias até ao fim do prazo de empréstimo deste"
-                            << endl;
+                    colorText('C');
+                    cout << "Ainda não é possível renovar o livro em questão. Só é possível quando faltar 3 ou menos dias até ao fim do prazo de empréstimo deste"
+                         << endl;
+                    colorText('F');
                 }
             }
         }
@@ -296,18 +376,39 @@ bool Club::returnLending() {
     int nif = 0, code = -1;
     string name, nif_str, code_str, answer;
     bool nonMem = false;
+    bool valid=false;
     int isMem = isMember(nif), isNMem = isnonMem(nif);
 
-    while ( (isMem == isNMem) || ((catalog.searchBook(code) == -1) && (code != -1))) {
-        cout << "Indique o NIF: ";
-        getline(cin, nif_str);
-        nif = stoi(nif_str);
-        isMem = isMember(nif);
-        isNMem = isnonMem(nif);
+    while ( ((isMem == isNMem) || ((catalog.searchBook(code) == -1) && (code != -1)))) {
+        while(!valid){
+            cout << "Indique o NIF: ";
+            getline(cin, nif_str);
+            if(isdigit(nif_str[0])){
+                valid=true;
+                nif = stoi(nif_str);
+            }
+            else{
+                valid=false;
+                colorText('C');
+                cout<<"Input inválido...por favor tente de novo"<<endl;
+                colorText('F');
+            }
+            isMem = isMember(nif);
+            isNMem = isnonMem(nif);
 
-        cout << "Indique o código do livro (se não o souber, insira -1 e dê ENTER): ";
-        getline(cin, code_str);
-        code = stoi(code_str);
+            cout << "Indique o código do livro (se não o souber, insira -1 e dê ENTER): ";
+            getline(cin, code_str);
+            if(isdigit(code_str[0])){
+                code = stoi(code_str);
+                valid=true;
+            }
+            else{
+                valid=false;
+                colorText('C');
+                cout<<"Input inválido...por favor tente de novo"<<endl;
+                colorText('F');
+            }
+        }
         code = catalog.searchBook(code);
         answer="N";
         for (int i = 0; i < delays.size(); i++){
@@ -332,6 +433,7 @@ bool Club::returnLending() {
         for (int i = 0; i < delays.size(); i++){
             if (get<0>(delays[i]) == code && get<2>(delays[i]) == nif){
                 delays.erase(delays.begin()+i);
+                getOpinions(code);
                 return true;
             }
         }
@@ -339,12 +441,51 @@ bool Club::returnLending() {
         for (int i = 0; i < lendings.size(); i++){
             if (get<0>(lendings[i]) == code && get<2>(lendings[i]) == nif){
                 lendings.erase(lendings.begin()+i);
+                getOpinions(code);
                 return true;
             }
         }
     }
     //throw a tantrum!
     return false;
+}
+
+void Club::getOpinions(int code){
+    string int_answer,answer,writ_answer;
+    int rating;
+    bool valid=false;
+    while(!valid){
+        cout<<"Introduza uma opinião de 1 a 5 sobre o livro, por favor : "<<endl;
+        getline(cin,int_answer);
+        if(isdigit(int_answer[0])){
+            rating = stoi(int_answer);
+            valid=true;
+        }
+        else{
+            valid=false;
+            colorText('C');
+            cout<<"Input inválido...por favor tente de novo"<<endl;
+            colorText('F');
+        }
+    }
+    catalog.books[code].calculateRating(rating);
+    while(!valid){
+        cout<<"Deseja introduzir uma opinião escrita com mais detalhe sobre o livro?"<<endl;
+        getline(cin,answer);
+        if(answer=="Sim"|| answer=="S" || answer=="s" || answer=="sim" || answer == "SIM"){
+            valid=true;
+            cout<<"Introduza a sua opinião: "<<endl;
+            getline(cin,writ_answer);
+            catalog.books[code].addWritops(writ_answer);
+        }
+        else{
+            valid=false;
+            colorText('C');
+            cout<<"Por favor, introduza uma resposta válida, Sim ou Não"<<endl;
+            colorText('F');
+        }
+    }
+    cout<<"Obrigado pela sua colaboração"<<endl;
 }
 
 int Club::isMember(int nif){ //returns member index or -1 if it doesn't exist
@@ -365,8 +506,8 @@ int Club::isnonMem(int nif){ //returns member index or -1 if it doesn't exist
     return -1;
 }
 
-void Club::chargeFirstDelay(int nif,Book book){
-    float fine = book.getValue()*0.10;
+void Club::chargeFirstDelay(int nif,Book book,int days){
+    float fine = book.getValue()*0.10*days;
 
     int index=isMember(nif);
 
@@ -393,33 +534,54 @@ int Club::calculateDelay(Date date){
 void Club::addBook(int nif = 0){
     string title, author, category, edition_s, owner_s;
     int edition, owner, code;
+    bool valid=false;
 
-    cout <<"Introduza o seu título, por favor: ";
-    getline(cin, title);
-    cout << endl;
-    cout << "Introduza o nome do seu escritor(a), por favor: " ;
-    getline(cin, author);
-    cout << endl;
-    cout<<"Introduza a sua categoria, por favor: ";
-    getline(cin,category);
-    cout << endl;
-    cout << "Introduza a sua edição, por favor: ";
-    getline(cin, edition_s);
-    cout << endl;
-    if (nif == 0){
-        cout << "Introduza o NIF, por favor, para registarmos o livro na conta respetiva: ";
-        getline(cin, owner_s);
+    while(!valid){
+        cout <<"Introduza o seu título, por favor: ";
+        getline(cin, title);
+        cout << endl;
+        cout << "Introduza o nome do seu escritor(a), por favor: " ;
+        getline(cin, author);
+        cout << endl;
+        cout<<"Introduza a sua categoria, por favor: ";
+        getline(cin,category);
+        cout << endl;
+        cout << "Introduza a sua edição, por favor: ";
+        getline(cin, edition_s);
+        if(isdigit(edition_s[0])){
+            edition = stoi(edition_s);
+            valid=true;
+        }
+        else{
+            valid=false;
+            colorText('C');
+            cout<<"Input inválido...por favor tente de novo"<<endl;
+            colorText('F');
+        }
+        cout << endl;
+        if (nif == 0){
+            cout << "Introduza o NIF, por favor, para registarmos o livro na conta respetiva: ";
+            getline(cin, owner_s);
+        }
+        cout << endl;
+        owner = nif;
+
+        if (owner == 0){
+            if(isdigit(owner_s[0])){
+                valid=true;
+                owner = stoi(owner_s);
+            }
+            else{
+                valid=false;
+                colorText('C');
+                cout<<"Input inválido...por favor tente de novo"<<endl;
+                colorText('F');
+            }
+        }
     }
-    cout << endl;
-    edition = stoi(edition_s);
-    owner = nif;
-
-    if (owner == 0){
-        owner = stoi(owner_s);
-    }
-
     code = catalog.books.size();
-    Book* b = new Book(code,title,author,category,edition, owner);
+    int unit=1; int oguni=1;
+    Book* b = new Book(code,title,author,category,edition, owner,unit,oguni);
     catalog.addBook((*b));
     members[isMember(owner)].addBook((*b));
 }
@@ -428,24 +590,35 @@ void Club::addMember(){
     string name = "", answer, title, author, nif_s, edition_s, code_s, category;
     int nif, edition, code;
     Member* mem = new Member;
-    cout<<"Introduza o nome, por favor: ";
-    getline(cin,name);
-    cout << endl;
-    (*mem).setName(name);
-    cout<<"Introduza o NIF, por favor: ";
-    getline(cin,nif_s);
-    cout << endl;
-    nif=stoi(nif_s);
-    (*mem).setNif(nif);
-    members.push_back((*mem));
-    cout << "Adicione um livro, por favor!" << endl << endl;
-    do {
-        addBook(nif);
-        cout << "Quer adicionar outro livro? ";
-        getline(cin,answer);
+    bool valid=false;
+    while(!valid){
+        cout<<"Introduza o nome, por favor: ";
+        getline(cin,name);
+        cout << endl;
+        (*mem).setName(name);
+        cout<<"Introduza o NIF, por favor: ";
+        getline(cin,nif_s);
+        cout << endl;
+        if(isdigit(nif_s[0])){
+            valid=true;
+            nif=stoi(nif_s);
+        }
+        else{
+            valid=false;
+            colorText('C');
+            cout<<"Input inválido...por favor tente de novo"<<endl;
+            colorText('F');
+        }
+        (*mem).setNif(nif);
+        members.push_back((*mem));
+        cout << "Adicione um livro, por favor!" << endl << endl;
+        do {
+            addBook(nif);
+            cout << "Quer adicionar outro livro? ";
+            getline(cin,answer);
 
-    } while((answer=="S") || (answer=="Sim") || (answer=="sim") || (answer=="s"));
-
+        } while((answer=="S") || (answer=="Sim") || (answer=="sim") || (answer=="s"));
+    }
 }
 
 bool Club::removeMember(int nif){
@@ -456,12 +629,13 @@ bool Club::removeMember(int nif){
 
     int index = isMember(nif);
     vector<Book> toDelv = members[index].getBooks();
-    cout<<"holo"<<endl;
 
     for (int i = 0; i < toDelv.size(); i++){
         if (toDelv[i].getState() == false || toDelv[i].getMulti()==false){
+            colorText('C');
             cout << "Não é possível eliminar um membro que tenha livros emprestados." << endl;
             cout << "Verifique os empréstimos e informe o membro da data em que poderá deixar o Clube." << endl;
+            colorText('F');
             return false;
         }
     }
@@ -531,7 +705,7 @@ void Club::removeBook(tuple<int, Date, int> lostBook) {
 
 void Club::showMembers(){
     for (int i = 0; i < members.size(); i++){
-        cout << "Nome: " << members[i].getName() << endl << "NIF: "<< members[i].getNIF() << endl <<members[i].getBalance()<<" euros"<<endl<< "Livros:" << endl;
+        cout << "Nome: " << members[i].getName() << endl << "NIF: "<< members[i].getNIF() << endl <<setprecision(2)<<members[i].getBalance()<<" euros"<<endl<< "Livros:" << endl;
         vector<Book> books = members[i].getBooks();
         for (int j = 0; j < books.size(); j++){
             books[j].showBook();
@@ -585,9 +759,11 @@ void Club::checkDelays(){
     }
 
     for (unsigned int i = 0; i < lendings.size(); i++){
-        if(abs(today.timePeriod(get<1>(lendings[i])))>=10){ //Consider lending period is 10 days
-            this->delays.push_back(make_tuple(get<0>(lendings[i]),get<1>(lendings[i]).extendTime(),get<2>(lendings[i])));
-            chargeFirstDelay(get<2>(lendings[i]), catalog.getBook(get<0>(lendings[i])));
+        if(abs(today.timePeriod(get<1>(lendings[i])))>10){ //Consider lending period is 10 days
+            this->delays.push_back(make_tuple(get<0>(lendings[i]),get<1>(lendings[i]).delayDate(),get<2>(lendings[i])));
+            //if(sys_counter==1){
+            chargeFirstDelay(get<2>(lendings[i]), catalog.getBook(get<0>(lendings[i])),calculateDelay(get<1>(lendings[i])));
+            // }
 
             if (isMember(get<2>(lendings[i])) == -1){
                 nonmembers[isnonMem(get<2>(lendings[i]))].finishLending(get<0>(lendings[i]), get<1>(lendings[i]));
@@ -606,6 +782,7 @@ void Club::registerLoss(){
     string answer, code_st, date_st, nif_st;
     Date temp;
     bool lending = false;
+    bool valid=false;
     int code, nif;
     cout << "Para registarmos a perda, terá de identificar o empréstimo ou atraso." << endl;
     answer="S";
@@ -620,18 +797,35 @@ void Club::registerLoss(){
         showLendings();
 
         cout << "A perda afetará o saldo." << endl;
-        cout << "Indique o código do livro em questão: ";
-        getline(cin, code_st);
-        code = stoi(code_st);
-        cout << "Indique a data de empréstimo (formato DD/MM/AAAA): ";
-        getline(cin, date_st);
-        temp = temp.getDate(date_st);
-        cout << "Indique o NIF associado ao empréstimo: ";
-        getline(cin, nif_st);
-        nif = stoi(nif_st);
-
+        while(!valid){
+            cout << "Indique o código do livro em questão: ";
+            getline(cin, code_st);
+            if(isdigit(code_st[0])){
+                valid=true;
+                code = stoi(code_st);
+            }
+            else{
+                valid=false;
+                colorText('C');
+                cout<<"Input inválido...por favor tente de novo"<<endl;
+                colorText('F');
+            }
+            cout << "Indique o NIF associado ao empréstimo: ";
+            getline(cin, nif_st);
+            if(isdigit(nif_st[0])){
+                valid=true;
+                nif = stoi(nif_st);
+            }
+            else{
+                valid=false;
+                colorText('C');
+                cout<<"Input inválido...por favor tente de novo"<<endl;
+                colorText('F');
+            }
+        }
         for (int i = 0; i < lendings.size(); i++){
-            if ((get<0>(lendings[i]) == code) && (get<1>(lendings[i]) == temp) && (get<2>(lendings[i]) == nif)){
+            if ((get<0>(lendings[i]) == code) && (get<2>(lendings[i]) == nif)){
+                temp=get<1>(lendings[i]);
                 removeBook(make_tuple(code, temp, nif));
                 lendings.erase(lendings.begin()+ i);
             }
@@ -640,19 +834,36 @@ void Club::registerLoss(){
         showDelays();
 
         cout << "A perda e o atraso afetarão o saldo." << endl;
-        cout << "Indique o código do livro em questão: ";
-        getline(cin, code_st);
-        code = stoi(code_st);
-        cout << "Indique do inicio do atraso (formato DD/MM/AAAA): ";
-        getline(cin, date_st);
-        temp = temp.getDate(date_st);
-        temp.showDate();
-        cout << "Indique o NIF associado ao empréstimo: ";
-        getline(cin, nif_st);
-        nif = stoi(nif_st);
+        while(!valid){
+            cout << "Indique o código do livro em questão: ";
+            getline(cin, code_st);
+            if(isdigit(code_st[0])){
+                valid=true;
+                code = stoi(code_st);
+            }
+            else{
+                valid=false;
+                colorText('C');
+                cout<<"Input inválido...por favor tente de novo"<<endl;
+                colorText('F');
+            }
+            cout << "Indique o NIF associado ao empréstimo: ";
+            getline(cin, nif_st);
+            if(isdigit(nif_st[0])){
+                valid=true;
+                nif = stoi(nif_st);
+            }
+            else{
+                valid=false;
+                colorText('C');
+                cout<<"Input inválido...por favor tente de novo"<<endl;
+                colorText('F');
+            }
+        }
 
         for (int i = 0; i < delays.size(); i++){
-            if ((get<0>(delays[i]) == code) && (get<1>(delays[i]) == temp) && (get<2>(delays[i]) == nif)){
+            if ((get<0>(delays[i]) == code) && (get<2>(delays[i]) == nif)){
+                temp=get<1>(lendings[i]);
                 removeBook(make_tuple(code, temp, nif));
                 delays.erase(lendings.begin()+ i);
             }
@@ -669,18 +880,38 @@ void Club::registerLoss(){
 bool Club::makeRequest() {
     int nif, code;
     string date, name, nif_str, date_str, code_str;
+    bool valid=false;
 
-    cout << "Indique o NIF: ";
-    getline(cin, nif_str);
-    cout << endl;
-    cout << endl;
-    nif = stoi(nif_str);
+    while(!valid){
 
-    cout << "Indique o código do livro (se não o souber, introduza -1 e dê ENTER): ";
-    getline(cin, code_str);
-    cout << endl;
-    cout << endl;
-    code = stoi(code_str);
+        cout << "Indique o NIF: ";
+        getline(cin, nif_str);
+        cout << endl;
+        cout << endl;
+        if(isdigit(nif_str[0])){
+            nif = stoi(nif_str);
+            valid=true;
+        }else{
+            valid=false;
+            colorText('C');
+            cout<<"Input inválido...por favor tente de novo"<<endl;
+            colorText('F');
+        }
+
+        cout << "Indique o código do livro (se não o souber, introduza -1 e dê ENTER): ";
+        getline(cin, code_str);
+        cout << endl;
+        cout << endl;
+        if(isdigit(code_str[0])){
+            code = stoi(code_str);
+            valid=true;
+        }else{
+            valid=false;
+            colorText('C');
+            cout<<"Input inválido...por favor tente de novo"<<endl;
+            colorText('F');
+        }
+    }
 
     while ((code <= -1) || code >= catalog.books.size() || cin.fail()) {
         cout << "Indique, então, o título do livro: ";
@@ -689,7 +920,9 @@ bool Club::makeRequest() {
         cout << endl;
 
         if (catalog.searchBook(name) == false) {
+            colorText('C');
             cerr << "EXCEÇÃO: não há livro com esse título.";
+            colorText('F');
             continue;
         } else {
             cout << "Os livros disponíveis com esse título são: " << endl;
@@ -700,38 +933,49 @@ bool Club::makeRequest() {
             }
         }
 
-        cout << "Indique o código do livro que pretende: ";
-        getline(cin, code_str);
-        code = stoi(code_str);
-    }
-
-    //And now, to register it in Members or NonMembers.
-    if (isMember(nif) != -1) {
-        if (members[isMember(nif)].getBalance() <= 0) {
-            //EXCEÇÃO! NÃO PODE FAZER PEDIDOS CASO O BALANÇO ESTEJA NEGATIVO/NULO.
-            return false;
+        while(!valid){
+            cout << "Indique o código do livro que pretende: ";
+            getline(cin, code_str);
+            if(isdigit(code_str[0])){
+                valid=true;
+                code = stoi(code_str);
+            }
+            else{
+                valid=false;
+                colorText('C');
+                cout<<"Input inválido...por favor tente de novo"<<endl;
+                colorText('F');
+            }
         }
-        members[isMember(nif)].registerRequest(code, today);
-    } else { //it's not a member then it's a nonMem
-        while (true) {
-            if (isnonMem(nif) == -1) {
-                string namem;
-                cout << "Introduza o nome, por favor: ";
-                getline(cin, namem);
-                float balance = 50;
-                nonMem* p = new nonMem(namem, nif, balance);
-                (*p).registerRequest(code, today);
-                nonmembers.push_back((*p));
-                break;
-            } else {
-                if ((isnonMem(nif) != -1) && (nonmembers[isnonMem(nif)].getBalance() > 0)) {
-                    nonmembers[isnonMem(nif)].registerRequest(code, today);
+
+        //And now, to register it in Members or NonMembers.
+        if (isMember(nif) != -1) {
+            if (members[isMember(nif)].getBalance() <= 0) {
+                //EXCEÇÃO! NÃO PODE FAZER PEDIDOS CASO O BALANÇO ESTEJA NEGATIVO/NULO.
+                return false;
+            }
+            members[isMember(nif)].registerRequest(code, today);
+        } else { //it's not a member then it's a nonMem
+            while (true) {
+                if (isnonMem(nif) == -1) {
+                    string namem;
+                    cout << "Introduza o nome, por favor: ";
+                    getline(cin, namem);
+                    float balance = 50;
+                    nonMem* p = new nonMem(namem, nif, balance);
+                    (*p).registerRequest(code, today);
+                    nonmembers.push_back((*p));
                     break;
-                } else if (nonmembers[isnonMem(nif)].getBalance() <= 0) {
-                    //Exceção!
-                    return false;
                 } else {
-                    continue;
+                    if ((isnonMem(nif) != -1) && (nonmembers[isnonMem(nif)].getBalance() > 0)) {
+                        nonmembers[isnonMem(nif)].registerRequest(code, today);
+                        break;
+                    } else if (nonmembers[isnonMem(nif)].getBalance() <= 0) {
+                        //Exceção!
+                        return false;
+                    } else {
+                        continue;
+                    }
                 }
             }
         }
@@ -743,7 +987,7 @@ bool Club::makeRequest() {
 }
 
 void Club::saveData(){
-    string membs = "members.txt", nonmembs = "nonmembers.txt", lends = "lendings.txt", lendRs = "lendRequests.txt", bks = "books.txt", dels = "delays.txt";
+    string membs = "members.txt", nonmembs = "nonmembers.txt", lends = "lendings.txt", lendRs = "lendRequests.txt", bks = "books.txt", dels = "delays.txt";//sys="system.txt";
 
     ofstream file; //(membs, ios::binary);
     ofstream filee; //(lends, ios::binary);
@@ -751,6 +995,7 @@ void Club::saveData(){
     ofstream fileeee; //(bks, ios::binary);
     ofstream fileeeee; //(dels, ios::binary);
     ofstream fileeeeee; //(nonmembs, ios::binary);
+    // ofstream fileeeeeee; //(system)
 
     file.open("members.txt", std::ofstream::out | std::ofstream::trunc);
     filee.open("lendings.txt", std::ofstream::out | std::ofstream::trunc);
@@ -758,9 +1003,10 @@ void Club::saveData(){
     fileeee.open("books.txt", std::ofstream::out | std::ofstream::trunc);
     fileeeee.open("delays.txt", std::ofstream::out | std::ofstream::trunc);
     fileeeeee.open("nonmembers.txt", std::ofstream::out | std::ofstream::trunc);
+    //fileeeeeee.open("system.txt", std::ofstream::out | std::ofstream::trunc);
 
 
-    stringstream temp1, temp2, temp3, temp4, temp5, temp6;
+    stringstream temp1, temp2, temp3, temp4, temp5, temp6, temp7;
 
     for (int i = 0; i < members.size(); i++){
         if (i < members.size() -1) {
@@ -821,6 +1067,10 @@ void Club::saveData(){
     }
 
     fileeeee << temp5.str();
+
+    /* temp7<<today.getDateStr()<<endl<<sys_counter<<endl<<endl<<"END";
+
+     fileeeeeee<<temp7.str();*/
 }
 
 void Club::retrieveData(){
@@ -830,10 +1080,43 @@ void Club::retrieveData(){
     ifstream lends_file; lends_file.open("lendings.txt");
     ifstream dels_file; dels_file.open("delays.txt");
     ifstream nmemb_file; nmemb_file.open("nonmembers.txt");
+    //ifstream system_file; system_file.open("system.txt");
     string temp;
     char sep = ',';
-    stringstream membs, bks, lendRs, lends, dels, nmembs;
-
+    stringstream membs, bks, lendRs, lends, dels, nmembs; //sys;
+/*
+    //Getting System data
+    string d, str_counter;
+    int temp_counter;
+    bool already=false;
+    while(temp!= "END"){
+        getline(system_file,temp);
+        sys.str("");
+        sys.clear();
+        sys<<temp;
+        sys>>d;
+        if(d==today.getDateStr()){
+            already=true;
+        }
+        getline(system_file,temp);
+        sys.str("");
+        sys.clear();
+        sys<<temp;
+        sys>>temp_counter;
+        if(already){
+            sys_counter=temp_counter+1;
+        }
+        getline(system_file, temp);
+        sys.str("");
+        sys.clear();
+        getline(system_file, temp);
+        sys.str("");
+        sys.clear();
+    }
+    if(!already){
+        sys_counter=1;
+    }
+    */
 
     //Getting Books data.
     string title, author, category;
@@ -1087,4 +1370,20 @@ void Club::retrieveData(){
     }
 
     checkDelays();
+}
+
+void Club:: colorText(char ch)
+{
+    if (ch == 'A')
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0xA);    //VERDE
+    else if (ch == 'B')
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0xB);  //AZUL
+    else if (ch == 'C')
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0xC);  //VERMELHO
+    else if (ch == 'D')
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0xD);  //ROSA
+    else if (ch == 'E')
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0xE);  //AMARELO
+    else if (ch == 'F')
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0xF);  //BRANCO
 }

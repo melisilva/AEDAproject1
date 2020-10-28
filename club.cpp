@@ -1,5 +1,4 @@
 #include "club.h"
-//int sys_counter;
 
 Club::Club() {
     vector<Member> temp;
@@ -41,7 +40,13 @@ void Club::run(){
             int nif;
             cout<<"Insira um NIF para proceder: ";
             getline(cin,nif_s);
-            nif=stoi(nif_s);
+            if(isdigit(nif_s[0])){
+                nif=stoi(nif_s);
+                valid=true;
+            }
+            else{
+                valid=false;
+            }
             removeMember(nif);
         }
         if (input == "ATL_P"){
@@ -174,6 +179,7 @@ void Club::help() {
 }
 
 void Club::updatePerson() {
+    bool valid=false;
     string answer, name;
     int nif;
     float quantity;
@@ -183,13 +189,35 @@ void Club::updatePerson() {
     cout << "Indique o nome: ";
     getline(cin, answer);
     name = answer;
-    cout << "Indique a quantia a adicionar (ex: 19.43): ";
-    getline(cin, answer);
-    quantity = stof(answer);
-    cout << "Indique o NIF do frequentante: ";
-    getline(cin, answer);
-    nif = stoi(answer);
+    while(!valid){
+        cout << "Indique a quantia a adicionar (ex: 19.43): ";
+        getline(cin, answer);
+        if(isdigit(answer[0])){
+            quantity = stof(answer);
+            valid=true;
+        }else{
+            valid=false;
+            colorText('C');
+            cout<<"Por favor, indique uma quantia válida."<<endl;
+            colorText('F');
+        }
+    }
 
+    valid=false;
+    while(!valid){
+        cout << "Indique o NIF do frequentante: ";
+        getline(cin, answer);
+        if(isdigit(answer[0])){
+            nif = stoi(answer);
+            valid=true;
+        }
+        else{
+            valid=false;
+            colorText('C');
+            cout<<"Por favor, indique um NIF válido (número de 9 algarismos)."<<endl;
+            colorText('F');
+        }
+    }
 
     if (isMember(nif) == isnonMem(nif)){
         //Nenhum frequentante tem o NIF especificado!
@@ -205,21 +233,44 @@ void Club::updatePerson() {
 }
 
 bool Club::makeLending() {
+    bool valid=false;
     int nif = 0, code = -1, temp, i;
     string name, nif_str, code_str;
     bool nonMem = false;
     int isMem = isMember(nif), isNMem = isnonMem(nif);
 
     while ( (isMem == isNMem) || ((catalog.searchBook(code) == -1) && (code != -1))){
-        cout << "Indique o NIF: ";
-        getline(cin, nif_str);
-        nif = stoi(nif_str);
+        while(!valid){
+            cout << "Indique o NIF: ";
+            getline(cin, nif_str);
+            if(isdigit(nif_str[0])){
+                nif = stoi(nif_str);
+                valid=true;
+            }else{
+                valid=false;
+                colorText('C');
+                cout<<"Por favor, indique um NIF válido (número de 9 algarismos)."<<endl;
+                colorText('F');
+            }
+        }
         isMem = isMember(nif);
         isNMem = isnonMem(nif);
 
-        cout << "Indique o código do livro (se não o souber, insira -1 e dê ENTER): ";
-        getline(cin, code_str);
-        code = stoi(code_str);
+        valid=false;
+        while(!valid){
+            cout << "Indique o código do livro (se não o souber, insira -1 e dê ENTER): ";
+            getline(cin, code_str);
+            if(isdigit(code_str[0]) || code_str[0]=='-'){
+                valid=true;
+                code = stoi(code_str);
+            }
+            else{
+                valid=false;
+                colorText('C');
+                cout<<"Por favor, indique um número válido."<<endl;
+                colorText('F');
+            }
+        }
         code = catalog.searchBook(code);
 
         if (code == -1){
@@ -315,27 +366,30 @@ bool Club::renovateLending(){
                 cout<<"Indique um NIF válido."<<endl;
                 colorText('F');
             }
-            isMem = isMember(nif);
-            isNMem = isnonMem(nif);
-            if (isMem != -1) {
+        }
+        valid=false;
+        isMem = isMember(nif);
+        isNMem = isnonMem(nif);
+        if (isMem != -1) {
+            while(!valid){
                 cout << "Indique o código do livro (se não o souber, insira -1 e dê ENTER): ";
                 getline(cin, code_str);
-                if(isdigit(code_str[0])){
-                    code = stoi(code_str);
+                if(isdigit(code_str[0]) || code_str[0]=='-'){
                     valid=true;
+                    code = stoi(code_str);
                 }
                 else{
                     valid=false;
                     colorText('C');
-                    cout<<"Código de livro errado: deverá ser um número."<<endl;
+                    cout<<"Por favor, indique um número válido."<<endl;
                     colorText('F');
                 }
-            }else {
-                colorText('C');
-                cout << "Renovação de empréstimos é um privilégio exclusivo para Membros." << endl;
-                colorText('F');
-                return false;
             }
+        }else {
+            colorText('C');
+            cout << "Renovação de empréstimos é um privilégio exclusivo para Membros." << endl;
+            colorText('F');
+            return false;
         }
         code = catalog.searchBook(code);
         if (code == -1) {
@@ -343,6 +397,7 @@ bool Club::renovateLending(){
             showDelays();
         }
     }
+
     if(catalog.books[code].getUnits()==0){
         colorText('C');
         cout<<"O livro especificado está interdito de renovações (por ser a única unidade existente)."<<endl;
@@ -367,7 +422,6 @@ bool Club::renovateLending(){
             }
         }
     }
-
     return false;
 }
 
@@ -392,19 +446,21 @@ bool Club::returnLending() {
                 cout<<"Por favor, indique um NIF válido (número de 9 algarismos)."<<endl;
                 colorText('F');
             }
-            isMem = isMember(nif);
-            isNMem = isnonMem(nif);
-
+        }
+        isMem = isMember(nif);
+        isNMem = isnonMem(nif);
+        valid=false;
+        while(!valid){
             cout << "Indique o código do livro (se não o souber, insira -1 e dê ENTER): ";
             getline(cin, code_str);
-            if(isdigit(code_str[0])){
-                code = stoi(code_str);
+            if(isdigit(code_str[0]) || code_str[0]=='-'){
                 valid=true;
+                code = stoi(code_str);
             }
             else{
                 valid=false;
                 colorText('C');
-                cout<<"Por favor, indique um código de livro inválido (deverá ser um número)."<<endl;
+                cout<<"Por favor, indique um número válido."<<endl;
                 colorText('F');
             }
         }
@@ -468,6 +524,7 @@ void Club::getOpinions(int code){
         }
     }
     catalog.books[code].calculateRating(rating);
+    valid=false;
     while(!valid){
         cout<<"O frequentante deseja introduzir uma opinião detalhada sobre o livro? ";
         getline(cin,answer);
@@ -476,15 +533,20 @@ void Club::getOpinions(int code){
             cout<<"Introduza, então, a opinião transcrita: "<<endl;
             getline(cin,writ_answer);
             catalog.books[code].addWritops(writ_answer);
+            cout<<"Agradeça ao frequentante pela sua colaboração!"<<endl;
         }
-        else{
+        if(answer=="Não"|| answer=="N" || answer=="n" || answer=="não" || answer == "NÃO"){
+            valid=true;
+            cout<<"Agradeça ao frequentante pela sua colaboração!"<<endl;
+
+        }
+        if(!valid){
             valid=false;
             colorText('C');
             cout<<"Por favor, introduza uma resposta válida (Sim ou Não)."<<endl;
             colorText('F');
         }
     }
-    cout<<"Agradeça ao frequentante pela sua colaboração!"<<endl;
 }
 
 int Club::isMember(int nif){ //returns member index or -1 if it doesn't exist
@@ -535,16 +597,17 @@ void Club::addBook(int nif = 0){
     int edition, owner, code;
     bool valid=false;
 
+
+    cout <<"Introduza o seu título, por favor: ";
+    getline(cin, title);
+    cout << endl;
+    cout << "Introduza o nome do seu escritor(a), por favor: " ;
+    getline(cin, author);
+    cout << endl;
+    cout<<"Introduza a sua categoria, por favor: ";
+    getline(cin,category);
+    cout << endl;
     while(!valid){
-        cout <<"Introduza o seu título, por favor: ";
-        getline(cin, title);
-        cout << endl;
-        cout << "Introduza o nome do seu escritor(a), por favor: " ;
-        getline(cin, author);
-        cout << endl;
-        cout<<"Introduza a sua categoria, por favor: ";
-        getline(cin,category);
-        cout << endl;
         cout << "Introduza a sua edição, por favor: ";
         getline(cin, edition_s);
         if(isdigit(edition_s[0])){
@@ -557,7 +620,12 @@ void Club::addBook(int nif = 0){
             cout<<"Indique uma edição válida para o livro (um número)."<<endl;
             colorText('F');
         }
-        cout << endl;
+    }
+    cout << endl;
+
+    valid=false;
+
+    while(!valid){
         if (nif == 0){
             cout << "Introduza, por favor, um NIF, de modo a registarmos o livro na conta respetiva: ";
             getline(cin, owner_s);
@@ -569,6 +637,12 @@ void Club::addBook(int nif = 0){
             if(isdigit(owner_s[0])){
                 valid=true;
                 owner = stoi(owner_s);
+                if(isMember(owner)==-1){
+                    valid=false;
+                    colorText('C');
+                    cout<<"Por favor, introduza um NIF válido (número de 9 algarismos associado a um frequentante)."<<endl;
+                    colorText('F');
+                }
             }
             else{
                 valid=false;
@@ -590,11 +664,11 @@ void Club::addMember(){
     int nif, edition, code;
     Member* mem = new Member;
     bool valid=false;
+    cout<<"Introduza o nome, por favor: ";
+    getline(cin,name);
+    cout << endl;
+    (*mem).setName(name);
     while(!valid){
-        cout<<"Introduza o nome, por favor: ";
-        getline(cin,name);
-        cout << endl;
-        (*mem).setName(name);
         cout<<"Introduza o NIF, por favor: ";
         getline(cin,nif_s);
         cout << endl;
@@ -608,16 +682,16 @@ void Club::addMember(){
             cout<<"Introduza um NIF válido (número de 9 algarismos)."<<endl;
             colorText('F');
         }
-        (*mem).setNif(nif);
-        members.push_back((*mem));
-        cout << "Adicione um livro, por favor!" << endl << endl;
-        do {
-            addBook(nif);
-            cout << "Quer adicionar outro livro? ";
-            getline(cin,answer);
-
-        } while((answer=="S") || (answer=="Sim") || (answer=="sim") || (answer=="s"));
     }
+    (*mem).setNif(nif);
+    members.push_back((*mem));
+    cout << "Adicione um livro, por favor!" << endl << endl;
+    do {
+        addBook(nif);
+        cout << "Quer adicionar outro livro? ";
+        getline(cin,answer);
+
+    } while((answer=="S") || (answer=="Sim") || (answer=="sim") || (answer=="s"));
 }
 
 bool Club::removeMember(int nif){
@@ -760,9 +834,7 @@ void Club::checkDelays(){
     for (unsigned int i = 0; i < lendings.size(); i++){
         if(abs(today.timePeriod(get<1>(lendings[i])))>10){ //Consider lending period is 10 days
             this->delays.push_back(make_tuple(get<0>(lendings[i]),get<1>(lendings[i]).delayDate(),get<2>(lendings[i])));
-            //if(sys_counter==1){
             chargeFirstDelay(get<2>(lendings[i]), catalog.getBook(get<0>(lendings[i])),calculateDelay(get<1>(lendings[i])));
-            // }
 
             if (isMember(get<2>(lendings[i])) == -1){
                 nonmembers[isnonMem(get<2>(lendings[i]))].finishLending(get<0>(lendings[i]), get<1>(lendings[i]));
@@ -784,14 +856,10 @@ void Club::registerLoss(){
     bool valid=false;
     int code, nif;
     cout << "Para registarmos a perda, terá de identificar o empréstimo ou atraso." << endl;
-    answer="S";
-    for (int i = 0; i < delays.size(); i++){
-        if (get<0>(delays[i]) == code){
-            answer="N";
-        }
-    }
+    cout << "O livro perdido ainda estava num período de empréstimo válido? ";
+    getline(cin, answer);
 
-    if (answer == "S"){
+    if (answer == "S" || answer == "s" || answer == "sim" || answer == "Sim" || answer == "SIM"){
         lending = true;
         showLendings();
 
@@ -809,6 +877,9 @@ void Club::registerLoss(){
                 cout<<"Introduza um código válido (um número)."<<endl;
                 colorText('F');
             }
+        }
+        valid=false;
+        while(!valid){
             cout << "Indique o NIF associado ao empréstimo: ";
             getline(cin, nif_st);
             if(isdigit(nif_st[0])){
@@ -830,7 +901,6 @@ void Club::registerLoss(){
             }
         }
     } else {
-        showDelays();
 
         cout << "A perda e o atraso afetarão o saldo." << endl;
         while(!valid){
@@ -846,6 +916,9 @@ void Club::registerLoss(){
                 cout<<"Introduza um código válido (um número)."<<endl;
                 colorText('F');
             }
+        }
+        valid=false;
+        while(!valid){
             cout << "Indique o NIF associado ao empréstimo: ";
             getline(cin, nif_st);
             if(isdigit(nif_st[0])){
@@ -896,22 +969,26 @@ bool Club::makeRequest() {
             cout<<"Introduza um NIF válido (um número de nove algarismos associado a um frequentante)."<<endl;
             colorText('F');
         }
+    }
 
-        cout << "Indique o código do livro (se não o souber, introduza -1 e dê ENTER): ";
+    valid=false;
+    while(!valid){
+        cout << "Indique o código do livro (se não o souber, insira -1 e dê ENTER): ";
         getline(cin, code_str);
         cout << endl;
         cout << endl;
-        if(isdigit(code_str[0])){
-            code = stoi(code_str);
+        if(isdigit(code_str[0]) || code_str[0]=='-'){
             valid=true;
-        }else{
+            code = stoi(code_str);
+        }
+        else{
             valid=false;
             colorText('C');
-            cout<<"Introduza um código válido (um número)."<<endl;
+            cout<<"Por favor, indique um número válido."<<endl;
             colorText('F');
         }
     }
-
+    valid=false;
     while ((code <= -1) || code >= catalog.books.size() || cin.fail()) {
         cout << "Indique, então, o título do livro: ";
         getline(cin, name);
@@ -942,7 +1019,7 @@ bool Club::makeRequest() {
             else{
                 valid=false;
                 colorText('C');
-                cout<<"Input inválido...por favor tente de novo"<<endl;
+                cout<<"Por favor, indique um número válido"<<endl;
                 colorText('F');
             }
         }
@@ -1081,7 +1158,7 @@ void Club::retrieveData(){
     ifstream dels_file; dels_file.open("delays.txt");
     ifstream nmemb_file; nmemb_file.open("nonmembers.txt");
     ifstream system_file; system_file.open("system.txt");
-    
+
     string temp;
     char sep = ',';
     stringstream membs, bks, lendRs, lends, dels, nmembs, sys;
@@ -1350,8 +1427,8 @@ void Club::retrieveData(){
     //If we're in the same day, then we don't need to checkDelays().
     if(d != today.getDateStr()){
         checkDelays();
-    } 
-    
+    }
+
 }
 
 void Club:: colorText(char ch)

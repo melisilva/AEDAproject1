@@ -5,6 +5,23 @@
 #include <iostream>
 using namespace std;
 
+/**
+ * Class to represent books.
+ * @param code: unique integer number code that serves to identify the book.
+ * @param units: integer number of units of book available for lending.
+ * @param opinions: integer number of opinions/ratings registered for the book, used in the rating calculation.
+ * @param edition: integer number that represents the book's publishing edition.
+ * @param owner: integer number that identifies a book's owner through their NIF.
+ * @param oguni: integer number of total units available (only changes if a book is lost or a new equal book is added).
+ * @param realRating: average rating of the book (float).
+ * @param value: value associated with the book (in € - float).
+ * @param sumRating: sum of all ratings registered for the book, used in the rating calculation.
+ * @param title: string containing the book's title.
+ * @param author: string containing the book's author's name.
+ * @param writ_ops: string contianing all registered detailed opinions of the book.
+ * @param state: boolean value that helps dictate if the book can be lended.
+ * @param multi: boolean value that helps dictate if the book can be lended.
+*/
 class Book {
     int code, units, opinions = 0, edition, owner,oguni;
     float realRating, value, sumRating = 0;

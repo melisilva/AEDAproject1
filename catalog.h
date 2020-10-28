@@ -5,6 +5,10 @@
 #include <iostream>
 using namespace std;
 
+/**
+ * Class to represent members.
+ * @param books: vector with the Book objects that represent the club's catalogued books.
+*/
 class Catalog{
 public:
     vector<Book> books;

@@ -9,6 +9,16 @@
 #include <stdio.h>
 #include <iomanip>
 
+/**
+ * Class that represents the Book Club - to be a little informal: this is where most magic happens!
+ * @param members: vector of Member objects representing the Club's members.
+ * @param nonmembers: vector of nonMem objects representing the Club's nonmembers.
+ * @param lendings: vector of three-element tuples representing each current lending in the club.
+ * @param lendRequests: vector of three-element tuples representing each current lending request in the club.
+ * @param delays: vector of three-element tuples representing each current delay (lending that's gone over its own due date) in the club.
+ * @param catalog: Catalog class that deals with everything related to the Club's books.
+ * @param today: Date object that keeps the date at the time of execution of the program.
+*/
 class Club {
 private:
     vector<Member> members;

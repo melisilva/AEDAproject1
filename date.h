@@ -5,6 +5,13 @@
 #include <iostream>
 using namespace std;
 
+/**
+ * Class to represent dates.
+ * @param mDays: int array with the day count for each month.
+ * @param day: integer number specifying the day (from 1 to 31).
+ * @param month: integer number specifying the month (from 1 to 12).
+ * @param year: integer number specifying the year.
+*/
 class Date {
 private:
     int mdays[12] = { 31, 28, 31, 30, 31, 30,

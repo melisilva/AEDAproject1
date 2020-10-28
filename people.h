@@ -10,7 +10,15 @@
 #include <algorithm>
 using namespace std;
 
-
+/**
+ * Class to represent members.
+ * @param lendRequest: vector with data from the member's lending requests.
+ * @param lendings: vector with data from the member's current lendings.
+ * @param books: vector with the Book objects that represent the member's books.
+ * @param name: string with the name of the member.
+ * @param nif: integer number with the NIF of the member.
+ * @param balance: float number with the member's associated balance.
+*/
 class Member {
 protected:
     vector<pair<int, Date>> lendRequest, lendings;
@@ -177,6 +185,14 @@ public:
     virtual void addBook(Book &book);
 };
 
+/**
+ * Class to represent non-members, derived from Member.
+ * @param lendRequest: vector with data from the member's lending requests.
+ * @param lendings: vector with data from the member's current lendings.
+ * @param name: string with the name of the member.
+ * @param nif: integer number with the NIF of the member.
+ * @param balance: float number with the member's associated balance.
+*/
 class nonMem : public Member {
 public:
     /**

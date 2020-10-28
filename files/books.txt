@@ -6,23 +6,43 @@ Benjamin Alire-Saenz
 Contemporary
 19.43
 5
+0
 1
 10
 50
-1 
- 
+0
+0
+
 
 1
 DaVinci's Code
 Dan Brown
 1
-123456789
+143567899
 Contemporary
 19.43
 5
 1
+1
 10
 50
 1
+1
+
+
+2
+Paper Towns
+John Green
+2
+1425345676
+Adventure
+18.7
+0
+0
+1
+0
+0
+0
+0
 
 END

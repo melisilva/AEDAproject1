@@ -21,8 +21,8 @@ public:
     Catalog(vector<Book> books); 
 
     /**
-     * Function that adds a book to the club's catalog (in the books vector parameter).
-     * @param book: Book object that represents the book to be added in the books vector parameter!
+     * Function that adds a book to the club's catalog (in the books vector attribute).
+     * @param book: Book object that represents the book to be added in the books vector attribute!
     */
     void addBook(Book book); 
 
@@ -60,14 +60,14 @@ public:
     void registerRating(int code); 
 
     /**
-     * Function that looks for a book in the catalog (in the books vector parameter).
+     * Function that looks for a book in the catalog (in the books vector attribute).
      * @param code: integer number specifying the looked-for book.
      * @return: the Book object's code if found or -1 otherwise.
     */
     int searchBook(int code); 
 
     /**
-     * Function that looks for a book in the catalog (in the books vector parameter) and says if it exists.
+     * Function that looks for a book in the catalog (in the books vector attribute) and says if it exists.
      * @param name: string with the title of the looked-for book.
      * @return: true if a book with the title provided is found, false otherwise.
     */

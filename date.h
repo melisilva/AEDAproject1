@@ -49,7 +49,7 @@ public:
     bool isleapYear();
 
     /**
-     * Function that returns the number of leap years between 1800 and the year specified by the object's year parameter.
+     * Function that returns the number of leap years between 1800 and the year specified by the object's year attribute.
      * @return: number of leap years between 1800 and the object's specified year (integer).
     */
     int nly();

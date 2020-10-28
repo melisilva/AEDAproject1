@@ -133,7 +133,7 @@ public:
     void showNonMembers();
 
     /**
-     * Function that checks if there are any new delays (through the lendings vector parameter).
+     * Function that checks if there are any new delays (through the lendings vector attribute).
     */
     void checkDelays();
 

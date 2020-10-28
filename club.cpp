@@ -13,11 +13,12 @@ Club::Club() {
     catalog = temp5;
 }
 
-/**
+    /*
      * Esta função irá ditar como corre o programa desde o início, inciando com uma descrição
      * de como utilizar o programa e recuperando os dados em ficheiros já guardados,
-     * (códigos de execução e por aí fora) e depois o seu uso. Quando esta
-     * função terminar, o programa fecha, guardando os dados todos possuídos no clube em ficheiros.
+     * ordenando a impressão dos códigos de acesso ao uilizador e controlando depois o seu uso.
+     * A função termina quando o programa está em processo de ser terminado, pelo que ordena,
+     * antes de "matar" o programa em si, que os dados todos do clube se guardem em ficheiros.
      */
 void Club::run(){
     string input = "";
@@ -1354,7 +1355,7 @@ void Club::retrieveData(){
     
 }
 
-void Club:: colorText(char ch)
+void Club::colorText(char ch)
 {
     if (ch == 'A')
         SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0xA);    //VERDE

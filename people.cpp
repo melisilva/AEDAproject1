@@ -37,11 +37,11 @@ float Member::getBalance() const {
     return balance;
 }
 
-void Member::addBalance(int quantity){
+void Member::addBalance(float quantity){
     balance+=quantity;
 }
 
-void Member::minusBalance(int quantity){
+void Member::minusBalance(float quantity){
     balance-=quantity;
 }
 

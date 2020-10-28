@@ -20,36 +20,177 @@ protected:
     float balance;
 
 public:
-    Member(); //done
-    Member(string &name, int &nif, vector<Book> &books, float &balance); //done
+    /**
+     * Default constructor for class Member.
+    */
+    Member();
+
+    /**
+     * Overloaded constructor for class Member.
+     * @param name: string specifying the Member's name.
+     * @param nif: integer number specifying the Member's NIF ("Número de Identificação Fiscal").
+     * @param books: vector of Book class objects representing the books owned and offered by the member.
+     * @param balance: float number representing the Member's "bank account" balance.
+    */
+    Member(string &name, int &nif, vector<Book> &books, float &balance);
+
+    /**
+     * Function that deletes an ended request from a Member's lendRequest parameter (because of a lending). Works just the same for the nonMem class.
+     * @param code: integer number specifying the book's code.
+    */
     void deleteRequest(int code);
-    void addBalance(int quantity);
-    virtual int findBook(int code) const; //done
-    virtual string getData(); //done
-    int getNIF() const; //done
-    string getName() const; //done
-    virtual vector<Book> getBooks() const; //done
-    float getBalance() const; //done
-    void minusBalance(int quantity);
-    bool registerRequest(int code, Date date); //done
-    bool registerLending(int code, Date date); //done
-    void renovateLending(int code, Date date);
+
+    /**
+     * Function that adds quantity to the Member's balance parameter. Since the only argument is an integer number, only Euro quantities are accepted (ex.: 2€). Works just the same for the nonMem class.
+     * @param quantity: integer number representing the value to be added to the balance parameter (float).
+    */
+    void addBalance(float quantity);
+
+    /**
+     * Function that searches for a book (with its code parameter equal to the "code" argument) and returns its position in the "books" vector parameter. Function is virtual to take into account that it's useless in the derived Member class nonMem.
+     * @param code: code of the book to be found in the books vector (integer).
+    */
+    virtual int findBook(int code) const;
+
+    /**
+     * Function that returns the Member's relevant data in string form for the file records. Function is virtual to take the derived Member class nonMem into account.
+     * @return: the Member's data (string).
+    */
+    virtual string getData();
+
+    /**
+     * Returns the Member's NIF parameter. Works just the same for the nonMem class.
+     * @return: the NIF parameter's value (integer).
+    */
+    int getNIF() const;
+
+    /**
+     * Returns the Member's name parameter. Works just the same for the nonMem class.
+     * @return: the name parameter's value (string).
+    */
+    string getName() const;
+
+    /**
+     * Returns the Member's books vector parameter. Declared virtual to take the nonMem class, where the function isn't needed.
+     * @return: the books vector parameter (vector<Book>).
+    */
+    virtual vector<Book> getBooks() const;
+
+    /**
+     * Returns the Member's balance parameter. Works just the same for the nonMem class.
+     * @return: the NIF parameter's value (integer).
+    */
+    float getBalance() const;
+
+    /**
+     * Substracts quantity to the Member's balance parameter. Works just the same for the nonMem class.
+     * @param quantity: the value to be subtracted to the balance parameter.
+    */
+    void minusBalance(float quantity);
+
+    /**
+     * Function that registers a request in the lendRequests vector parameter.
+     * @param code: integer number specifying the requested book's code.
+     * @param date: Date object specifying the Date when the request was made.
+     * @return: true if the request is registered, false otherwise (boolean).
+    */
+    bool registerRequest(int code, Date date);
+
+    /**
+     * Function that registers a lending in the lendings vector parameter.
+     * @param code: integer number specifying the lended book's code.
+     * @param date: Date object specifying the Date when the lending was started.
+     * @return: true if the lending is registered, false otherwise (boolean).
+    */
+    bool registerLending(int code, Date date);
+
+    /**
+     * Function that updates a lending registered in the lendings vector parameter (identifiable by the functions arguments). Declared virtual as non-Members (class nonMem) can't renovate lendings, thus the function is not required.
+     * @param code: integer number specifying the lending-to-be-renewed book's code.
+     * @param date: Date object specifying the Date to identify the lending-to-be-renewed.
+    */
+    virtual void renovateLending(int code, Date date);
+
+    /**
+     * Function that removes a book from a Member's books vector parameter. Declared virtual as it's not required in nonMem.
+     * @param code: integer number specifying the to-be-removed-book's code.
+    */
     virtual void removeBook(int index);
+
+    /**
+     * Function that sets the Member's name parameter with the name provided in the function's argument. Works just the same in the nonMem class.
+     * @param name: string specifying the Member's name.
+    */
     void setName(string name);
+
+    /**
+     * Function that sets the Member's nif parameter with the NIF provided in the function's argument. Works just the same in the nonMem class.
+     * @param nif: integer number specifying the Member's NIF.
+    */
     void setNif(int nif);
-    bool showLendRequests() const; //done
-    void showData() const; //done
-    void showLendings() const; //done
-    virtual void showBooks() const; //done
+
+    /**
+     * Function that outputs the contents of the Member's lend request. Works just the same in the nonMem class. Works just the same in the nonMem class.
+     * @return: true if there's data to be outputed (the size of the lendRequest parameter isn't 0), false otherwise.
+    */
+    bool showLendRequests() const;
+
+    /**
+     * Function that outputs a Member's data. Works just the same for the nonMem derived class.
+    */
+    void showData() const;
+
+    /**
+     * Function that outputs a Member's lendings vector parameter. Works just the same for the nonMem derived class.
+    */
+    void showLendings() const;
+
+    /**
+     * Function that outputs a Member's books vector parameter. Declared virtual as it's not required for nonMem objects.
+    */
+    virtual void showBooks() const;
+
+    /**
+     * Function that updates a member's data (either their name, balance or both). Works just the same for the nonMem class.
+     * @param name: the Member's new name (string).
+     * @param quantity: the value to be added to the Member's balance.
+    */
     void updateData(string &name, float quantity);
+
+    /**
+     * Function that "finishes" a lending (i.e., deletes its register in the lendings vector parameter), as per identified through the function's arguments. Works just the same for the nonMem class.
+     * @param code: integer number specifying the lended book's code.
+     * @param date: Date object specifying the date where the lending was first made.
+    */
     void finishLending(int code, Date date);
+
+    /**
+     * Function that "finishes" a request (i.e., deletes its register in the lendRequests vector parameter), as per identified through the function's argument. Works just the same for the nonMem class.
+     * @param code: integer number specifying the requested book's code.
+    */
     void finishRequest(int code);
+
+    /**
+     * Function that adds a book to a Member's books vector parameter. Declared virtual as it's not needed in the nonMem class.
+     * @param book: the Book to be added to the books vector.
+    */
     virtual void addBook(Book &book);
 };
 
 class nonMem : public Member {
 public:
-    nonMem(string &name, int &nif, float &balance); //done
+    /**
+     * Overloaded constructor for the derived nonMem class.
+     * @param name: string specifying the nonMember's name.
+     * @param nif: integer number specifying the non-member's NIF.
+     * @param balance: float number specifying the non-member's balance.
+    */
+    nonMem(string &name, int &nif, float &balance); 
+
+    /**
+     * Redefinition of the getData function.
+     * @return: string containing the non-member's data in string form.
+    */
     string getData();
 };
 

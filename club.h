@@ -17,35 +17,173 @@ private:
     Catalog catalog;
     Date today;
 public:
-    Club(); //done
+    /**
+     * Default constructor for the Club class.
+    */
+    Club();
+
+    /**
+     * Function that coordinates the flow of the program.
+    */
     void run();
-    void beginningInfo(); //done
-    void help(); //done
-    void showBooks(); //done
-    void updatePerson(); //done
-    void addMember(); //done
-    bool removeMember(int nif); //done
-    void addBook(int nif); //done
-    void registerLoss(); //done
-    void removeBook(tuple<int, Date, int> lostBook); //done
-    bool makeRequest(); //done
-    bool makeLending(); //done
-    bool returnLending(); //done
-    void chargeFirstDelay(int nif, Book book,int days); //done
-    void chargeFee(int nif,Book book); //done, precisa ser usada
-    int calculateDelay(Date date); //done
-    void showMembers(); //done
+
+    /**
+     * Simple function that outputs some instructions for a first time user.
+    */
+    void beginningInfo();
+
+    /**
+     * Function that outputs a set of codes used by the user to manage the Club's data.
+    */
+    void help();
+
+    /**
+     * Function that coordinates output of all the data of the books in the Club's catalog.
+    */
+    void showBooks();
+
+    /**
+     * Function that coordinates the updating of a Club frequentant's data (using input).
+    */
+    void updatePerson();
+
+    /**
+     * Function that adds a member to the Club's data (using input).
+    */
+    void addMember();
+
+    /**
+     * Function that removes a member from the Club (after checking if it's possible).
+     * @param nif: integer number specifying the to-be-removed member's NIF.
+     * @return: true if the removal goes by smoothly, false otherwise (boolean).
+    */
+    bool removeMember(int nif);
+
+    /**
+     * Function that adds a book to a member's data.
+     * @param nif: integer number specifying a member's NIF.
+    */
+    void addBook(int nif);
+
+    /**
+     * Function that coordinates the loss of a book (specified through input from the user).
+    */
+    void registerLoss();
+
+    /**
+     * Function that "executes" the loss of a book (removes it from the Club's data entirely and pays fees where fees are due).
+     * @param lostBook: tuple containing the data of the lost book's delay or lending.
+    */
+    void removeBook(tuple<int, Date, int> lostBook);
+
+    /**
+     * Function that coordinates the requesting of a book.
+     * @return: true if the request is nicely registered, false otherwise (boolean).
+    */
+    bool makeRequest();
+
+    /**
+     * Function that coordinates a lending of a pressuposedly already requested book.
+     * @return: true if the lending is registered nicely, false otherwise (boolean).
+    */
+    bool makeLending();
+
+    /**
+     * Function that coordinated a lending/delay's end.
+     * @return: true if the returning is nicely registered and done with, false otherwise (boolean).
+    */
+    bool returnLending();
+
+    /**
+     * Special function to charge a bigger value whenever a delay is first spotted in the program.
+     * @param nif: integer number specifying the person at fault's NIF.
+     * @param book: the Book object representing the book involved in the delay.
+     * @param days: the number of days passed ever since the first lending date associated with the delay (integer).
+    */
+    void chargeFirstDelay(int nif, Book book,int days);
+
+    /**
+     * Function used for charging a lending to a non-member.
+     * @param nif: integer number specifying the non-member's NIF.
+     * @param book: the Book object that represents the book to-be-lended.
+    */
+    void chargeFee(int nif,Book book);
+
+    /**
+     * Function that calculates the delay between the current day (when the program's running) and the date specified in the function's only argument.
+     * @param date: a Date object.
+     * @return: the delay in days (integer).
+    */
+    int calculateDelay(Date date);
+
+    /**
+     * Function that outputs each and every member's data.
+    */
+    void showMembers();
+
+    /**
+     * Function that coordinates a lending renovation requested by a member. Lendings can only be renewed in one of the 3 days before a lending's due date.
+     * @return: true if the renovation passes through, false otherwise.
+    */
     bool renovateLending();
-    void showNonMembers(); //done
-    void checkDelays(); //done
-    void retrieveData(); //done, tem de checar delays
-    int isMember(int nif); //done
-    int isnonMem(int nif); //done
-    void showLendings(); //done
-    void showDelays(); //done
-    void showLendRequests(); //done
-    void saveData(); //done
+
+    /**
+     * Function that outputs every non-member's data.
+    */
+    void showNonMembers();
+
+    /**
+     * Function that checks if there are any new delays (through the lendings vector parameter).
+    */
+    void checkDelays();
+
+    /**
+     * Function that retrieves all data saved in files by saveData().
+    */
+    void retrieveData();
+
+    /**
+     * Function that verifies if a NIF provided belongs to any nmember frequenting the Club.
+     * @param nif: integer number specifying the NIF to be searched for in the members vector.
+    */
+    int isMember(int nif);
+
+    /**
+     * Function that verifies if a NIF provided belongs to any non-member frequenting the Club.
+     * @param nif: integer number specifying the NIF to be searched for in the nonmembers vector.
+    */
+    int isnonMem(int nif);
+
+     /**
+     * Function that outputs all the Club's registered (and non-finished) lendings.
+    */
+    void showLendings();
+
+    /**
+     * Function that outputs all the Club's registered (and resolved) delays.
+    */
+    void showDelays();
+
+    /**
+     * Function that outputs all the Club's registered (and non-finished) lending requests.
+    */
+    void showLendRequests();
+
+    /**
+     * Function that saves all the Club's data in files.
+    */
+    void saveData();
+
+     /**
+     * Function that coordinates the rating and commenting of a book.
+     * @param code: integer number specifying the book to be rated and commented.
+    */
     void getOpinions(int code);
+
+    /**
+     * Function that sets the outputed text's color.
+     * @param ch: char identifying the color needed when outputing.
+    */
     void colorText(char ch); //add color to the interface
 };
 

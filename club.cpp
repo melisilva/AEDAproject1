@@ -31,7 +31,7 @@ void Club::run(){
             }
             catch(MemberAlreadyExists(nif)){
                 colorText('C');
-                cout<< "Exceção apanhada: Impossível adicionar frequentante, "<<nif.getInfo()<<" à lista de membros, pois este já é um."<<endl;
+                cout<< "ERRO: Impossível adicionar o frequentante "<<nif.getInfo()<<" à lista de membros, pois este já é um."<<endl;
                 colorText('F');
             }
         }
@@ -53,7 +53,7 @@ void Club::run(){
             }
             catch(MemberDoesNotExist(nif)){
                 colorText('C');
-                cout<< "Exceção apanhada: Impossível eliminar membro, "<<nif.getInfo()<<", pois este não existe."<<endl;
+                cout<< "ERRO: Impossível eliminar o membro "<<nif.getInfo()<<", pois este não existe."<<endl;
                 colorText('F');
             }
         }
@@ -64,7 +64,7 @@ void Club::run(){
             }
             catch(NIFDoesNotExist(nif)){
                 colorText('C');
-                cout<< "Exceção apanhada: Nenhum frequentante possui este nif, "<<nif.getInfo()<<endl;
+                cout<< "ERRO: Nenhum frequentante possui "<<nif.getInfo() << " como NIF." <<endl;
                 colorText('F');
             }
         }
@@ -75,7 +75,7 @@ void Club::run(){
             }
             catch(MemberDoesNotExist(nif)){
                 colorText('C');
-                cout<< "Exceção apanhada: Nenhum membro possui este nif, "<<nif.getInfo()<<endl;
+                cout<< "ERRO: Nenhum membro possui "<<nif.getInfo() << " como NIF."<<endl;
                 colorText('F');
             }
         }
@@ -86,17 +86,17 @@ void Club::run(){
             }
             catch(NIFDoesNotExist(nif)){
                 colorText('C');
-                cout<< "Exceção apanhada: Nenhum frequentante possui este nif, "<<nif.getInfo()<<endl;
+                cout<< "ERRO: Nenhum frequentante possui "<<nif.getInfo() << " como NIF." <<endl;
                 colorText('F');
             }
             catch(BookDoesNotExist(code)){
                 colorText('C');
-                cout << "Exceção apanhada: O livro especificado "<<code.getInfo()<<" não existe." << endl;
+                cout << "ERRO: O livro especificado com o código "<<code.getInfo()<<" não existe no Clube." << endl;
                 colorText('F');
             }
             catch(RequestDoesNotExist(code)){
                 colorText('C');
-                cout << "Exceção apanhada: O pedido especificado "<<code.getInfo().first<<" "<<code.getInfo().second<<" não existe." << endl;
+                cout << "ERRO: O pedido especificado pelos dados ("<<code.getInfo().first<<", "<<code.getInfo().second<<") não existe." << endl;
                 colorText('F');
             }
         }
@@ -107,17 +107,17 @@ void Club::run(){
             }
             catch(BookDoesNotExist(title)){
                 colorText('C');
-                cout << "Exceção apanhada: O livro especificado "<<title.getInfo()<<" não existe." << endl;
+                cout << "ERRO: Não possuímos nenhum livro com o título '" <<title.getInfo()<< "'." << endl;
                 colorText('F');
             }
             catch(NIFDoesNotExist(nif)){
                 colorText('C');
-                cout<< "Exceção apanhada: Nenhum frequentante possui este nif, "<<nif.getInfo()<<endl;
+                cout<< "ERRO: Nenhum frequentante possui "<<nif.getInfo() << " como NIF." <<endl;
                 colorText('F');
             }
             catch(NegativeBalance(nif)){
                 colorText('C');
-                cout<< "Exceção apanhada: O frequentante "<<nif.getInfo()<<" não consegue pagar a taxa indicada, pois possui um balanço negativo."<<endl;
+                cout<< "ERRO: O frequentante "<<nif.getInfo()<<" não consegue pagar a taxa indicada, pois possui um balanço negativo."<<endl;
                 colorText('F');
             }
         }
@@ -128,17 +128,17 @@ void Club::run(){
             }
             catch(NIFDoesNotExist(nif)){
                 colorText('C');
-                cout<< "Exceção apanhada: Nenhum frequentante possui este nif, "<<nif.getInfo()<<endl;
+                cout<< "ERRO: Nenhum frequentante possui "<<nif.getInfo() << " como NIF." <<endl;
                 colorText('F');
             }
             catch(BookDoesNotExist(code)){
                 colorText('C');
-                cout << "Exceção apanhada: O livro especificado "<<code.getInfo()<<" não existe." << endl;
+                cout << "ERRO: O livro especificado com o código "<<code.getInfo()<<" não existe no Clube." << endl;
                 colorText('F');
             }
             catch(RequestDoesNotExist(code)){
                 colorText('C');
-                cout << "Exceção apanhada: O pedido especificado "<<code.getInfo().first<<" "<<code.getInfo().second<<" não existe." << endl;
+                cout << "ERRO: O pedido especificado pelos dados ("<<code.getInfo().first<<", "<<code.getInfo().second<<") não existe." << endl;
                 colorText('F');
             }
         }
@@ -149,17 +149,17 @@ void Club::run(){
             }
             catch(NIFDoesNotExist(nif)){
                 colorText('C');
-                cout<< "Exceção apanhada: Nenhum frequentante possui este nif, "<<nif.getInfo()<<endl;
+                cout<< "ERRO: Nenhum frequentante possui "<<nif.getInfo() << " como NIF." <<endl;
                 colorText('F');
             }
             catch(BookDoesNotExist(code)){
                 colorText('C');
-                cout << "Exceção apanhada: O livro especificado "<<code.getInfo()<<" não existe." << endl;
+                cout << "ERRO: O livro especificado com o código "<<code.getInfo()<<" não existe no Clube." << endl;
                 colorText('F');
             }
             catch(RequestDoesNotExist(code)){
                 colorText('C');
-                cout << "Exceção apanhada: O pedido especificado "<<code.getInfo().first<<" "<<code.getInfo().second<<" não existe." << endl;
+                cout << "ERRO: O pedido especificado pelos dados ("<<code.getInfo().first<<", "<<code.getInfo().second<<") não existe." << endl;
                 colorText('F');
             }
         }
@@ -170,22 +170,22 @@ void Club::run(){
             }
             catch(NIFDoesNotExist(nif)){
                 colorText('C');
-                cout<< "Exceção apanhada: Nenhum frequentante possui este nif, "<<nif.getInfo()<<endl;
+                cout<< "ERRO: Nenhum frequentante possui "<<nif.getInfo() << " como NIF." <<endl;
                 colorText('F');
             }
             catch(BookDoesNotExist(code)){
                 colorText('C');
-                cout << "Exceção apanhada: O livro especificado "<<code.getInfo()<<" não existe." << endl;
+                cout << "ERRO: O livro especificado com o código "<<code.getInfo()<<" não existe no Clube." << endl;
                 colorText('F');
             }
             catch(RequestDoesNotExist(code)){
                 colorText('C');
-                cout << "Exceção apanhada: O pedido especificado "<<code.getInfo().first<<" "<<code.getInfo().second<<" não existe." << endl;
+                cout << "ERRO: O pedido especificado pelos dados ("<<code.getInfo().first<<", "<<code.getInfo().second<<") não existe." << endl;
                 colorText('F');
             }
             catch(NotAMember(nif)){
                 colorText('C');
-                cout << "Exceção apanhada: Impossível renovar empréstimo, pois "<<nif.getInfo()<<" não é um membro."<< endl;
+                cout << "ERRO: Renovar empréstimos é exclusivo para Membros do Clube. O NIF "<<nif.getInfo()<<" não identifica um Membro."<< endl;
                 colorText('F');
             }
         }

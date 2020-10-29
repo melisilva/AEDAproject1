@@ -740,8 +740,8 @@ int Club::isnonMem(int nif){ //returns member index or -1 if it doesn't exist
     return -1;
 }
 
-void Club::chargeFirstDelay(int nif,Book book,int days){
-    float fine = book.getValue()*0.10*days;
+void Club::chargeFirstDelay(int nif,Book book){
+    float fine = book.getValue()*0.10;
 
     int index=isMember(nif);
 
@@ -759,10 +759,6 @@ void Club::chargeFee(int nif, Book book){
     if(isnonMem(nif)!=-1){
         nonmembers[index].minusBalance(fee);
     }
-}
-
-int Club::calculateDelay(Date date){
-    return abs(today.timePeriod(date));
 }
 
 void Club::addBook(int nif = 0){
@@ -1009,7 +1005,7 @@ void Club::checkDelays(){
     for (unsigned int i = 0; i < lendings.size(); i++){
         if(abs(today.timePeriod(get<1>(lendings[i])))>10){ //Consider lending period is 10 days
             this->delays.push_back(make_tuple(get<0>(lendings[i]),get<1>(lendings[i]).delayDate(),get<2>(lendings[i])));
-            chargeFirstDelay(get<2>(lendings[i]), catalog.getBook(get<0>(lendings[i])),calculateDelay(get<1>(lendings[i])));
+            chargeFirstDelay(get<2>(lendings[i]), catalog.getBook(get<0>(lendings[i])));
 
             if (isMember(get<2>(lendings[i])) == -1){
                 nonmembers[isnonMem(get<2>(lendings[i]))].finishLending(get<0>(lendings[i]), get<1>(lendings[i]));

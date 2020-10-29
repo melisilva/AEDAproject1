@@ -108,9 +108,8 @@ public:
      * Special function to charge a bigger value whenever a delay is first spotted in the program.
      * @param nif: integer number specifying the person at fault's NIF.
      * @param book: the Book object representing the book involved in the delay.
-     * @param days: the number of days passed ever since the first lending date associated with the delay (integer).
-    */
-    void chargeFirstDelay(int nif, Book book,int days);
+     */
+    void chargeFirstDelay(int nif, Book book);
 
     /**
      * Function used for charging a lending to a non-member.
@@ -118,13 +117,6 @@ public:
      * @param book: the Book object that represents the book to-be-lended.
     */
     void chargeFee(int nif,Book book);
-
-    /**
-     * Function that calculates the delay between the current day (when the program's running) and the date specified in the function's only argument.
-     * @param date: a Date object.
-     * @return: the delay in days (integer).
-    */
-    int calculateDelay(Date date);
 
     /**
      * Function that outputs each and every member's data.

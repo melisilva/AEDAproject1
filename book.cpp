@@ -189,7 +189,7 @@ void Book::calculateRating(float rate){
 }
 
 void Book::showBook() const{
-    cout << "   - " << title << " (" << code << "), de " << author << ", "<< edition << " edicao" <<" (" << realRating << "/5), do membro " << owner <<", "<<units<<" unidades"<<endl << "Comentários do Livro: " << endl << writ_ops;
+    cout << "   - " << title << " (" << code << "), de " << author << ", "<< edition << " edicao" <<" (" << realRating << "/5), do membro " << owner <<", "<<oguni<<" unidades"<<endl << "Comentários do Livro: " << endl << writ_ops;
 }
 
 string Book::getData() const{

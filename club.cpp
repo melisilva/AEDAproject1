@@ -817,6 +817,9 @@ void Club::addBook(int nif = 0){
                 colorText('F');
             }
         }
+        else{
+            valid=true;
+        }
     }
     code = catalog.books.size();
     int unit=1; int oguni=1;

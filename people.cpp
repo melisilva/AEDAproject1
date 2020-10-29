@@ -78,16 +78,13 @@ bool Member::registerRequest(int code, Date date){
 }
 
 void Member::addBook(Book &book){
-    bool already=false;
     if(books.size()!=0){
-        for(unsigned int i=0;i<books.size();i++){
-            if(book==books[i]){
-                books[i].addUnits();
-                already=true;
-            }
-        }
-        if(!already){
+        vector<Book>::iterator it=find(books.begin(),books.end(),book);
+        if(it==books.end()){
             books.push_back(book);
+        }
+        else{
+            it->addUnits();
         }
     }else{
         books.push_back(book);

@@ -2,6 +2,7 @@
 #define AEDAPROJECT1_CATALOG_H
 #include "book.h"
 #include <vector>
+#include <algorithm>
 #include <iostream>
 using namespace std;
 

@@ -2,6 +2,7 @@
 #define AEDAPROJECT1_CLUB_H
 #include "catalog.h"
 #include "date.h"
+#include "exception.h"
 #include <windows.h>
 #include <fstream>
 #include "people.h"

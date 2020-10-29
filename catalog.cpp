@@ -1,4 +1,5 @@
 #include "catalog.h"
+using namespace std;
 
 Catalog::Catalog(){
     vector<Book> temp;
@@ -16,19 +17,15 @@ void Catalog::updateCodes(){
 }
 
 void Catalog::addBook(Book book){
-    bool already=false;
     if(books.size()!=0){
-        for(unsigned int i=0;i<books.size();i++){
-            if(books[i]==book){
-                books[i].addUnits();
-                already=true;
-            }
-        }
-        if(!already){
+        vector<Book>::iterator it=find(books.begin(),books.end(),book);
+        if(it==books.end()){
             books.push_back(book);
         }
-    }
-    else{
+        else{
+            it->addUnits();
+        }
+    }else{
         books.push_back(book);
     }
 }

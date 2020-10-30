@@ -1456,274 +1456,330 @@ void Club::retrieveData(){
     ifstream nmemb_file; nmemb_file.open("nonmembers.txt");
     ifstream system_file; system_file.open("system.txt");
 
+    bool d_exist=false;
+    bool l_exist=false;
+    bool empty=false;
     string temp;
     char sep = ',';
     stringstream membs, bks, lendRs, lends, dels, nmembs, sys;
 
     //Getting Books data.
-    string title, author, category;
-    int code_bk, units, opinions, sumRating, edition, owner, oguni;
-    float realRating, value;
-    bool state, multi;
-    while (temp != "END"){
-        getline(bks_file, temp);
-        bks.str("");
-        bks.clear();
-        bks << temp;
-        bks >> code_bk;
-        getline(bks_file, temp);
-        bks.str("");
-        bks.clear();
-        bks << temp;
-        title = bks.str();
-        getline(bks_file, temp);
-        bks.str("");
-        bks.clear();
-        bks << temp;
-        author = bks.str();
-        getline(bks_file, temp);
-        bks.str("");
-        bks.clear();
-        bks << temp;
-        bks >> edition;
-        getline(bks_file, temp);
-        bks.str("");
-        bks.clear();
-        bks << temp;
-        bks >> owner;
-        getline(bks_file, temp);
-        bks.str("");
-        bks.clear();
-        bks << temp;
-        bks >> category;
-        getline(bks_file, temp);
-        bks.str("");
-        bks.clear();
-        bks << temp;
-        bks >> value;
-        getline(bks_file, temp);
-        bks.str("");
-        bks.clear();
-        bks << temp;
-        bks >> realRating;
-        getline(bks_file, temp);
-        bks.str("");
-        bks.clear();
-        bks << temp;
-        bks >> units;
-        getline(bks_file, temp);
-        bks.str("");
-        bks.clear();
-        bks << temp;
-        bks >> oguni;
-        getline(bks_file, temp);
-        bks.str("");
-        bks.clear();
-        bks << temp;
-        bks >> opinions;
-        getline(bks_file, temp);
-        bks.str("");
-        bks.clear();
-        bks << temp;
-        bks >> sumRating;
-        getline(bks_file, temp);
-        bks.str("");
-        bks.clear();
-        bks << temp;
-        bks >> state;
-        getline(bks_file, temp);
-        bks.str("");
-        bks.clear();
-        bks << temp;
-        bks >> multi;
-        Book bk;
-        bk.setAuthor(author); bk.setTitle(title); bk.setCat(category); bk.setCode(code_bk); bk.setUnits(units);
-        bk.setOpinions(opinions); bk.setRating(realRating); bk.setSumR(sumRating); bk.setValue(value); bk.setState();
-        bk.setEdition(edition); bk.setOwner(owner); bk.setOgunit(oguni); bk.setMulti();
-        catalog.books.push_back(bk);
-        getline(bks_file, temp);
-        bks.str("");
-        bks.clear();
-        getline(bks_file, temp);
-        bks.str("");
-        bks.clear();
+    empty=bks_file.peek() == std::ifstream::traits_type::eof();
+
+    if(!(empty)){
+        string title, author, category;
+        int code_bk, units, opinions, sumRating, edition, owner, oguni;
+        float realRating, value;
+        bool state, multi;
+        while (temp != "END"){
+            getline(bks_file, temp);
+            bks.str("");
+            bks.clear();
+            bks << temp;
+            bks >> code_bk;
+            getline(bks_file, temp);
+            bks.str("");
+            bks.clear();
+            bks << temp;
+            title = bks.str();
+            getline(bks_file, temp);
+            bks.str("");
+            bks.clear();
+            bks << temp;
+            author = bks.str();
+            getline(bks_file, temp);
+            bks.str("");
+            bks.clear();
+            bks << temp;
+            bks >> edition;
+            getline(bks_file, temp);
+            bks.str("");
+            bks.clear();
+            bks << temp;
+            bks >> owner;
+            getline(bks_file, temp);
+            bks.str("");
+            bks.clear();
+            bks << temp;
+            bks >> category;
+            getline(bks_file, temp);
+            bks.str("");
+            bks.clear();
+            bks << temp;
+            bks >> value;
+            getline(bks_file, temp);
+            bks.str("");
+            bks.clear();
+            bks << temp;
+            bks >> realRating;
+            getline(bks_file, temp);
+            bks.str("");
+            bks.clear();
+            bks << temp;
+            bks >> units;
+            getline(bks_file, temp);
+            bks.str("");
+            bks.clear();
+            bks << temp;
+            bks >> oguni;
+            getline(bks_file, temp);
+            bks.str("");
+            bks.clear();
+            bks << temp;
+            bks >> opinions;
+            getline(bks_file, temp);
+            bks.str("");
+            bks.clear();
+            bks << temp;
+            bks >> sumRating;
+            getline(bks_file, temp);
+            bks.str("");
+            bks.clear();
+            bks << temp;
+            bks >> state;
+            getline(bks_file, temp);
+            bks.str("");
+            bks.clear();
+            bks << temp;
+            bks >> multi;
+            Book bk;
+            bk.setAuthor(author); bk.setTitle(title); bk.setCat(category); bk.setCode(code_bk); bk.setUnits(units);
+            bk.setOpinions(opinions); bk.setRating(realRating); bk.setSumR(sumRating); bk.setValue(value); bk.setState();
+            bk.setEdition(edition); bk.setOwner(owner); bk.setOgunit(oguni); bk.setMulti();
+            catalog.books.push_back(bk);
+            getline(bks_file, temp);
+            bks.str("");
+            bks.clear();
+            getline(bks_file, temp);
+            bks.str("");
+            bks.clear();
+        }
     }
 
+    empty=false;
+
+    empty=memb_file.peek() == std::ifstream::traits_type::eof();
+
     //Getting Member data.
-    temp = "BEGIN";
-    string name;
-    int nif, code;
-    float balance;
-    while (temp != "END"){
-        vector<Book> memb_bks;
-        getline(memb_file, temp);
-        membs.str("");
-        membs.clear();
-        membs << temp;
-        membs >> name;
-        getline(memb_file, temp);
-        membs.str("");
-        membs.clear();
-        membs << temp;
-        membs >> nif;
-        getline(memb_file, temp);
-        membs.str("");
-        membs.clear();
-        membs << temp;
-        balance = stof(temp);
-        do {
+    if(!(empty)){
+        temp = "BEGIN";
+        string name;
+        int nif, code;
+        float balance;
+        while (temp != "END"){
+            vector<Book> memb_bks;
             getline(memb_file, temp);
             membs.str("");
             membs.clear();
             membs << temp;
-            membs >> code >> sep;
-            int ind = catalog.searchBook(code);
-            memb_bks.push_back(catalog.books[ind]);
-        } while (sep != ';');
-        members.push_back(Member(name, nif, memb_bks, balance));
-        getline(memb_file, temp);
-        membs.str("");
-        membs.clear();
-        getline(memb_file, temp);
-        membs.str("");
-        membs.clear();
+            membs >> name;
+            getline(memb_file, temp);
+            membs.str("");
+            membs.clear();
+            membs << temp;
+            membs >> nif;
+            getline(memb_file, temp);
+            membs.str("");
+            membs.clear();
+            membs << temp;
+            balance = stof(temp);
+            do {
+                getline(memb_file, temp);
+                membs.str("");
+                membs.clear();
+                membs << temp;
+                membs >> code >> sep;
+                int ind = catalog.searchBook(code);
+                memb_bks.push_back(catalog.books[ind]);
+            } while (sep != ';');
+            members.push_back(Member(name, nif, memb_bks, balance));
+            getline(memb_file, temp);
+            membs.str("");
+            membs.clear();
+            getline(memb_file, temp);
+            membs.str("");
+            membs.clear();
+        }
     }
+
+    empty=false;
+    empty=nmemb_file.peek() == std::ifstream::traits_type::eof();
 
     //Getting nonMembers data.
-    temp = "BEGIN";
-    while (temp != "END"){
-        getline(nmemb_file, temp);
-        nmembs.str("");
-        nmembs.clear();
-        nmembs << temp;
-        nmembs >> name;
-        getline(nmemb_file, temp);
-        nmembs.str("");
-        nmembs.clear();
-        nmembs << temp;
-        nmembs >> nif;
-        getline(nmemb_file, temp);
-        nmembs.str("");
-        nmembs.clear();
-        nmembs << temp;
-        balance = stof(temp);
-        nonmembers.push_back(nonMem(name, nif, balance));
-        getline(nmemb_file, temp);
-        nmembs.str("");
-        nmembs.clear();
-        getline(nmemb_file, temp);
-        nmembs.str("");
-        nmembs.clear();
+    if(!(empty)){
+        temp = "BEGIN";
+        string name;
+        int nif, code;
+        float balance;
+        while (temp != "END"){
+            getline(nmemb_file, temp);
+            nmembs.str("");
+            nmembs.clear();
+            nmembs << temp;
+            nmembs >> name;
+            getline(nmemb_file, temp);
+            nmembs.str("");
+            nmembs.clear();
+            nmembs << temp;
+            nmembs >> nif;
+            getline(nmemb_file, temp);
+            nmembs.str("");
+            nmembs.clear();
+            nmembs << temp;
+            balance = stof(temp);
+            nonmembers.push_back(nonMem(name, nif, balance));
+            getline(nmemb_file, temp);
+            nmembs.str("");
+            nmembs.clear();
+            getline(nmemb_file, temp);
+            nmembs.str("");
+            nmembs.clear();
+        }
     }
+
+    empty=false;
+    empty=lendRs_file.peek() == std::ifstream::traits_type::eof();
+
 
     //Getting lendRequests data.
-    temp = "BEGIN";
-    string date = "temp";
-    Date tmp;
-    while (temp != "END") {
-        getline(lendRs_file, temp);
-        lendRs.str("");
-        lendRs.clear();
-        lendRs << temp;
-        lendRs >> code;
-        getline(lendRs_file, temp);
-        lendRs.str("");
-        lendRs.clear();
-        lendRs << temp;
-        lendRs >> date;
-        getline(lendRs_file, temp);
-        lendRs.str("");
-        lendRs.clear();
-        lendRs << temp;
-        lendRs >> nif;
-        lendRequests.push_back(make_tuple(code, tmp.getDate(date), nif));
-        if (isMember(nif) != -1){
-            members[isMember(nif)].registerRequest(code, tmp.getDate(date));
-        } else {
-            nonmembers[isnonMem(nif)].registerRequest(code, tmp.getDate(date));
+    if(!(empty)){
+        temp = "BEGIN";
+        string date = "temp";
+        Date tmp;
+        int nif, code;
+        while (temp != "END") {
+            getline(lendRs_file, temp);
+            lendRs.str("");
+            lendRs.clear();
+            lendRs << temp;
+            lendRs >> code;
+            getline(lendRs_file, temp);
+            lendRs.str("");
+            lendRs.clear();
+            lendRs << temp;
+            lendRs >> date;
+            getline(lendRs_file, temp);
+            lendRs.str("");
+            lendRs.clear();
+            lendRs << temp;
+            lendRs >> nif;
+            lendRequests.push_back(make_tuple(code, tmp.getDate(date), nif));
+            if (isMember(nif) != -1){
+                members[isMember(nif)].registerRequest(code, tmp.getDate(date));
+            } else {
+                nonmembers[isnonMem(nif)].registerRequest(code, tmp.getDate(date));
+            }
+            getline(lendRs_file, temp);
+            lendRs.str("");
+            lendRs.clear();
+            getline(lendRs_file, temp);
+            lendRs.str("");
+            lendRs.clear();
         }
-        getline(lendRs_file, temp);
-        lendRs.str("");
-        lendRs.clear();
-        getline(lendRs_file, temp);
-        lendRs.str("");
-        lendRs.clear();
     }
+
+    empty=false;
+    empty=lends_file.peek() == std::ifstream::traits_type::eof();
 
     //Getting lendings data.
-    temp = "BEGIN";
-    Date tmp2;
-    while (temp != "END") {
-        getline(lends_file, temp);
-        lends.str("");
-        lends.clear();
-        lends << temp;
-        lends >> code;
-        getline(lends_file, temp);
-        lends.str("");
-        lends.clear();
-        lends << temp;
-        lends >> date;
-        getline(lends_file, temp);
-        lends.str("");
-        lends.clear();
-        lends << temp;
-        lends >> nif;
-        lendings.push_back(make_tuple(code, tmp.getDate(date), nif));
-        if (isMember(nif) != -1){
-            members[isMember(nif)].registerLending(code, tmp.getDate(date));
-        } else {
-            nonmembers[isnonMem(nif)].registerLending(code, tmp.getDate(date));
+    if(!(empty)){
+        l_exist=true;
+        temp = "BEGIN";
+        string date = "temp";
+        int nif, code;
+        Date tmp,tmp2;
+        while (temp != "END") {
+            getline(lends_file, temp);
+            lends.str("");
+            lends.clear();
+            lends << temp;
+            lends >> code;
+            getline(lends_file, temp);
+            lends.str("");
+            lends.clear();
+            lends << temp;
+            lends >> date;
+            getline(lends_file, temp);
+            lends.str("");
+            lends.clear();
+            lends << temp;
+            lends >> nif;
+            lendings.push_back(make_tuple(code, tmp.getDate(date), nif));
+            if (isMember(nif) != -1){
+                members[isMember(nif)].registerLending(code, tmp.getDate(date));
+            } else {
+                nonmembers[isnonMem(nif)].registerLending(code, tmp.getDate(date));
+            }
+            getline(lends_file, temp);
+            lends.str("");
+            lends.clear();
+            getline(lends_file, temp);
+            lends.str("");
+            lends.clear();
         }
-        getline(lends_file, temp);
-        lends.str("");
-        lends.clear();
-        getline(lends_file, temp);
-        lends.str("");
-        lends.clear();
     }
+
+    empty=false;
+    empty=dels_file.peek() == std::ifstream::traits_type::eof();
+
 
     //Getting delays data.
-    temp = "BEGIN";
-    Date tmp3;
-    while (temp != "END") {
-        getline(dels_file, temp);
-        dels.str("");
-        dels.clear();
-        dels << temp;
-        dels >> code;
-        getline(dels_file, temp);
-        dels.str("");
-        dels.clear();
-        dels << temp;
-        dels >> date;
-        getline(dels_file, temp);
-        dels.str("");
-        dels.clear();
-        dels << temp;
-        dels >> nif;
-        delays.push_back(make_tuple(code, tmp3.getDate(date), nif));
-        getline(dels_file, temp);
-        dels.str("");
-        dels.clear();
-        getline(dels_file, temp);
-        dels.str("");
-        dels.clear();
+    if(!(empty)){
+        d_exist=true;
+        temp = "BEGIN";
+        Date tmp3;
+        string date = "temp";
+        int nif, code;
+        while (temp != "END") {
+            getline(dels_file, temp);
+            dels.str("");
+            dels.clear();
+            dels << temp;
+            dels >> code;
+            getline(dels_file, temp);
+            dels.str("");
+            dels.clear();
+            dels << temp;
+            dels >> date;
+            getline(dels_file, temp);
+            dels.str("");
+            dels.clear();
+            dels << temp;
+            dels >> nif;
+            delays.push_back(make_tuple(code, tmp3.getDate(date), nif));
+            getline(dels_file, temp);
+            dels.str("");
+            dels.clear();
+            getline(dels_file, temp);
+            dels.str("");
+            dels.clear();
+        }
     }
 
-    //Getting System data
-    string d, str_counter;
-    int temp_counter;
-    bool already=false;
-    getline(system_file,temp);
-    sys.str("");
-    sys.clear();
-    sys<<temp;
-    sys>>d;
+    empty=false;
+    empty=system_file.peek() == std::ifstream::traits_type::eof();
+    cout<<empty<<endl;
 
-    //If we're in the same day, then we don't need to checkDelays().
-    if(d != today.getDateStr()){
-        checkDelays();
+    //Getting System data
+    if(!(empty)){
+        string d, str_counter;
+        int temp_counter;
+        bool already=false;
+        getline(system_file,temp);
+        sys.str("");
+        sys.clear();
+        sys<<temp;
+        sys>>d;
+
+        //If we're in the same day, then we don't need to checkDelays().
+        if(d != today.getDateStr()){
+            checkDelays();
+        }
+    }
+    else{
+        if(d_exist || l_exist){
+            checkDelays();
+        }
     }
 
 }

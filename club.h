@@ -5,6 +5,7 @@
 #include "exception.h"
 #include <windows.h>
 #include <fstream>
+#include <istream>
 #include "people.h"
 #include <vector>
 #include <stdio.h>

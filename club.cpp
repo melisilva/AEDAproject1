@@ -40,13 +40,18 @@ void Club::run(){
             string nif_s;
             int nif;
             cout<<"Insira um NIF para proceder: ";
-            getline(cin,nif_s);
-            if(isdigit(nif_s[0])){
-                nif=stoi(nif_s);
-                valid=true;
-            }
-            else{
-                valid=false;
+            while(!valid){
+                getline(cin,nif_s);
+                if(isdigit(nif_s[0])){
+                    nif=stoi(nif_s);
+                    valid=true;
+                }
+                else{
+                    valid=false;
+                    colorText('C');
+                    cout<<"Por favor, indique um NIF válido (número de 9 algarismos)."<<endl;
+                    colorText('F');
+                }
             }
             try{
                 removeMember(nif);
@@ -197,6 +202,63 @@ void Club::run(){
             valid=true;
             showMembers();
         }
+        if(input=="SHO_F"){
+            valid=true;
+            showAllFrequentants();
+        }
+        if(input=="SHO_1F"){
+            string nif_s;
+            int nif;
+            while(!valid){
+                cout<<"Insira um NIF para proceder: ";
+                getline(cin,nif_s);
+                if(isdigit(nif_s[0])){
+                    nif=stoi(nif_s);
+                    valid=true;
+                }
+                else{
+                    valid=false;
+                    colorText('C');
+                    cout<<"Por favor, indique um NIF válido (número de 9 algarismos)."<<endl;
+                    colorText('F');
+                }
+            }
+            try{
+                showFrequentant(nif);
+            }
+            catch(NIFDoesNotExist(nif)){
+                colorText('C');
+                cout<< "ERRO: Nenhum frequentante possui "<<nif.getInfo() << " como NIF." <<endl;
+                colorText('F');
+            }
+        }
+        if(input=="SHO_1L"){
+            valid=true;
+            string code_s;
+            int code;
+            while(!valid){
+                cout<<"Indique o código do livro: "<< endl;
+                getline(cin,code_s);
+                if(isdigit(code_s[0])){
+                    code=stoi(code_s);
+                    valid=true;
+                }
+                else{
+                    valid=false;
+                    colorText('C');
+                    cout<<"Por favor, indique um código válido (um número)."<<endl;
+                    colorText('F');
+                }
+            }
+            try{
+                showABook(code);
+            }
+            catch(BookDoesNotExist(code)){
+                colorText('C');
+                cout << "ERRO: O livro especificado com o código "<<code.getInfo()<<" não existe no Clube." << endl;
+                colorText('F');
+            }
+        }
         if (input == "SHO_A"){
             valid=true;
             showDelays();
@@ -258,6 +320,8 @@ void Club::help() {
     cout << " ATL_P: atualizar frequentador (para adição de saldo ou mudança de nome)" << endl;
     cout << " SHO_M: mostrar membros" << endl;
     cout << " SHO_N: mostrar não-membros" << endl;
+    cout << " SHO_1F: mostrar um frequentante" << endl;
+    cout << " SHO_F: mostrar frquentantes (membros e não membros)" << endl;
     cout << endl;
     colorText('B');
     cout << " --- PROTOCOLOS AO NÍVEL DO CATÁLOGO --- " << endl;
@@ -268,6 +332,7 @@ void Club::help() {
     cout << " END_L: finalizar empréstimo" << endl;
     cout << " REN_L: renovar empréstimo" << endl;
     cout << " SHO_L: mostrar livros" << endl;
+    cout << " SHO_1L: mostrar um livro" << endl;
     cout << " SHO_E: mostrar empréstimos" << endl;
     cout << " SHO_A: mostrar atrasos" << endl;
     cout << " SHO_P: mostrar pedidos" << endl;
@@ -950,6 +1015,7 @@ void Club::removeBook(tuple<int, Date, int> lostBook) {
     }
 }
 
+
 void Club::showMembers(){
     for (int i = 0; i < members.size(); i++){
         cout << "Nome: " << members[i].getName() << endl << "NIF: "<< members[i].getNIF() << endl <<setprecision(2)<<members[i].getBalance()<<" euros"<<endl<< "Livros:" << endl;
@@ -959,6 +1025,40 @@ void Club::showMembers(){
         }
         cout << endl << endl;
     }
+}
+
+void Club::showFrequentant(int nif){
+    int i1=isMember(nif);
+    int i2=isnonMem(nif);
+    if(i1==i2){
+        throw NIFDoesNotExist(nif);
+    }
+    if(i1==-1){
+        int index=isnonMem(nif);
+        cout << "Nome: " << nonmembers[i2].getName() << endl << "NIF: "<< nonmembers[i2].getNIF() << endl <<setprecision(2)<<nonmembers[i2].getBalance()<<" euros"<<endl;
+    }
+    else{
+        cout << "Nome: " << members[i1].getName() << endl << "NIF: "<< members[i1].getNIF() << endl <<setprecision(2)<<members[i1].getBalance()<<" euros"<<endl<< "Livros:" << endl;
+        vector<Book> books = members[i1].getBooks();
+        for (int j = 0; j < books.size(); j++){
+            books[j].showBook();
+        }
+        cout << endl << endl;
+    }
+}
+
+void Club::showABook(int code){
+    if(code>catalog.books.size() || code<0){
+        throw BookDoesNotExist(code);
+    }
+    catalog.books[code].showBook();
+}
+
+void Club::showAllFrequentants(){
+    cout<<"---- MEMBROS ----"<<endl;
+    showMembers();
+    cout<<"---- NÃO MEMBROS ----"<<endl;
+    showNonMembers();
 }
 
 void Club::showNonMembers(){

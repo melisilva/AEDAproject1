@@ -109,7 +109,7 @@ public:
      * Special function to charge a bigger value whenever a delay is first spotted in the program.
      * @param nif: integer number specifying the person at fault's NIF.
      * @param book: the Book object representing the book involved in the delay.
-     */
+    */
     void chargeFirstDelay(int nif, Book book);
 
     /**
@@ -123,6 +123,23 @@ public:
      * Function that outputs each and every member's data.
     */
     void showMembers();
+
+    /**
+     * Function that outputs every data of a specific frequentant.
+     * @param nif: integer number representing a frequentant's NIF whose data should be shown.
+    */
+    void showFrequentant(int nif);
+
+    /**
+     * Function that outputs every data of a specific book.
+     * @param code: integer number specifying the book whose data should be shown.
+    */
+    void showABook(int code);
+
+    /**
+     * Function that outputs each and every frequentants'(member and non member alike) data.
+    */
+    void showAllFrequentants();
 
     /**
      * Function that coordinates a lending renovation requested by a member. Lendings can only be renewed in one of the 3 days before a lending's due date.
@@ -157,9 +174,9 @@ public:
     */
     int isnonMem(int nif);
 
-     /**
-     * Function that outputs all the Club's registered (and non-finished) lendings.
-    */
+    /**
+    * Function that outputs all the Club's registered (and non-finished) lendings.
+   */
     void showLendings();
 
     /**
@@ -177,10 +194,10 @@ public:
     */
     void saveData();
 
-     /**
-     * Function that coordinates the rating and commenting of a book.
-     * @param code: integer number specifying the book to be rated and commented.
-    */
+    /**
+    * Function that coordinates the rating and commenting of a book.
+    * @param code: integer number specifying the book to be rated and commented.
+   */
     void getOpinions(int code);
 
     /**
@@ -189,6 +206,5 @@ public:
     */
     void colorText(char ch); //add color to the interface
 };
-
 
 #endif //AEDAPROJECT1_CLUB_H

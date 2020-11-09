@@ -53,9 +53,9 @@ public:
 
     /**
      * Function to add a new opinion to the book's critiques register.
-     * @param writ_ops: the new opinion to be added to the object's writ_ops attribute.
+     * @param writ_op: the new opinion to be added to the object's writ_ops attribute.
     */
-    void addWritops(string writ_ops);
+    void addWritops(string writ_op);
 
     /**
      * Function to calculate a book's value and set it in its value attribute.
@@ -223,6 +223,12 @@ public:
     void setEdition(int edition);
 
     /**
+     * Function that sets the object from which it is called's writ_ops attribute with the argument provided.
+     * @param writ_ops: value to set the writ_ops attribute (string).
+    */
+    void setWritOps(string writ_ops);
+
+    /**
      * Function that sets the object from which it is called's oguni attribute with the argument provided.
      * @param oguni: value to set the oguni attribute (integer).
     */
@@ -242,7 +248,7 @@ public:
     /**
      * Operator to compare two Book objects.
      * @return: true if the books have the same exact attributes and false otherwise (boolean).
-    */ 
+    */
     bool operator==(Book b1);
 
     /**
@@ -257,3 +263,4 @@ public:
 };
 
 #endif //AEDAPROJECT1_BOOK_H
+

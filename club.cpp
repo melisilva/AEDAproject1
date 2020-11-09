@@ -14,10 +14,11 @@ Club::Club() {
 
 void Club::run(){
     string input = "";
-    bool valid=false;
+    bool valid;
     retrieveData();
     beginningInfo();
     do {
+        valid=false;
         cout << "O que pretende fazer? ";
         getline(cin, input);
         cout << endl;
@@ -36,7 +37,6 @@ void Club::run(){
             }
         }
         if (input == "REM_M"){
-            valid = false;
             string nif_s;
             int nif;
             cout<<"Insira um NIF para proceder: ";
@@ -207,7 +207,6 @@ void Club::run(){
             showAllFrequentants();
         }
         if(input=="SHO_1F"){
-            valid = false;
             string nif_s;
             int nif;
             while(!valid){
@@ -236,46 +235,45 @@ void Club::run(){
         if(input=="SHO_1L"){
             string code_s, title;
             int code;
-            valid = false;
-            
-            while(!valid){
-                    cout<<"Indique o código do livro (indique -1 caso não saiba o código): "<< endl;
-                    getline(cin,code_s);
-                    
-                    if(isdigit(code_s[0])){
-                        code=stoi(code_s);
-                        valid=true;
-                    }
-                    else if (code_s == "-1"){
-                        cout << "Indique o título do livro (cada palavra iniciada por maiúscula): " << endl;
-                        getline(cin, title);
-                        try {
-                            if (!catalog.searchBook(title)){
-                                throw BookDoesNotExist(title);
-                            } else {
-                                cout << endl;
-                                cout << "Códigos de Exemplares Disponíveis:";
-                                for (int i = 0; i < catalog.books.size(); i++){
-                                    if (catalog.books[i].getTitle() == title){
-                                        cout << " " << i;
-                                    } 
-                                }
-                                cout << "." << endl << endl;
-                                continue;
-                            }
-                        } catch (BookDoesNotExist(title)){
-                            colorText('C');
-                            cout << "ERRO: O livro especificado com o título "<<title.getInfo()<<" não existe no Clube." << endl;
-                            colorText('F');
-                        }
 
-                    } else {
-                        valid = false;
+            while(!valid){
+                cout<<"Indique o código do livro (indique -1 caso não saiba o código): "<< endl;
+                getline(cin,code_s);
+
+                if(isdigit(code_s[0])){
+                    code=stoi(code_s);
+                    valid=true;
+                }
+                else if (code_s == "-1"){
+                    cout << "Indique o título do livro (cada palavra iniciada por maiúscula): " << endl;
+                    getline(cin, title);
+                    try {
+                        if (!catalog.searchBook(title)){
+                            throw BookDoesNotExist(title);
+                        } else {
+                            cout << endl;
+                            cout << "Códigos de Exemplares Disponíveis:";
+                            for (int i = 0; i < catalog.books.size(); i++){
+                                if (catalog.books[i].getTitle() == title){
+                                    cout << " " << i;
+                                }
+                            }
+                            cout << "." << endl << endl;
+                            continue;
+                        }
+                    } catch (BookDoesNotExist(title)){
                         colorText('C');
-                        cout<<"Por favor, indique um código válido (um número maior que 0)."<<endl;
+                        cout << "ERRO: O livro especificado com o título "<<title.getInfo()<<" não existe no Clube." << endl;
                         colorText('F');
                     }
+
+                } else {
+                    valid = false;
+                    colorText('C');
+                    cout<<"Por favor, indique um código válido (um número maior que 0)."<<endl;
+                    colorText('F');
                 }
+            }
 
 
             try{
@@ -286,7 +284,7 @@ void Club::run(){
                 cout << "ERRO: O livro especificado com o código "<<code.getInfo()<<" não existe no Clube." << endl;
                 colorText('F');
             }
-        
+
         }
         if (input == "SHO_A"){
             valid=true;
@@ -1389,7 +1387,7 @@ bool Club::makeRequest() {
 }
 
 void Club::saveData(){
-    string membs = "members.txt", nonmembs = "nonmembers.txt", lends = "lendings.txt", lendRs = "lendRequests.txt", bks = "books.txt", dels = "delays.txt";//sys="system.txt";
+    string membs = "members.txt", nonmembs = "nonmembers.txt", lends = "lendings.txt", lendRs = "lendRequests.txt", bks = "books.txt", dels = "delays.txt";
 
     ofstream file; //(membs, ios::binary);
     ofstream filee; //(lends, ios::binary);
@@ -1496,7 +1494,7 @@ void Club::retrieveData(){
     empty=bks_file.peek() == std::ifstream::traits_type::eof();
 
     if(!(empty)){
-        string title, author, category;
+        string title, author, category, writ_ops;
         int code_bk, units, opinions, sumRating, edition, owner, oguni;
         float realRating, value;
         bool state, multi;
@@ -1571,10 +1569,15 @@ void Club::retrieveData(){
             bks.clear();
             bks << temp;
             bks >> multi;
+            getline(bks_file, temp);
+            bks.str("");
+            bks.clear();
+            bks<<temp;
+            writ_ops=bks.str();
             Book bk;
             bk.setAuthor(author); bk.setTitle(title); bk.setCat(category); bk.setCode(code_bk); bk.setUnits(units);
             bk.setOpinions(opinions); bk.setRating(realRating); bk.setSumR(sumRating); bk.setValue(value); bk.setState();
-            bk.setEdition(edition); bk.setOwner(owner); bk.setOgunit(oguni); bk.setMulti();
+            bk.setEdition(edition); bk.setOwner(owner); bk.setOgunit(oguni); bk.setMulti(); bk.setWritOps(writ_ops);
             catalog.books.push_back(bk);
             getline(bks_file, temp);
             bks.str("");

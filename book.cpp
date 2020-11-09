@@ -113,11 +113,11 @@ void Book::setEdition(int edition){
     this->edition = edition;
 }
 
-void Book::addWritops(string writ_ops){
+void Book::addWritops(string writ_op){
     stringstream temp;
-    temp << "- " << writ_ops << endl;
+    temp<< "- " <<  writ_op << endl;
     writ_ops += temp.str();
-
+    cout<<writ_ops<<endl;
 }
 
 int Book::getCode() const {
@@ -195,7 +195,7 @@ void Book::showBook() const{
 string Book::getData() const{
     stringstream temp;
 
-    temp << code << endl << title << endl << author << endl << edition << endl << owner << endl << category << endl << value << endl << realRating << endl << units << endl << oguni << endl << opinions << endl << sumRating << endl << state << endl << multi;
+    temp << code << endl << title << endl << author << endl << edition << endl << owner << endl << category << endl << value << endl << realRating << endl << units << endl << oguni << endl << opinions << endl << sumRating << endl << state << endl << multi << endl << writ_ops;
 
     string tmp = temp.str();
     return temp.str();
@@ -221,4 +221,8 @@ bool Book::operator==(Book b1){
 
 void Book::setOgunit(int oguni){
     this->oguni = oguni;
+}
+
+void Book::setWritOps(string writ_ops){
+    this->writ_ops=writ_ops;
 }

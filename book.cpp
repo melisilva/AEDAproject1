@@ -113,10 +113,10 @@ void Book::setEdition(int edition){
     this->edition = edition;
 }
 
-void Book::addWritops(string writ_op){
+void Book::addWritops(string writ_ops){
     stringstream temp;
-    temp<< "- " <<  writ_op << endl;
-    writ_ops += temp.str();
+    temp << writ_ops << endl;
+    this->writ_ops += temp.str();
     cout<<writ_ops<<endl;
 }
 
@@ -195,7 +195,7 @@ void Book::showBook() const{
 string Book::getData() const{
     stringstream temp;
 
-    temp << code << endl << title << endl << author << endl << edition << endl << owner << endl << category << endl << value << endl << realRating << endl << units << endl << oguni << endl << opinions << endl << sumRating << endl << state << endl << multi << endl << writ_ops;
+    temp << code << endl << title << endl << author << endl << edition << endl << owner << endl << category << endl << value << endl << realRating << endl << units << endl << oguni << endl << opinions << endl << sumRating << endl << state << endl << multi << endl << writ_ops << "END_REVS";
 
     string tmp = temp.str();
     return temp.str();
@@ -223,6 +223,3 @@ void Book::setOgunit(int oguni){
     this->oguni = oguni;
 }
 
-void Book::setWritOps(string writ_ops){
-    this->writ_ops=writ_ops;
-}

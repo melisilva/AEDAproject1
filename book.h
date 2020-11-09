@@ -53,9 +53,9 @@ public:
 
     /**
      * Function to add a new opinion to the book's critiques register.
-     * @param writ_op: the new opinion to be added to the object's writ_ops attribute.
+     * @param writ_ops: the new opinion to be added to the object's writ_ops attribute.
     */
-    void addWritops(string writ_op);
+    void addWritops(string writ_ops);
 
     /**
      * Function to calculate a book's value and set it in its value attribute.
@@ -221,12 +221,6 @@ public:
      * @param edition: value to set the edition attribute (integer).
     */
     void setEdition(int edition);
-
-    /**
-     * Function that sets the object from which it is called's writ_ops attribute with the argument provided.
-     * @param writ_ops: value to set the writ_ops attribute (string).
-    */
-    void setWritOps(string writ_ops);
 
     /**
      * Function that sets the object from which it is called's oguni attribute with the argument provided.

@@ -233,7 +233,6 @@ void Club::run(){
             }
         }
         if(input=="SHO_1L"){
-            valid=false;
             string code_s, title;
             int code;
             

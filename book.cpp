@@ -115,7 +115,7 @@ void Book::setEdition(int edition){
 
 void Book::addWritops(string writ_ops){
     stringstream temp;
-    temp << writ_ops << endl;
+    temp << "- " << writ_ops << endl;
     writ_ops += temp.str();
 
 }

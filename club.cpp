@@ -36,7 +36,7 @@ void Club::run(){
             }
         }
         if (input == "REM_M"){
-            valid=true;
+            valid = false;
             string nif_s;
             int nif;
             cout<<"Insira um NIF para proceder: ";
@@ -207,6 +207,7 @@ void Club::run(){
             showAllFrequentants();
         }
         if(input=="SHO_1F"){
+            valid = false;
             string nif_s;
             int nif;
             while(!valid){
@@ -235,6 +236,7 @@ void Club::run(){
         if(input=="SHO_1L"){
             string code_s, title;
             int code;
+            valid = false;
             
             while(!valid){
                     cout<<"Indique o código do livro (indique -1 caso não saiba o código): "<< endl;

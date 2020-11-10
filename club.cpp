@@ -982,6 +982,11 @@ bool Club::removeMember(int nif){
 
     for (int i = 0; i < toDelv.size(); i++){
         catalog.books.erase(catalog.books.begin() + (toDelv[i]).getCode());
+        for(int j=0;j<lendRequests.size();j++){
+            if (get<0>(lendRequests[j]) ==(toDelv[i]).getCode()) {
+                lendRequests.erase(lendRequests.begin()+j);
+            }
+        }
     }
     catalog.updateCodes();
     members.erase(members.begin() + index);

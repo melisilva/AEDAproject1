@@ -634,7 +634,7 @@ bool Club::renovateLending(){
         throw NotAMember(nif);
     }
 
-    if(catalog.books[code].getUnits()==0){
+    if(catalog.books[code].getOguni()==1){
         colorText('C');
         cout<<"O livro especificado está interdito de renovações (por ser a única unidade existente)."<<endl;
         colorText('F');
@@ -647,7 +647,9 @@ bool Club::renovateLending(){
             }
             if (get<0>(lendings[i]) == code && get<2>(lendings[i]) == nif) {
                 lending=true;
-                if (abs(get<1>(lendings[i]).timePeriod(get<1>(lendings[i]).extendTime())) <= 3) {
+                Date dt2=get<1>(lendings[i]);
+                dt2.extendTime();
+                if (abs(today.timePeriod(dt2)) <= 3) {
                     get<1>(lendings[i])=today;
                     cout<<endl;
                     members[isMem].renovateLending(code, today);

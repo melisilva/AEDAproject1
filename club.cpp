@@ -513,7 +513,7 @@ bool Club::makeLending() {
                 if(counter==1){
                     if(catalog.books[code].getUnits()!=0){
                         catalog.books[code].deleteUnit();
-                        members[isMember(catalog.books[code].getOwner())].removeBook(members[isMember(catalog.books[code].getOwner())].findBook(code));
+                        //members[isMember(catalog.books[code].getOwner())].removeBook(members[isMember(catalog.books[code].getOwner())].findBook(code));
                         lendings.push_back(make_tuple(get<0>(lendRequests[i]), today, get<2>(lendRequests[i])));
                         lendRequests.erase(lendRequests.begin()+ i);
                         members[pers].registerLending(code, today);
@@ -913,7 +913,12 @@ void Club::addBook(int nif = 0){
             valid=true;
         }
     }
-    code = catalog.books.size();
+    if(catalog.books.size()==0){
+        code=0;
+    }
+    else{
+        code = catalog.books[catalog.books.size()-1].getCode()+1;
+    }
     int unit=1; int oguni=1;
     Book* b = new Book(code,title,author,category,edition, owner,unit,oguni);
     catalog.addBook((*b));
@@ -980,15 +985,54 @@ bool Club::removeMember(int nif){
         }
     }
 
+    for(int i=0;i<lendings.size();i++){
+        if(get<2>(lendings[i])==nif){
+            colorText('C');
+            cout << "A eliminação de um membro só é possível quando este não tem livros emprestados do Clube!" << endl;
+            cout << "Peça ao membro para devolver os livros, de modo a sair do Clube." << endl;
+            cout<<  "Ou que os declare como perdidos, caso não saiba do paredeiro deles. "<<endl;
+            colorText('F');
+            return false;
+        }
+    }
+
+    for(int i=0;i<delays.size();i++){
+        if(get<2>(delays[i])==nif){
+            colorText('C');
+            cout << "A eliminação de um membro só é possível quando este não tem livros emprestados do Clube!" << endl;
+            cout << "Peça ao membro para devolver os livros, de modo a sair do Clube." << endl;
+            cout<<  "Ou que os declare como perdidos, caso não saiba do paredeiro deles. "<<endl;
+            colorText('F');
+            return false;
+        }
+    }
+
+    vector<int> indtoDel;
+
     for (int i = 0; i < toDelv.size(); i++){
-        catalog.books.erase(catalog.books.begin() + (toDelv[i]).getCode());
+        for(int k=0;k<catalog.books.size();k++){
+            if(catalog.books[k]==toDelv[i]){
+                indtoDel.push_back(k);
+            }
+        }
         for(int j=0;j<lendRequests.size();j++){
             if (get<0>(lendRequests[j]) ==(toDelv[i]).getCode()) {
                 lendRequests.erase(lendRequests.begin()+j);
+            }else
+            {
+                if(get<2>(lendRequests[j])==nif){
+                    lendRequests.erase(lendRequests.begin()+j);
+                }
             }
         }
     }
-    catalog.updateCodes();
+
+    for(int i=0;i<indtoDel.size();i++){
+        catalog.books.erase(catalog.books.begin() + indtoDel[i]);
+    }
+
+    //catalog.updateCodes();
+
     members.erase(members.begin() + index);
     return true;
 }
@@ -1039,7 +1083,7 @@ void Club::removeBook(tuple<int, Date, int> lostBook) {
         catalog.books.erase(catalog.books.begin() + get<0>(lostBook));
 
 
-        catalog.updateCodes();
+        //catalog.updateCodes();
     }
     else{
         catalog.books[get<0>(lostBook)].deleteUnit();
@@ -1053,7 +1097,7 @@ void Club::showMembers(){
         cout << "Nome: " << members[i].getName() << endl << "NIF: "<< members[i].getNIF() << endl <<setprecision(2)<<members[i].getBalance()<<" euros"<<endl<< "Livros:" << endl;
         vector<Book> books = members[i].getBooks();
         for (int j = 0; j < books.size(); j++){
-            books[j].showBook();
+            cout << "   - " << books[j].getTitle() << " (" << books[j].getCode() << "), de " << books[j].getAuthor() << ", "<< books[j].getEdition() << " edicao" <<" (" << books[j].getRating() << "/5), do membro " << books[j].getOwner() <<", "<<books[j].getOguni()<<" unidades"<<endl << "Comentários do Livro: " << endl << books[j].getWritops();
         }
         cout << endl << endl;
     }
@@ -1080,7 +1124,7 @@ void Club::showFrequentant(int nif){
 }
 
 void Club::showABook(int code){
-    if(code>catalog.books.size() || code<0){
+    if(code>catalog.books[catalog.books.size()-1].getCode() || code<0){
         throw BookDoesNotExist(code);
     }
     catalog.books[code].showBook();
@@ -1218,6 +1262,7 @@ void Club::registerLoss(){
     } else {
 
         cout << "A perda e o atraso afetarão o saldo." << endl;
+        showDelays();
         while(!valid){
             cout << "Indique o código do livro em questão: ";
             getline(cin, code_st);
@@ -1591,7 +1636,7 @@ void Club::retrieveData(){
             for (int i = 0; i < reviews.size(); i++){
                 bk.addWritops(reviews[i]);
             }
-            
+
             catalog.books.push_back(bk);
             getline(bks_file, temp);
             bks.str("");

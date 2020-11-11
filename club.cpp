@@ -1399,33 +1399,33 @@ bool Club::makeRequest() {
                 colorText('F');
             }
         }
+    }
 
-        //And now, to register it in Members or NonMembers.
-        if (isMember(nif) != -1) {
-            if (members[isMember(nif)].getBalance() <= 0) {
-                throw NegativeBalance(nif);
-            }
-            members[isMember(nif)].registerRequest(code, today);
-        } else { //it's not a member then it's a nonMem
-            while (true) {
-                if (isnonMem(nif) == -1) {
-                    string namem;
-                    cout << "Introduza o nome, por favor: ";
-                    getline(cin, namem);
-                    float balance = 50;
-                    nonMem* p = new nonMem(namem, nif, balance);
-                    (*p).registerRequest(code, today);
-                    nonmembers.push_back((*p));
+    //And now, to register it in Members or NonMembers.
+    if (isMember(nif) != -1) {
+        if (members[isMember(nif)].getBalance() <= 0) {
+            throw NegativeBalance(nif);
+        }
+        members[isMember(nif)].registerRequest(code, today);
+    } else { //it's not a member then it's a nonMem
+        while (true) {
+            if (isnonMem(nif) == -1) {
+                string namem;
+                cout << "Introduza o nome, por favor: ";
+                getline(cin, namem);
+                float balance = 50;
+                nonMem* p = new nonMem(namem, nif, balance);
+                (*p).registerRequest(code, today);
+                nonmembers.push_back((*p));
+                break;
+            } else {
+                if ((isnonMem(nif) != -1) && (nonmembers[isnonMem(nif)].getBalance() > 0)) {
+                    nonmembers[isnonMem(nif)].registerRequest(code, today);
                     break;
+                } else if (nonmembers[isnonMem(nif)].getBalance() <= 0) {
+                    throw NegativeBalance(nif);
                 } else {
-                    if ((isnonMem(nif) != -1) && (nonmembers[isnonMem(nif)].getBalance() > 0)) {
-                        nonmembers[isnonMem(nif)].registerRequest(code, today);
-                        break;
-                    } else if (nonmembers[isnonMem(nif)].getBalance() <= 0) {
-                        throw NegativeBalance(nif);
-                    } else {
-                        continue;
-                    }
+                    continue;
                 }
             }
         }

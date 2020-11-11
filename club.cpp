@@ -1031,7 +1031,6 @@ bool Club::removeMember(int nif){
         catalog.books.erase(catalog.books.begin() + indtoDel[i]);
     }
 
-    //catalog.updateCodes();
 
     members.erase(members.begin() + index);
     return true;
@@ -1045,6 +1044,7 @@ void Club::removeBook(tuple<int, Date, int> lostBook) {
     members[owner].addBalance(value);
 
     int perp = isMember(get<2>(lostBook));
+    cout<<perp<<endl;
     if (perp == -1) {
         perp = isnonMem(get<2>(lostBook));
         nonmembers[perp].minusBalance(value);
@@ -1064,30 +1064,39 @@ void Club::removeBook(tuple<int, Date, int> lostBook) {
         }
 
         for (int i = 0; i < delays.size(); i++) {
-            if (get<0>(delays[i]) == get<0>(lostBook) && get<2>(delays[i]) == get<2>(delays[i])) {
+            if (get<0>(delays[i]) == get<0>(lostBook)) {
                 codes2.push_back(i);
             }
         }
 
         for (int i = 0; i < codes.size(); i++) {
-            if (isMember(get<2>(lendings[codes[i]])) == -1) {
-                nonmembers[isnonMem(get<2>(lendings[codes[i]]))].deleteRequest(get<0>(lostBook));
+            if (isMember(get<2>(lendRequests[codes[i]])) == -1) {
+                nonmembers[isnonMem(get<2>(lendRequests[codes[i]]))].deleteRequest(get<0>(lostBook));
             } else {
-                members[isMember(get<2>(lendings[codes[i]]))].deleteRequest(get<0>(lostBook));
+
+                members[isMember(get<2>(lendRequests[codes[i]]))].deleteRequest(get<0>(lostBook));
             }
-            lendRequests.erase(lendRequests.begin() + codes[i]);
+            lendRequests.erase(lendRequests.begin() + codes[i]-i);
         }
+
         for (int i = 0; i < codes2.size(); i++) {
-            delays.erase(delays.begin() + codes2[i]);
+            delays.erase(delays.begin() + codes2[i]-i);
         }
-        catalog.books.erase(catalog.books.begin() + get<0>(lostBook));
 
+        for(int i=0;i<catalog.books.size();i++){
+            if(catalog.books[i].getCode()==get<0>(lostBook)){
+                catalog.books.erase(catalog.books.begin() + i);
+            }
+        }
 
-        //catalog.updateCodes();
     }
     else{
-        catalog.books[get<0>(lostBook)].deleteUnit();
-        catalog.books[get<0>(lostBook)].deleteOgunit();
+        for(int i=0;i<catalog.books.size();i++){
+            if(catalog.books[i].getCode()==get<0>(lostBook)){
+                catalog.books[i].deleteUnit();
+                catalog.books[i].deleteOgunit();
+            }
+        }
     }
 }
 
@@ -1255,7 +1264,10 @@ void Club::registerLoss(){
             if ((get<0>(lendings[i]) == code) && (get<2>(lendings[i]) == nif)){
                 request=true;
                 temp=get<1>(lendings[i]);
+                cout<<code<<" "<<nif<<endl;
+                cout<<i<<endl;
                 removeBook(make_tuple(code, temp, nif));
+                cout<<i<<endl;
                 lendings.erase(lendings.begin()+ i);
             }
         }

@@ -69,6 +69,7 @@ void Member::removeBook(int index) {
     }
     else{
         books.erase(books.begin()+index);
+        cout<<"all good"<<endl;
     }
 }
 

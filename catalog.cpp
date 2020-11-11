@@ -10,12 +10,6 @@ Catalog::Catalog(vector<Book> books){
     this->books = books;
 }
 
-void Catalog::updateCodes(){
-    for (int i = 0; i < books.size(); i++){
-        books[i].setCode(i);
-    }
-}
-
 void Catalog::addBook(Book book){
     if(books.size()!=0){
         vector<Book>::iterator it=find(books.begin(),books.end(),book);

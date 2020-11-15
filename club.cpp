@@ -1046,7 +1046,6 @@ void Club::removeBook(tuple<int, Date, int> lostBook) {
     members[owner].addBalance(value);
 
     int perp = isMember(get<2>(lostBook));
-    cout<<perp<<endl;
     if (perp == -1) {
         perp = isnonMem(get<2>(lostBook));
         nonmembers[perp].minusBalance(value);
@@ -1266,10 +1265,7 @@ void Club::registerLoss(){
             if ((get<0>(lendings[i]) == code) && (get<2>(lendings[i]) == nif)){
                 request=true;
                 temp=get<1>(lendings[i]);
-                cout<<code<<" "<<nif<<endl;
-                cout<<i<<endl;
                 removeBook(make_tuple(code, temp, nif));
-                cout<<i<<endl;
                 lendings.erase(lendings.begin()+ i);
             }
         }
@@ -1863,7 +1859,6 @@ void Club::retrieveData(){
 
     empty=false;
     empty=system_file.peek() == std::ifstream::traits_type::eof();
-    cout<<empty<<endl;
 
     //Getting System data
     if(!(empty)){

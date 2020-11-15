@@ -117,7 +117,6 @@ void Book::addWritops(string writ_ops){
     stringstream temp;
     temp << writ_ops << endl;
     this->writ_ops += temp.str();
-    cout<<writ_ops<<endl;
 }
 
 int Book::getCode() const {

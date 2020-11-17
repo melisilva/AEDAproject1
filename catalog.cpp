@@ -86,7 +86,6 @@ void Catalog::showBook(int code){
 
 Book Catalog::getBook(int code = -1){
     if (code == -1){
-        //throw shit;
     }
     return books[searchBook(code)];
 }

@@ -6,14 +6,6 @@
 #include <iostream>
 using namespace std;
 
-#ifndef AEDAPROJECT1_CATALOG_H
-#define AEDAPROJECT1_CATALOG_H
-#include "book.h"
-#include <vector>
-#include <iostream>
-#include <algorithm>
-using namespace std;
-
 /**
  * Class to represent members.
  * @param books: vector with the Book objects that represent the club's catalogued books.

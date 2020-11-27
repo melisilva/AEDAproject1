@@ -485,8 +485,9 @@ bool Club::makeLending() {
             cout<<"Por favor, indique um número válido."<<endl;
             colorText('F');
         }
-        code = catalog.searchBook(code);
-        if(code==-1){
+        int id;
+        id = catalog.searchBook(code);
+        if(id==-1){
             valid=false;
             showLendRequests();
         }
@@ -505,15 +506,22 @@ bool Club::makeLending() {
         //Members do lendings per order of arrival.
         for (int i = 0; i < lendRequests.size(); i++){
             if(get<0>(lendRequests[i])==code){
-                exist=true;
-                counter++;
+                if(isMember((get<2>(lendRequests[i])))!=-1){
+                    exist=true;
+                    counter++;
+                }
             }
             if ((get<0>(lendRequests[i]) == code) && (get<2>(lendRequests[i]) == nif)){
                 request=true;
                 if(counter==1){
-                    if(catalog.books[code].getUnits()!=0){
-                        catalog.books[code].deleteUnit();
-                        //members[isMember(catalog.books[code].getOwner())].removeBook(members[isMember(catalog.books[code].getOwner())].findBook(code));
+                    int index;
+                    for(int i=0;i<catalog.books.size();i++){
+                        if(catalog.books[i].getCode()==code){
+                            index=i;
+                        }
+                    }
+                    if(catalog.books[index].getUnits()!=0){
+                        catalog.books[index].deleteUnit();
                         lendings.push_back(make_tuple(get<0>(lendRequests[i]), today, get<2>(lendRequests[i])));
                         lendRequests.erase(lendRequests.begin()+ i);
                         members[pers].registerLending(code, today);
@@ -558,14 +566,20 @@ bool Club::makeLending() {
         if(!exist){
             throw BookDoesNotExist(code);
         }
-        if(catalog.books[code].getUnits()!=0){
-            catalog.books[code].deleteUnit();
-            members[isMember(catalog.books[code].getOwner())].removeBook(members[isMember(catalog.books[code].getOwner())].findBook(code));
+        int index;
+        for(int i=0;i<catalog.books.size();i++){
+            if(catalog.books[i].getCode()==code){
+                index=i;
+            }
+        }
+        if(catalog.books[index].getUnits()!=0){
+            catalog.books[index].deleteUnit();
+            members[isMember(catalog.books[index].getOwner())].removeBook(members[isMember(catalog.books[index].getOwner())].findBook(code));
             lendings.push_back(make_tuple(get<0>(lendRequests[temp]), today, get<2>(lendRequests[temp])));
             lendRequests.erase(lendRequests.begin()+ i);
             nonmembers[pers].registerLending(code, today);
             nonmembers[pers].finishRequest(code);
-            chargeFee(pers, catalog.books[code]);
+            chargeFee(pers, catalog.books[index]);
         }
         else{
             colorText('C');
@@ -624,8 +638,9 @@ bool Club::renovateLending(){
                 cout<<"Por favor, indique um número válido."<<endl;
                 colorText('F');
             }
-            code = catalog.searchBook(code);
-            if(code==-1){
+            int id;
+            id = catalog.searchBook(code);
+            if(id==-1){
                 valid=false;
                 showLendings();
             }
@@ -633,33 +648,56 @@ bool Club::renovateLending(){
     }else {
         throw NotAMember(nif);
     }
+    int index;
+    for(int i=0;i<catalog.books.size();i++){
+        if(catalog.books[i].getCode()==code){
+            index=i;
+        }
+    }
 
-    if(catalog.books[code].getOguni()==1){
+    if(catalog.books[index].getOguni()==1){
         colorText('C');
         cout<<"O livro especificado está interdito de renovações (por ser a única unidade existente)."<<endl;
         colorText('F');
         return false;
     }
     else{
-        for (int i = 0; i < lendings.size(); i++) {
-            if(get<0>(lendings[i])==code){
-                exist=true;
+        bool another=false;
+        for(int i=0;i<lendRequests.size();i++){
+            if(get<0>(lendRequests[i])==code){
+                another=true;
             }
-            if (get<0>(lendings[i]) == code && get<2>(lendings[i]) == nif) {
-                lending=true;
-                Date dt2=get<1>(lendings[i]);
-                dt2.extendTime();
-                if (abs(today.timePeriod(dt2)) <= 3) {
-                    get<1>(lendings[i])=today;
-                    cout<<endl;
-                    members[isMem].renovateLending(code, today);
-                    return true;
-                } else {
-                    colorText('C');
-                    cout << "A renovação de livros só é possível a três ou menos dias antes do fim do prazo do seu empréstimo." << endl;
-                    colorText('F');
+        }
+        if(another==false) {
+            for (int i = 0; i < lendings.size(); i++) {
+                if (get<0>(lendings[i]) == code) {
+                    exist = true;
+                }
+                if (get<0>(lendings[i]) == code && get<2>(lendings[i]) == nif) {
+                    lending = true;
+                    Date dt2 = get<1>(lendings[i]);
+                    dt2.extendTime();
+                    if (abs(today.timePeriod(dt2)) <= 3) {
+                        get<1>(lendings[i]) = today;
+                        cout << endl;
+                        members[isMem].renovateLending(code, today);
+                        return true;
+                    } else {
+                        colorText('C');
+                        cout
+                                << "A renovação de livros só é possível a três ou menos dias antes do fim do prazo do seu empréstimo."
+                                << endl;
+                        colorText('F');
+                    }
                 }
             }
+        }
+        if(another){
+            colorText('C');
+            cout
+                    << "A renovação de livros só é possível quando não  há  registo  de  um  pedido  em  espera."
+                    << endl;
+            colorText('F');
         }
         if(!lending){
             throw RequestDoesNotExist(code,nif);
@@ -719,8 +757,9 @@ bool Club::returnLending() {
             cout<<"Por favor, indique um número válido."<<endl;
             colorText('F');
         }
-        code = catalog.searchBook(code);
-        if(code==-1){
+        int id;
+        id = catalog.searchBook(code);
+        if(id==-1){
             valid=false;
             showLendings();
             showDelays();
@@ -740,7 +779,14 @@ bool Club::returnLending() {
         pers = isnonMem(nif);
     }
 
-    catalog.books[code].addUnits();
+    int index;
+    for(int i=0;i<catalog.books.size();i++){
+        if(catalog.books[i].getCode()==code){
+            index=i;
+        }
+    }
+
+    catalog.books[index].addUnits();
     if (answer == "S"){
         for (int i = 0; i < delays.size(); i++){
             if (get<0>(delays[i]) == code && get<2>(delays[i]) == nif){
@@ -790,7 +836,13 @@ void Club::getOpinions(int code){
             colorText('F');
         }
     }
-    catalog.books[code].calculateRating(rating);
+    int index;
+    for(int i=0;i<catalog.books.size();i++){
+        if(catalog.books[i].getCode()==code){
+            index=i;
+        }
+    }
+    catalog.books[index].calculateRating(rating);
     valid=false;
     while(!valid){
         cout<<"O frequentante deseja introduzir uma opinião detalhada sobre o livro? ";
@@ -799,7 +851,7 @@ void Club::getOpinions(int code){
             valid=true;
             cout<<"Introduza, então, a opinião transcrita: "<<endl;
             getline(cin,writ_answer);
-            catalog.books[code].addWritops(writ_answer);
+            catalog.books[index].addWritops(writ_answer);
             cout<<"Agradeça ao frequentante pela sua colaboração!"<<endl;
         }
         if(answer=="Não"|| answer=="N" || answer=="n" || answer=="não" || answer == "NÃO"){
@@ -1134,10 +1186,14 @@ void Club::showFrequentant(int nif){
 }
 
 void Club::showABook(int code){
-    if(code>catalog.books[catalog.books.size()-1].getCode() || code<0){
+    if(code<0){
         throw BookDoesNotExist(code);
     }
-    catalog.books[code].showBook();
+    for(int i=0;i<catalog.books.size();i++){
+        if(catalog.books[i].getCode()==code){
+            catalog.books[i].showBook();
+        }
+    }
 }
 
 void Club::showAllFrequentants(){
@@ -1378,7 +1434,7 @@ bool Club::makeRequest() {
         }
     }
     valid=false;
-    while ((code <= -1) || code >= catalog.books.size() || cin.fail()) {
+    while ((code <= -1) || cin.fail()) {
         cout << "Indique, então, o título do livro: ";
         getline(cin, name);
         cout << endl;
@@ -1440,7 +1496,6 @@ bool Club::makeRequest() {
             }
         }
     }
-
     lendRequests.push_back(make_tuple(code, today, nif)); //registering the request in club
     return true;
 
@@ -1899,3 +1954,4 @@ void Club:: colorText(char ch)
     else if (ch == 'F')
         SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0xF);  //BRANCO
 }
+

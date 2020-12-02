@@ -1,4 +1,5 @@
 #include "date.h"
+using namespace std;
 
 Date::Date(){
     time_t t = time(0);
@@ -92,11 +93,10 @@ int Date::timePeriod( Date dt2)
         n2+=mdays[i];
     }
     n2 += dt2.nly();
-
     return (n2 - n1);
 }
 
-string Date::extendTime() {
+Date Date::extendTime() {
     int rest, extrad = 10;
     //days plus months
     int n1 = day ;
@@ -142,5 +142,6 @@ string Date::extendTime() {
     }
     day = n1;
     month = i+1;
-    return getDateStr();
+    Date result={day,month,year};
+    return result;
 }

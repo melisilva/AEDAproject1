@@ -33,6 +33,7 @@ public:
     void chargeFee(int nif,Book book); //done, precisa ser usada
     int calculateDelay(Date date); //done
     void showMembers(); //done
+    bool renovateLending();
     void showNonMembers(); //done
     void checkDelays(); //done
     void retrieveData(); //done, tem de checar delays

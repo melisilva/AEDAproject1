@@ -8,11 +8,14 @@ Book::Book(){
     category = "";
     edition = -1;
     units = 1;
+    oguni=1;
     opinions = 0;
     sumRating = 0;
     realRating = 0;
     writ_ops = "";
     setState();
+    multi=true;
+
 }
 
 Book::Book(int code, string title, string author,string category,int edition, int owner){
@@ -23,12 +26,14 @@ Book::Book(int code, string title, string author,string category,int edition, in
     this->edition=edition;
     this->owner = owner;
     this->units = 1;
+    this->oguni=1;
     this->opinions = 0;
     this->sumRating = 0;
     this->realRating = 0;
     this->writ_ops = "";
     calculateValue();
     setState();
+    this->multi=true;
 }
 
 void Book::calculateValue(){
@@ -56,6 +61,15 @@ void Book::setState() {
         state = false;
     } else {
         state = true;
+    }
+}
+
+void Book::setMulti(){
+    if(oguni>units){
+        multi=false;
+    }
+    else{
+        multi=true;
     }
 }
 
@@ -138,6 +152,10 @@ bool Book::getState() const{
     return state;
 }
 
+bool Book::getMulti()const{
+    return multi;
+}
+
 float Book::getValue() const{
     return value;
 }
@@ -153,6 +171,11 @@ int Book::getOwner() const{
 void Book::deleteUnit(){
     units-=1;
     setState();
+    setMulti();
+}
+
+void Book::deleteOgunit(){
+    oguni-=1;
 }
 
 void Book::calculateRating(float rate){
@@ -178,7 +201,9 @@ string Book::getData() const{
 
 void Book::addUnits(){
     units+=1;
+    oguni+=1;
     setState();
+    setMulti();
 }
 
 bool Book::operator==(Book b1){

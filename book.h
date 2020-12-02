@@ -6,10 +6,10 @@
 using namespace std;
 
 class Book {
-    int code, units, opinions = 0, edition, owner;
+    int code, units, opinions = 0, edition, owner,oguni;
     float realRating, value, sumRating = 0;
     string title, author, category, writ_ops;
-    bool state;
+    bool state,multi;
 
 public:
     Book(); //nice
@@ -26,6 +26,7 @@ public:
     string getTitle() const; //nice
     string getWritops() const; //nice
     bool getState() const; //nice
+    bool getMulti() const;
     string getAuthor() const; //nice
     string getCategory() const; //nice
     float getValue() const; //nice
@@ -45,7 +46,10 @@ public:
     void showBook() const; //nice
     string getData() const; //nice
     bool operator==(Book b1);
+    void deleteOgunit();
+    void setMulti();
 };
+
 
 
 #endif //AEDAPROJECT1_BOOK_H

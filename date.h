@@ -19,7 +19,7 @@ public:
     bool isleapYear();
     int nly();
     int timePeriod(Date dt2);
-    string extendTime();
+    Date extendTime();
     bool operator==(Date d1);
 
 };

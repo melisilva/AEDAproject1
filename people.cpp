@@ -153,20 +153,12 @@ string Member::getData() {
     return temp.str();
 }
 
-void Member::renovateLending() { //include check if it's last unit in club or where we call this
-    int temp;
-    string str_temp;
-
-    //Informamos o utilizador dos empréstimos em vigor.
-    showLendings();
-
-    cout << "Por favor, indique a ordem do empréstimo: ";
-    getline(cin,str_temp);
-    temp=stoi(str_temp);
-    Date dt1=lendings[temp - 1].second;
-    Date dt2;
-    if(abs(dt1.timePeriod(dt2))<=3){
-        dt1.extendTime();
+void Member::renovateLending(int code, Date date) {
+    for (int i = 0; i < lendings.size(); i++){
+        if ((lendings[i].first == code)){
+            lendings[i].second=date;
+            break;
+        }
     }
 }
 

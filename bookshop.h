@@ -9,29 +9,13 @@ class BookShop {
         float promoValue, realRating;
         int bookGenreCount;
     public:
-        BookShop(string name, string city, float promoValue, float realRating, int bookGenreCount)
-            : name(name), city(city), promoValue(promoValue), realRating(realRating), bookGenreCount(bookGenreCount) {};
-    
-        string getName() { return name; }
-        
-        string getCity() { return city; }
-
-        float getpromoValue() { return promoValue; }
-
-        float getRating() { return realRating; }
-
-        int getGenreCount() { return bookGenreCount; }
-        
-        bool operator<(BookShop &bs1){
-            if (bs1.getRating() == realRating){
-                return name < bs1.getName();
-            }
-            return realRating < bs1.getRating();
-        };
-
-        string operator<<(ostream &out) {
-            stringstream ss;
-            ss << name << endl << city << endl << promoValue << endl << realRating << endl << bookGenreCount << endl << endl;
-            return ss.str();
-        };
+        BookShop();
+        BookShop(string name, string city, float promoValue, float realRating, int bookGenreCount);
+        string getName() const;
+        string getCity() const ;
+        float getpromoValue() const;
+        float getRating() const;
+        int getGenreCount() const;
+        bool operator<(const BookShop &bs1) const;
+        string operator<<(ostream &out);
 };

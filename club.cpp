@@ -4,12 +4,14 @@ Club::Club() {
     vector<Member> temp;
     vector<tuple<int, Date, int>> temp2, temp3,temp4;
     Catalog temp5;
+    BST<BookShop> shop;
 
     members = temp;
     lendings = temp2;
     lendRequests = temp4;
     delays = temp3;
     catalog = temp5;
+    shops = shop;
 }
 
 void Club::run(){
@@ -1974,8 +1976,8 @@ void Club::retrieveData(){
             shop << temp;
             shop >> realRating;
             getline(shops_file, temp);
-            shops.str("");
-            shops.clear();
+            shop.str("");
+            shop.clear();
             shop << temp;
             shop >> bookGenreCount;
             BookShop newShop(name, city, promoValue, realRating, bookGenreCount);

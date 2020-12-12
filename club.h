@@ -13,6 +13,9 @@
 #include <stdio.h>
 #include <iomanip>
 
+
+static BookShop dummy("", "", 0.05, 2.5, 10);
+
 /**
  * Class that represents the Book Club - to be a little informal: this is where most magic happens!
  * @param members: vector of Member objects representing the Club's members.

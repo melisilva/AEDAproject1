@@ -1153,7 +1153,6 @@ void Club::removeBook(tuple<int, Date, int> lostBook) {
     }
 }
 
-
 void Club::showMembers(){
     for (int i = 0; i < members.size(); i++){
         cout << "Nome: " << members[i].getName() << endl << "NIF: "<< members[i].getNIF() << endl <<setprecision(2)<<members[i].getBalance()<<" euros"<<endl<< "Livros:" << endl;
@@ -1502,7 +1501,7 @@ bool Club::makeRequest() {
 }
 
 void Club::saveData(){
-    string membs = "members.txt", nonmembs = "nonmembers.txt", lends = "lendings.txt", lendRs = "lendRequests.txt", bks = "books.txt", dels = "delays.txt";
+    string membs = "members.txt", nonmembs = "nonmembers.txt", lends = "lendings.txt", lendRs = "lendRequests.txt", bks = "books.txt", dels = "delays.txt", shops = "bookshops.txt";
 
     ofstream file; //(membs, ios::binary);
     ofstream filee; //(lends, ios::binary);
@@ -1511,6 +1510,7 @@ void Club::saveData(){
     ofstream fileeeee; //(dels, ios::binary);
     ofstream fileeeeee; //(nonmembs, ios::binary);
     ofstream fileeeeeee; //(system)
+    ofstream fileeeeeeee; //bookshops
 
     //Yay, file cleaning!
     file.open("members.txt", std::ofstream::out | std::ofstream::trunc);
@@ -1520,6 +1520,7 @@ void Club::saveData(){
     fileeeee.open("delays.txt", std::ofstream::out | std::ofstream::trunc);
     fileeeeee.open("nonmembers.txt", std::ofstream::out | std::ofstream::trunc);
     fileeeeeee.open("system.txt", std::ofstream::out | std::ofstream::trunc);
+    fileeeeeee.open("bookshops.txt", std::ofstream::out | std::ofstream::trunc);
 
 
     stringstream temp1, temp2, temp3, temp4, temp5, temp6, temp7;
@@ -1587,6 +1588,13 @@ void Club::saveData(){
     temp7 << today.getDateStr() << endl << endl << "END";
 
     fileeeeeee<<temp7.str();
+
+    for (int i = 0; i < shops.size(); i++){
+        fileeeeeeee << shops[i];
+    }
+
+    fileeeeeeee << "END";
+
 }
 
 void Club::retrieveData(){
@@ -1597,13 +1605,14 @@ void Club::retrieveData(){
     ifstream dels_file; dels_file.open("delays.txt");
     ifstream nmemb_file; nmemb_file.open("nonmembers.txt");
     ifstream system_file; system_file.open("system.txt");
+    ifstream shops_file; shops_file.open("bookshops.txt");
 
     bool d_exist=false;
     bool l_exist=false;
     bool empty=false;
     string temp;
     char sep = ',';
-    stringstream membs, bks, lendRs, lends, dels, nmembs, sys;
+    stringstream membs, bks, lendRs, lends, dels, nmembs, sys, shops;
 
     //Getting Books data.
     empty=bks_file.peek() == std::ifstream::traits_type::eof();
@@ -1937,6 +1946,42 @@ void Club::retrieveData(){
         }
     }
 
+    empty=false;
+    empty=shops_file.peek() == std::ifstream::traits_type::eof();
+    if(!(empty)){
+        string name, city, temp;
+        float promoValue, realRating;
+        int bookGenreCount;
+        while (temp != "END") {
+            getline(shops_file, temp);
+            shops.str("");
+            shops.clear();
+            shops << temp;
+            shops >> name;
+            getline(shops_file, temp);
+            shops.str("");
+            shops.clear();
+            shops << temp;
+            shops >> city;
+            getline(shops_file, temp);
+            shops.str("");
+            shops.clear();
+            shops << temp;
+            shops >> promoValue;
+            getline(shops_file, temp);
+            shops.str("");
+            shops.clear();
+            shops << temp;
+            shops >> realRating;
+            getline(shops_file, temp);
+            shops.str("");
+            shops.clear();
+            shops << temp;
+            shops >> bookGenreCount;
+            BookShop newShop(name, city, promoValue, realRating, bookGenreCount);
+            shops.push_back(newShop);
+        }
+    }
 }
 
 void Club:: colorText(char ch)

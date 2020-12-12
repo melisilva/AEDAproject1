@@ -8,6 +8,7 @@
 #include <istream>
 #include "people.h"
 #include "bookshop.h"
+#include "bst.h"
 #include <vector>
 #include <stdio.h>
 #include <iomanip>
@@ -27,7 +28,7 @@ private:
     vector<Member> members;
     vector<nonMem> nonmembers;
     vector<tuple<int, Date, int>> lendings, delays, lendRequests;
-    vector<BookShop> shops;
+    BST<BookShop> shops;
     Catalog catalog;
     Date today;
 public:

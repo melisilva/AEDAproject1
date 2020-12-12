@@ -1612,7 +1612,7 @@ void Club::retrieveData(){
     bool empty=false;
     string temp;
     char sep = ',';
-    stringstream membs, bks, lendRs, lends, dels, nmembs, sys, shops;
+    stringstream membs, bks, lendRs, lends, dels, nmembs, sys, shop;
 
     //Getting Books data.
     empty=bks_file.peek() == std::ifstream::traits_type::eof();
@@ -1954,32 +1954,32 @@ void Club::retrieveData(){
         int bookGenreCount;
         while (temp != "END") {
             getline(shops_file, temp);
-            shops.str("");
-            shops.clear();
-            shops << temp;
-            shops >> name;
+            shop.str("");
+            shop.clear();
+            shop << temp;
+            shop >> name;
+            getline(shops_file, temp);
+            shop.str("");
+            shop.clear();
+            shop << temp;
+            shop >> city;
+            getline(shops_file, temp);
+            shop.str("");
+            shop.clear();
+            shop << temp;
+            shop >> promoValue;
+            getline(shops_file, temp);
+            shop.str("");
+            shop.clear();
+            shop << temp;
+            shop >> realRating;
             getline(shops_file, temp);
             shops.str("");
             shops.clear();
-            shops << temp;
-            shops >> city;
-            getline(shops_file, temp);
-            shops.str("");
-            shops.clear();
-            shops << temp;
-            shops >> promoValue;
-            getline(shops_file, temp);
-            shops.str("");
-            shops.clear();
-            shops << temp;
-            shops >> realRating;
-            getline(shops_file, temp);
-            shops.str("");
-            shops.clear();
-            shops << temp;
-            shops >> bookGenreCount;
+            shop << temp;
+            shop >> bookGenreCount;
             BookShop newShop(name, city, promoValue, realRating, bookGenreCount);
-            shops.push_back(newShop);
+            shops.insert(newShop);
         }
     }
 }

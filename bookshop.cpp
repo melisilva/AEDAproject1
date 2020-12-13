@@ -7,8 +7,8 @@ BookShop::BookShop(){
     realRating = 2.5;
 }
 
-BookShop::BookShop(string name, string city, float promoValue, float realRating, int bookGenreCount)
-    : name(name), city(city), promoValue(promoValue), realRating(realRating), bookGenreCount(bookGenreCount) {}
+BookShop::BookShop(string name, string city, float promoValue, float realRating, int bookGenreCount,vector<Book> books)
+    : name(name), city(city), promoValue(promoValue), realRating(realRating), bookGenreCount(bookGenreCount), books(books) {}
     
 string BookShop::getName() const { return name; }
         
@@ -19,6 +19,8 @@ float BookShop::getpromoValue() const { return promoValue; }
 float BookShop::getRating() const { return realRating; }
 
 int BookShop::getGenreCount() const { return bookGenreCount; }
+
+vector<Book> BookShop::getBooks()const{return books;}
         
 bool BookShop::operator<(const BookShop& bs1) const{
     if (bs1.getRating() == realRating){
@@ -41,8 +43,8 @@ void BStores::readFile(ifstream &f){
         realRating=stof(rRating);
         getline(f,bGC);
         bookGenreCount=stoi(bGC);
-        BookShop b1(name,city,promoValue,realRating,bookGenreCount);
-        shops.insert(b1);
+        //BookShop b1(name,city,promoValue,realRating,bookGenreCount);
+        //shops.insert(b1);
     }
 }
 

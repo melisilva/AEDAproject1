@@ -4,14 +4,14 @@ Club::Club() {
     vector<Member> temp;
     vector<tuple<int, Date, int>> temp2, temp3,temp4;
     Catalog temp5;
-    BStores b;
+    BStores temp6;
 
     members = temp;
     lendings = temp2;
     lendRequests = temp4;
     delays = temp3;
     catalog = temp5;
-    b = b;
+    b=temp6;
 }
 
 void Club::run(){
@@ -1951,9 +1951,11 @@ void Club::retrieveData(){
     empty=false;
     empty=shops_file.peek() == std::ifstream::traits_type::eof();
     if(!(empty)){
-        string name, city, temp;
-        float promoValue, realRating;
-        int bookGenreCount;
+        string name, city, temp,title, author, category, writ_ops;
+        float promoValue, realRating,realRatingBook, value;
+        int bookGenreCount, code_bk, units, opinions, sumRating, edition, owner, oguni;
+        bool state, multi;
+        vector <Book> shop_books;
         while (temp != "END") {
             getline(shops_file, temp);
             shop.str("");
@@ -1980,7 +1982,98 @@ void Club::retrieveData(){
             shop.clear();
             shop << temp;
             shop >> bookGenreCount;
-            BookShop newShop(name, city, promoValue, realRating, bookGenreCount);
+
+            while(temp != "END BOOKS"){
+                getline(shops_file, temp);
+                bks.str("");
+                bks.clear();
+                bks << temp;
+                bks >> code_bk;
+                getline(shops_file, temp);
+                bks.str("");
+                bks.clear();
+                bks << temp;
+                title = bks.str();
+                getline(shops_file, temp);
+                bks.str("");
+                bks.clear();
+                bks << temp;
+                author = bks.str();
+                getline(shops_file, temp);
+                bks.str("");
+                bks.clear();
+                bks << temp;
+                bks >> edition;
+                getline(shops_file, temp);
+                bks.str("");
+                bks.clear();
+                bks << temp;
+                bks >> owner;
+                getline(shops_file, temp);
+                bks.str("");
+                bks.clear();
+                bks << temp;
+                bks >> category;
+                getline(shops_file, temp);
+                bks.str("");
+                bks.clear();
+                bks << temp;
+                bks >> value;
+                getline(shops_file, temp);
+                bks.str("");
+                bks.clear();
+                bks << temp;
+                bks >> realRating;
+                getline(shops_file, temp);
+                bks.str("");
+                bks.clear();
+                bks << temp;
+                bks >> units;
+                getline(shops_file, temp);
+                bks.str("");
+                bks.clear();
+                bks << temp;
+                bks >> oguni;
+                getline(shops_file, temp);
+                bks.str("");
+                bks.clear();
+                bks << temp;
+                bks >> opinions;
+                getline(shops_file, temp);
+                bks.str("");
+                bks.clear();
+                bks << temp;
+                bks >> sumRating;
+                getline(shops_file, temp);
+                bks.str("");
+                bks.clear();
+                bks << temp;
+                bks >> state;
+                getline(shops_file, temp);
+                bks.str("");
+                bks.clear();
+                bks << temp;
+                bks >> multi;
+
+                vector<string> reviews;
+                while (1){
+                    getline(shops_file, temp);
+                    if (temp == "END_REVS"){
+                        break;
+                    }
+                    reviews.push_back(temp);
+                }
+                Book bk;
+                bk.setAuthor(author); bk.setTitle(title); bk.setCat(category); bk.setCode(code_bk); bk.setUnits(units);
+                bk.setOpinions(opinions); bk.setRating(realRating); bk.setSumR(sumRating); bk.setValue(value); bk.setState();
+                bk.setEdition(edition); bk.setOwner(owner); bk.setOgunit(oguni); bk.setMulti();
+
+                for (int i = 0; i < reviews.size(); i++){
+                       bk.addWritops(reviews[i]);
+                    }
+                shop_books.push_back(bk);
+            }
+            BookShop newShop(name, city, promoValue, realRating, bookGenreCount,shop_books);
             b.shops.insert(newShop);
         }
     }

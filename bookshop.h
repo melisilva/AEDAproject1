@@ -2,6 +2,7 @@
 #include <string>
 #include <ostream>
 #include <sstream>
+#include "bts.h"
 
 class BookShop {
     protected:
@@ -18,4 +19,16 @@ class BookShop {
         int getGenreCount() const;
         bool operator<(const BookShop &bs1) const;
         string operator<<(ostream &out);
+};
+
+class BStores
+{
+    BST<BookShop> shops;
+public:
+    BStores():shops(BookShop("","",0,0,0)){};
+    //BST<BookShop> getNames()const;
+    //BST<BookShop> getCities()const;
+    //string searchFor(string name) const;
+    void readFile(ifstream &f); //working function, no idea how files are being structured 
+    void print() const;
 };

@@ -2,7 +2,8 @@
 #include <string>
 #include <ostream>
 #include <sstream>
-#include "bts.h"
+#include "bst.h"
+#include "fstream"
 
 class BookShop {
     protected:
@@ -23,8 +24,8 @@ class BookShop {
 
 class BStores
 {
-    BST<BookShop> shops;
 public:
+    BST<BookShop> shops;
     BStores():shops(BookShop("","",0,0,0)){};
     //BST<BookShop> getNames()const;
     //BST<BookShop> getCities()const;

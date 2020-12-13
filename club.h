@@ -31,7 +31,7 @@ private:
     vector<Member> members;
     vector<nonMem> nonmembers;
     vector<tuple<int, Date, int>> lendings, delays, lendRequests;
-    BST<BookShop> shops;
+    BStores b;
     Catalog catalog;
     Date today;
 public:

@@ -4,14 +4,14 @@ Club::Club() {
     vector<Member> temp;
     vector<tuple<int, Date, int>> temp2, temp3,temp4;
     Catalog temp5;
-    BST<BookShop> shop;
+    BStores b;
 
     members = temp;
     lendings = temp2;
     lendRequests = temp4;
     delays = temp3;
     catalog = temp5;
-    shops = shop;
+    b = b;
 }
 
 void Club::run(){
@@ -1981,7 +1981,7 @@ void Club::retrieveData(){
             shop << temp;
             shop >> bookGenreCount;
             BookShop newShop(name, city, promoValue, realRating, bookGenreCount);
-            shops.insert(newShop);
+            b.shops.insert(newShop);
         }
     }
 }
@@ -2001,4 +2001,7 @@ void Club:: colorText(char ch)
     else if (ch == 'F')
         SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0xF);  //BRANCO
 }
+
+
+
 

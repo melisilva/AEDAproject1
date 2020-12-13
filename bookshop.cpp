@@ -54,3 +54,7 @@ void BStores::print() const
         it.advance();
     }
 }
+
+BST<BookShop> BStores::getShops() const {
+    return this->shops;
+}

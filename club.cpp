@@ -4,14 +4,14 @@ Club::Club() {
     vector<Member> temp;
     vector<tuple<int, Date, int>> temp2, temp3,temp4;
     Catalog temp5;
-    BStores b;
+    BStores temp6;
 
     members = temp;
     lendings = temp2;
     lendRequests = temp4;
     delays = temp3;
     catalog = temp5;
-    b = b;
+    b=temp6;
 }
 
 void Club::run(){

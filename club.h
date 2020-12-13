@@ -34,7 +34,6 @@ private:
     BStores b;
     Catalog catalog;
     Date today;
-
 public:
     /**
      * Default constructor for the Club class.

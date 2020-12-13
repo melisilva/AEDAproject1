@@ -29,7 +29,6 @@ public:
     BStores():shops(BookShop("","",0,0,0)){};
     //BST<BookShop> getNames()const;
     //BST<BookShop> getCities()const;
-    BST<BookShop> getShops() const;
     //string searchFor(string name) const;
     void readFile(ifstream &f); //working function, no idea how files are being structured 
     void print() const;

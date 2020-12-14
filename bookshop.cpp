@@ -51,8 +51,15 @@ void BStores::readFile(ifstream &f){
 void BStores::print() const
 {
     BSTItrIn<BookShop> it(shops);
+    vector<Book>b;
     while(!it.isAtEnd()){
+        b=it.retrieve().getBooks();
         cout<<it.retrieve().getName()<<endl<<it.retrieve().getCity()<<endl<<it.retrieve().getpromoValue()<<endl<<it.retrieve().getRating()<<endl<<it.retrieve().getGenreCount()<<endl;
+        cout<<"Livros Disponíveis na Livraria: "<<endl;
+        for(int i=0;i<b.size();i++){
+            b[i].showBook();
+            cout<<endl<<endl;
+        }
         it.advance();
     }
 }

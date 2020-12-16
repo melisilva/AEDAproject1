@@ -46,9 +46,6 @@ Book::Book(int code, string title, string author,string category,int edition,int
     this->category=category;
     this->edition=edition;
     this->units = units;
-    this->opinions = 0;
-    this->sumRating = 0;
-    this->realRating = 0;
     calculateValue(); //Need a better function to get sale
     setState();
     this->store=store;

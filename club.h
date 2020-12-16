@@ -31,9 +31,9 @@ private:
     vector<Member> members;
     vector<nonMem> nonmembers;
     vector<tuple<int, Date, int>> lendings, delays, lendRequests;
-    BStores b;
     Catalog catalog;
     Date today;
+    //BStores b;
 
 public:
     /**

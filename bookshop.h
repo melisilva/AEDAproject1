@@ -27,8 +27,8 @@ class BookShop {
 
 class BStores
 {
-    BST<BookShop> shops;
 public:
+    BST<BookShop> shops;
     vector<Book>books;
     BStores():shops(BookShop("","",0,0,0,books)){};
     BST<BookShop> getShop();

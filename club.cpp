@@ -1,4 +1,5 @@
 #include "club.h"
+BStores b;
 
 Club::Club() {
     vector<Member> temp;
@@ -1949,7 +1950,6 @@ void Club::retrieveData(){
     }
 
     empty=false;
-    BStores b;
     empty=shops_file.peek() == std::ifstream::traits_type::eof();
     if(!(empty)){
         string name, city, temp,title, author, category, writ_ops,store;

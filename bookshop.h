@@ -45,5 +45,6 @@ public:
     void readFile(ifstream &f); //working function, no idea how files are being structured 
     void print() const;
     bool sellBook(Book b,string store);
-    vector<string> findBook(book b);
+    vector<string> findBook(Book b);
+    void showStoresContemplated(float min, float max);
 };

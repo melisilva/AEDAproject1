@@ -26,9 +26,12 @@ vector<Book> BookShop::getBooks()const{return books;}
         
 bool BookShop::operator<(const BookShop& bs1) const{
     if (bs1.getRating() == realRating){
-        return name < bs1.getName();
+        if (bs1.getGenreCount() == getGenreCount()){
+            return name < bs1.getName();
+        }
+        return getGenreCount() > bs1.getGenreCount();
     }
-    return realRating < bs1.getRating();
+    return realRating > bs1.getRating();
 }
 
 string BookShop::getData() const{
@@ -104,7 +107,7 @@ void BStores::print() const
         cout<<it.retrieve().getName()<<endl<<it.retrieve().getCity()<<endl<<it.retrieve().getpromoValue()<<endl<<it.retrieve().getRating()<<endl<<it.retrieve().getGenreCount()<<endl;
         cout<<"Livros Disponíveis na Livraria: "<<endl;
         for(int i=0;i<b.size();i++){
-            b[i].showBook();
+            b[i].showBook(1);
             cout<<endl<<endl;
         }
         it.advance();
@@ -116,7 +119,7 @@ bool BStores::sellBook(Book b,string store){
     bool exist=false;
     int index;
     while(!it.isAtEnd()){
-        if(it.retrieve().getName()){
+        if(it.retrieve().getName() == store){
             index= it.retrieve().searchBook(b.getTitle(),b.getAuthor(),b.getEdition());
              if(index != -1){
                  it.retrieve().removeBook(index);
@@ -164,3 +167,12 @@ void BStores::showStoresByRating(){
     
 }
 
+void BStores::showStoresContemplated(float min, float max){
+    BSTItrLevel<BookShop> it(shops);
+
+    while (!it.isAtEnd()){
+        if (it.retrieve().getRating() >= min && it.retrieve().getRating() <= max){
+            it.retrieve().print();
+        }
+    }
+}

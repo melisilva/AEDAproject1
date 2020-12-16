@@ -124,9 +124,9 @@ void Book::setEdition(int edition){
     this->edition = edition;
 }
 
-void Book::setStore(string store){
+/*void Book::setStore(string store){
     this->store=store;
-}
+}*/
 
 void Book::addWritops(string writ_ops){
     stringstream temp;
@@ -162,9 +162,9 @@ string Book::getCategory() const{
     return category;
 }
 
-string Book::getStore()const{
+/*string Book::getStore()const{
     return store;
-}
+}*/
 
 bool Book::getState() const{
     return state;

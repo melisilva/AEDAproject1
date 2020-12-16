@@ -309,9 +309,13 @@ void Club::run(){
             valid=true;
             showBooks();
         }
-         if (input == "SH_LR"){
+        if (input == "SH_LR"){
             valid=true;
             showShopsByRating();
+        }
+        if (input == "SH_LIR"){
+            valid=true;
+            showShopsInRange();
         }
         if(input == "BUY_L"){
             valid=true;
@@ -379,6 +383,7 @@ void Club::help() {
     colorText('D');
     cout << " --- PROTOCOLOS AO NÍVEL DO SICL --- " << endl;
     cout << " SH_LR: mostrar lojas fidelizadas com o Clube (ordenadas por ordem decrescente de avaliação)" << endl;
+    cout << " SH_LIR: mostrar lojas fidelizadas com o Clube (de classificação entre um mínimo e máximo - inclusive)" << endl;
     cout << " HELP: ajuda" << endl;
     cout << " END: terminar/fechar programa" << endl;
     cout << endl;
@@ -1544,7 +1549,7 @@ bool Club::buyBook(int code=-1){
         id = catalog.searchBook(code);
         if(id==-1){
             valid=false;
-            cout<<catalog.showBooks();
+            catalog.showBooks();
         }
     }
     }
@@ -1552,7 +1557,7 @@ bool Club::buyBook(int code=-1){
         id = catalog.searchBook(code);
     }
     stores=b.findBook(catalog.books[id]);
-    if(stores.size==0){
+    if(stores.size()==0){
         colorText('C');
         cout<<"Infelizmente, o livro especificado não se encontra disponível em nenhuma loja."<<endl;
         colorText('F');
@@ -2100,6 +2105,27 @@ void Club::retrieveData(){
             getline(shops_file, temp);
         }
     }
+}
+
+void Club::showShopsInRange(){
+    bool valid = false;
+    while (!valid){
+        string temp, temp1;
+        cout << "Indique a classificação mínima requerida para contemplar uma loja: ";
+        getline(cin, temp);
+        float min, max;
+        min = stof(temp);
+        cout << "Indique a classificação máxima requerida para contemplar uma loja: ";
+        getline(cin, temp1);
+        max = stof(temp1);
+        if (min < 0 || max > 5){
+            cout << "Os valores fornecidos não são válidos. Forneça números entre 0 e 5 (inclusive)." << endl << endl;
+            continue;
+        } else {
+            valid = true;
+        }
+    }
+    b.showStoresContemplated(min, max);
 }
 
 void Club::colorText(char ch)

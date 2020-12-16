@@ -12,6 +12,7 @@
 #include <vector>
 #include <stdio.h>
 #include <iomanip>
+#include <string>
 //static BookShop dummy("", "", 0.05, 2.5, 10);
 
 /**
@@ -215,6 +216,8 @@ public:
     bool buyBook(int code=-1);
 
     void showShopsByRating();
+
+    void showShopsInRange();
 };
 
 #endif //AEDAPROJECT1_CLUB_H

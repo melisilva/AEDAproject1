@@ -5,6 +5,8 @@ BookShop::BookShop(){
     city = "";
     promoValue = 0.05;
     realRating = 2.5;
+    vector<Book> temp;
+    books = temp;
 }
 
 BookShop::BookShop(string name, string city, float promoValue, float realRating, int bookGenreCount,vector<Book> books)
@@ -27,6 +29,21 @@ bool BookShop::operator<(const BookShop& bs1) const{
         return name < bs1.getName();
     }
     return realRating < bs1.getRating();
+}
+
+string BookShop::getData() const{
+    stringstream ss;
+    ss << name << endl << city << endl << promoValue << endl << realRating << endl << bookGenreCount << endl;
+
+    for (int i = 0; i < books.size(); i++){
+        if (i != books.size() - 1){
+            ss << books[i].getCode() << "," << endl;
+        } else {
+            ss << books[i].getCode() << ";";
+        }
+    }
+
+    return ss.str();
 }
 
 BST<BookShop> BStores::getShop(){

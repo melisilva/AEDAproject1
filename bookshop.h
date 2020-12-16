@@ -22,16 +22,18 @@ class BookShop {
         int getGenreCount() const;
         vector<Book> getBooks()const;
         bool operator<(const BookShop &bs1) const;
-        string operator<<(ostream &out);
+        string getData() const;
 };
+
+static BookShop dummy;
 
 class BStores
 {
 public:
     BST<BookShop> shops;
-    vector<Book>books;
-    BStores():shops(BookShop("","",0,0,0,books)){};
+    BStores():shops(dummy){};
     BST<BookShop> getShop();
+    void addShop(BookShop newStore) { shops.insert(newStore);};
     //BST<BookShop> getNames()const;
     //BST<BookShop> getCities()const;
     //string searchFor(string name) const;

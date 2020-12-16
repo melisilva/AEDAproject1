@@ -12,8 +12,6 @@
 #include <vector>
 #include <stdio.h>
 #include <iomanip>
-
-
 //static BookShop dummy("", "", 0.05, 2.5, 10);
 
 /**

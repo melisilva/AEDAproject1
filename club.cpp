@@ -1523,7 +1523,7 @@ void Club::saveData(){
     fileeeee.open("delays.txt", std::ofstream::out | std::ofstream::trunc);
     fileeeeee.open("nonmembers.txt", std::ofstream::out | std::ofstream::trunc);
     fileeeeeee.open("system.txt", std::ofstream::out | std::ofstream::trunc);
-    fileeeeeee.open("bookshops.txt", std::ofstream::out | std::ofstream::trunc);
+    fileeeeeeee.open("shops.txt", std::ofstream::out | std::ofstream::trunc);
 
 
     stringstream temp1, temp2, temp3, temp4, temp5, temp6, temp7;
@@ -1593,7 +1593,7 @@ void Club::saveData(){
     fileeeeeee<<temp7.str();
 
     for (int i = 0; i < shops.size(); i++){
-        fileeeeeeee << shops[i];
+        fileeeeeeee << shops[i] << endl << endl;
     }
 
     fileeeeeeee << "END";
@@ -1608,7 +1608,7 @@ void Club::retrieveData(){
     ifstream dels_file; dels_file.open("delays.txt");
     ifstream nmemb_file; nmemb_file.open("nonmembers.txt");
     ifstream system_file; system_file.open("system.txt");
-    ifstream shops_file; shops_file.open("bookshops.txt");
+    ifstream shops_file; shops_file.open("shops.txt");
 
     bool d_exist=false;
     bool l_exist=false;
@@ -1956,8 +1956,9 @@ void Club::retrieveData(){
         float promoValue, realRating,realRatingBook, value;
         int bookGenreCount, code_bk, units, opinions, sumRating, edition, owner, oguni;
         bool state, multi;
-        vector <Book> shop_books;
+        
         while (temp != "END") {
+            vector<Book> shop_books;
             getline(shops_file, temp);
             shop.str("");
             shop.clear();
@@ -1984,68 +1985,26 @@ void Club::retrieveData(){
             shop << temp;
             shop >> bookGenreCount;
 
-            while(temp != "END BOOKS"){
+            do {
+                stringstream sps;
+                int code; char sep;
                 getline(shops_file, temp);
-                bks.str("");
-                bks.clear();
-                bks << temp;
-                bks >> code_bk;
-                getline(shops_file, temp);
-                bks.str("");
-                bks.clear();
-                bks << temp;
-                title = bks.str();
-                getline(shops_file, temp);
-                bks.str("");
-                bks.clear();
-                bks << temp;
-                author = bks.str();
-                getline(shops_file, temp);
-                bks.str("");
-                bks.clear();
-                bks << temp;
-                bks >> edition;
-                getline(shops_file, temp);
-                bks.str("");
-                bks.clear();
-                bks<<temp;
-                store=bks.str();
-                getline(shops_file, temp);
-                bks.str("");
-                bks.clear();
-                bks << temp;
-                bks >> category;
-                getline(shops_file, temp);
-                bks.str("");
-                bks.clear();
-                bks << temp;
-                bks >> value;
-                getline(shops_file, temp);
-                bks.str("");
-                bks.clear();
-                bks << temp;
-                bks >> units;
-                getline(shops_file, temp);
-                bks.str("");
-                bks.clear();
-                bks << temp;
-                bks >> state;
-
-
-                Book bk;
-                bk.setAuthor(author); bk.setTitle(title); bk.setCat(category); bk.setCode(code_bk); bk.setUnits(units);
-                bk.setValue(value); bk.setState();
-                bk.setEdition(edition);bk.setStore(store);
-
-                shop_books.push_back(bk);
-            }
+                sps.str("");
+                sps.clear();
+                sps << temp;
+                sps >> code >> sep;
+                int ind = catalog.searchBook(code);
+                shop_books.push_back(catalog.books[ind]);
+            } while (sep != ';');
+        
             BookShop newShop(name, city, promoValue, realRating, bookGenreCount,shop_books);
-            b.shops.insert(newShop);
+            b.addShop(newShop);
+            shop_books.clear();
         }
     }
 }
 
-void Club:: colorText(char ch)
+void Club::colorText(char ch)
 {
     if (ch == 'A')
         SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0xA);    //VERDE

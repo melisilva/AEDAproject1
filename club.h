@@ -211,6 +211,8 @@ public:
      * @param ch: char identifying the color needed when outputing.
     */
     void colorText(char ch); //add color to the interface
+
+    void showShopsByRating();
 };
 
 #endif //AEDAPROJECT1_CLUB_H

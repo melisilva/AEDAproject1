@@ -2,6 +2,7 @@
 #include <string>
 #include <ostream>
 #include <sstream>
+#include <algorithm>
 #include "bst.h"
 #include "book.h"
 #include "fstream"
@@ -23,6 +24,7 @@ class BookShop {
         vector<Book> getBooks()const;
         bool operator<(const BookShop &bs1) const;
         string getData() const;
+        void print() const;
 };
 
 static BookShop dummy;
@@ -34,6 +36,7 @@ public:
     BStores():shops(dummy){};
     BST<BookShop> getShop();
     void addShop(BookShop newStore) { shops.insert(newStore);};
+    void showStoresByRating();
     //BST<BookShop> getNames()const;
     //BST<BookShop> getCities()const;
     //string searchFor(string name) const;

@@ -77,9 +77,42 @@ void BStores::print() const
         cout<<it.retrieve().getName()<<endl<<it.retrieve().getCity()<<endl<<it.retrieve().getpromoValue()<<endl<<it.retrieve().getRating()<<endl<<it.retrieve().getGenreCount()<<endl;
         cout<<"Livros Disponíveis na Livraria: "<<endl;
         for(int i=0;i<b.size();i++){
-            b[i].showBook();
+            b[i].showBook(true);
             cout<<endl<<endl;
         }
         it.advance();
     }
+}
+
+void BookShop::print() const
+{
+    cout<< "NOME: " << getName()<<endl<< "LOCALIDADE: " << getCity()<<endl<< "PROMOÇÃO (%): " << 100*getpromoValue()<<endl<< "CLASSIFICAÇÃO: " << getRating()<< " em 5" << endl<< "NÚMERO DE GÉNEROS DISPONÍVEIS: " << getGenreCount()<<endl;
+    cout<<"Livros Disponíveis na Livraria: "<<endl;
+    for(int i=0;i<books.size();i++){
+        books[i].showBook(true);
+    }
+
+}
+
+void BStores::showStoresByRating(){
+    BST<BookShop> temp = shops;
+    BSTItrLevel<BookShop> it(temp);
+    vector<BookShop> stores;
+    while (!it.isAtEnd()){
+        stores.push_back(it.retrieve());
+        it.advance();
+    }
+
+    sort(stores.begin(), stores.end(), [](BookShop &b1, BookShop &b2){
+        if (b1.getRating() == b2.getRating()){
+            return b1.getName() < b2.getName();
+        }
+        return b1.getRating() > b2.getRating();
+    });
+
+    for (int i = 0; i < stores.size(); i++){
+        stores[i].print();
+        cout << endl;
+    }
+    
 }

@@ -28,8 +28,6 @@ class Book {
     float realRating, value, sumRating = 0;
     string title, author, category, writ_ops,store;
     bool state,multi;
-    bool shop;
-
 public:
     /**
      * Default constructor for the Book class.
@@ -238,7 +236,7 @@ public:
     /**
      * Function that prints/outputs the book's data for the user.
     */
-    void showBook() const;
+    void showBook(bool shop) const;
 
     /**
      * Function that returrns the book's needed data for file records.

@@ -119,7 +119,7 @@ void Member::showData() const {
 void Member::showBooks() const {
     cout << "Livros de " << getName() << ": " << endl;
     for (int i = 0; i < books.size(); i++){
-        books[i].showBook();
+        books[i].showBook(0);
     }
 }
 

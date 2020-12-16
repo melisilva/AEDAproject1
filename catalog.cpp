@@ -51,7 +51,7 @@ void Catalog::registerComments(int code){
 
 void Catalog::showBooks(){
     for(int i=0;i<books.size();i++){
-        books[i].showBook();
+        books[i].showBook(0);
     }
 }
 
@@ -81,7 +81,7 @@ bool Catalog::searchBook(string name){
 }
 
 void Catalog::showBook(int code){
-    books[code].showBook();
+    books[code].showBook(0);
 }
 
 Book Catalog::getBook(int code = -1){

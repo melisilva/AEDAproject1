@@ -309,6 +309,10 @@ void Club::run(){
             valid=true;
             showBooks();
         }
+        if (input == "SH_LR"){
+            valid=true;
+            showShopsByRating();
+        }
         if(!valid && (input != "end" && input != "END")){
             colorText('C');
             cout<<"Input inválido...por favor tente de novo"<<endl;
@@ -369,6 +373,7 @@ void Club::help() {
     cout << endl;
     colorText('D');
     cout << " --- PROTOCOLOS AO NÍVEL DO SICL --- " << endl;
+    cout << " SH_LR: mostrar lojas fidelizadas com o Clube (ordenadas por ordem decrescente de avaliação)" << endl;
     cout << " HELP: ajuda" << endl;
     cout << " END: terminar/fechar programa" << endl;
     cout << endl;
@@ -1181,7 +1186,7 @@ void Club::showFrequentant(int nif){
         cout << "Nome: " << members[i1].getName() << endl << "NIF: "<< members[i1].getNIF() << endl <<setprecision(2)<<members[i1].getBalance()<<" euros"<<endl<< "Livros:" << endl;
         vector<Book> books = members[i1].getBooks();
         for (int j = 0; j < books.size(); j++){
-            books[j].showBook();
+            books[j].showBook(0);
         }
         cout << endl << endl;
     }
@@ -1193,7 +1198,7 @@ void Club::showABook(int code){
     }
     for(int i=0;i<catalog.books.size();i++){
         if(catalog.books[i].getCode()==code){
-            catalog.books[i].showBook();
+            catalog.books[i].showBook(0);
         }
     }
 }
@@ -1233,6 +1238,10 @@ void Club::showDelays() {
         cout << get<0>(delays[i]) << ", desde " << get<1>(delays[i]).getDateStr() << " pelo membro " << get<2>(delays[i]) << endl;
     }
     cout << endl << endl;
+}
+
+void Club::showShopsByRating(){
+    b.showStoresByRating();
 }
 
 void Club::checkDelays(){
@@ -1448,7 +1457,7 @@ bool Club::makeRequest() {
             cout << "Os livros disponíveis com esse título são: " << endl;
             for (int i = 0; i < catalog.books.size(); i++) {
                 if ((catalog.books[i].getTitle() == name) && (catalog.books[i].getState() == true)) {
-                    catalog.books[i].showBook();
+                    catalog.books[i].showBook(0);
                 }
             }
         }

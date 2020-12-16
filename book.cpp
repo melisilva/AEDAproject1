@@ -36,7 +36,7 @@ Book::Book(int code, string title, string author,string category,int edition, in
 }
 
 
-Book::Book(int code, string title, string author,string category,int edition,int units,string store){
+Book::Book(int code, string title, string author,string category,int edition,int units){
     this->code = code;
     this->title = title;
     this->author = author;

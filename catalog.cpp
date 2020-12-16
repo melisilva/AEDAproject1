@@ -52,6 +52,7 @@ void Catalog::registerComments(int code){
 void Catalog::showBooks(){
     for(int i=0;i<books.size();i++){
         books[i].showBook(0);
+        cout<<endl;
     }
 }
 

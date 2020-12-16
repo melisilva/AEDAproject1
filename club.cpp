@@ -309,9 +309,13 @@ void Club::run(){
             valid=true;
             showBooks();
         }
-        if (input == "SH_LR"){
+         if (input == "SH_LR"){
             valid=true;
             showShopsByRating();
+        }
+        if(input == "BUY_L"){
+            valid=true;
+            buyBook();
         }
         if(!valid && (input != "end" && input != "END")){
             colorText('C');
@@ -355,7 +359,8 @@ void Club::help() {
     cout << " SHO_M: mostrar membros" << endl;
     cout << " SHO_N: mostrar não-membros" << endl;
     cout << " SHO_1F: mostrar um frequentante" << endl;
-    cout << " SHO_F: mostrar frquentantes (membros e não membros)" << endl;
+    cout << " SHO_F: mostrar frequentantes (membros e não membros)" << endl;
+    cout << " BUY_L: possibilidade de frequentantes comprarem um livro"<<endl;
     cout << endl;
     colorText('B');
     cout << " --- PROTOCOLOS AO NÍVEL DO CATÁLOGO --- " << endl;
@@ -1511,6 +1516,88 @@ bool Club::makeRequest() {
     return true;
 
 }
+
+bool Club::buyBook(int code=-1){
+    string code_str,shop_str;
+    bool valid;
+    int id,id_shop;
+    vector<string>stores;
+    if(code==-1){
+    valid=false;
+    while(!valid){
+        cout<<"Indique o código do livro (indique -1 caso não saiba o código): "<< endl;
+        getline(cin, code_str);
+        if(isdigit(code_str[0])){
+            valid=true;
+            code = stoi(code_str);
+        }
+        if(code_str[0]=='-'){
+            valid=true;
+            code = stoi(code_str);
+        }
+        if(!valid){
+            valid=false;
+            colorText('C');
+            cout<<"Por favor, indique um número válido."<<endl;
+            colorText('F');
+        }
+        id = catalog.searchBook(code);
+        if(id==-1){
+            valid=false;
+            cout<<catalog.showBooks();
+        }
+    }
+    }
+    else{
+        id = catalog.searchBook(code);
+    }
+    stores=b.findBook(catalog.books[id]);
+    if(stores.size==0){
+        colorText('C');
+        cout<<"Infelizmente, o livro especificado não se encontra disponível em nenhuma loja."<<endl;
+        colorText('F');
+        return false;
+    }
+    else{
+        cout<<"O livro especificado encontra-se disponível nas seguintes lojas:"<<endl;
+        for(int i=0;i<stores.size();i++){
+            cout<<i+1<<" - "<<stores[i]<<endl;
+        }
+        valid=false;
+        while(!valid){
+            cout<<"Selecione uma das lojas que apresentam o livro especificado disponível (indique o número presente antes do nome da loja): "<<endl;
+            getline(cin, shop_str);
+            if(isdigit(shop_str[0])){
+                valid=true;
+                id_shop = stoi(shop_str);
+                if(id_shop<1 || id_shop> stores.size()){
+                    valid=false;
+                }
+            }
+            if(code_str[0]=='-'){
+            valid=false;
+            }
+            if(!valid){
+               valid=false;
+               colorText('C');
+               cout<<"Por favor, indique um número válido."<<endl;
+               colorText('F');
+               cout<<"O livro especificado encontra-se disponível nas seguintes lojas:"<<endl;
+               for(int i=0;i<stores.size();i++){
+                   cout<<i+1<<" - "<<stores[i]<<endl;
+        }
+        }
+        }
+        id_shop-=1;
+        if(b.sellBook(catalog.books[id],stores[id_shop])){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+}
+
 
 void Club::saveData(){
     ofstream file; //(membs, ios::binary);

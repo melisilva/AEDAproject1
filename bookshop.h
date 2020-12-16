@@ -22,8 +22,10 @@ class BookShop {
         float getRating() const;
         int getGenreCount() const;
         vector<Book> getBooks()const;
+        int searchBook(string title,string author,int edition);
         bool operator<(const BookShop &bs1) const;
         string getData() const;
+        void removeBook(int index);
         void print() const;
 };
 
@@ -42,4 +44,6 @@ public:
     //string searchFor(string name) const;
     void readFile(ifstream &f); //working function, no idea how files are being structured 
     void print() const;
+    bool sellBook(Book b,string store);
+    vector<string> findBook(book b);
 };

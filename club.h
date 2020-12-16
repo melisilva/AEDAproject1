@@ -212,6 +212,8 @@ public:
     */
     void colorText(char ch); //add color to the interface
 
+    bool buyBook(int code=-1);
+
     void showShopsByRating();
 };
 

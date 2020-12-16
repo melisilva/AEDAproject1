@@ -46,6 +46,33 @@ string BookShop::getData() const{
     return ss.str();
 }
 
+int BookShop::searchBook(string title,string author,int edition){
+    for(int i=0;i<books.size();i++){
+        if(books[i].getTitle() == title && books[i].getAuthor() == author && books[i].getEdition() ==edition){
+            return i;
+        }
+    }
+    return -1;
+}
+
+void BookShop::removeBook(int index){
+    books.erase(books.begin() + index);
+}
+
+void BookShop::print() const
+{
+    cout<< "NOME: " << getName()<<endl<< "LOCALIDADE: " << getCity()<<endl<< "PROMOÇÃO (%): " << 100*getpromoValue()<<endl<< "CLASSIFICAÇÃO: " << getRating()<< " em 5" << endl<< "NÚMERO DE GÉNEROS DISPONÍVEIS: " << getGenreCount()<<endl;
+    cout<<"Livros Disponíveis na Livraria: "<<endl;
+    for(int i=0;i<books.size();i++){
+        books[i].showBook(true);
+    }
+
+}
+
+
+
+//BStores
+
 BST<BookShop> BStores::getShop(){
     return shops;
 }
@@ -77,21 +104,41 @@ void BStores::print() const
         cout<<it.retrieve().getName()<<endl<<it.retrieve().getCity()<<endl<<it.retrieve().getpromoValue()<<endl<<it.retrieve().getRating()<<endl<<it.retrieve().getGenreCount()<<endl;
         cout<<"Livros Disponíveis na Livraria: "<<endl;
         for(int i=0;i<b.size();i++){
-            b[i].showBook(true);
+            b[i].showBook();
             cout<<endl<<endl;
         }
         it.advance();
     }
 }
 
-void BookShop::print() const
-{
-    cout<< "NOME: " << getName()<<endl<< "LOCALIDADE: " << getCity()<<endl<< "PROMOÇÃO (%): " << 100*getpromoValue()<<endl<< "CLASSIFICAÇÃO: " << getRating()<< " em 5" << endl<< "NÚMERO DE GÉNEROS DISPONÍVEIS: " << getGenreCount()<<endl;
-    cout<<"Livros Disponíveis na Livraria: "<<endl;
-    for(int i=0;i<books.size();i++){
-        books[i].showBook(true);
+bool BStores::sellBook(Book b,string store){
+    BSTItrIn<BookShop> it(shops);
+    bool exist=false;
+    int index;
+    while(!it.isAtEnd()){
+        if(it.retrieve().getName()){
+            index= it.retrieve().searchBook(b.getTitle(),b.getAuthor(),b.getEdition());
+             if(index != -1){
+                 it.retrieve().removeBook(index);
+                 return true;
+        }
+        }
+        it.advance();
     }
+    return false;
+}
 
+vector<string> BStores::findBook(Book b){
+    vector<string> stores;
+    BSTItrIn<BookShop> it(shops);
+    bool exist=false;
+    while(!it.isAtEnd()){
+        if(it.retrieve().searchBook(b.getTitle(),b.getAuthor(),b.getEdition()) != -1){
+            stores.push_back(it.retrieve().getName());
+        }
+        it.advance();
+    }
+    return stores;
 }
 
 void BStores::showStoresByRating(){
@@ -116,3 +163,4 @@ void BStores::showStoresByRating(){
     }
     
 }
+

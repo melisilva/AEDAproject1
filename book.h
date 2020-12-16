@@ -26,7 +26,7 @@ using namespace std;
 class Book {
     int code, units, opinions = 0, edition, owner,oguni;
     float realRating, value, sumRating = 0;
-    string title, author, category, writ_ops,store;
+    string title, author, category, writ_ops;
     bool state,multi;
 public:
     /**
@@ -46,7 +46,7 @@ public:
     */
     Book(int code,string title,string author,string category, int edition,int owner,int units,int oguni);
 
-    Book(int code, string title, string author,string category,int edition,int units,string store);
+    Book(int code, string title, string author,string category,int edition,int units);
     /**
      * Function that adds a lendable unit to the units attribute.
     */

@@ -15,6 +15,7 @@ Book::Book(){
     writ_ops = "";
     setState();
     multi=true;
+    store="";
 
 }
 
@@ -34,6 +35,24 @@ Book::Book(int code, string title, string author,string category,int edition, in
     calculateValue();
     setState();
     this->multi=true;
+    shop=false;
+}
+
+
+Book::Book(int code, string title, string author,string category,int edition,int units,string store){
+    this->code = code;
+    this->title = title;
+    this->author = author;
+    this->category=category;
+    this->edition=edition;
+    this->units = units;
+    this->opinions = 0;
+    this->sumRating = 0;
+    this->realRating = 0;
+    calculateValue(); //Need a better function to get sale
+    setState();
+    this->store=store;
+    shop=true;
 }
 
 void Book::calculateValue(){
@@ -113,6 +132,10 @@ void Book::setEdition(int edition){
     this->edition = edition;
 }
 
+void Book::setStore(string store){
+    this->store=store;
+}
+
 void Book::addWritops(string writ_ops){
     stringstream temp;
     temp << writ_ops << endl;
@@ -145,6 +168,10 @@ string Book::getAuthor() const{
 
 string Book::getCategory() const{
     return category;
+}
+
+string Book::getStore()const{
+    return store;
 }
 
 bool Book::getState() const{
@@ -188,7 +215,12 @@ void Book::calculateRating(float rate){
 }
 
 void Book::showBook() const{
+    if(shop){
+        cout << "   - " << title << " (" << code << "), de " << author << ", "<< edition << " edicao" <<" (" << realRating << "/5), da loja " << store <<", "<<units<<" unidades"<<endl;
+    }
+    else{
     cout << "   - " << title << " (" << code << "), de " << author << ", "<< edition << " edicao" <<" (" << realRating << "/5), do membro " << owner <<", "<<units<<" unidades"<<endl << "Comentários do Livro: " << endl << writ_ops;
+    }
 }
 
 string Book::getData() const{

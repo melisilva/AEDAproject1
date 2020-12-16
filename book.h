@@ -21,12 +21,14 @@ using namespace std;
  * @param writ_ops: string contianing all registered detailed opinions of the book.
  * @param state: boolean value that helps dictate if the book can be lended.
  * @param multi: boolean value that helps dictate if the book can be lended.
+ * @param store
 */
 class Book {
     int code, units, opinions = 0, edition, owner,oguni;
     float realRating, value, sumRating = 0;
-    string title, author, category, writ_ops;
+    string title, author, category, writ_ops,store;
     bool state,multi;
+    bool shop;
 
 public:
     /**
@@ -44,8 +46,9 @@ public:
      * @param units: integer number specifying the the number of units available for lending.
      * @param oguni: integer number specifying the total number of units for the book.
     */
-    Book(int code, string title, string author, string category,int edition, int owner,int units,int oguni);
+    Book(int code,string title,string author,string category, int edition,int owner,int units,int oguni);
 
+    Book(int code, string title, string author,string category,int edition,int units,string store);
     /**
      * Function that adds a lendable unit to the units attribute.
     */
@@ -151,6 +154,8 @@ public:
     */
     int getOguni() const;
 
+    string getStore()const;
+
     /**
      * Function that sets the object from which it is called's owner attribute with the argument provided.
      * @param owner: value to set the owner attribute (integer).
@@ -227,6 +232,8 @@ public:
      * @param oguni: value to set the oguni attribute (integer).
     */
     void setOgunit(int oguni);
+
+    void setStore(string store);
 
     /**
      * Function that prints/outputs the book's data for the user.

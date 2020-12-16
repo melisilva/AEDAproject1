@@ -1951,7 +1951,7 @@ void Club::retrieveData(){
     empty=false;
     empty=shops_file.peek() == std::ifstream::traits_type::eof();
     if(!(empty)){
-        string name, city, temp,title, author, category, writ_ops;
+        string name, city, temp,title, author, category, writ_ops,store;
         float promoValue, realRating,realRatingBook, value;
         int bookGenreCount, code_bk, units, opinions, sumRating, edition, owner, oguni;
         bool state, multi;
@@ -2033,11 +2033,6 @@ void Club::retrieveData(){
                 bks.str("");
                 bks.clear();
                 bks << temp;
-                bks >> oguni;
-                getline(shops_file, temp);
-                bks.str("");
-                bks.clear();
-                bks << temp;
                 bks >> opinions;
                 getline(shops_file, temp);
                 bks.str("");
@@ -2052,25 +2047,15 @@ void Club::retrieveData(){
                 getline(shops_file, temp);
                 bks.str("");
                 bks.clear();
-                bks << temp;
-                bks >> multi;
+                bks<<temp;
+                bks>>store;
 
-                vector<string> reviews;
-                while (1){
-                    getline(shops_file, temp);
-                    if (temp == "END_REVS"){
-                        break;
-                    }
-                    reviews.push_back(temp);
-                }
+
                 Book bk;
                 bk.setAuthor(author); bk.setTitle(title); bk.setCat(category); bk.setCode(code_bk); bk.setUnits(units);
                 bk.setOpinions(opinions); bk.setRating(realRating); bk.setSumR(sumRating); bk.setValue(value); bk.setState();
-                bk.setEdition(edition); bk.setOwner(owner); bk.setOgunit(oguni); bk.setMulti();
+                bk.setEdition(edition);bk.setStore(store);
 
-                for (int i = 0; i < reviews.size(); i++){
-                       bk.addWritops(reviews[i]);
-                    }
                 shop_books.push_back(bk);
             }
             BookShop newShop(name, city, promoValue, realRating, bookGenreCount,shop_books);

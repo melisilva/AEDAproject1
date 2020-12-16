@@ -120,10 +120,11 @@ bool BStores::sellBook(Book b,string store){
     bool exist=false;
     int index;
     while(!it.isAtEnd()){
-           if(it.retrieve().getName() == store){
-            index= it.retrieve().searchBook(b.getTitle(),b.getAuthor(),b.getEdition());
+        auto test=it.retrieve();
+           if(test.getName() == store){
+            index= test.searchBook(b.getTitle(),b.getAuthor(),b.getEdition());
              if(index != -1){
-                 it.retrieve().removeBook(index);
+                 test.removeBook(index);
                  return true;
         }
         }
@@ -137,8 +138,9 @@ vector<string> BStores::findBook(Book b){
     BSTItrIn<BookShop> it(shops);
     bool exist=false;
     while(!it.isAtEnd()){
-        if(it.retrieve().searchBook(b.getTitle(),b.getAuthor(),b.getEdition()) != -1){
-            stores.push_back(it.retrieve().getName());
+        auto test=it.retrieve();
+        if(test.searchBook(b.getTitle(),b.getAuthor(),b.getEdition()) != -1){
+            stores.push_back(test.getName());
         }
         it.advance();
     }

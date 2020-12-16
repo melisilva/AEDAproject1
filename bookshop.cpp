@@ -29,6 +29,9 @@ bool BookShop::operator<(const BookShop& bs1) const{
     return realRating < bs1.getRating();
 }
 
+BST<BookShop> BStores::getShop(){
+    return shops;
+}
 
 void BStores::readFile(ifstream &f){
     string name,city,pValue,rRating,bGC;

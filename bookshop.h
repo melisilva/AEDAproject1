@@ -27,10 +27,11 @@ class BookShop {
 
 class BStores
 {
-public:
     BST<BookShop> shops;
+public:
     vector<Book>books;
     BStores():shops(BookShop("","",0,0,0,books)){};
+    BST<BookShop> getShop();
     //BST<BookShop> getNames()const;
     //BST<BookShop> getCities()const;
     //string searchFor(string name) const;

@@ -69,7 +69,6 @@ void Member::removeBook(int index) {
     }
     else{
         books.erase(books.begin()+index);
-        cout<<"all good"<<endl;
     }
 }
 
@@ -109,7 +108,7 @@ void Member::showData() const {
 
     temp << "Nome: " << name << endl << "NIF: " << nif << endl;
 
-    cout << temp.str();
+
     showBooks();
 
     showLendRequests();

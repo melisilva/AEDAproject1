@@ -319,7 +319,7 @@ void Club::run(){
         }
         if(input == "BUY_L"){
             valid=true;
-            buyBook();
+            buyBook(-1);
         }
         if(!valid && (input != "end" && input != "END")){
             colorText('C');
@@ -1522,7 +1522,7 @@ bool Club::makeRequest() {
 
 }
 
-bool Club::buyBook(int code=-1){
+bool Club::buyBook(int code){
     string code_str,shop_str;
     bool valid;
     int id,id_shop;
@@ -2108,12 +2108,12 @@ void Club::retrieveData(){
 }
 
 void Club::showShopsInRange(){
+    float min, max;
     bool valid = false;
     while (!valid){
         string temp, temp1;
         cout << "Indique a classificação mínima requerida para contemplar uma loja: ";
         getline(cin, temp);
-        float min, max;
         min = stof(temp);
         cout << "Indique a classificação máxima requerida para contemplar uma loja: ";
         getline(cin, temp1);

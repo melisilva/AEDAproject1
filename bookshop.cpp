@@ -34,6 +34,7 @@ bool BookShop::operator<(const BookShop& bs1) const{
     return realRating > bs1.getRating();
 }
 
+
 string BookShop::getData() const{
     stringstream ss;
     ss << name << endl << city << endl << promoValue << endl << realRating << endl << bookGenreCount << endl;
@@ -119,7 +120,7 @@ bool BStores::sellBook(Book b,string store){
     bool exist=false;
     int index;
     while(!it.isAtEnd()){
-        if(it.retrieve().getName() == store){
+           if(it.retrieve().getName() == store){
             index= it.retrieve().searchBook(b.getTitle(),b.getAuthor(),b.getEdition());
              if(index != -1){
                  it.retrieve().removeBook(index);
@@ -164,7 +165,6 @@ void BStores::showStoresByRating(){
         stores[i].print();
         cout << endl;
     }
-    
 }
 
 void BStores::showStoresContemplated(float min, float max){

@@ -1504,8 +1504,6 @@ bool Club::makeRequest() {
 }
 
 void Club::saveData(){
-    string membs = "members.txt", nonmembs = "nonmembers.txt", lends = "lendings.txt", lendRs = "lendRequests.txt", bks = "books.txt", dels = "delays.txt", shops = "bookshops.txt";
-
     ofstream file; //(membs, ios::binary);
     ofstream filee; //(lends, ios::binary);
     ofstream fileee; //(lendRs, ios::binary);
@@ -1592,11 +1590,16 @@ void Club::saveData(){
 
     fileeeeeee<<temp7.str();
 
-    for (int i = 0; i < shops.size(); i++){
-        fileeeeeeee << shops[i] << endl << endl;
+    BSTItrLevel<BookShop> it(b.shops);
+    while (!it.isAtEnd()){
+        fileeeeeeee << it.retrieve().getData();
+        it.advance();
+        if (!it.isAtEnd()){
+            fileeeeeeee << endl << endl;
+        }
     }
 
-    fileeeeeeee << "END";
+    fileeeeeeee << endl << "END";
 
 }
 
@@ -1962,13 +1965,11 @@ void Club::retrieveData(){
             getline(shops_file, temp);
             shop.str("");
             shop.clear();
-            shop << temp;
-            shop >> name;
+            name = temp;
             getline(shops_file, temp);
             shop.str("");
             shop.clear();
-            shop << temp;
-            shop >> city;
+            city = temp;
             getline(shops_file, temp);
             shop.str("");
             shop.clear();
@@ -1984,10 +1985,10 @@ void Club::retrieveData(){
             shop.clear();
             shop << temp;
             shop >> bookGenreCount;
-
+            sep = '0';
             do {
                 stringstream sps;
-                int code; char sep;
+                int code;
                 getline(shops_file, temp);
                 sps.str("");
                 sps.clear();
@@ -2000,6 +2001,7 @@ void Club::retrieveData(){
             BookShop newShop(name, city, promoValue, realRating, bookGenreCount,shop_books);
             b.addShop(newShop);
             shop_books.clear();
+            getline(shops_file, temp);
         }
     }
 }

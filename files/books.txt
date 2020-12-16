@@ -1,40 +1,27 @@
 0
-Ari and Dante
-Benjamin Alire-Saenz
+DaVinci's Code
+Dan Brown
 1
 123456789
 Contemporary
 19.43
 5
-0
-1
-10
-50
-0
-0
-
-
-1
-DaVinci's Code
-Dan Brown
-1
-143567899
-Contemporary
-19.43
-5
 1
 1
 10
 50
 1
 1
+Adorei
+Ótimo
+END_REVS
 
 
-2
+1
 Paper Towns
 John Green
 2
-1425345676
+142534567
 Adventure
 18.7
 0
@@ -44,5 +31,74 @@ Adventure
 0
 0
 0
+END_REVS
+
+
+2
+Batman:Ego
+Darwyn Cooke
+2
+178250953
+Musings
+18.7
+0
+0
+1
+0
+0
+0
+0
+END_REVS
+
+
+3
+Good Omens
+Neil Gaiman & Terry Pratchett
+1
+178250953
+Comedy
+25
+0
+1
+1
+0
+0
+1
+1
+END_REVS
+
+
+4
+AEDA Divertida
+Liliana Ferreira
+3
+123456789
+Educational
+18.05
+0
+1
+1
+0
+0
+1
+1
+END_REVS
+
+
+5
+Como Fazer Uma Excelente Apresentação
+Mateus & Melissa Silva
+1
+142534567
+Excellency
+25
+0
+1
+1
+0
+0
+1
+1
+END_REVS
 
 END

@@ -1497,11 +1497,13 @@ bool Club::makeRequest() {
     } else { //it's not a member then it's a nonMem
         while (true) {
             if (isnonMem(nif) == -1) {
-                string namem;
+                string namem, eMail;
                 cout << "Introduza o nome, por favor: ";
                 getline(cin, namem);
+                cout << "Introduza o seu eMail, por favor: ";
+                getline(cin, eMail);
                 float balance = 50;
-                nonMem* p = new nonMem(namem, nif, balance);
+                nonMem* p = new nonMem(namem, eMail, nif, balance);
                 (*p).registerRequest(code, today);
                 nonmembers.push_back((*p));
                 break;
@@ -1602,7 +1604,6 @@ bool Club::buyBook(int code){
         }
     }
 }
-
 
 void Club::saveData(){
     ofstream file; //(membs, ios::binary);
@@ -1835,7 +1836,7 @@ void Club::retrieveData(){
     //Getting Member data.
     if(!(empty)){
         temp = "BEGIN";
-        string name;
+        string name, eMail;
         int nif, code;
         float balance;
         while (temp != "END"){
@@ -1845,6 +1846,11 @@ void Club::retrieveData(){
             membs.clear();
             membs << temp;
             membs >> name;
+            getline(memb_file, temp);
+            membs.str("");
+            membs.clear();
+            membs << temp;
+            membs >> eMail;
             getline(memb_file, temp);
             membs.str("");
             membs.clear();
@@ -1864,7 +1870,7 @@ void Club::retrieveData(){
                 int ind = catalog.searchBook(code);
                 memb_bks.push_back(catalog.books[ind]);
             } while (sep != ';');
-            members.push_back(Member(name, nif, memb_bks, balance));
+            members.push_back(Member(name, eMail, nif, memb_bks, balance));
             getline(memb_file, temp);
             membs.str("");
             membs.clear();
@@ -1880,7 +1886,7 @@ void Club::retrieveData(){
     //Getting nonMembers data.
     if(!(empty)){
         temp = "BEGIN";
-        string name;
+        string name, eMail;
         int nif, code;
         float balance;
         while (temp != "END"){
@@ -1893,13 +1899,18 @@ void Club::retrieveData(){
             nmembs.str("");
             nmembs.clear();
             nmembs << temp;
+            nmembs >> eMail;
+            getline(nmemb_file, temp);
+            nmembs.str("");
+            nmembs.clear();
+            nmembs << temp;
             nmembs >> nif;
             getline(nmemb_file, temp);
             nmembs.str("");
             nmembs.clear();
             nmembs << temp;
             balance = stof(temp);
-            nonmembers.push_back(nonMem(name, nif, balance));
+            nonmembers.push_back(nonMem(name, eMail, nif, balance));
             getline(nmemb_file, temp);
             nmembs.str("");
             nmembs.clear();

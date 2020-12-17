@@ -8,15 +8,17 @@ Member::Member(){
     balance = 50;
 }
 
-Member::Member(string &name, int &nif, vector<Book> &books, float &balance) {
+Member::Member(string &name, string &eMail, int &nif, vector<Book> &books, float &balance) {
     this->name = name;
+    this->eMail = eMail;
     this->nif = nif;
     this->books = books;
     this->balance = balance;
 }
 
-nonMem::nonMem(string &name, int &nif, float &balance) : Member() {
+nonMem::nonMem(string &name, string &eMail, int &nif, float &balance) : Member() {
     this->name = name;
+    this->eMail = eMail;
     this->nif = nif;
     this->balance = balance;
 }
@@ -139,7 +141,7 @@ string Member::getData() {
 
     stringstream temp;
 
-    temp << name << endl << nif << endl << to_string(balance) << endl;
+    temp << name << endl << eMail << endl << nif << endl << to_string(balance) << endl;
     for (int i = 0; i < books.size(); i++){
         if (i < books.size() - 1 ) {
             temp << books[i].getCode() << "," << endl;
@@ -193,10 +195,14 @@ void Member::deleteRequest(int code){
     lendRequest.erase(lendRequest.begin()+temp);
 }
 
+string Member::getEmail() const{
+    return eMail;
+}
+
 string nonMem::getData() {
 
     stringstream temp;
 
-    temp << name << endl << nif << endl << to_string(balance);
+    temp << name << endl << eMail << endl << nif << endl << to_string(balance);
     return temp.str();
 }

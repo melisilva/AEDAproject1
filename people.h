@@ -16,6 +16,7 @@ using namespace std;
  * @param lendings: vector with data from the member's current lendings.
  * @param books: vector with the Book objects that represent the member's books.
  * @param name: string with the name of the member.
+ * @param eMail: string with the e-mail address of the member.
  * @param nif: integer number with the NIF of the member.
  * @param balance: float number with the member's associated balance.
 */
@@ -23,7 +24,7 @@ class Member {
 protected:
     vector<pair<int, Date>> lendRequest, lendings;
     vector<Book> books;
-    string name;
+    string name, eMail;
     int nif;
     float balance;
 
@@ -36,11 +37,12 @@ public:
     /**
      * Overloaded constructor for class Member.
      * @param name: string specifying the Member's name.
+     * @param eMail: string specifying the Member's e-mail address.
      * @param nif: integer number specifying the Member's NIF ("Número de Identificação Fiscal").
      * @param books: vector of Book class objects representing the books owned and offered by the member.
      * @param balance: float number representing the Member's "bank account" balance.
     */
-    Member(string &name, int &nif, vector<Book> &books, float &balance);
+    Member(string &name, string &eMail, int &nif, vector<Book> &books, float &balance);
 
     /**
      * Function that deletes an ended request from a Member's lendRequest attribute (because of a lending). Works just the same for the nonMem class.
@@ -89,6 +91,12 @@ public:
      * @return: the NIF attribute's value (integer).
     */
     float getBalance() const;
+
+    /**
+     * Returns the Member's e-mail. Works just the same for the nonMem class.
+     * @return: the person's e-mail address (string).
+    */
+    string getEmail() const;
 
     /**
      * Substracts quantity to the Member's balance attribute. Works just the same for the nonMem class.
@@ -187,21 +195,23 @@ public:
 
 /**
  * Class to represent non-members, derived from Member.
- * @param lendRequest: vector with data from the member's lending requests.
- * @param lendings: vector with data from the member's current lendings.
- * @param name: string with the name of the member.
- * @param nif: integer number with the NIF of the member.
- * @param balance: float number with the member's associated balance.
+ * @param lendRequest: vector with data from the frequentant's lending requests.
+ * @param lendings: vector with data from the frequentant's current lendings.
+ * @param name: string with the frequentant's name.
+ * @param eMail: string swith the frequentant's e-mail address.
+ * @param nif: integer number with the NIF of the frequentant.
+ * @param balance: float number with the frequentant's associated balance.
 */
 class nonMem : public Member {
 public:
     /**
      * Overloaded constructor for the derived nonMem class.
      * @param name: string specifying the nonMember's name.
+     * @param eMail: string specifying the nonMember's e-mail address.
      * @param nif: integer number specifying the non-member's NIF.
      * @param balance: float number specifying the non-member's balance.
     */
-    nonMem(string &name, int &nif, float &balance); 
+    nonMem(string &name, string &eMail, int &nif, float &balance); 
 
     /**
      * Redefinition of the getData function.

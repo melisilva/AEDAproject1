@@ -13,7 +13,25 @@
 #include <stdio.h>
 #include <iomanip>
 #include <string>
+#include <unordered_set>
 //static BookShop dummy("", "", 0.05, 2.5, 10);
+
+struct PeopleHash {
+    int operator()(const Member& ar) const {
+        int v=0;
+        for(int i=0;i<ar.getEmail().size();i++){
+            v=37*v+ar.getEmail()[i];
+        }
+        return v;
+    }
+
+    bool operator()(const Member& ar1, const Member& ar2) const {
+       return (ar1.getEmail()==ar2.getEmail());
+    }
+};
+
+
+typedef unordered_set<Member, PeopleHash, PeopleHash> HashTablePeople;
 
 /**
  * Class that represents the Book Club - to be a little informal: this is where most magic happens!
@@ -32,6 +50,7 @@ private:
     vector<tuple<int, Date, int>> lendings, delays, lendRequests;
     Catalog catalog;
     Date today;
+    HashTablePeople preferences;
     //BStores b;
 
 public:

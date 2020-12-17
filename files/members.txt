@@ -1,20 +1,23 @@
 Ben
+ben@gmail.com
 123456789
-46.056999
+42.187000
 0,
 4;
 
 
 Patricia
+patty@gmail.com
 142534567
-50.000000
+46.000000
 1,
 5;
 
 
 Cristine
+cristinewithnoh@gmail.com
 178250953
-50.000000
+48.130001
 2,
 3;
 

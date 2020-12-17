@@ -16,6 +16,7 @@
 #include <unordered_set>
 //static BookShop dummy("", "", 0.05, 2.5, 10);
 
+/*
 struct PeopleHash {
     int operator()(const Member& ar) const {
         int v=0;
@@ -29,13 +30,24 @@ struct PeopleHash {
        return (ar1.getEmail()==ar2.getEmail());
     }
 };
+*/
 
-struct preference {
-   string eMail;
-   vector<string> preferences;
+
+struct PeopleHash {
+    int operator()(const Info& ar) const {
+        int v=0;
+        for(int i=0;i<ar.getEmail().size();i++){
+            v=37*v+ar.getEmail()[i];
+        }
+        return v;
+    }
+
+    bool operator()(const Info& ar1, const Info& ar2) const {
+       return (ar1.getEmail()==ar2.getEmail());
+    }
 };
 
-typedef unordered_set<Member, PeopleHash, PeopleHash> HashTablePeople;
+typedef unordered_set<Info, PeopleHash, PeopleHash> HashTablePeople;
 
 /**
  * Class that represents the Book Club - to be a little informal: this is where most magic happens!
@@ -54,7 +66,8 @@ private:
     vector<tuple<int, Date, int>> lendings, delays, lendRequests;
     Catalog catalog;
     Date today;
-    HashTablePeople preferences;
+    vector<Info*> Meminfo;
+    HashTablePeople Preferences;
     //BStores b;
 
 public:
@@ -241,6 +254,12 @@ public:
     void showShopsByRating();
 
     void showShopsInRange();
+
+    void showShopsBySpecificBook();
+
+    void recordPeople();
+
+    void updateTable();
 };
 
 #endif //AEDAPROJECT1_CLUB_H

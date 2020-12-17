@@ -161,9 +161,8 @@ void Member::renovateLending(int code, Date date) {
     }
 }
 
-void Member::updateData(string &name, float quantity, string eMail){
+void Member::updateData(string &name, float quantity){
     this->name = name;
-    this->eMail = eMail;
     addBalance(quantity);
 }
 
@@ -207,3 +206,20 @@ string nonMem::getData() {
     temp << name << endl << eMail << endl << nif << endl << to_string(balance);
     return temp.str();
 }
+
+Info::Info(string e):eMail(e){
+}
+
+Info::Info(string email,vector<string> preferences){
+    this->eMail=email;
+    this->preferences=preferences;
+}
+
+string Info::getEmail() const{
+    return eMail;
+}
+
+vector<string> Info::getPreferences() const{
+    return preferences;
+}
+

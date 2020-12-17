@@ -10,6 +10,23 @@
 #include <algorithm>
 using namespace std;
 
+/*
+ struct Info {
+   string eMail;
+   vector<string> preferences;
+};
+*/
+
+class Info {
+    string eMail;
+    vector<string> preferences;
+public: 
+    Info(string e);
+    Info(string email,vector<string>preferences);
+    string getEmail() const;
+    vector<string> getPreferences()const;
+   };
+
 /**
  * Class to represent members.
  * @param lendRequest: vector with data from the member's lending requests.
@@ -43,6 +60,7 @@ public:
      * @param balance: float number representing the Member's "bank account" balance.
     */
     Member(string &name, string &eMail, int &nif, vector<Book> &books, float &balance);
+
 
     /**
      * Function that deletes an ended request from a Member's lendRequest attribute (because of a lending). Works just the same for the nonMem class.
@@ -170,9 +188,8 @@ public:
      * Function that updates a member's data (either their name, balance or both). Works just the same for the nonMem class.
      * @param name: the Member's new name (string).
      * @param quantity: the value to be added to the Member's balance.
-     * @param eMail: a new e-Mail to be put in the 
     */
-    void updateData(string &name, float quantity, string eMail);
+    void updateData(string &name, float quantity);
 
     /**
      * Function that "finishes" a lending (i.e., deletes its register in the lendings vector attribute), as per identified through the function's arguments. Works just the same for the nonMem class.

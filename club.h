@@ -30,6 +30,10 @@ struct PeopleHash {
     }
 };
 
+struct preference {
+   string eMail;
+   vector<string> preferences;
+};
 
 typedef unordered_set<Member, PeopleHash, PeopleHash> HashTablePeople;
 

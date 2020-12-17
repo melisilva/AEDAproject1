@@ -170,8 +170,9 @@ public:
      * Function that updates a member's data (either their name, balance or both). Works just the same for the nonMem class.
      * @param name: the Member's new name (string).
      * @param quantity: the value to be added to the Member's balance.
+     * @param eMail: a new e-Mail to be put in the 
     */
-    void updateData(string &name, float quantity);
+    void updateData(string &name, float quantity, string eMail);
 
     /**
      * Function that "finishes" a lending (i.e., deletes its register in the lendings vector attribute), as per identified through the function's arguments. Works just the same for the nonMem class.

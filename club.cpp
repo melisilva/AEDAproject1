@@ -359,7 +359,7 @@ void Club::help() {
     cout << " --- PROTOCOLOS AO NÍVEL DE FREQUÊNCIA (por Membros e não-Membros)  ---" << endl;
     cout << " ADD_M: adicionar membro" << endl;
     cout << " REM_M: remover membro" << endl;
-    cout << " ATL_P: atualizar frequentador (para adição de saldo ou mudança de nome)" << endl;
+    cout << " ATL_P: atualizar frequentador (para adição de saldo, mudança de nome ou e-mail)" << endl;
     cout << " SHO_M: mostrar membros" << endl;
     cout << " SHO_N: mostrar não-membros" << endl;
     cout << " SHO_1F: mostrar um frequentante" << endl;
@@ -402,12 +402,13 @@ void Club::help() {
 
 void Club::updatePerson() {
     bool valid=false;
-    string answer, name;
+    string answer, name, eMail;
     int nif;
     float quantity;
     cout << "Poderá mudar o nome e atualizar o saldo." << endl;
-    cout << "Caso só deseje mudar o saldo, insira o mesmo nome abaixo." << endl;
-    cout << "Caso só deseje mudar o nome, insira 0 na quantia abaixo." << endl;
+    cout << "Caso só deseje mudar o saldo e/ou o e-mail, insira o mesmo nome abaixo." << endl;
+    cout << "Caso só deseje mudar o nome e/ou o e-mail, insira 0 na quantia abaixo." << endl;
+    cout << "Caso só deseje mudar o seu nome e/ou saldo, insira o mesmo e-mail abaixo." << endl;
     cout << "Indique o nome: ";
     getline(cin, answer);
     name = answer;
@@ -424,6 +425,8 @@ void Club::updatePerson() {
             colorText('F');
         }
     }
+    cout << "Indique o mail do frequentante: ";
+    getline(cin, eMail);
 
     valid=false;
     while(!valid){
@@ -449,9 +452,9 @@ void Club::updatePerson() {
     int per = isMember(nif);
 
     if (per == -1){
-        nonmembers[isnonMem(nif)].updateData(name, quantity);
+        nonmembers[isnonMem(nif)].updateData(name, quantity, eMail);
     } else {
-        members[per].updateData(name, quantity);
+        members[per].updateData(name, quantity, eMail);
     }
 }
 
@@ -1618,6 +1621,7 @@ void Club::saveData(){
     ofstream fileeeeee; //(nonmembs, ios::binary);
     ofstream fileeeeeee; //(system)
     ofstream fileeeeeeee; //bookshops
+    ofstream file9;
 
     //Yay, file cleaning!
     file.open("members.txt", std::ofstream::out | std::ofstream::trunc);
@@ -1628,9 +1632,10 @@ void Club::saveData(){
     fileeeeee.open("nonmembers.txt", std::ofstream::out | std::ofstream::trunc);
     fileeeeeee.open("system.txt", std::ofstream::out | std::ofstream::trunc);
     fileeeeeeee.open("shops.txt", std::ofstream::out | std::ofstream::trunc);
+    file9.open("preferences.txt", std::ofstream::out | std::ofstream::trunc);
 
 
-    stringstream temp1, temp2, temp3, temp4, temp5, temp6, temp7;
+    stringstream temp1, temp2, temp3, temp4, temp5, temp6, temp7, temp8, temp9;
 
     for (int i = 0; i < members.size(); i++){
         if (i < members.size() -1) {
@@ -1707,6 +1712,7 @@ void Club::saveData(){
 
     fileeeeeeee << endl << "END";
 
+    //iterating the hashtable to save all things!
 }
 
 void Club::retrieveData(){
@@ -1718,6 +1724,7 @@ void Club::retrieveData(){
     ifstream nmemb_file; nmemb_file.open("nonmembers.txt");
     ifstream system_file; system_file.open("system.txt");
     ifstream shops_file; shops_file.open("shops.txt");
+    ifstream prefs_file; prefs_file.open("preferences.txt");
 
     bool d_exist=false;
     bool l_exist=false;
@@ -1927,7 +1934,6 @@ void Club::retrieveData(){
     empty=false;
     empty=lendRs_file.peek() == std::ifstream::traits_type::eof();
 
-
     //Getting lendRequests data.
     if(!(empty)){
         temp = "BEGIN";
@@ -2009,7 +2015,6 @@ void Club::retrieveData(){
     empty=false;
     empty=dels_file.peek() == std::ifstream::traits_type::eof();
 
-
     //Getting delays data.
     if(!(empty)){
         d_exist=true;
@@ -2068,6 +2073,7 @@ void Club::retrieveData(){
         }
     }
 
+    //Getting shops data.
     empty=false;
     empty=shops_file.peek() == std::ifstream::traits_type::eof();
     if(!(empty)){
@@ -2118,6 +2124,33 @@ void Club::retrieveData(){
             b.addShop(newShop);
             shop_books.clear();
             getline(shops_file, temp);
+        }
+    }
+
+    empty = false;
+    empty = prefs_file.peek() == std::ifstream::traits_type::eof();
+
+    if (!empty){
+        string temp, eMail;
+        while (temp != "END") {
+            vector<string> preferences;
+            getline(prefs_file, temp);
+            eMail = temp;
+            getline(prefs_file, temp);
+            preferences.push_back(temp);
+            getline(prefs_file, temp);
+            preferences.push_back(temp);
+            getline(prefs_file, temp);
+            preferences.push_back(temp);
+            getline(prefs_file, temp);
+            preferences.push_back(temp);
+            getline(prefs_file, temp);
+            preferences.push_back(temp);
+            preference pref_temp;
+            pref_temp.eMail = eMail;
+            pref_temp.preferences = preferences;
+            //add pref_temp to the hashtable!
+            getline(prefs_file, temp);
         }
     }
 }

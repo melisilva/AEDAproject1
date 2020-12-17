@@ -161,8 +161,9 @@ void Member::renovateLending(int code, Date date) {
     }
 }
 
-void Member::updateData(string &name, float quantity){
+void Member::updateData(string &name, float quantity, string eMail){
     this->name = name;
+    this->eMail = eMail;
     addBalance(quantity);
 }
 

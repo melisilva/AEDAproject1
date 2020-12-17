@@ -149,23 +149,13 @@ vector<string> BStores::findBook(Book b){
 
 void BStores::showStoresByRating(){
     BST<BookShop> temp = shops;
-    BSTItrLevel<BookShop> it(temp);
+    BSTItrIn<BookShop> it(temp);
     vector<BookShop> stores;
+    
     while (!it.isAtEnd()){
-        stores.push_back(it.retrieve());
-        it.advance();
-    }
-
-    sort(stores.begin(), stores.end(), [](BookShop &b1, BookShop &b2){
-        if (b1.getRating() == b2.getRating()){
-            return b1.getName() < b2.getName();
-        }
-        return b1.getRating() > b2.getRating();
-    });
-
-    for (int i = 0; i < stores.size(); i++){
-        stores[i].print();
+        it.retrieve().print();
         cout << endl;
+        it.advance();
     }
 }
 
@@ -176,5 +166,7 @@ void BStores::showStoresContemplated(float min, float max){
         if (it.retrieve().getRating() >= min && it.retrieve().getRating() <= max){
             it.retrieve().print();
         }
+        it.advance();
+        cout << endl;
     }
 }

@@ -224,3 +224,6 @@ vector<string> Info::getPreferences() const{
     return preferences;
 }
 
+void Info::setEmail(string email){
+    eMail=email;
+}

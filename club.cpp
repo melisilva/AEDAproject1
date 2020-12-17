@@ -468,6 +468,7 @@ void Club::updatePerson() {
     }
     cout << "Indique o mail do frequentante: ";
     getline(cin, eMail);
+    updateTable(eMail);
 
     valid=false;
     while(!valid){
@@ -1345,6 +1346,26 @@ void Club::recordPeople(){
        }
        Preferences.insert(infotmp);
    }
+}
+
+void Club::updateTable(string email){
+    Info infotmp("");
+    for(auto& elem: Meminfo){
+        if(elem->getEmail()==email){
+            infotmp= Info(email);
+            for(auto& curinfo: Preferences){
+                if(curinfo.getEmail() == email){
+                    infotmp= curinfo;
+                    infotmp.setEmail(elem->getEmail());
+                    break;
+                }
+            }
+            Preferences.erase(email);
+            Preferences.insert(infotmp);
+            Meminfo.erase(find(Meminfo.begin(),Meminfo.end(),elem));
+            break;
+        }
+    }
 }
 
 void Club::checkDelays(){

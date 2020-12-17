@@ -25,6 +25,7 @@ public:
     Info(string email,vector<string>preferences);
     string getEmail() const;
     vector<string> getPreferences()const;
+    void setEmail(string email);
    };
 
 /**

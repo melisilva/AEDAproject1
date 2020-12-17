@@ -50,17 +50,13 @@ string BookShop::getData() const{
     return ss.str();
 }
 
-int BookShop::searchBook(string title,string author,int edition){
+bool BookShop::searchBook(string title,string author,int edition){
     for(int i=0;i<books.size();i++){
         if(books[i].getTitle() == title && books[i].getAuthor() == author && books[i].getEdition() ==edition){
-            return i;
+            return true;
         }
     }
-    return -1;
-}
-
-void BookShop::removeBook(int index){
-    books.erase(books.begin() + index);
+    return false;
 }
 
 void BookShop::print() const
@@ -72,6 +68,7 @@ void BookShop::print() const
     }
 
 }
+
 
 
 
@@ -115,22 +112,20 @@ void BStores::print() const
     }
 }
 
-bool BStores::sellBook(Book b,string store){
+float BStores::sellBook(Book b,string store){ //return price of the book wanted
     BSTItrIn<BookShop> it(shops);
-    bool exist=false;
-    int index;
+    float price;
     while(!it.isAtEnd()){
         auto test=it.retrieve();
            if(test.getName() == store){
-            index= test.searchBook(b.getTitle(),b.getAuthor(),b.getEdition());
-             if(index != -1){
-                 test.removeBook(index);
-                 return true;
-        }
+               if(test.searchBook(b.getTitle(),b.getAuthor(),b.getEdition())){
+                   price=test.getpromoValue()*b.getValue();
+               }
+              
         }
         it.advance();
     }
-    return false;
+    return -1;
 }
 
 vector<string> BStores::findBook(Book b){
@@ -139,7 +134,7 @@ vector<string> BStores::findBook(Book b){
     bool exist=false;
     while(!it.isAtEnd()){
         auto test=it.retrieve();
-        if(test.searchBook(b.getTitle(),b.getAuthor(),b.getEdition()) != -1){
+        if(test.searchBook(b.getTitle(),b.getAuthor(),b.getEdition())){
             stores.push_back(test.getName());
         }
         it.advance();
@@ -150,7 +145,6 @@ vector<string> BStores::findBook(Book b){
 void BStores::showStoresByRating(){
     BST<BookShop> temp = shops;
     BSTItrIn<BookShop> it(temp);
-    vector<BookShop> stores;
     
     while (!it.isAtEnd()){
         it.retrieve().print();
@@ -168,5 +162,18 @@ void BStores::showStoresContemplated(float min, float max){
         }
         it.advance();
         cout << endl;
+    }
+}
+
+void BStores::showStoresbySpecificBook(Book b){
+    BST<BookShop> temp=shops;
+    BSTItrIn<BookShop> it(temp);
+    bool exist=false;
+    while(!it.isAtEnd()){
+        auto test=it.retrieve();
+        if(test.searchBook(b.getTitle(),b.getAuthor(),b.getEdition())){
+            it.retrieve().print();
+        }
+        it.advance();
     }
 }

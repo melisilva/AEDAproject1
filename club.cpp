@@ -1596,13 +1596,17 @@ bool Club::buyBook(int code){
         }
         }
         id_shop-=1;
-        if(b.sellBook(catalog.books[id],stores[id_shop])){
+        float price=b.sellBook(catalog.books[id],stores[id_shop]);
+    }
+      /*  if(price != -1){
+            
             return true;
         }
         else{
             return false;
         }
-    }
+    }*/
+    return true;
 }
 
 void Club::saveData(){

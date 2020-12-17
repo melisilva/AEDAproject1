@@ -322,8 +322,44 @@ void Club::run(){
             showShopsBySpecificBook();
         }
         if(input == "BUY_L"){
-            valid=true;
-            buyBook(-1);
+            bool valid;
+            string nif_s;
+            int nif;
+            cout<<"Insira um NIF para proceder: ";
+            while(!valid){
+                getline(cin,nif_s);
+                if(isdigit(nif_s[0])){
+                    nif=stoi(nif_s);
+                    valid=true;
+                }
+                else{
+                    valid=false;
+                    colorText('C');
+                    cout<<"Por favor, indique um NIF válido (número de 9 algarismos)."<<endl;
+                    colorText('F');
+                }
+            }
+            try{
+            buyBook(nif,-1);
+            }
+            catch(NIFDoesNotExist(nif)){
+                colorText('C');
+                cout<< "ERRO: Nenhum frequentante possui "<<nif.getInfo() << " como NIF." <<endl;
+                colorText('F');
+            }
+
+catch(NotAMember(nif)){
+                colorText('C');
+                cout << "ERRO: Renovar empréstimos é exclusivo para Membros do Clube. O NIF "<<nif.getInfo()<<" não identifica um Membro."<< endl;
+                colorText('F');
+            }
+
+catch(NegativeBalance(nif)){
+                colorText('C');
+                cout<< "ERRO: O frequentante "<<nif.getInfo()<<" não consegue pagar a taxa indicada, pois possui um balanço negativo."<<endl;
+                colorText('F');
+            }
+
         }
         if(!valid && (input != "end" && input != "END")){
             colorText('C');
@@ -1581,8 +1617,15 @@ bool Club::makeRequest() {
 
 }
 
-bool Club::buyBook(int code){
+bool Club::buyBook(int nif,int code){
+    if(isMember(nif)==isnonMem(nif)){
+        throw NIFDoesNotExist(nif);
+    }
+    if(isMember(nif) == -1){
+        throw NotAMember(nif);
+    }
     string code_str,shop_str;
+    float price;
     bool valid;
     int id,id_shop;
     vector<string>stores;
@@ -1653,17 +1696,21 @@ bool Club::buyBook(int code){
         }
         }
         id_shop-=1;
-        float price=b.sellBook(catalog.books[id],stores[id_shop]);
+        price=b.sellBook(catalog.books[id],stores[id_shop]);
     }
-      /*  if(price != -1){
-            
-            return true;
+        if(price != -1){
+            if(members[isMember(nif)].getBalance()-price<=0){
+                throw NegativeBalance(nif);
+            }
+            else{
+                members[isMember(nif)].minusBalance(price);
+                return true;
+            }
         }
         else{
             return false;
         }
-    }*/
-    return true;
+        return false;
 }
 
 void Club::saveData(){
@@ -2200,10 +2247,9 @@ void Club::retrieveData(){
             preferences.push_back(temp);
             getline(prefs_file, temp);
             preferences.push_back(temp);
-            preference pref_temp;
-            pref_temp.eMail = eMail;
-            pref_temp.preferences = preferences;
+            Info info_temp(eMail,preferences);
             //add pref_temp to the hashtable!
+            recordPeople();
             getline(prefs_file, temp);
         }
     }

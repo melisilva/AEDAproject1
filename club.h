@@ -249,7 +249,7 @@ public:
     */
     void colorText(char ch); //add color to the interface
 
-    bool buyBook(int code);
+    bool buyBook(int nif,int code);
 
     void showShopsByRating();
 

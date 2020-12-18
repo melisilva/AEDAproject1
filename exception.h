@@ -223,7 +223,7 @@ public:
      * Function that returns the email at the core of the exception.
      * @return: the string representing the never-before-seen email.
     */
-    int getInfo(){
+    string getInfo(){
         return this->email;
     }
 

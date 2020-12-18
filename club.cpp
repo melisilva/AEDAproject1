@@ -1349,6 +1349,21 @@ void Club::recordPeople(){
    }
 }
 
+
+/*
+void Club::updateTable(string oldEmail, string newEmail){
+    Info infotmp("");
+    for(auto it = Preferences.begin(); it != Preferences.end(); it++){
+        if (it->getEmail() == oldEmail){
+            Info temp = *it;
+            Preferences.erase(oldEmail);
+            temp.setEmail(newEmail);
+            Preferences.insert(temp);
+        }
+    }
+}
+*/
+
 void Club::updateTable(string oldemail, string newemail){
     Info infotmp("");
     for(auto& elem: Meminfo){
@@ -2019,7 +2034,7 @@ void Club::retrieveData(){
     //Getting nonMembers data.
     if(!(empty)){
         temp = "BEGIN";
-        string name, eMail;
+        string name;
         int nif, code;
         float balance;
         while (temp != "END"){
@@ -2028,11 +2043,6 @@ void Club::retrieveData(){
             nmembs.clear();
             nmembs << temp;
             nmembs >> name;
-            getline(nmemb_file, temp);
-            nmembs.str("");
-            nmembs.clear();
-            nmembs << temp;
-            nmembs >> eMail;
             getline(nmemb_file, temp);
             nmembs.str("");
             nmembs.clear();

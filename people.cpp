@@ -204,7 +204,7 @@ string nonMem::getData() {
 
     stringstream temp;
 
-    temp << name << endl << eMail << endl << nif << endl << to_string(balance);
+    temp << name << endl << nif << endl << to_string(balance);
     return temp.str();
 }
 

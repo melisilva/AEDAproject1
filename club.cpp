@@ -321,6 +321,10 @@ void Club::run(){
             valid=true;
             showShopsBySpecificBook();
         }
+        if(input == "AT_PR"){
+            valid=true;
+            updatePreferences();
+        }
         if(input == "BUY_L"){
             bool valid;
             string nif_s;
@@ -400,6 +404,7 @@ void Club::help() {
     cout << " ADD_M: adicionar membro" << endl;
     cout << " REM_M: remover membro" << endl;
     cout << " ATL_P: atualizar frequentador (para adição de saldo, mudança de nome ou e-mail)" << endl;
+    cout << " AT_PR: atualizar preferências de um membro" << endl;
     cout << " SHO_M: mostrar membros" << endl;
     cout << " SHO_N: mostrar não-membros" << endl;
     cout << " SHO_1F: mostrar um frequentante" << endl;
@@ -1300,7 +1305,6 @@ void Club::showShopsByRating(){
     b.showStoresByRating();
 }
 
-
 void Club::showShopsBySpecificBook(){
     string code_str;
     int code,id;
@@ -1334,51 +1338,42 @@ void Club::showShopsBySpecificBook(){
 
 }
 
-void Club::recordPeople(){
-   Info infotmp("");
-   for(int i=0;i<Meminfo.size();i++){
-       infotmp=Info(Meminfo[i]->getEmail());
-       for(auto& curinfo: Preferences){
-           if(Meminfo[i]->getEmail()== curinfo.getEmail()){
-               infotmp=curinfo;
-               Preferences.erase(curinfo.getEmail());
-               break;
-           }
-       }
-       Preferences.insert(infotmp);
-   }
+void Club::updatePreferences(){
+    string eMail, temp;
+    cout << "Indique, por favor, o e-mail do membro: ";
+    getline(cin, eMail);
+
+    auto it = Preferences.find(eMail);
+
+    if (it == Preferences.end()){
+        //throw a tantrum
+    } else {
+        it->printPreferences();
+        vector<string> preferences = it->getPreferences();
+        string eMail = it->getEmail();
+
+        cout << endl << "Indique, do primeiro ao último lugar, as suas novas preferências abaixo." << endl;
+        cout << "Se desejar que uma preferência fique vazia, introduza ASE - A Ser Escolhido - no seu lugar." << endl << endl;
+
+        for (int i = 0; i < preferences.size(); i++){
+            cout << i + 1 << "º LUGAR: ";
+            getline(cin, temp);
+            preferences[i] = temp;
+        }
+
+        Preferences.erase(it);
+        Info tempInf(eMail, preferences);
+        Preferences.insert(tempInf);
+    }
 }
 
-
-/*
 void Club::updateTable(string oldEmail, string newEmail){
-    Info infotmp("");
     for(auto it = Preferences.begin(); it != Preferences.end(); it++){
         if (it->getEmail() == oldEmail){
             Info temp = *it;
             Preferences.erase(oldEmail);
             temp.setEmail(newEmail);
             Preferences.insert(temp);
-        }
-    }
-}
-*/
-
-void Club::updateTable(string oldemail, string newemail){
-    Info infotmp("");
-    for(auto& elem: Meminfo){
-        if(elem->getEmail()==newemail){
-            infotmp= Info(newemail);
-            for(auto& curinfo: Preferences){
-                if(curinfo.getEmail() == oldemail){
-                    infotmp= curinfo;
-                    infotmp.setEmail(elem->getEmail());
-                    break;
-                }
-            }
-            Preferences.erase(oldemail);
-            Preferences.insert(infotmp);
-            break;
         }
     }
 }
@@ -1626,13 +1621,11 @@ bool Club::makeRequest() {
     } else { //it's not a member then it's a nonMem
         while (true) {
             if (isnonMem(nif) == -1) {
-                string namem, eMail;
+                string namem;
                 cout << "Introduza o nome, por favor: ";
                 getline(cin, namem);
-                cout << "Introduza o seu eMail, por favor: ";
-                getline(cin, eMail);
                 float balance = 50;
-                nonMem* p = new nonMem(namem, eMail, nif, balance);
+                nonMem* p = new nonMem(namem, nif, balance);
                 (*p).registerRequest(code, today);
                 nonmembers.push_back((*p));
                 break;
@@ -1849,7 +1842,16 @@ void Club::saveData(){
 
     fileeeeeeee << endl << "END";
 
-    //iterating the hashtable to save all things!
+    for (auto it = Preferences.begin(); it != Preferences.end(); it++){
+        file9 << it->getEmail() << endl;
+        vector<string> prefs = it->getPreferences();
+        for (int i = 0; i < prefs.size(); i++){
+            file9 << prefs[i] << endl;
+        }
+        file9 << endl;
+    }
+
+    file9 << "END";
 }
 
 void Club::retrieveData(){
@@ -2053,7 +2055,7 @@ void Club::retrieveData(){
             nmembs.clear();
             nmembs << temp;
             balance = stof(temp);
-            nonmembers.push_back(nonMem(name, eMail, nif, balance));
+            nonmembers.push_back(nonMem(name, nif, balance));
             getline(nmemb_file, temp);
             nmembs.str("");
             nmembs.clear();
@@ -2259,14 +2261,15 @@ void Club::retrieveData(){
         }
     }
 
+    //Getting preferences data.
     empty = false;
     empty = prefs_file.peek() == std::ifstream::traits_type::eof();
 
     if (!empty){
         string temp, eMail;
+        getline(prefs_file, temp);
         while (temp != "END") {
             vector<string> preferences;
-            getline(prefs_file, temp);
             eMail = temp;
             getline(prefs_file, temp);
             preferences.push_back(temp);
@@ -2279,8 +2282,8 @@ void Club::retrieveData(){
             getline(prefs_file, temp);
             preferences.push_back(temp);
             Info info_temp(eMail,preferences);
-            //add pref_temp to the hashtable!
-            recordPeople();
+            Preferences.insert(info_temp);
+            getline(prefs_file, temp);
             getline(prefs_file, temp);
         }
     }

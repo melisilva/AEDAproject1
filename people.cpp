@@ -16,9 +16,8 @@ Member::Member(string &name, string &eMail, int &nif, vector<Book> &books, float
     this->balance = balance;
 }
 
-nonMem::nonMem(string &name, string &eMail, int &nif, float &balance) : Member() {
+nonMem::nonMem(string &name, int &nif, float &balance) : Member() {
     this->name = name;
-    this->eMail = eMail;
     this->nif = nif;
     this->balance = balance;
 }
@@ -226,4 +225,10 @@ vector<string> Info::getPreferences() const{
 
 void Info::setEmail(string email){
     eMail=email;
+}
+
+void Info::printPreferences() const{
+    for (int i = 0; i < preferences.size(); i++){
+        cout << i + 1 << "º LUGAR: " << preferences[i] << endl;
+    }
 }

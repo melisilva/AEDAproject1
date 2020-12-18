@@ -26,6 +26,8 @@ public:
     string getEmail() const;
     vector<string> getPreferences()const;
     void setEmail(string email);
+    void printPreferences() const;
+    void setPreferences(vector<string> newPrefs);
    };
 
 /**
@@ -218,7 +220,6 @@ public:
  * @param lendRequest: vector with data from the frequentant's lending requests.
  * @param lendings: vector with data from the frequentant's current lendings.
  * @param name: string with the frequentant's name.
- * @param eMail: string swith the frequentant's e-mail address.
  * @param nif: integer number with the NIF of the frequentant.
  * @param balance: float number with the frequentant's associated balance.
 */
@@ -227,11 +228,10 @@ public:
     /**
      * Overloaded constructor for the derived nonMem class.
      * @param name: string specifying the nonMember's name.
-     * @param eMail: string specifying the nonMember's e-mail address.
      * @param nif: integer number specifying the non-member's NIF.
      * @param balance: float number specifying the non-member's balance.
     */
-    nonMem(string &name, string &eMail, int &nif, float &balance); 
+    nonMem(string &name, int &nif, float &balance); 
 
     /**
      * Redefinition of the getData function.

@@ -66,7 +66,6 @@ private:
     vector<tuple<int, Date, int>> lendings, delays, lendRequests;
     Catalog catalog;
     Date today;
-    vector<Info*> Meminfo;
     HashTablePeople Preferences;
     //BStores b;
 
@@ -251,15 +250,29 @@ public:
 
     bool buyBook(int nif,int code);
 
+    /**
+     * Prints all shops with an agreement with the Club from their highest to lowest rating. 
+    */
     void showShopsByRating();
 
+    /**
+     * Prints all shops with an agreement with the Club that have a rating in between a minimum and maximum value provided by user input.
+    */
     void showShopsInRange();
 
     void showShopsBySpecificBook();
 
-    void recordPeople();
+    /**
+     * Updates the table with a new e-mail address.
+     * @param oldEmail: the old e-mail address, to be deprecated but useful as a key before the change.
+     * @param newEmail: the new e-mail address.
+    */
+    void updateTable(string oldEmail, string newEmail);
 
-    void updateTable(string oldemail,string newemail);
+    /*
+    * Lets the user alter a member's preference. Asks for an e-mail address through input.
+    */
+    void updatePreferences();
 };
 
 #endif //AEDAPROJECT1_CLUB_H

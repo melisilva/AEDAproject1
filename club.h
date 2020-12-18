@@ -259,7 +259,7 @@ public:
 
     void recordPeople();
 
-    void updateTable(string email);
+    void updateTable(string oldemail,string newemail);
 };
 
 #endif //AEDAPROJECT1_CLUB_H

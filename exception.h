@@ -203,3 +203,28 @@ public:
 
 };
 
+/**
+ * Exception class for when the program tries to find an email that doesn't exist in the club.
+ * @param email: string containing said email.
+*/
+class EmailDoesNotExist{
+private:
+    string email;
+public:
+    /**
+     * Constructor for exception class EmailDoesNotExist.
+     * @param email: string containing said email.
+    */
+    EmailDoesNotExist(const string email){
+        this->email=email;
+    }
+
+    /**
+     * Function that returns the email at the core of the exception.
+     * @return: the string representing the never-before-seen email.
+    */
+    int getInfo(){
+        return this->email;
+    }
+
+};

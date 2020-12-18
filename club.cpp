@@ -323,7 +323,14 @@ void Club::run(){
         }
         if(input == "AT_PR"){
             valid=true;
+            try{
             updatePreferences();
+            }
+            catch(NIFDoesNotExist(email)){
+                colorText('C');
+                cout<< "ERRO: Nenhum membro possui "<<email.getInfo() << " como email." <<endl;
+                colorText('F');
+            }
         }
         if(input == "BUY_L"){
             bool valid;
@@ -1344,7 +1351,7 @@ void Club::showShopsBySpecificBook(){
 
 }
 
-void Club::updatePreferences(){
+void Club::updatePreferences(){ //@Melissa: don't forget to do the input handling-->make hashTable for genre examples, don't die plz
     string eMail, temp;
     cout << "Indique, por favor, o e-mail do membro: ";
     getline(cin, eMail);
@@ -1352,7 +1359,7 @@ void Club::updatePreferences(){
     auto it = Preferences.find(eMail);
 
     if (it == Preferences.end()){
-        //throw a tantrum
+        throw EmailDoesNotExist(eMail);
     } else {
         it->printPreferences();
         vector<string> preferences = it->getPreferences();

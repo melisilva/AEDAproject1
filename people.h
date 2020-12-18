@@ -17,6 +17,11 @@ using namespace std;
 };
 */
 
+/**
+ * A class to save the member's preferences.
+ * @param eMail: a Member's e-mail address. Serves as a key in the hashtable.
+ * @param preferences: a string vector with the member's preferences. 
+*/
 class Info {
     string eMail;
     vector<string> preferences;
@@ -26,7 +31,16 @@ public:
     string getEmail() const;
     vector<string> getPreferences()const;
     void setEmail(string email);
+
+    /**
+     * Outputs the member's preferences.
+    */
     void printPreferences() const;
+
+    /**
+     * Updates a member's preferences.
+     * @param newPrefs: string vector representing the member's new preferences.
+    */
     void setPreferences(vector<string> newPrefs);
    };
 

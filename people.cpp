@@ -199,6 +199,10 @@ string Member::getEmail() const{
     return eMail;
 }
 
+void Member::setEmail(string eMail) {
+    this->eMail = eMail;
+}
+
 string nonMem::getData() {
 
     stringstream temp;

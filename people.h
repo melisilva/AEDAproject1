@@ -181,6 +181,13 @@ public:
     void setNif(int nif);
 
     /**
+     * Function that sets the Member's e-mail attribute with the e-mail provided in the function's argument. Isn't used in the nonMem class.
+     * @param eMail: string specifying the Member's e-mail address.
+    */
+    virtual void setEmail(string eMail);
+
+
+    /**
      * Function that outputs the contents of the Member's lend request. Works just the same in the nonMem class. Works just the same in the nonMem class.
      * @return: true if there's data to be outputed (the size of the lendRequest attribute isn't 0), false otherwise.
     */

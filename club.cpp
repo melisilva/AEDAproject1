@@ -1049,12 +1049,14 @@ void Club::addBook(int nif = 0){
 }
 
 void Club::addMember(){
-    string name = "", answer, title, author, nif_s, edition_s, code_s, category;
+    string name = "", eMail, answer, title, author, nif_s, edition_s, code_s, category;
     int nif, edition, code;
     Member* mem = new Member;
     bool valid=false;
     cout<<"Introduza o nome, por favor: ";
     getline(cin,name);
+    cout << "Introduza o e-mail, por favor: ";
+    getline(cin, eMail);
     cout << endl;
     (*mem).setName(name);
     while(!valid){
@@ -1079,14 +1081,18 @@ void Club::addMember(){
         }
     }
     (*mem).setNif(nif);
+    (*mem).setEmail(eMail);
     members.push_back((*mem));
     cout << "Adicione um livro, por favor!" << endl << endl;
     do {
         addBook(nif);
         cout << "Quer adicionar outro livro? ";
         getline(cin,answer);
-
     } while((answer=="S") || (answer=="Sim") || (answer=="sim") || (answer=="s"));
+    vector<string> tempPreferences(5, "ASE");
+    Info tempInf(eMail, tempPreferences);
+    Preferences.insert(tempInf);
+    cout << "Todas as suas preferências estão marcadas como ASE - A Ser Escolhido." << endl << "Daqui em diante, é possível atualizá-las através do comando AT_PR." << endl;
 }
 
 bool Club::removeMember(int nif){
@@ -1154,7 +1160,7 @@ bool Club::removeMember(int nif){
         catalog.books.erase(catalog.books.begin() + indtoDel[i]);
     }
 
-
+    Preferences.erase(Preferences.find(members[index].getEmail()));
     members.erase(members.begin() + index);
     return true;
 }

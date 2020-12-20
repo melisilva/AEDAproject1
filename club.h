@@ -69,6 +69,8 @@ private:
     Date today;
     HashTablePeople Preferences;
     tabHstring Genres;
+    const vector<string> book_genres={ "ASE", "Comedy", "Comics", "Fantasy", "Graphic Novel","Health", "LGBTQIA","Memoir", "Mystery", "Non-Fiction",  "Play", "Poetry", "Recipes","Romance","Sci-fi", "Self-Help","Thriller","Young Adult"};
+
     //BStores b;
 
 public:

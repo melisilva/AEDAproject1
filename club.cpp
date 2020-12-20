@@ -18,7 +18,7 @@ Club::Club() {
 void Club::run(){
     string input = "";
     bool valid;
-
+    generateGenretable();
     retrieveData();
     beginningInfo();
     do {
@@ -327,7 +327,7 @@ void Club::run(){
             try{
             updatePreferences();
             }
-            catch(NIFDoesNotExist(email)){
+            catch(EmailDoesNotExist(email)){
                 colorText('C');
                 cout<< "ERRO: Nenhum membro possui "<<email.getInfo() << " como email." <<endl;
                 colorText('F');
@@ -1352,8 +1352,9 @@ void Club::showShopsBySpecificBook(){
 
 }
 
-void Club::updatePreferences(){ //@Melissa: don't forget to do the input handling-->make hashTable for genre examples, don't die plz
+void Club::updatePreferences(){ 
     string eMail, temp;
+    bool valid=false;
     cout << "Indique, por favor, o e-mail do membro: ";
     getline(cin, eMail);
 
@@ -1370,9 +1371,25 @@ void Club::updatePreferences(){ //@Melissa: don't forget to do the input handlin
         cout << "Se desejar que uma preferência fique vazia, introduza ASE - A Ser Escolhido - no seu lugar." << endl << endl;
 
         for (int i = 0; i < preferences.size(); i++){
+            while(!valid){
             cout << i + 1 << "º LUGAR: ";
             getline(cin, temp);
-            preferences[i] = temp;
+            if(Genres.find(temp) != Genres.end()){
+                cout<<"Hello"<<endl;
+                valid=true;
+                preferences[i] = temp;
+            }
+            else{
+                valid=false;
+                colorText('C');
+                cout<<"Por favor, indique um género literário válido. Escolha entre os seguintes: "<<endl;
+                for(int i=0;i<book_genres.size();i++){
+                    cout<<book_genres[i]<<endl;
+                }
+                colorText('F');
+            }
+            }
+            valid=false;
         }
 
         Preferences.erase(it);
@@ -2326,7 +2343,6 @@ void Club::showShopsInRange(){
 
 void Club::generateGenretable(){ 
     Genres.clear();
-    const vector<string> book_genres={ "ASE", "Comedy", "Comics", "Fantasy", "Graphic Novel","Health", "LGBTQIA","Memoir", "Mystery", "Non-Fiction",  "Play", "Poetry", "Recipes","Romance","Sci-fi", "Self-Help","Thriller","Young Adult"};
     for(int i=0;i<book_genres.size();i++){
         Genres.insert(book_genres[i]);
 

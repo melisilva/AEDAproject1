@@ -18,6 +18,7 @@ Club::Club() {
 void Club::run(){
     string input = "";
     bool valid;
+
     retrieveData();
     beginningInfo();
     do {
@@ -2321,6 +2322,15 @@ void Club::showShopsInRange(){
         }
     }
     b.showStoresContemplated(min, max);
+}
+
+void Club::generateGenretable(){ 
+    Genres.clear();
+    const vector<string> book_genres={ "ASE", "Comedy", "Comics", "Fantasy", "Graphic Novel","Health", "LGBTQIA","Memoir", "Mystery", "Non-Fiction",  "Play", "Poetry", "Recipes","Romance","Sci-fi", "Self-Help","Thriller","Young Adult"};
+    for(int i=0;i<book_genres.size();i++){
+        Genres.insert(book_genres[i]);
+
+    }
 }
 
 void Club::colorText(char ch)

@@ -32,6 +32,7 @@ struct PeopleHash {
 };
 */
 
+typedef unordered_set <string> tabHstring;
 
 struct PeopleHash {
     int operator()(const Info& ar) const {
@@ -67,6 +68,7 @@ private:
     Catalog catalog;
     Date today;
     HashTablePeople Preferences;
+    tabHstring Genres;
     //BStores b;
 
 public:
@@ -273,6 +275,8 @@ public:
     * Lets the user alter a member's preference. Asks for an e-mail address through input.
     */
     void updatePreferences();
+
+    void generateGenretable();
 };
 
 #endif //AEDAPROJECT1_CLUB_H

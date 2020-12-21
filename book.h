@@ -3,6 +3,7 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+#include "people.h"
 using namespace std;
 
 /**
@@ -28,6 +29,8 @@ class Book {
     float realRating, value, sumRating = 0;
     string title, author, category, writ_ops;
     bool state,multi;
+    typedef priority_queue<Member> HeapMember;
+    typedef priority_queue<nonMem> HeapnonMem;
 public:
     /**
      * Default constructor for the Book class.

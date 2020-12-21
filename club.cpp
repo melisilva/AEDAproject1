@@ -664,6 +664,12 @@ bool Club::makeLending() {
             colorText('F');
         }
     }
+    if(isMem!=-1){
+        members[isMember(nif)].addBooktaken();
+    }
+    else{
+        nonmembers[isnonMem(nif)].addBooktaken();
+    }
     return true;
 }
 

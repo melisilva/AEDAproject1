@@ -14,6 +14,7 @@ Member::Member(string &name, string &eMail, int &nif, vector<Book> &books, float
     this->nif = nif;
     this->books = books;
     this->balance = balance;
+    books_given=books.size();
 }
 
 nonMem::nonMem(string &name, int &nif, float &balance) : Member() {
@@ -90,6 +91,7 @@ void Member::addBook(Book &book){
     }else{
         books.push_back(book);
     }
+    addBookgiven();
 }
 
 bool Member::showLendRequests() const {
@@ -201,6 +203,14 @@ string Member::getEmail() const{
 
 void Member::setEmail(string eMail) {
     this->eMail = eMail;
+}
+
+void Member::addBookgiven(){
+    books_given++;
+}
+
+void Member::addBooktaken(){
+    books_taken++;
 }
 
 string nonMem::getData() {

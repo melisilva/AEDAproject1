@@ -59,7 +59,7 @@ protected:
     vector<pair<int, Date>> lendRequest, lendings;
     vector<Book> books;
     string name, eMail;
-    int nif;
+    int nif, books_given=0, books_taken=0;
     float balance;
 
 public:
@@ -75,6 +75,7 @@ public:
      * @param nif: integer number specifying the Member's NIF ("Número de Identificação Fiscal").
      * @param books: vector of Book class objects representing the books owned and offered by the member.
      * @param balance: float number representing the Member's "bank account" balance.
+     * 
     */
     Member(string &name, string &eMail, int &nif, vector<Book> &books, float &balance);
 
@@ -90,6 +91,10 @@ public:
      * @param quantity: integer number representing the value to be added to the balance attribute (float).
     */
     void addBalance(float quantity);
+
+    void addBookgiven();
+
+    void addBooktaken();
 
     /**
      * Function that searches for a book (with its code attribute equal to the "code" argument) and returns its position in the "books" vector attribute. Function is virtual to take into account that it's useless in the derived Member class nonMem.

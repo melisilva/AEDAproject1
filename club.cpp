@@ -1664,6 +1664,9 @@ bool Club::makeRequest() {
             throw NegativeBalance(nif);
         }
         members[isMember(nif)].registerRequest(code, today);
+        int id=catalog.searchBook(code);
+        catalog.books[id].loadHeapMember(members[isMember(nif)]);
+
     } else { //it's not a member then it's a nonMem
         while (true) {
             if (isnonMem(nif) == -1) {
@@ -1678,6 +1681,8 @@ bool Club::makeRequest() {
             } else {
                 if ((isnonMem(nif) != -1) && (nonmembers[isnonMem(nif)].getBalance() > 0)) {
                     nonmembers[isnonMem(nif)].registerRequest(code, today);
+                    int id=catalog.searchBook(code);
+                    catalog.books[id].loadHeapnonMem(nonmembers[isnonMem(nif)]);
                     break;
                 } else if (nonmembers[isnonMem(nif)].getBalance() <= 0) {
                     throw NegativeBalance(nif);

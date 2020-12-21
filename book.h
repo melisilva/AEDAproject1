@@ -267,6 +267,10 @@ public:
      * Function that sets the object from which it is called's multi attribute.
     */
     void setMulti();
+
+    void loadHeapMember(Member m);
+
+    void loadHeapnonMem(nonMem n);
 };
 
 #endif //AEDAPROJECT1_BOOK_H

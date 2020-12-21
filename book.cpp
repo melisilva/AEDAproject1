@@ -245,3 +245,12 @@ bool Book::operator==(Book b1){
 void Book::setOgunit(int oguni){
     this->oguni = oguni;
 }
+
+
+void Book::loadHeapMember(Member m){
+    pqMem.push(m);
+}
+
+void Book::loadHeapnonMem(nonMem n){
+    pqNMem.push(n);
+}

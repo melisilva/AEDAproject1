@@ -223,6 +223,9 @@ public:
 
     float getRatio();
 
+    bool operator>(Member& m1);
+
+
 };
 
 /**
@@ -248,6 +251,11 @@ public:
      * @return: string containing the non-member's data in string form.
     */
     string getData();
+
+    bool operator<(const nonMem& nm1) const;
+
+    int getBooksTaken();
+
 };
 
 

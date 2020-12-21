@@ -178,12 +178,25 @@ float Member::getRatio(){
     return ratio;
 }
 
+bool Member::operator>(Member& m1) {
+    return(getRatio() > m1.getRatio());
+}
+
+
 string nonMem::getData() {
 
     stringstream temp;
 
     temp << name << endl << nif << endl << to_string(balance);
     return temp.str();
+}
+
+int nonMem::getBooksTaken(){
+    return books_taken;
+}
+
+bool nonMem::operator<(const nonMem& nm1) const{
+    return(books_taken< nm1.books_taken);
 }
 
 Info::Info(string e):eMail(e){

@@ -651,7 +651,6 @@ bool Club::makeLending() {
         }
         if(catalog.books[index].getUnits()!=0){
             catalog.books[index].deleteUnit();
-            members[isMember(catalog.books[index].getOwner())].removeBook(members[isMember(catalog.books[index].getOwner())].findBook(code));
             lendings.push_back(make_tuple(get<0>(lendRequests[temp]), today, get<2>(lendRequests[temp])));
             lendRequests.erase(lendRequests.begin()+ i);
             nonmembers[pers].registerLending(code, today);
@@ -1057,7 +1056,6 @@ void Club::addBook(int nif = 0){
     int unit=1; int oguni=1;
     Book* b = new Book(code,title,author,category,edition, owner,unit,oguni);
     catalog.addBook((*b));
-    members[isMember(owner)].addBook((*b));
 }
 
 void Club::addMember(){
@@ -1114,7 +1112,12 @@ bool Club::removeMember(int nif){
 
 
     int index = isMember(nif);
-    vector<Book> toDelv = members[index].getBooks();
+    vector<Book> toDelv;
+    for(int i=0;i<catalog.books.size();i++){
+        if(catalog.books[i].getOwner() == nif){
+            toDelv.push_back(catalog.books[i]);
+        }
+    }
 
     for (int i = 0; i < toDelv.size(); i++){
         if (toDelv[i].getState() == false || toDelv[i].getMulti()==false){
@@ -1180,7 +1183,6 @@ bool Club::removeMember(int nif){
 void Club::removeBook(tuple<int, Date, int> lostBook) {
     float value = catalog.books[get<0>(lostBook)].getValue();
     int owner = isMember(catalog.books[get<0>(lostBook)].getOwner());
-    int index = members[owner].findBook(get<0>(lostBook));
 
     members[owner].addBalance(value);
 
@@ -1192,8 +1194,6 @@ void Club::removeBook(tuple<int, Date, int> lostBook) {
         members[perp].minusBalance(value);
     }
 
-
-    members[owner].removeBook(index);
     if (catalog.books[get<0>(lostBook)].getUnits() == 0) {
         vector<int> codes, codes2;
         int code;
@@ -1243,7 +1243,13 @@ void Club::removeBook(tuple<int, Date, int> lostBook) {
 void Club::showMembers(){
     for (int i = 0; i < members.size(); i++){
         cout << "Nome: " << members[i].getName() << endl << "NIF: "<< members[i].getNIF() << endl <<setprecision(2)<<members[i].getBalance()<<" euros"<<endl<< "Livros:" << endl;
-        vector<Book> books = members[i].getBooks();
+        vector<Book>books;
+        for(int i=0;i<catalog.books.size();i++){
+            if(catalog.books[i].getOwner() == members[i].getNIF()){
+                books.push_back(catalog.books[i]);
+            }
+        }
+
         for (int j = 0; j < books.size(); j++){
             cout << "   - " << books[j].getTitle() << " (" << books[j].getCode() << "), de " << books[j].getAuthor() << ", "<< books[j].getEdition() << " edicao" <<" (" << books[j].getRating() << "/5), do membro " << books[j].getOwner() <<", "<<books[j].getOguni()<<" unidades"<<endl << "Comentários do Livro: " << endl << books[j].getWritops();
         }
@@ -1263,7 +1269,12 @@ void Club::showFrequentant(int nif){
     }
     else{
         cout << "Nome: " << members[i1].getName() << endl << "NIF: "<< members[i1].getNIF() << endl <<setprecision(2)<<members[i1].getBalance()<<" euros"<<endl<< "Livros:" << endl;
-        vector<Book> books = members[i1].getBooks();
+       vector<Book>books;
+        for(int i=0;i<catalog.books.size();i++){
+            if(catalog.books[i].getOwner() == members[i].getNIF()){
+                books.push_back(catalog.books[i]);
+            }
+        }
         for (int j = 0; j < books.size(); j++){
             books[j].showBook(0);
         }
@@ -2025,7 +2036,6 @@ void Club::retrieveData(){
         int nif, code, books_taken, books_given;
         float balance;
         while (temp != "END"){
-            vector<Book> memb_bks;
             getline(memb_file, temp);
             membs.str("");
             membs.clear();
@@ -2063,10 +2073,9 @@ void Club::retrieveData(){
                 membs << temp;
                 membs >> code >> sep;
                 int ind = catalog.searchBook(code);
-                memb_bks.push_back(catalog.books[ind]);
             } while (sep != ';');
-            Member newMem(name, eMail, nif, memb_bks, balance);
-            newMem.setBooksGiven(books_given);
+            Member newMem(name, eMail, nif, balance,books_given);
+           //newMem.setBooksGiven(books_given);
             newMem.setBooksTaken(books_taken);
             members.push_back(newMem);
             getline(memb_file, temp);

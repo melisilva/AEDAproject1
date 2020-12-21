@@ -4,6 +4,7 @@
 #include <sstream>
 #include <iostream>
 #include <queue>
+#include "people.h"
 using namespace std;
 
 

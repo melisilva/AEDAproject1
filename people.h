@@ -1,6 +1,5 @@
 #ifndef AEDAPROJECT1_MEMBER_H
 #define AEDAPROJECT1_MEMBER_H
-#include "book.h"
 #include "date.h"
 #include <string>
 #include <vector>
@@ -48,7 +47,6 @@ public:
  * Class to represent members.
  * @param lendRequest: vector with data from the member's lending requests.
  * @param lendings: vector with data from the member's current lendings.
- * @param books: vector with the Book objects that represent the member's books.
  * @param name: string with the name of the member.
  * @param eMail: string with the e-mail address of the member.
  * @param nif: integer number with the NIF of the member.
@@ -57,10 +55,9 @@ public:
 class Member {
 protected:
     vector<pair<int, Date>> lendRequest, lendings;
-    vector<Book> books;
     string name, eMail;
     int nif, books_given=0, books_taken=0;
-    float balance;
+    float balance,ratio;
 
 public:
     /**
@@ -77,7 +74,7 @@ public:
      * @param balance: float number representing the Member's "bank account" balance.
      * 
     */
-    Member(string &name, string &eMail, int &nif, vector<Book> &books, float &balance);
+    Member(string &name, string &eMail, int &nif, float &balance, int books_given);
 
 
     /**
@@ -97,12 +94,6 @@ public:
     void addBooktaken();
 
     /**
-     * Function that searches for a book (with its code attribute equal to the "code" argument) and returns its position in the "books" vector attribute. Function is virtual to take into account that it's useless in the derived Member class nonMem.
-     * @param code: code of the book to be found in the books vector (integer).
-    */
-    virtual int findBook(int code) const;
-
-    /**
      * Function that returns the Member's relevant data in string form for the file records. Function is virtual to take the derived Member class nonMem into account.
      * @return: the Member's data (string).
     */
@@ -119,12 +110,6 @@ public:
      * @return: the name attribute's value (string).
     */
     string getName() const;
-
-    /**
-     * Returns the Member's books vector attribute. Declared virtual to take the nonMem class, where the function isn't needed.
-     * @return: the books vector attribute (vector<Book>).
-    */
-    virtual vector<Book> getBooks() const;
 
     /**
      * Returns the Member's balance attribute. Works just the same for the nonMem class.
@@ -167,11 +152,6 @@ public:
     */
     virtual void renovateLending(int code, Date date);
 
-    /**
-     * Function that removes a book from a Member's books vector attribute. Declared virtual as it's not required in nonMem.
-     * @param code: integer number specifying the to-be-removed-book's code.
-    */
-    virtual void removeBook(int index);
 
     /**
      * Function that sets the Member's name attribute with the name provided in the function's argument. Works just the same in the nonMem class.
@@ -219,10 +199,6 @@ public:
     */
     void showLendings() const;
 
-    /**
-     * Function that outputs a Member's books vector attribute. Declared virtual as it's not required for nonMem objects.
-    */
-    virtual void showBooks() const;
 
     /**
      * Function that updates a member's data (either their name, balance or both). Works just the same for the nonMem class.
@@ -245,11 +221,8 @@ public:
     */
     void finishRequest(int code);
 
-    /**
-     * Function that adds a book to a Member's books vector attribute. Declared virtual as it's not needed in the nonMem class.
-     * @param book: the Book to be added to the books vector.
-    */
-    virtual void addBook(Book &book);
+    float getRatio();
+
 };
 
 /**

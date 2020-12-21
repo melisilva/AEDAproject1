@@ -8,14 +8,13 @@ Member::Member(){
     balance = 50;
 }
 
-Member::Member(string &name, string &eMail, int &nif, vector<Book> &books, float &balance) {
+Member::Member(string &name, string &eMail, int &nif, float &balance, int books_given) {
     this->name = name;
     this->eMail = eMail;
     this->nif = nif;
-    this->books = books;
     this->balance = balance;
-    books_given=books.size();
     books_taken = 0;
+    this->books_given=books_given;
 }
 
 nonMem::nonMem(string &name, int &nif, float &balance) : Member() {
@@ -52,47 +51,10 @@ string Member::getName() const {
     return name;
 }
 
-vector<Book> Member::getBooks() const {
-    return books;
-}
-
-int Member::findBook(int code) const{
-    for (int i = 0; i < books.size(); i++){
-        if (code == books[i].getCode()){
-            return i;
-        }
-        continue;
-    }
-    return -1;
-}
-
-void Member::removeBook(int index) {
-    if(books[index].getUnits()>1){
-        books[index].deleteUnit();
-    }
-    else{
-        books.erase(books.begin()+index);
-    }
-}
 
 bool Member::registerRequest(int code, Date date){
     lendRequest.push_back(make_pair(code, date));
     return true;
-}
-
-void Member::addBook(Book &book){
-    if(books.size()!=0){
-        vector<Book>::iterator it=find(books.begin(),books.end(),book);
-        if(it==books.end()){
-            books.push_back(book);
-        }
-        else{
-            it->addUnits();
-        }
-    }else{
-        books.push_back(book);
-    }
-    addBookgiven();
 }
 
 bool Member::showLendRequests() const {
@@ -112,19 +74,9 @@ void Member::showData() const {
 
     temp << "Nome: " << name << endl << "NIF: " << nif << endl;
 
-
-    showBooks();
-
     showLendRequests();
 
     showLendings();
-}
-
-void Member::showBooks() const {
-    cout << "Livros de " << getName() << ": " << endl;
-    for (int i = 0; i < books.size(); i++){
-        books[i].showBook(0);
-    }
 }
 
 void Member::showLendings() const {
@@ -144,13 +96,7 @@ string Member::getData() {
     stringstream temp;
 
     temp << name << endl << eMail << endl << nif << endl << books_given << endl << books_taken << endl << to_string(balance) << endl;
-    for (int i = 0; i < books.size(); i++){
-        if (i < books.size() - 1 ) {
-            temp << books[i].getCode() << "," << endl;
-        } else if (i == books.size() - 1){
-            temp << books[i].getCode() << ";";
-        }
-    }
+    
     return temp.str();
 }
 
@@ -220,6 +166,16 @@ void Member::setBooksGiven(int given){
 
 void Member::setBooksTaken(int taken){
     this->books_taken = taken;
+}
+
+float Member::getRatio(){
+    if(books_taken==0){
+        ratio=books_given;
+    }
+    else{
+        ratio=(books_given)/(books_taken);
+    }
+    return ratio;
 }
 
 string nonMem::getData() {

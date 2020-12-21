@@ -3,8 +3,12 @@
 #include <string>
 #include <sstream>
 #include <iostream>
-#include "people.h"
+#include <queue>
 using namespace std;
+
+
+typedef priority_queue<Member> HeapMember;
+typedef priority_queue<nonMem> HeapNonMem;
 
 /**
  * Class to represent books.
@@ -29,8 +33,8 @@ class Book {
     float realRating, value, sumRating = 0;
     string title, author, category, writ_ops;
     bool state,multi;
-    typedef priority_queue<Member> HeapMember;
-    typedef priority_queue<nonMem> HeapnonMem;
+    HeapMember pqMem;
+    HeapNonMem pqNMem;
 public:
     /**
      * Default constructor for the Book class.

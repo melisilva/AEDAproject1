@@ -667,9 +667,7 @@ bool Club::makeLending() {
     if(isMem!=-1){
         members[isMember(nif)].addBooktaken();
     }
-    else{
-        nonmembers[isnonMem(nif)].addBooktaken();
-    }
+    
     return true;
 }
 
@@ -2024,7 +2022,7 @@ void Club::retrieveData(){
     if(!(empty)){
         temp = "BEGIN";
         string name, eMail;
-        int nif, code;
+        int nif, code, books_taken, books_given;
         float balance;
         while (temp != "END"){
             vector<Book> memb_bks;
@@ -2047,6 +2045,16 @@ void Club::retrieveData(){
             membs.str("");
             membs.clear();
             membs << temp;
+            membs >> books_given;
+            getline(memb_file, temp);
+            membs.str("");
+            membs.clear();
+            membs << temp;
+            membs >> books_taken;
+            getline(memb_file, temp);
+            membs.str("");
+            membs.clear();
+            membs << temp;
             balance = stof(temp);
             do {
                 getline(memb_file, temp);
@@ -2057,7 +2065,10 @@ void Club::retrieveData(){
                 int ind = catalog.searchBook(code);
                 memb_bks.push_back(catalog.books[ind]);
             } while (sep != ';');
-            members.push_back(Member(name, eMail, nif, memb_bks, balance));
+            Member newMem(name, eMail, nif, memb_bks, balance);
+            newMem.setBooksGiven(books_given);
+            newMem.setBooksTaken(books_taken);
+            members.push_back(newMem);
             getline(memb_file, temp);
             membs.str("");
             membs.clear();

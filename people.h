@@ -191,6 +191,17 @@ public:
     */
     virtual void setEmail(string eMail);
 
+    /**
+     * Function that sets the Member's books_given attribute with the number provided in the function's argument. Isn't used in the nonMem class.
+     * @param given: integer number for the number of given books.
+    */
+    virtual void setBooksGiven(int given);
+
+    /**
+     * Function that sets the Member's books_taken attribute with the number provided in the function's argument. Isn't used in the nonMem class.
+     * @param given: integer number for the number of taken books.
+    */
+    void setBooksTaken(int taken);
 
     /**
      * Function that outputs the contents of the Member's lend request. Works just the same in the nonMem class. Works just the same in the nonMem class.

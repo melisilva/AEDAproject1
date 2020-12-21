@@ -15,6 +15,7 @@ Member::Member(string &name, string &eMail, int &nif, vector<Book> &books, float
     this->books = books;
     this->balance = balance;
     books_given=books.size();
+    books_taken = 0;
 }
 
 nonMem::nonMem(string &name, int &nif, float &balance) : Member() {
@@ -142,7 +143,7 @@ string Member::getData() {
 
     stringstream temp;
 
-    temp << name << endl << eMail << endl << nif << endl << to_string(balance) << endl;
+    temp << name << endl << eMail << endl << nif << endl << books_given << endl << books_taken << endl << to_string(balance) << endl;
     for (int i = 0; i < books.size(); i++){
         if (i < books.size() - 1 ) {
             temp << books[i].getCode() << "," << endl;
@@ -211,6 +212,14 @@ void Member::addBookgiven(){
 
 void Member::addBooktaken(){
     books_taken++;
+}
+
+void Member::setBooksGiven(int given){
+    this->books_given = given;
+}
+
+void Member::setBooksTaken(int taken){
+    this->books_taken = taken;
 }
 
 string nonMem::getData() {

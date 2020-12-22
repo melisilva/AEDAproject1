@@ -4,6 +4,7 @@
 #include <sstream>
 #include <iostream>
 #include <queue>
+#include <algorithm>
 #include "people.h"
 using namespace std;
 
@@ -36,6 +37,8 @@ class Book {
     bool state,multi;
     HeapMember pqMem;
     HeapNonMem pqNMem;
+    vector<Member>members;
+    vector<nonMem>nonmembers;
 public:
     /**
      * Default constructor for the Book class.

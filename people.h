@@ -229,6 +229,8 @@ public:
 
     void showDetails() const;
 
+    bool operator==(const Member& m1)const;
+
 
 };
 

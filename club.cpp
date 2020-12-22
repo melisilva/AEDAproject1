@@ -1105,6 +1105,7 @@ void Club::addBook(int nif = 0){
     int unit=1; int oguni=1;
     Book* b = new Book(code,title,author,category,edition, owner,unit,oguni);
     catalog.addBook((*b));
+    members[isMember(owner)].addBookgiven();
 }
 
 void Club::addMember(){

@@ -249,10 +249,12 @@ void Book::setOgunit(int oguni){
 
 void Book::loadHeapMember(Member m){
     pqMem.push(m);
+    members.push_back(m);
 }
 
 void Book::loadHeapnonMem(nonMem n){
     pqNMem.push(n);
+    nonmembers.push_back(n);
 }
 
 HeapMember Book::getHeapM(){
@@ -264,27 +266,27 @@ HeapNonMem Book::getHeapNM(){
 }
 
 bool Book::checkMember(Member m){
-    bool found=false;
-    HeapMember test= getHeapM();
-    while(!test.empty() || !found){
-        if(test.top().getNIF() == m.getNIF()){
-            found=true;
-        }
-        test.pop();
-    }
-    return found;
+    bool found;
+   vector<Member>::iterator it=find(members.begin(),members.end(),m);
+   if(it!=members.end()){
+       found=true;
+   }
+   else{
+       found=false;
+   }
+   return found;
 }
 
 bool Book::checknonMem(nonMem n){
-    bool found=false;
-    HeapNonMem test= getHeapNM();
-    while(!test.empty() || !found){
-        if(test.top().getNIF() == n.getNIF()){
-            found=true;
-        }
-        test.pop();
-    }
-    return found;
+    bool found;
+    vector<nonMem>::iterator it=find(nonmembers.begin(),nonmembers.end(),n);
+   if(it!=nonmembers.end()){
+       found=true;
+   }
+   else{
+       found=false;
+   }
+   return found;
 }
 
 bool Book::deleteHeapM(Member m){

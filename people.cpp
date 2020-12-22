@@ -203,6 +203,10 @@ string nonMem::getData() {
     return temp.str();
 }
 
+bool Member::operator==(const Member& m1)const{
+    return(getNIF() == m1.getNIF());
+}
+
 int nonMem::getBooksTaken() const{
     return books_taken;
 }

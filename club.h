@@ -233,7 +233,9 @@ public:
     /**
      * Function that outputs all the Club's registered (and non-finished) lending requests.
     */
-    void showLendRequests();
+    void showQueues();
+
+    void showPersonRequests(int nif);
 
     /**
      * Function that saves all the Club's data in files.
@@ -274,11 +276,17 @@ public:
     void updateTable(string oldEmail, string newEmail);
 
     /*
-    * Lets the user alter a member's preference. Asks for an e-mail address through input.
+    * Lets the user change a member's preference. Asks for an e-mail address through input.
     */
     void updatePreferences();
 
     void generateGenretable();
+
+    void givenuponBook(int nif);
+
+    //nif to know who's the cause of the update
+    void updateHeap(int nif);
+
 };
 
 #endif //AEDAPROJECT1_CLUB_H

@@ -317,7 +317,7 @@ bool Book::deleteHeapM(Member m){
 }
 
 bool Book::deleteHeapNM(nonMem n){
-vector<nonMem> notDel;
+    vector<nonMem> notDel;
     bool found=false;
     while(!found){
         if(pqNMem.top().getNIF() != n.getNIF()){

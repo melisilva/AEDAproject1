@@ -66,10 +66,68 @@ void Club::run(){
                 colorText('F');
             }
         }
+        if(input == "GU_L"){
+            string nif_s;
+            int nif;
+            cout<<"Insira um NIF para proceder: ";
+            while(!valid){
+                getline(cin,nif_s);
+                if(isdigit(nif_s[0])){
+                    nif=stoi(nif_s);
+                    valid=true;
+                }
+                else{
+                    valid=false;
+                    colorText('C');
+                    cout<<"Por favor, indique um NIF válido (número de 9 algarismos)."<<endl;
+                    colorText('F');
+                }
+            }
+            try{
+                givenuponBook(nif);
+            }
+            catch(NIFDoesNotExist(nif)){
+                colorText('C');
+                cout<< "ERRO: Nenhum frequentante possui "<<nif.getInfo() << " como NIF." <<endl;
+                colorText('F');
+            }
+            catch(RequestDoesNotExist(code)){
+                colorText('C');
+                cout << "ERRO: O pedido especificado pelos dados ("<<code.getInfo().first<<", "<<code.getInfo().second<<") não existe." << endl;
+                colorText('F');
+            }
+
+        }
         if (input == "ATL_P"){
             valid=true;
             try{
                 updatePerson();
+            }
+            catch(NIFDoesNotExist(nif)){
+                colorText('C');
+                cout<< "ERRO: Nenhum frequentante possui "<<nif.getInfo() << " como NIF." <<endl;
+                colorText('F');
+            }
+        }
+        if(input == "SP_P"){
+            string nif_s;
+            int nif;
+            cout<<"Insira um NIF para proceder: ";
+            while(!valid){
+                getline(cin,nif_s);
+                if(isdigit(nif_s[0])){
+                    nif=stoi(nif_s);
+                    valid=true;
+                }
+                else{
+                    valid=false;
+                    colorText('C');
+                    cout<<"Por favor, indique um NIF válido (número de 9 algarismos)."<<endl;
+                    colorText('F');
+                }
+            }
+            try{
+                showPersonRequests(nif);
             }
             catch(NIFDoesNotExist(nif)){
                 colorText('C');
@@ -302,9 +360,10 @@ void Club::run(){
             valid=true;
             showNonMembers();
         }
-        if (input == "SHO_P"){
+        if (input == "SHO_Q"){
             valid=true;
-            showLendRequests();
+           // showLendRequests();
+           showQueues();
         }
         if (input == "SHO_L"){
             valid=true;
@@ -425,13 +484,15 @@ void Club::help() {
     cout << " LOSS: perda de livro" << endl;
     cout << " REG_P: registar pedido" << endl;
     cout << " MK_L: fazer/iniciar empréstimo" << endl;
+    cout << " GU_L: desistir de um empréstimo"<<endl;
     cout << " END_L: finalizar empréstimo" << endl;
     cout << " REN_L: renovar empréstimo" << endl;
     cout << " SHO_L: mostrar livros" << endl;
     cout << " SHO_1L: mostrar um livro" << endl;
     cout << " SHO_E: mostrar empréstimos" << endl;
     cout << " SHO_A: mostrar atrasos" << endl;
-    cout << " SHO_P: mostrar pedidos" << endl;
+    //cout << " SHO_P: mostrar pedidos" << endl;
+    cout << "SHO_Q: mostrar filas de espera para cada livro"<<endl;
     cout << endl;
     colorText('D');
     cout << " --- PROTOCOLOS AO NÍVEL DO SICL --- " << endl;
@@ -566,7 +627,12 @@ bool Club::makeLending() {
         id = catalog.searchBook(code);
         if(id==-1){
             valid=false;
-            showLendRequests();
+             if(isMember(nif)!=-1){
+                members[isMember(nif)].showLendRequests();
+            }
+            else{
+                nonmembers[isnonMem(nif)].showLendRequests();
+            }
         }
     }
 
@@ -630,6 +696,7 @@ bool Club::makeLending() {
                         members[pers].registerLending(code, today);
                         members[pers].finishRequest(code);
                         members[pers].addBooktaken();
+                        updateHeap(nif);
                     }
                     else{
                         colorText('C');
@@ -698,6 +765,7 @@ bool Club::makeLending() {
                     nonmembers[pers].registerLending(code, today);
                     nonmembers[pers].finishRequest(code);
                     nonmembers[pers].addBooktaken();
+                    updateHeap(nif);
                     chargeFee(pers, catalog.books[index]);
         }
         else{
@@ -1106,6 +1174,8 @@ void Club::addBook(int nif = 0){
     Book* b = new Book(code,title,author,category,edition, owner,unit,oguni);
     catalog.addBook((*b));
     members[isMember(owner)].addBookgiven();
+    members[isMember(owner)].calculateRatio();
+    updateHeap(owner);
 }
 
 void Club::addMember(){
@@ -1206,17 +1276,8 @@ bool Club::removeMember(int nif){
     for (int i = 0; i < toDelv.size(); i++){
         for(int k=0;k<catalog.books.size();k++){
             if(catalog.books[k]==toDelv[i]){
+                catalog.books[k].deleteHeapM(members[index]);
                 indtoDel.push_back(k);
-            }
-        }
-        for(int j=0;j<lendRequests.size();j++){
-            if (get<0>(lendRequests[j]) ==(toDelv[i]).getCode()) {
-                lendRequests.erase(lendRequests.begin()+j);
-            }else
-            {
-                if(get<2>(lendRequests[j])==nif){
-                    lendRequests.erase(lendRequests.begin()+j);
-                }
             }
         }
     }
@@ -1357,7 +1418,7 @@ void Club::showNonMembers(){
     }
 }
 
-void Club::showLendRequests() {
+void Club::showQueues() {
     int counter=1;
     for(unsigned int i=0;i<catalog.books.size();i++){
         cout<<"Lista de espera do livro: ";
@@ -1383,6 +1444,18 @@ void Club::showLendRequests() {
         cout << get<0>(lendRequests[i]) << ", a " << get<1>(lendRequests[i]).getDateStr()<< " pelo " << get<2>(lendRequests[i]) << endl;
     }
     cout << endl << endl;*/
+}
+
+void Club::showPersonRequests(int nif){
+    if(isMember(nif)==isnonMem(nif)){
+        throw NIFDoesNotExist(nif);
+    }
+    if(isMember(nif) !=-1){ //is Member
+       members[isMember(nif)].showLendRequests();
+    }
+    else{
+        nonmembers[isnonMem(nif)].showLendRequests();
+    }
 }
 
 void Club::showLendings() {
@@ -2449,6 +2522,94 @@ void Club::generateGenretable(){
     for(int i=0;i<book_genres.size();i++){
         Genres.insert(book_genres[i]);
 
+    }
+}
+
+void Club::givenuponBook(int nif){
+    int id,code;
+    string code_str;
+
+    if(isMember(nif)==isnonMem(nif)){
+        throw NIFDoesNotExist(nif);
+    }
+
+    bool valid=false;
+    while(!valid){
+        cout << "Indique o código do livro (se não o souber, insira -1 e dê ENTER): ";
+        getline(cin, code_str);
+        if(isdigit(code_str[0])){
+            valid=true;
+            code = stoi(code_str);
+        }
+        if(code_str[0]=='-'){
+            valid=true;
+            code = stoi(code_str);
+        }
+        if(!valid){
+            valid=false;
+            colorText('C');
+            cout<<"Por favor, indique um número válido."<<endl;
+            colorText('F');
+        }
+        id = catalog.searchBook(code);
+        if(id==-1){
+            valid=false;
+            if(isMember(nif)!=-1){
+                members[isMember(nif)].showLendRequests();
+            }
+            else{
+                nonmembers[isnonMem(nif)].showLendRequests();
+            }
+        }
+    }
+
+
+
+    if(isMember(nif)!=-1){ //is Member
+       if(!catalog.books[id].checkMember(members[isMember(nif)])){
+           throw RequestDoesNotExist(code,nif);
+       }
+       else{
+           catalog.books[id].deleteHeapM(members[isMember(nif)]);
+           members[isMember(nif)].finishRequest(code);
+       }
+    }
+    else{
+        if(!catalog.books[id].checknonMem(nonmembers[isnonMem(nif)])){
+           throw RequestDoesNotExist(code,nif);
+       }
+       else{
+           catalog.books[id].deleteHeapNM(nonmembers[isnonMem(nif)]);
+           nonmembers[isnonMem(nif)].finishRequest(code);
+       }
+    }
+}
+
+void Club::updateHeap(int nif){ 
+    vector<int>codes;
+    if(isnonMem(nif) != -1){ //is nonMem
+       for(int i=0;i<nonmembers[isnonMem(nif)].getlendRequest().size();i++){
+           if(find(codes.begin(),codes.end(),catalog.searchBook(nonmembers[isnonMem(nif)].getlendRequest()[i].first)) != codes.end()){
+              codes.push_back(catalog.searchBook(nonmembers[isnonMem(nif)].getlendRequest()[i].first));
+           }
+       }
+
+       for(int i=0;i<codes.size();i++){
+           catalog.books[codes[i]].deleteHeapNM(nonmembers[isnonMem(nif)]);
+           catalog.books[codes[i]].loadHeapnonMem(nonmembers[isnonMem(nif)]);
+       }
+    }
+    else{
+         for(int i=0;i<members[isMember(nif)].getlendRequest().size();i++){
+           if(find(codes.begin(),codes.end(),catalog.searchBook(members[isMember(nif)].getlendRequest()[i].first)) != codes.end()){
+              codes.push_back(catalog.searchBook(members[isMember(nif)].getlendRequest()[i].first));
+           }
+       }
+
+       for(int i=0;i<codes.size();i++){
+           catalog.books[codes[i]].deleteHeapM(members[isMember(nif)]);
+           catalog.books[codes[i]].loadHeapMember(members[isMember(nif)]);
+       }
     }
 }
 

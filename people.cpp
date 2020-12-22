@@ -194,6 +194,16 @@ bool Member::operator<(const Member& m1) const {
     }
 }
 
+vector<pair<int, Date>> Member::getlendRequest()const{
+    return lendRequest;
+}
+
+void Member::showLendRequests(){
+    for (unsigned int i = 0; i < lendRequest.size(); i++){
+        cout << get<0>(lendRequest[i]) << ", a " << get<1>(lendRequest[i]).getDateStr() << endl;
+    }
+    cout << endl << endl;
+}
 
 string nonMem::getData() {
 

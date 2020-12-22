@@ -231,7 +231,9 @@ public:
 
     bool operator==(const Member& m1)const;
 
+    vector<pair<int, Date>>getlendRequest()const;
 
+    void showLendRequests();
 };
 
 /**

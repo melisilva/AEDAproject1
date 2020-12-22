@@ -168,18 +168,26 @@ void Member::setBooksTaken(int taken){
     this->books_taken = taken;
 }
 
-float Member::getRatio(){
+void Member::calculateRatio(){
     if(books_taken==0){
-        ratio=books_given;
+        this->ratio=books_given;
     }
     else{
-        ratio=(books_given)/(books_taken);
+         this->ratio=(books_given)/(books_taken);
     }
+}
+
+float Member::getRatio()const{
     return ratio;
 }
 
-bool Member::operator>(Member& m1) {
-    return(getRatio() > m1.getRatio());
+bool Member::operator<(const Member& m1) const {
+    if(getRatio() < m1.getRatio()){
+        return false;
+    }
+    else{
+        return true;
+    }
 }
 
 
@@ -191,12 +199,13 @@ string nonMem::getData() {
     return temp.str();
 }
 
-int nonMem::getBooksTaken(){
+int nonMem::getBooksTaken() const{
     return books_taken;
 }
 
 bool nonMem::operator<(const nonMem& nm1) const{
-    return(books_taken< nm1.books_taken);
+   return(getBooksTaken()<nm1.getBooksTaken());
+    
 }
 
 Info::Info(string e):eMail(e){

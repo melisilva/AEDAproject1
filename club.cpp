@@ -2071,14 +2071,14 @@ void Club::retrieveData(){
             membs.clear();
             membs << temp;
             balance = stof(temp);
-            do {
+            /*do {
                 getline(memb_file, temp);
                 membs.str("");
                 membs.clear();
                 membs << temp;
                 membs >> code >> sep;
                 int ind = catalog.searchBook(code);
-            } while (sep != ';');
+            } while (sep != ';');*/
             Member newMem(name, eMail, nif, balance,books_given);
            //newMem.setBooksGiven(books_given);
             newMem.setBooksTaken(books_taken);

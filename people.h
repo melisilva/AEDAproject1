@@ -57,7 +57,7 @@ protected:
     vector<pair<int, Date>> lendRequest, lendings;
     string name, eMail;
     int nif, books_given=0, books_taken=0;
-    float balance,ratio;
+    float balance,ratio=0;
 
 public:
     /**
@@ -221,9 +221,11 @@ public:
     */
     void finishRequest(int code);
 
-    float getRatio();
+    void calculateRatio();
 
-    bool operator>(Member& m1);
+    float getRatio() const;
+
+    virtual bool operator<(const Member& m1)const;
 
 
 };
@@ -254,7 +256,7 @@ public:
 
     bool operator<(const nonMem& nm1) const;
 
-    int getBooksTaken();
+    int getBooksTaken() const;
 
 };
 

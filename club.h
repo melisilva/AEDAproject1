@@ -19,15 +19,24 @@
 
 typedef unordered_set <string> tabHstring;
 
+/**
+ * @brief A struct that serves as an HashTable that organizes member's information through their e-mail.
+ */
 struct PeopleHash {
+    /**
+    * @brief Hashfunction.
+    */
     int operator()(const Info& ar) const {
         int v=0;
         for(int i=0;i<ar.getEmail().size();i++){
             v=37*v+ar.getEmail()[i];
         }
         return v;
-    }
+    } 
 
+    /**
+    * @brief Equality function.
+    */
     bool operator()(const Info& ar1, const Info& ar2) const {
        return (ar1.getEmail()==ar2.getEmail());
     }
@@ -44,6 +53,9 @@ typedef unordered_set<Info, PeopleHash, PeopleHash> HashTablePeople;
  * @param delays: vector of three-element tuples representing each current delay (lending that's gone over its own due date) in the club.
  * @param catalog: Catalog class that deals with everything related to the Club's books.
  * @param today: Date object that keeps the date at the time of execution of the program.
+ * @param Preferences: HashTable that organizes Member's contact information by their e-mail.
+ * @param Genres: HashTable that stores every possible book genre.
+ * @param book_genres: Vector of strings that identify book genres (used to make HashTable Genre).
 */
 class Club {
 private:
@@ -216,10 +228,13 @@ public:
     void showDelays();
 
     /**
-     * Function that outputs all the Club's registered (and non-finished) lending requests.
+     * Function that outputs all the Club's queues of registered (and non-finished) lending requests.
     */
     void showQueues();
 
+     /**
+     * Function that outputs one frequentant's registered (and non-finished) lending requests.
+    */
     void showPersonRequests(int nif);
 
     /**
@@ -239,6 +254,11 @@ public:
     */
     void colorText(char ch); //add color to the interface
 
+    /**
+     * Function that coordinates the process of buying a book from a bookshop associated with the Club.
+     * @param nif: integer number specifying frequentant interested in buying a book.
+     * @param code:integer number specifying the book whose copy to be bought.
+    */
     bool buyBook(int nif,int code);
 
     /**
@@ -251,6 +271,9 @@ public:
     */
     void showShopsInRange();
 
+    /**
+     * Prints all shops with an agreement with the Club that have a copy of the book whose code is provided by user input.
+    */
     void showShopsBySpecificBook();
 
     /**
@@ -260,16 +283,26 @@ public:
     */
     void updateTable(string oldEmail, string newEmail);
 
-    /*
+    /**
     * Lets the user change a member's preference. Asks for an e-mail address through input.
     */
     void updatePreferences();
 
+    /**
+    * Make HashTable that stores information provided by vector of strings books_genres.
+    */ 
     void generateGenretable();
 
+    /**
+    * Takes off waiting priority queue frequentant specified by nif provided.
+    * @param nif: integer number of frequentant who wants to given up on waiting for a book that wasn't available.
+    */ 
     void givenuponBook(int nif);
 
-    //nif to know who's the cause of the update
+    /**
+     * Updates priority queues after a frequentant took a book home from the Club or a member gave a book to the Club.
+     * @param nif: integer number identifying frequentant responsible for priority queue having to be updated.
+     */
     void updateHeap(int nif);
 
 };

@@ -653,8 +653,7 @@ bool Club::makeLending() {
             if(line.top().getNIF() == members[isMember(nif)].getNIF()){
                  if(catalog.books[index].getUnits()!=0){
                         catalog.books[index].deleteUnit();
-                        lendings.push_back(make_tuple(get<0>(lendRequests[i]), today, get<2>(lendRequests[i])));
-                        //lendRequests.erase(lendRequests.begin()+ i);
+                        lendings.push_back(make_tuple(code, today,nif));
                         catalog.books[index].deleteHeapM(members[isMember(nif)]); //delete member from queue
                         members[pers].registerLending(code, today);
                         members[pers].finishRequest(code);
@@ -676,41 +675,6 @@ bool Club::makeLending() {
         return true;
     } else {
         //Checking priorities...
-       /* for (int i = 0; i < lendRequests.size(); i++){
-            if(get<0>(lendRequests[i])==code){
-                exist=true;
-            }
-            if ((get<0>(lendRequests[i]) == code) && (get<2>(lendRequests[i]) != nif)){
-                colorText('C');
-                cout<<"O livro especificado foi emprestado por um membro/foi pedido por um membro. Terá de aguardar a sua vez."<<endl;
-                colorText('F');
-                return false;
-            } else {
-                temp = i;
-            }
-        }
-        if(!exist){
-            throw BookDoesNotExist(code);
-        }
-        int index;
-        for(int i=0;i<catalog.books.size();i++){
-            if(catalog.books[i].getCode()==code){
-                index=i;
-            }
-        }
-        if(catalog.books[index].getUnits()!=0){
-            catalog.books[index].deleteUnit();
-            lendings.push_back(make_tuple(get<0>(lendRequests[temp]), today, get<2>(lendRequests[temp])));
-            lendRequests.erase(lendRequests.begin()+ i);
-            nonmembers[pers].registerLending(code, today);
-            nonmembers[pers].finishRequest(code);
-            chargeFee(pers, catalog.books[index]);
-        }
-        else{
-            colorText('C');
-            cout<<"Infelizmente, o livro especificado não se encontra disponível."<<endl;
-            colorText('F');
-        }*/
         int index=catalog.searchBook(code);
         HeapNonMem line=catalog.books[index].getHeapNM();
         if(line.empty()){
@@ -720,8 +684,7 @@ bool Club::makeLending() {
             if(line.top().getNIF()==nonmembers[isnonMem(nif)].getNIF()){
                 if(catalog.books[index].getUnits()!=0){
                     catalog.books[index].deleteUnit();
-                    lendings.push_back(make_tuple(get<0>(lendRequests[temp]), today, get<2>(lendRequests[temp])));
-                    //lendRequests.erase(lendRequests.begin()+ i);
+                    lendings.push_back(make_tuple(code, today,nif));
                     catalog.books[index].deleteHeapNM(nonmembers[isnonMem(nif)]);
                     nonmembers[pers].registerLending(code, today);
                     nonmembers[pers].finishRequest(code);
@@ -821,11 +784,10 @@ bool Club::renovateLending(){
     }
     else{
         bool another=false;
-        for(int i=0;i<lendRequests.size();i++){
-            if(get<0>(lendRequests[i])==code){
-                another=true;
-            }
+        if(catalog.books[index].getHeapM().empty() && catalog.books[index].getHeapNM().empty()){
+            another =true;
         }
+        
         if(another==false) {
             for (int i = 0; i < lendings.size(); i++) {
                 if (get<0>(lendings[i]) == code) {
@@ -1268,6 +1230,7 @@ void Club::removeBook(tuple<int, Date, int> lostBook) {
 
     if (catalog.books[get<0>(lostBook)].getUnits() == 0) {
         vector<int> codes, codes2;
+        HeapMember test=catalog.books[gest<0>(lostBook)].getHeapM();
         int code;
         for (int i = 0; i < lendRequests.size(); i++) {
             if (get<0>(lendRequests[i]) == get<0>(lostBook)) {

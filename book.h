@@ -271,6 +271,19 @@ public:
     void loadHeapMember(Member m);
 
     void loadHeapnonMem(nonMem n);
+
+    HeapMember getHeapM();
+
+    HeapNonMem getHeapNM();
+
+    bool deleteHeapM(Member m);
+
+    bool deleteHeapNM(nonMem n);
+
+    bool checkMember(Member m);
+
+    bool checknonMem(nonMem n);
+
 };
 
 #endif //AEDAPROJECT1_BOOK_H

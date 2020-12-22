@@ -227,6 +227,8 @@ public:
 
     virtual bool operator<(const Member& m1)const;
 
+    void showDetails() const;
+
 
 };
 

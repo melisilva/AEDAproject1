@@ -79,6 +79,10 @@ void Member::showData() const {
     showLendings();
 }
 
+void Member::showDetails()const {
+    cout<<"Nome: "<<name<< " "<< "NIF: "<<nif<<endl;
+}
+
 void Member::showLendings() const {
     cout << "Empréstimos em Vigor: " << endl;
     for (int i = 0; i < lendings.size(); i++){

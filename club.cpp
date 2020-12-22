@@ -579,9 +579,8 @@ bool Club::makeLending() {
 
     int counter=0;
 
-    if (!nonMem){
-        //Members do lendings per order of arrival.
-        for (int i = 0; i < lendRequests.size(); i++){
+    if (!nonMem){ //Member-->ratio
+       /* for (int i = 0; i < lendRequests.size(); i++){
             if(get<0>(lendRequests[i])==code){
                 if(isMember((get<2>(lendRequests[i])))!=-1){
                     exist=true;
@@ -616,18 +615,40 @@ bool Club::makeLending() {
                     cout<<"O livro especificado foi emprestado por um membro. Terá de aguardar a sua vez."<<endl;
                     colorText('F');
                 }
+            }*/
+            int index=catalog.searchBook(code);
+            HeapMember line= catalog.books[index].getHeapM();
+            if(line.empty()){
+                throw RequestDoesNotExist(code,nif);
             }
-        }
-        if(!exist){
+            if(line.top().getNIF() == members[isMember(nif)].getNIF()){
+                 if(catalog.books[index].getUnits()!=0){
+                        catalog.books[index].deleteUnit();
+                        lendings.push_back(make_tuple(get<0>(lendRequests[i]), today, get<2>(lendRequests[i])));
+                        //lendRequests.erase(lendRequests.begin()+ i);
+                        catalog.books[index].deleteHeapM(members[isMember(nif)]); //delete member from queue
+                        members[pers].registerLending(code, today);
+                        members[pers].finishRequest(code);
+                        members[pers].addBooktaken();
+                    }
+                    else{
+                        colorText('C');
+                        cout<<"Infelizmente, o livro especificado não se encontra disponível."<<endl;
+                        colorText('F');
+                    }
+            }
+            else{
+                colorText('C');
+                cout<<"Existem outros frequentantes à sua frente na fila para requisitar este livro. Terá de aguardar a sua vez."<<endl;
+                colorText('F');
+            }
+        /*if(!exist){
             throw BookDoesNotExist(code);
-        }
-        if(!request){
-            throw RequestDoesNotExist(code,nif);
-        }
+        }*/
         return true;
     } else {
         //Checking priorities...
-        for (int i = 0; i < lendRequests.size(); i++){
+       /* for (int i = 0; i < lendRequests.size(); i++){
             if(get<0>(lendRequests[i])==code){
                 exist=true;
             }
@@ -661,12 +682,40 @@ bool Club::makeLending() {
             colorText('C');
             cout<<"Infelizmente, o livro especificado não se encontra disponível."<<endl;
             colorText('F');
+        }*/
+        int index=catalog.searchBook(code);
+        HeapNonMem line=catalog.books[index].getHeapNM();
+        if(line.empty()){
+            throw RequestDoesNotExist(code,nif);
+        }
+        if(catalog.books[index].getHeapM().empty()){
+            if(line.top().getNIF()==nonmembers[isnonMem(nif)].getNIF()){
+                if(catalog.books[index].getUnits()!=0){
+                    catalog.books[index].deleteUnit();
+                    lendings.push_back(make_tuple(get<0>(lendRequests[temp]), today, get<2>(lendRequests[temp])));
+                    //lendRequests.erase(lendRequests.begin()+ i);
+                    catalog.books[index].deleteHeapNM(nonmembers[isnonMem(nif)]);
+                    nonmembers[pers].registerLending(code, today);
+                    nonmembers[pers].finishRequest(code);
+                    nonmembers[pers].addBooktaken();
+                    chargeFee(pers, catalog.books[index]);
+        }
+        else{
+            colorText('C');
+            cout<<"Infelizmente, o livro especificado não se encontra disponível."<<endl;
+            colorText('F');
+        }
+            }
+            else{
+                colorText('C');
+                cout<<"Existem outros frequentantes à sua frente na fila para requisitar este livro. Terá de aguardar a sua vez."<<endl;
+                colorText('F');
+            }
+        }
+        else{
+            cout<<"O livro solicitado foi requisitado foi pedido por um membro. Terá de aguardar a sua vez."<<endl;
         }
     }
-    if(isMem!=-1){
-        members[isMember(nif)].addBooktaken();
-    }
-    
     return true;
 }
 
@@ -1308,10 +1357,31 @@ void Club::showNonMembers(){
 }
 
 void Club::showLendRequests() {
-    for (unsigned int i = 0; i < lendRequests.size(); i++){
+    int counter=1;
+    for(unsigned int i=0;i<catalog.books.size();i++){
+        cout<<"Lista de espera do livro: ";
+        catalog.books[i].showBook(0);
+        cout<<endl;
+        cout<<"----MEMBROS----"<<endl;
+        HeapMember test1=catalog.books[i].getHeapM();
+        while(!test1.empty()){
+            cout<<counter<<" ";
+            test1.top().showDetails();
+            test1.pop();
+        }
+        cout<<"----NÃO MEMBROS----"<<endl;
+        HeapNonMem test2=catalog.books[i].getHeapNM();
+        counter=1;
+        while(!test2.empty()){
+            cout<<counter<<" ";
+            test2.top().showDetails();
+            test2.pop();
+        }
+    }
+    /*for (unsigned int i = 0; i < lendRequests.size(); i++){
         cout << get<0>(lendRequests[i]) << ", a " << get<1>(lendRequests[i]).getDateStr()<< " pelo " << get<2>(lendRequests[i]) << endl;
     }
-    cout << endl << endl;
+    cout << endl << endl;*/
 }
 
 void Club::showLendings() {
@@ -1665,8 +1735,9 @@ bool Club::makeRequest() {
         }
         members[isMember(nif)].registerRequest(code, today);
         int id=catalog.searchBook(code);
+        members[isMember(nif)].calculateRatio();
         catalog.books[id].loadHeapMember(members[isMember(nif)]);
-
+        members[isMember(nif)].registerRequest(code, today);
     } else { //it's not a member then it's a nonMem
         while (true) {
             if (isnonMem(nif) == -1) {
@@ -1680,9 +1751,9 @@ bool Club::makeRequest() {
                 break;
             } else {
                 if ((isnonMem(nif) != -1) && (nonmembers[isnonMem(nif)].getBalance() > 0)) {
-                    nonmembers[isnonMem(nif)].registerRequest(code, today);
                     int id=catalog.searchBook(code);
                     catalog.books[id].loadHeapnonMem(nonmembers[isnonMem(nif)]);
+                    nonmembers[isnonMem(nif)].registerRequest(code, today);
                     break;
                 } else if (nonmembers[isnonMem(nif)].getBalance() <= 0) {
                     throw NegativeBalance(nif);

@@ -254,3 +254,85 @@ void Book::loadHeapMember(Member m){
 void Book::loadHeapnonMem(nonMem n){
     pqNMem.push(n);
 }
+
+HeapMember Book::getHeapM(){
+    return pqMem;
+}
+
+HeapNonMem Book::getHeapNM(){
+    return pqNMem;
+}
+
+bool Book::checkMember(Member m){
+    bool found=false;
+    HeapMember test= getHeapM();
+    while(!test.empty() || !found){
+        if(test.top().getNIF() == m.getNIF()){
+            found=true;
+        }
+        test.pop();
+    }
+    return found;
+}
+
+bool Book::checknonMem(nonMem n){
+    bool found=false;
+    HeapNonMem test= getHeapNM();
+    while(!test.empty() || !found){
+        if(test.top().getNIF() == n.getNIF()){
+            found=true;
+        }
+        test.pop();
+    }
+    return found;
+}
+
+bool Book::deleteHeapM(Member m){
+    vector<Member> notDel;
+    bool found=false;
+    while(!found){
+        if(pqMem.top().getNIF() != m.getNIF()){
+            notDel.push_back(pqMem.top());
+        }
+        else{
+            found=true;
+        }
+        pqMem.pop();
+    }
+    if(!notDel.empty()){
+        for(int i=0;i<notDel.size();i++){
+            pqMem.push(notDel[i]);
+        }
+    }
+    if(found){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+bool Book::deleteHeapNM(nonMem n){
+vector<nonMem> notDel;
+    bool found=false;
+    while(!found){
+        if(pqNMem.top().getNIF() != n.getNIF()){
+            notDel.push_back(pqNMem.top());
+        }
+        else{
+            found=true;
+        }
+        pqNMem.pop();
+    }
+    if(!notDel.empty()){
+        for(int i=0;i<notDel.size();i++){
+            pqNMem.push(notDel[i]);
+        }
+    }
+    if(found){
+        return true;
+    }
+    else{
+        return false;
+    }
+}

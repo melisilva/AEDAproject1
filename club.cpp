@@ -362,7 +362,6 @@ void Club::run(){
         }
         if (input == "SHO_Q"){
             valid=true;
-           // showLendRequests();
            showQueues();
         }
         if (input == "SHO_L"){
@@ -646,42 +645,6 @@ bool Club::makeLending() {
     int counter=0;
 
     if (!nonMem){ //Member-->ratio
-       /* for (int i = 0; i < lendRequests.size(); i++){
-            if(get<0>(lendRequests[i])==code){
-                if(isMember((get<2>(lendRequests[i])))!=-1){
-                    exist=true;
-                    counter++;
-                }
-            }
-            if ((get<0>(lendRequests[i]) == code) && (get<2>(lendRequests[i]) == nif)){
-                request=true;
-                if(counter==1){
-                    int index;
-                    for(int i=0;i<catalog.books.size();i++){
-                        if(catalog.books[i].getCode()==code){
-                            index=i;
-                        }
-                    }
-                    if(catalog.books[index].getUnits()!=0){
-                        catalog.books[index].deleteUnit();
-                        lendings.push_back(make_tuple(get<0>(lendRequests[i]), today, get<2>(lendRequests[i])));
-                        lendRequests.erase(lendRequests.begin()+ i);
-                        members[pers].registerLending(code, today);
-                        members[pers].finishRequest(code);
-                        break;
-                    }
-                    else{
-                        colorText('C');
-                        cout<<"Infelizmente, o livro especificado não se encontra disponível."<<endl;
-                        colorText('F');
-                    }
-                }
-                else{
-                    colorText('C');
-                    cout<<"O livro especificado foi emprestado por um membro. Terá de aguardar a sua vez."<<endl;
-                    colorText('F');
-                }
-            }*/
             int index=catalog.searchBook(code);
             HeapMember line= catalog.books[index].getHeapM();
             if(line.empty()){
@@ -709,9 +672,7 @@ bool Club::makeLending() {
                 cout<<"Existem outros frequentantes à sua frente na fila para requisitar este livro. Terá de aguardar a sua vez."<<endl;
                 colorText('F');
             }
-        /*if(!exist){
-            throw BookDoesNotExist(code);
-        }*/
+       
         return true;
     } else {
         //Checking priorities...
@@ -1440,10 +1401,6 @@ void Club::showQueues() {
             test2.pop();
         }
     }
-    /*for (unsigned int i = 0; i < lendRequests.size(); i++){
-        cout << get<0>(lendRequests[i]) << ", a " << get<1>(lendRequests[i]).getDateStr()<< " pelo " << get<2>(lendRequests[i]) << endl;
-    }
-    cout << endl << endl;*/
 }
 
 void Club::showPersonRequests(int nif){

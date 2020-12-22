@@ -307,6 +307,8 @@ bool Book::deleteHeapM(Member m){
         }
     }
     if(found){
+        vector<Member>::iterator it=find(members.begin(),members.end(),m);
+        members.erase(it);
         return true;
     }
     else{
@@ -331,7 +333,10 @@ vector<nonMem> notDel;
             pqNMem.push(notDel[i]);
         }
     }
+
     if(found){
+        vector<nonMem>::iterator it=find(nonmembers.begin(),nonmembers.end(),n);
+        nonmembers.erase(it);
         return true;
     }
     else{

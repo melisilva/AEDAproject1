@@ -1865,6 +1865,7 @@ bool Club::buyBook(int nif,int code){
             }
             else{
                 members[isMember(nif)].minusBalance(price);
+                
                 return true;
             }
         }

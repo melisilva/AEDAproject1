@@ -78,24 +78,6 @@ BST<BookShop> BStores::getShop(){
     return shops;
 }
 
-void BStores::readFile(ifstream &f){
-    string name,city,pValue,rRating,bGC;
-    float promoValue,realRating;
-    int bookGenreCount;
-    while(!f.eof()){
-        getline(f,name);
-        getline(f,city);
-        getline(f,pValue);
-        promoValue=stof(pValue);
-        getline(f,rRating);
-        realRating=stof(rRating);
-        getline(f,bGC);
-        bookGenreCount=stoi(bGC);
-        //BookShop b1(name,city,promoValue,realRating,bookGenreCount);
-        //shops.insert(b1);
-    }
-}
-
 void BStores::print() const
 {
     BSTItrIn<BookShop> it(shops);

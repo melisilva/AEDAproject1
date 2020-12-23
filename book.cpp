@@ -124,10 +124,6 @@ void Book::setEdition(int edition){
     this->edition = edition;
 }
 
-/*void Book::setStore(string store){
-    this->store=store;
-}*/
-
 void Book::addWritops(string writ_ops){
     stringstream temp;
     temp << writ_ops << endl;
@@ -161,10 +157,6 @@ string Book::getAuthor() const{
 string Book::getCategory() const{
     return category;
 }
-
-/*string Book::getStore()const{
-    return store;
-}*/
 
 bool Book::getState() const{
     return state;

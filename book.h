@@ -25,10 +25,12 @@ typedef priority_queue<nonMem> HeapNonMem;
  * @param sumRating: sum of all ratings registered for the book, used in the rating calculation.
  * @param title: string containing the book's title.
  * @param author: string containing the book's author's name.
+ * @param catagory: string containing the book's category/genre.
  * @param writ_ops: string contianing all registered detailed opinions of the book.
  * @param state: boolean value that helps dictate if the book can be lended.
  * @param multi: boolean value that helps dictate if the book can be lended.
- * @param store
+ * @param pqMem: priority queue for members waiting to borrow the book.
+ * @param pqNMem: priority queue for nonmembers waiting to borrow the book.
 */
 class Book {
     int code, units, opinions = 0, edition, owner,oguni;
@@ -49,6 +51,7 @@ public:
      * @param title: string specifying the book's title.
      * @param author: string specifying the book's author's name.
      * @param category: string specifying the book's category/genre (ex.: SciFi, for Science Fiction).
+     * @param edition: integer number specifying the book's edition.
      * @param owner: integer number specifying the book's owner's NIF ("Número de Identificação Fiscal", which is unique to each person, in Portugal).
      * @param units: integer number specifying the the number of units available for lending.
      * @param oguni: integer number specifying the total number of units for the book.
@@ -56,6 +59,7 @@ public:
     Book(int code,string title,string author,string category, int edition,int owner,int units,int oguni);
 
     Book(int code, string title, string author,string category,int edition,int units);
+
     /**
      * Function that adds a lendable unit to the units attribute.
     */
@@ -161,8 +165,6 @@ public:
     */
     int getOguni() const;
 
-    string getStore()const;
-
     /**
      * Function that sets the object from which it is called's owner attribute with the argument provided.
      * @param owner: value to set the owner attribute (integer).
@@ -240,8 +242,6 @@ public:
     */
     void setOgunit(int oguni);
 
-    void setStore(string store);
-
     /**
      * Function that prints/outputs the book's data for the user.
     */
@@ -269,20 +269,56 @@ public:
     */
     void setMulti();
 
+    /**
+     * Inserts Member object specified in the parameter m into the priority queue HeapMember(pqMem) (priority queue for Member).
+     * @param m: Member object that we wish to insert in HeapMember.
+    */
     void loadHeapMember(Member m);
 
+    /**
+     * Inserts nonMem object specified in the parameter n into the priority queue HeapnonMem(pqNMem) (priority queue for nonMem).
+     * @param n: Member object that we wish to insert in HeapMember.
+    */
     void loadHeapnonMem(nonMem n);
 
+    /**
+     * Return the Member's priority queue.
+     * @return: the Member's priority queue (pqMem).
+    */ 
     HeapMember getHeapM();
 
+   /**
+     * Return the nonMem's priority queue.
+     * @return: the nonMem's priority queue (pqNMem).
+    */
     HeapNonMem getHeapNM();
-
+    
+     /**
+     * Deletes specified Member from the Member's priority queue.
+     * @param m: Member object to be deleted from Member's priority queue.
+     * @return: bool true if Member object specified was deleted successfully, false otherwise.
+    */ 
     bool deleteHeapM(Member m);
-
+    
+    /**
+     * Deletes specified nonMem from the nonMem's priority queue.
+     * @param n: nonMem object to be deleted from nonMem's priority queue.
+     * @return: bool true if nonMem object specified was deleted successfully, false otherwise.
+    */ 
     bool deleteHeapNM(nonMem n);
 
+     /**
+     * Checks if Member object exists in the Member's priority queue.
+     * @param m: Member object to check if it's in the Member's priority queue.
+     * @return: bool true if Member object specified was found, false otherwise.
+    */ 
     bool checkMember(Member m);
 
+     /**
+     * Checks if nonMem object exists in the nonMem's priority queue.
+     * @param n: nonMem object to check if it's in the nonMem's priority queue.
+     * @return: bool true if nonMem object specified was found, false otherwise.
+    */ 
     bool checknonMem(nonMem n);
 
 };

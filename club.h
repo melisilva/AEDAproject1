@@ -208,12 +208,14 @@ public:
     /**
      * Function that verifies if a NIF provided belongs to any nmember frequenting the Club.
      * @param nif: integer number specifying the NIF to be searched for in the members vector.
+     * @return: integer number specifying the index of member whose NIF was passed as parameter in the vector of Member members.
     */
     int isMember(int nif);
 
     /**
      * Function that verifies if a NIF provided belongs to any non-member frequenting the Club.
      * @param nif: integer number specifying the NIF to be searched for in the nonmembers vector.
+     * @return: integer number specifying the index of nonmember whose NIF was passed as parameter in the vector of nonMem nonmembers.
     */
     int isnonMem(int nif);
 
@@ -258,6 +260,7 @@ public:
      * Function that coordinates the process of buying a book from a bookshop associated with the Club.
      * @param nif: integer number specifying frequentant interested in buying a book.
      * @param code:integer number specifying the book whose copy to be bought.
+     * @return: bool that is true, if the book was successfully bought or false otherwise.
     */
     bool buyBook(int nif,int code);
 

@@ -9,12 +9,6 @@
 #include <algorithm>
 using namespace std;
 
-/*
- struct Info {
-   string eMail;
-   vector<string> preferences;
-};
-*/
 
 /**
  * A class to save the member's preferences.

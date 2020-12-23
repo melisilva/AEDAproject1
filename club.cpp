@@ -2235,7 +2235,7 @@ void Club::retrieveData(){
     if(!(empty)){
         temp = "BEGIN";
         string name;
-        int nif, code;
+        int nif, code, books_taken;
         float balance;
         while (temp != "END"){
             getline(nmemb_file, temp);
@@ -2252,8 +2252,15 @@ void Club::retrieveData(){
             nmembs.str("");
             nmembs.clear();
             nmembs << temp;
+            nmembs >> books_taken;
+            getline(nmemb_file, temp);
+            nmembs.str("");
+            nmembs.clear();
+            nmembs << temp;
             balance = stof(temp);
-            nonmembers.push_back(nonMem(name, nif, balance));
+            nonMem newNMem(name, nif, balance);
+            newNMem.setBooksTaken(books_taken);
+            nonmembers.push_back(newNMem);
             getline(nmemb_file, temp);
             nmembs.str("");
             nmembs.clear();

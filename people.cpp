@@ -213,7 +213,7 @@ string nonMem::getData() {
 
     stringstream temp;
 
-    temp << name << endl << nif << endl << to_string(balance);
+    temp << name << endl << nif << endl << books_taken << endl << to_string(balance);
     return temp.str();
 }
 

@@ -1246,7 +1246,7 @@ void Club::removeBook(tuple<int, Date, int> lostBook) {
 
     if (catalog.books[get<0>(lostBook)].getUnits() == 0) {
         vector<int> codes, codes2;
-        HeapMember test=catalog.books[gest<0>(lostBook)].getHeapM();
+        HeapMember test=catalog.books[get<0>(lostBook)].getHeapM();
         int code;
         for (int i = 0; i < lendRequests.size(); i++) {
             if (get<0>(lendRequests[i]) == get<0>(lostBook)) {

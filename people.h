@@ -66,15 +66,16 @@ public:
  * @param eMail: string with the e-mail address of the member.
  * @param nif: integer number with the NIF of the member.
  * @param books_given: number of books that member gave to the Club.
- * @param books_taken: 
+ * @param books_taken: number of books that member currently has from the Club.
  * @param balance: float number with the member's associated balance.
+ * @param ratio: float number that specifies the books_given/books_taken ratio, used to order the Member's priority queues in books (Member exclusive variable).
 */
 class Member {
 protected:
     vector<pair<int, Date>> lendRequest, lendings;
     string name, eMail;
-    int nif, books_given=0, books_taken=0;
-    float balance,ratio=0;
+    int nif, books_taken=0,books_given=0;
+    float balance,ratio;
 
 public:
     /**
@@ -89,6 +90,7 @@ public:
      * @param nif: integer number specifying the Member's NIF ("Número de Identificação Fiscal").
      * @param books: vector of Book class objects representing the books owned and offered by the member.
      * @param balance: float number representing the Member's "bank account" balance.
+     * @param books_given: integer number specifying the number of books given by the Member to the Club.
      * 
     */
     Member(string &name, string &eMail, int &nif, float &balance, int books_given);
@@ -106,10 +108,19 @@ public:
     */
     void addBalance(float quantity);
 
-    void addBookgiven();
+    /**
+     * Function that adds quantity to the Member's books_given attribute. Called everytime Member gives a book to the CLub.
+    */
+    virtual void addBookgiven();
 
+    /**
+     * Function that adds quantity to the books_taken attribute. Called everytime a frequentant takes a book from the Club.
+    */
     void addBooktaken();
-
+    
+    /**
+     * Function that subtracts quantity to the books_taken attribute. Called everytime a frequentant returns a book to the Club.
+    */
     void subBooktaken();
 
     /**
@@ -171,7 +182,6 @@ public:
     */
     virtual void renovateLending(int code, Date date);
 
-
     /**
      * Function that sets the Member's name attribute with the name provided in the function's argument. Works just the same in the nonMem class.
      * @param name: string specifying the Member's name.
@@ -218,7 +228,6 @@ public:
     */
     void showLendings() const;
 
-
     /**
      * Function that updates a member's data (either their name, balance or both). Works just the same for the nonMem class.
      * @param name: the Member's new name (string).
@@ -240,18 +249,38 @@ public:
     */
     void finishRequest(int code);
 
-    void calculateRatio();
+    /**
+     * Function exclusive to Member. Calculates the ratio between attributes: books_taken & books_given.
+    */
+    virtual void calculateRatio();
 
-    float getRatio() const;
+    /**
+     * Function exclusive to Member. Returns ratio.
+     * @return: float number specifying the ratio of the Member.
+    */
+    virtual float getRatio() const;
 
+    /**
+     * Function comparison of two Members (used in Member's priority queue).
+     * @param m1: The other Member object we wish to compare the current Member object with.
+     * @return: bool true if Member has a bigger ratio than m1, false otherwise.
+    */
     virtual bool operator<(const Member& m1)const;
-
+    
+    /**
+     * Shows frequentant's information.
+    */
     void showDetails() const;
-
-    bool operator==(const Member& m1)const;
-
+    
+    /**
+     * Returns lendRequest vector.
+     * @return: vector with data from the frequentant's lending requests.
+    */
     vector<pair<int, Date>>getlendRequest()const;
 
+    /**
+     * Show the frequentant's lending requests.
+    */
     void showLendRequests();
 };
 
@@ -262,6 +291,7 @@ public:
  * @param name: string with the frequentant's name.
  * @param nif: integer number with the NIF of the frequentant.
  * @param balance: float number with the frequentant's associated balance.
+  * @param books_taken: number of books that frequentant currently has from the Club.
 */
 class nonMem : public Member {
 public:
@@ -279,8 +309,17 @@ public:
     */
     string getData();
 
+     /**
+     * Function comparison of two nonMembers (used in nonMem's priority queue).
+     * @param nm1: The other nonMem object we wish to compare the current nonMem object with.
+     * @return: bool true if nonMem has a bigger ratio than nm1, false otherwise.
+    */
     bool operator<(const nonMem& nm1) const;
 
+    /**
+     * Returns number of books that nonMem currently has from the Club.
+     * @return: integer number books_taken attribute.
+    */
     int getBooksTaken() const;
 
 };

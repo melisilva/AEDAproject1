@@ -31,8 +31,17 @@ void Date::showDate(){
 
 string Date::getDateStr() const{
     string d,m,y,date,block="/";
-    d = to_string(day);
-    m = to_string(month);
+    if(day<10){
+        d='0'+to_string(day);
+    }
+    else{
+        d=to_string(day);
+    }
+    if(month<10){
+        m='0'+to_string(month);
+    }else{
+        m = to_string(month);
+    }
     y = to_string(year);
     date += d + block + m + block + y;
     return date;

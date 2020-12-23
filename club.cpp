@@ -1902,6 +1902,7 @@ void Club::saveData(){
     ofstream fileeeeeee; //(system)
     ofstream fileeeeeeee; //bookshops
     ofstream file9;
+    ofstream file10;
 
     //Yay, file cleaning!
     file.open("members.txt", std::ofstream::out | std::ofstream::trunc);
@@ -1913,7 +1914,7 @@ void Club::saveData(){
     fileeeeeee.open("system.txt", std::ofstream::out | std::ofstream::trunc);
     fileeeeeeee.open("shops.txt", std::ofstream::out | std::ofstream::trunc);
     file9.open("preferences.txt", std::ofstream::out | std::ofstream::trunc);
-
+    file10.open("queues.txt", std::ofstream::out | std::ofstream::trunc);
 
     stringstream temp1, temp2, temp3, temp4, temp5, temp6, temp7, temp8, temp9;
 
@@ -2002,6 +2003,33 @@ void Club::saveData(){
     }
 
     file9 << "END";
+
+    stringstream qs;
+    for (int i = 0; i < catalog.books.size(); i++){
+        if (catalog.books[i].getHeapM().empty()){
+            qs << "MEMQ_END" << endl;
+        } else {
+            HeapMember memQ = catalog.books[i].getHeapM();
+            while (!memQ.empty()){
+                qs << memQ.top().getNIF() << endl;
+                memQ.pop();
+            }
+            qs << "MEMQ_END" << endl;
+        }
+
+        if (catalog.books[i].getHeapNM().empty()){
+            qs << "NMEMQ_END" << endl << endl;
+        } else {
+            HeapNonMem nmemQ = catalog.books[i].getHeapNM();
+            while (!nmemQ.empty()){
+                qs << nmemQ.top().getNIF() << endl;
+                nmemQ.pop();
+            }
+            qs << "NMEMQ_END" << endl << endl;
+        }
+    }
+    qs << "END";
+    file10 << qs.str();    
 }
 
 void Club::retrieveData(){
@@ -2014,6 +2042,7 @@ void Club::retrieveData(){
     ifstream system_file; system_file.open("system.txt");
     ifstream shops_file; shops_file.open("shops.txt");
     ifstream prefs_file; prefs_file.open("preferences.txt");
+    ifstream queues_file; queues_file.open("queues.txt");
 
     bool d_exist=false;
     bool l_exist=false;
@@ -2448,6 +2477,33 @@ void Club::retrieveData(){
             getline(prefs_file, temp);
         }
     }
+
+    empty = false;
+    empty = queues_file.peek() == std::ifstream::traits_type::eof();
+
+    if (!empty){
+        for (int i = 0; i < catalog.books.size(); i++){
+            string temp = "";
+            getline(queues_file, temp);
+            if (temp != "END"){
+                while (temp != "MEMQ_END"){
+                    catalog.books[i].loadHeapMember(members[isMember(stoi(temp))]);
+                    getline(queues_file, temp);
+                }
+                getline(queues_file, temp);
+                while (temp != "NMEMQ_END"){
+                    catalog.books[i].loadHeapnonMem(nonmembers[isnonMem(stoi(temp))]);
+                    getline(queues_file, temp);
+                }
+                getline(queues_file, temp);
+            } else {
+                break;
+            }
+
+            
+        }
+    }
+
 }
 
 void Club::showShopsInRange(){

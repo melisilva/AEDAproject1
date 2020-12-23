@@ -99,7 +99,7 @@ string Member::getData() {
 
     stringstream temp;
 
-    temp << name << endl << eMail << endl << nif << endl << books_given << endl << books_taken << endl << to_string(balance) << endl;
+    temp << name << endl << eMail << endl << nif << endl << books_given << endl << books_taken << endl << to_string(balance);
     
     return temp.str();
 }

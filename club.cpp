@@ -1465,12 +1465,20 @@ void Club::updatePreferences(){
         cout << endl << "Indique, do primeiro ao último lugar, as suas novas preferências abaixo." << endl;
         cout << "Se desejar que uma preferência fique vazia, introduza ASE - A Ser Escolhido - no seu lugar." << endl << endl;
 
+        cout << "LISTA DE PREFERÊNCIAS PERMITIDAS PELO CLUBE:" << endl;
+        for (int i = 0; i < book_genres.size(); i++){
+            if (i % 6 == 0 && i != 0){
+                cout << book_genres[i] << endl;
+            } else {
+                if (i == book_genres.size() - 1){ cout << book_genres[i] << endl << endl; break;}
+                cout << book_genres[i] << " | ";
+            }
+        }
         for (int i = 0; i < preferences.size(); i++){
             while(!valid){
             cout << i + 1 << "º LUGAR: ";
             getline(cin, temp);
             if(Genres.find(temp) != Genres.end()){
-                cout<<"Hello"<<endl;
                 valid=true;
                 preferences[i] = temp;
             }

@@ -913,6 +913,14 @@ bool Club::returnLending() {
                 request=true;
                 delays.erase(delays.begin()+i);
                 getOpinions(code);
+                if(isMember(nif)!=-1){
+                    members[isMember(nif)].subBooktaken();
+                    members[isMember(nif)].calculateRatio();
+                }
+                else{
+                    nonmembers[isnonMem(nif)].subBooktaken();
+                }
+                updateHeap(nif);
                 return true;
             }
         }
@@ -925,6 +933,14 @@ bool Club::returnLending() {
                 request=true;
                 lendings.erase(lendings.begin()+i);
                 getOpinions(code);
+                if(isMember(nif)!=-1){
+                    members[isMember(nif)].subBooktaken();
+                    members[isMember(nif)].calculateRatio();
+                }
+                else{
+                    nonmembers[isnonMem(nif)].subBooktaken();
+                }
+                updateHeap(nif);
                 return true;
             }
         }

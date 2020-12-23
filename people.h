@@ -13,16 +13,37 @@ using namespace std;
 /**
  * A class to save the member's preferences.
  * @param eMail: a Member's e-mail address. Serves as a key in the hashtable.
- * @param preferences: a string vector with the member's preferences. 
+ * @param preferences: a string vector with the Member's preferences. 
 */
 class Info {
     string eMail;
     vector<string> preferences;
 public: 
-    Info(string e);
+    /**
+     * Overloaded constructor for the Info class.
+     * @param email: string Member's e-mail address.
+     * @param preferences: a string vector with the Member's preferences.
+    */
+    Info(string email);
+
     Info(string email,vector<string>preferences);
+
+    /**
+     * Returns e-mail address.
+     * @return: return string Member's e-mail address.
+    */
     string getEmail() const;
+
+    /**
+     * Returns Member's preferences.
+     * @return: return string vector with the Member's preferences.
+    */
     vector<string> getPreferences()const;
+
+    /**
+     * Function that sets the object from which it is called's e-mail attribute with the argument provided.
+     * @param email: value to set the email attribute (string).
+    */
     void setEmail(string email);
 
     /**
@@ -44,6 +65,8 @@ public:
  * @param name: string with the name of the member.
  * @param eMail: string with the e-mail address of the member.
  * @param nif: integer number with the NIF of the member.
+ * @param books_given: number of books that member gave to the Club.
+ * @param books_taken: 
  * @param balance: float number with the member's associated balance.
 */
 class Member {
@@ -86,6 +109,8 @@ public:
     void addBookgiven();
 
     void addBooktaken();
+
+    void subBooktaken();
 
     /**
      * Function that returns the Member's relevant data in string form for the file records. Function is virtual to take the derived Member class nonMem into account.

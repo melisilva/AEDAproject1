@@ -164,6 +164,10 @@ void Member::addBooktaken(){
     books_taken++;
 }
 
+void Member::subBooktaken(){
+    books_taken--;
+}
+
 void Member::setBooksGiven(int given){
     this->books_given = given;
 }
@@ -226,7 +230,7 @@ bool nonMem::operator<(const nonMem& nm1) const{
     
 }
 
-Info::Info(string e):eMail(e){
+Info::Info(string email):eMail(email){
 }
 
 Info::Info(string email,vector<string> preferences){

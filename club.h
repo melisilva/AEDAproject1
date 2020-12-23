@@ -303,7 +303,7 @@ public:
     void givenuponBook(int nif);
 
     /**
-     * Updates priority queues after a frequentant took a book home from the Club or a member gave a book to the Club.
+     * Updates priority queues after a frequentant took a book home from the Club or a member gave a book to the Club or frequentant brought back a book they had taken home.
      * @param nif: integer number identifying frequentant responsible for priority queue having to be updated.
      */
     void updateHeap(int nif);

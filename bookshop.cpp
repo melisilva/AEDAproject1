@@ -69,6 +69,18 @@ void BookShop::print() const
 
 }
 
+void BookShop::calculateRating(float rate){
+    opinions+=1;
+    sumRating+=rate;
+    if(opinions ==0){
+        realRating=sumRating;
+    }
+    else{
+        realRating=sumRating/opinions;
+    }
+}
+
+
 
 
 
@@ -124,6 +136,8 @@ vector<string> BStores::findBook(Book b){
     return stores;
 }
 
+
+
 void BStores::showStoresByRating(){
     BST<BookShop> temp = shops;
     BSTItrIn<BookShop> it(temp);
@@ -155,6 +169,23 @@ void BStores::showStoresbySpecificBook(Book b){
         auto test=it.retrieve();
         if(test.searchBook(b.getTitle(),b.getAuthor(),b.getEdition())){
             it.retrieve().print();
+        }
+        it.advance();
+    }
+}
+
+void BStores::findShop(string name,int rating){
+    BSTItrIn<BookShop>it(shops);
+    bool exist=false;
+    while(!exist){
+        auto test=it.retrieve();
+        if(test.getName() == name){
+            auto store=test;
+            shops.remove(test);
+            store.calculateRating(rating);
+            shops.insert(store);
+            exist=true;
+            break;
         }
         it.advance();
     }

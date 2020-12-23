@@ -19,8 +19,8 @@
 class BookShop {
     protected:
         string name, city;
-        float promoValue, realRating;
-        int bookGenreCount;
+        float promoValue, realRating,sumRating=0;
+        int bookGenreCount,opinions = 0;
         vector<Book> books;
     public:
     /**
@@ -100,6 +100,12 @@ class BookShop {
          * Shows all of the shop's information.
         */
         void print() const;
+
+        /**
+        * Function that calculates the average rating for a shop with the added new rating provided in the function's only argument.
+        * @param rate: a float number that specifies a new rating given by a member.
+        */
+        void calculateRating(float rate);
 };
 
 static BookShop dummy;
@@ -169,4 +175,11 @@ public:
      * @param b: Specific book.
     */
     void showStoresbySpecificBook(Book b);
+
+     /**
+         * Find shop and add rating from the Member.
+         * @param name: name of the shop we wish to find.
+         * @param rating: integer number representing rating given by Member to the shop.
+        */
+    void findShop(string name,int rating);
 };

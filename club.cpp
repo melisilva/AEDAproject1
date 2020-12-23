@@ -1865,7 +1865,24 @@ bool Club::buyBook(int nif,int code){
             }
             else{
                 members[isMember(nif)].minusBalance(price);
-                
+                string int_answer,answer,writ_answer;
+                int rating;
+                bool valid=false;
+                while(!valid){
+                     cout<<"Introduza uma opinião de 1 a 5 sobre a livraria, por favor : "<<endl;
+                     getline(cin,int_answer);
+                     if(isdigit(int_answer[0])){
+                          rating = stoi(int_answer);
+                          valid=true;
+                     }
+                     else{
+                          valid=false;
+                          colorText('C');
+                          cout<<"Por favor, indique uma avaliação válida (um número de 0 a 5)."<<endl;
+                          colorText('F');
+        }
+                }
+                b.findShop(stores[id_shop],rating);
                 return true;
             }
         }

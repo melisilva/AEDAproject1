@@ -114,6 +114,7 @@ float BStores::sellBook(Book b,string store){ //return price of the book wanted
            if(test.getName() == store){
                if(test.searchBook(b.getTitle(),b.getAuthor(),b.getEdition())){
                    price=test.getpromoValue()*b.getValue();
+                   return price;
                }
               
         }

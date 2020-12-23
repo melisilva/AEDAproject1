@@ -179,9 +179,11 @@ void Member::setBooksTaken(int taken){
 void Member::calculateRatio(){
     if(books_taken==0){
         this->ratio=books_given;
+        cout<<ratio<<endl;
     }
     else{
          this->ratio=(books_given)/(books_taken);
+         cout<<ratio<<endl;
     }
 }
 
@@ -190,12 +192,10 @@ float Member::getRatio()const{
 }
 
 bool Member::operator<(const Member& m1) const {
-    if(getRatio() < m1.getRatio()){
-        return false;
-    }
-    else{
-        return true;
-    }
+    cout<<(getRatio()<m1.getRatio())<<endl;
+    cout<<getRatio()<<endl;
+    cout<<m1.getRatio()<<endl;
+    return(getRatio()<m1.getRatio());
 }
 
 vector<pair<int, Date>> Member::getlendRequest()const{

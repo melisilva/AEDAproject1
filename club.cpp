@@ -392,7 +392,6 @@ void Club::run(){
             }
         }
         if(input == "BUY_L"){
-            bool valid;
             string nif_s;
             int nif;
             cout<<"Insira um NIF para proceder: ";
@@ -418,20 +417,19 @@ void Club::run(){
                 colorText('F');
             }
 
-catch(NotAMember(nif)){
+            catch(NotAMember(nif)){
                 colorText('C');
                 cout << "ERRO: Renovar empréstimos é exclusivo para Membros do Clube. O NIF "<<nif.getInfo()<<" não identifica um Membro."<< endl;
                 colorText('F');
             }
 
-catch(NegativeBalance(nif)){
+            catch(NegativeBalance(nif)){
                 colorText('C');
                 cout<< "ERRO: O frequentante "<<nif.getInfo()<<" não consegue pagar a taxa indicada, pois possui um balanço negativo."<<endl;
                 colorText('F');
             }
-
         }
-        if(!valid && (input != "end" && input != "END")){
+            if(!valid && (input != "end" && input != "END")){
             colorText('C');
             cout<<"Input inválido...por favor tente de novo"<<endl;
             colorText('F');
@@ -476,6 +474,7 @@ void Club::help() {
     cout << " SHO_1F: mostrar um frequentante" << endl;
     cout << " SHO_F: mostrar frequentantes (membros e não membros)" << endl;
     cout << " BUY_L: possibilidade de frequentantes comprarem um livro"<<endl;
+    cout << " SP_P: mostrar pedidos feitos por frequentante especificado."<<endl;
     cout << endl;
     colorText('B');
     cout << " --- PROTOCOLOS AO NÍVEL DO CATÁLOGO --- " << endl;
@@ -490,8 +489,7 @@ void Club::help() {
     cout << " SHO_1L: mostrar um livro" << endl;
     cout << " SHO_E: mostrar empréstimos" << endl;
     cout << " SHO_A: mostrar atrasos" << endl;
-    //cout << " SHO_P: mostrar pedidos" << endl;
-    cout << "SHO_Q: mostrar filas de espera para cada livro"<<endl;
+    cout << " SHO_Q: mostrar filas de espera para cada livro"<<endl;
     cout << endl;
     colorText('D');
     cout << " --- PROTOCOLOS AO NÍVEL DO SICL --- " << endl;
@@ -1374,6 +1372,7 @@ void Club::showQueues() {
             cout<<counter<<" - ";
             test1.top().showDetails();
             test1.pop();
+            counter++;
         }
         cout<<endl;
         colorText('E');
@@ -1386,6 +1385,7 @@ void Club::showQueues() {
             cout<<counter<<" - ";
             test2.top().showDetails();
             test2.pop();
+            counter++;
         }
         cout<<endl;
     }
@@ -1420,6 +1420,7 @@ void Club::showDelays() {
 }
 
 void Club::showShopsByRating(){
+    cout<<endl;
     b.showStoresByRating();
 }
 
@@ -1451,7 +1452,7 @@ void Club::showShopsBySpecificBook(){
             catalog.showBooks();
         }
     }
-
+    cout<<endl;
     b.showStoresbySpecificBook(catalog.books[id]);
 
 }
@@ -1722,7 +1723,7 @@ bool Club::makeRequest() {
         }
     }
     valid=false;
-    while ((code <= -1) || cin.fail()) {
+    while ((code <= -1) || cin.fail() || catalog.searchBook(code)==-1) {
         cout << "Indique, então, o título do livro: ";
         getline(cin, name);
         cout << endl;
@@ -1764,7 +1765,6 @@ bool Club::makeRequest() {
         int id=catalog.searchBook(code);
         members[isMember(nif)].calculateRatio();
         catalog.books[id].loadHeapMember(members[isMember(nif)]);
-        members[isMember(nif)].registerRequest(code, today);
     } else { //it's not a member then it's a nonMem
         while (true) {
             if (isnonMem(nif) == -1) {
@@ -1810,7 +1810,7 @@ bool Club::buyBook(int nif,int code){
     if(code==-1){
     valid=false;
     while(!valid){
-        cout<<"Indique o código do livro (indique -1 caso não saiba o código): "<< endl;
+        cout<<"Indique o código do livro (indique -1 caso não saiba o código): ";
         getline(cin, code_str);
         if(isdigit(code_str[0])){
             valid=true;
@@ -1850,12 +1850,14 @@ bool Club::buyBook(int nif,int code){
         }
         valid=false;
         while(!valid){
-            cout<<"Selecione uma das lojas que apresentam o livro especificado disponível (indique o número presente antes do nome da loja): "<<endl;
+            cout<<"Selecione uma das lojas que apresentam o livro especificado disponível (indique o número presente antes do nome da loja): ";
             getline(cin, shop_str);
             if(isdigit(shop_str[0])){
                 valid=true;
                 id_shop = stoi(shop_str);
-                if(id_shop<1 || id_shop> stores.size()){
+                cout<<id_shop<<endl;
+                if(id_shop<=0 || id_shop> stores.size()){
+                    cout<<"Holo"<<endl;
                     valid=false;
                 }
             }
@@ -1873,20 +1875,24 @@ bool Club::buyBook(int nif,int code){
         }
         }
         }
+        cout<<"I'm still here"<<endl;
         id_shop-=1;
         price=b.sellBook(catalog.books[id],stores[id_shop]);
     }
+    cout<<"Hello again"<<endl;
+    cout<<price<<endl;
         if(price != -1){
             if(members[isMember(nif)].getBalance()-price<=0){
+                cout<<"Negative"<<endl;
                 throw NegativeBalance(nif);
             }
             else{
                 members[isMember(nif)].minusBalance(price);
                 string int_answer,answer,writ_answer;
                 int rating;
-                bool valid=false;
+                valid=false;
                 while(!valid){
-                     cout<<"Introduza uma opinião de 1 a 5 sobre a livraria, por favor : "<<endl;
+                     cout<<"Introduza uma opinião de 1 a 5 sobre a livraria, por favor : ";
                      getline(cin,int_answer);
                      if(isdigit(int_answer[0])){
                           rating = stoi(int_answer);
@@ -1900,6 +1906,7 @@ bool Club::buyBook(int nif,int code){
         }
                 }
                 b.findShop(stores[id_shop],rating);
+                cout<<"Hello"<<endl;
                 return true;
             }
         }
@@ -2548,6 +2555,7 @@ void Club::showShopsInRange(){
             valid = true;
         }
     }
+    cout<<endl;
     b.showStoresContemplated(min, max);
 }
 
@@ -2623,7 +2631,7 @@ void Club::updateHeap(int nif){
     vector<int>codes;
     if(isnonMem(nif) != -1){ //is nonMem
        for(int i=0;i<nonmembers[isnonMem(nif)].getlendRequest().size();i++){
-           if(find(codes.begin(),codes.end(),catalog.searchBook(nonmembers[isnonMem(nif)].getlendRequest()[i].first)) != codes.end()){
+           if(find(codes.begin(),codes.end(),catalog.searchBook(nonmembers[isnonMem(nif)].getlendRequest()[i].first)) == codes.end()){
               codes.push_back(catalog.searchBook(nonmembers[isnonMem(nif)].getlendRequest()[i].first));
            }
        }
@@ -2635,13 +2643,17 @@ void Club::updateHeap(int nif){
     }
     else{
          for(int i=0;i<members[isMember(nif)].getlendRequest().size();i++){
-           if(find(codes.begin(),codes.end(),catalog.searchBook(members[isMember(nif)].getlendRequest()[i].first)) != codes.end()){
+             cout<<"Hello"<<endl;
+           if(find(codes.begin(),codes.end(),catalog.searchBook(members[isMember(nif)].getlendRequest()[i].first)) == codes.end()){
               codes.push_back(catalog.searchBook(members[isMember(nif)].getlendRequest()[i].first));
+              cout<<catalog.searchBook(members[isMember(nif)].getlendRequest()[i].first)<<endl;
            }
        }
 
        for(int i=0;i<codes.size();i++){
+           cout<<catalog.books[codes[i]].getTitle()<<endl;
            catalog.books[codes[i]].deleteHeapM(members[isMember(nif)]);
+           showQueues();
            catalog.books[codes[i]].loadHeapMember(members[isMember(nif)]);
        }
     }

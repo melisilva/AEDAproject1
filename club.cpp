@@ -1362,23 +1362,32 @@ void Club::showQueues() {
     int counter=1;
     for(unsigned int i=0;i<catalog.books.size();i++){
         cout<<"Lista de espera do livro: ";
-        catalog.books[i].showBook(0);
+        colorText('B');
+        cout<<catalog.books[i].getTitle()<< " (" << catalog.books[i].getCode()<< "), escrito por " << catalog.books[i].getAuthor() << ", "<< catalog.books[i].getEdition() << " edicao, do membro "<<catalog.books[i].getOwner()<<endl;
         cout<<endl;
+        colorText('A');
         cout<<"----MEMBROS----"<<endl;
+        cout<<endl;
+        colorText('F');
         HeapMember test1=catalog.books[i].getHeapM();
         while(!test1.empty()){
-            cout<<counter<<" ";
+            cout<<counter<<" - ";
             test1.top().showDetails();
             test1.pop();
         }
+        cout<<endl;
+        colorText('E');
         cout<<"----NÃO MEMBROS----"<<endl;
+        cout<<endl;
+        colorText('F');
         HeapNonMem test2=catalog.books[i].getHeapNM();
         counter=1;
         while(!test2.empty()){
-            cout<<counter<<" ";
+            cout<<counter<<" - ";
             test2.top().showDetails();
             test2.pop();
         }
+        cout<<endl;
     }
 }
 

@@ -1509,14 +1509,16 @@ void Club::updatePreferences(){
 }
 
 void Club::updateTable(string oldEmail, string newEmail){
-    for(auto it = Preferences.begin(); it != Preferences.end(); it++){
-        if (it->getEmail() == oldEmail){
-            Info temp = *it;
-            Preferences.erase(oldEmail);
-            temp.setEmail(newEmail);
-            Preferences.insert(temp);
-        }
-    }
+    Info temp(oldEmail);
+    for(auto email:Preferences){
+            if(email.getEmail()==oldEmail){
+                    temp=email;
+                    break;
+                }
+            }
+    Preferences.erase(oldEmail);
+    temp.setEmail(newEmail);
+    Preferences.insert(temp);
 }
 
 void Club::checkDelays(){

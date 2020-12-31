@@ -147,7 +147,7 @@ void BStores::showStoresByRating(){
         it.retrieve().print();
         cout << endl;
         it.advance();
-    }
+   }
 }
 
 void BStores::showStoresContemplated(float min, float max){
@@ -172,6 +172,7 @@ void BStores::showStoresbySpecificBook(Book b){
             it.retrieve().print();
         }
         it.advance();
+        cout<<endl;
     }
 }
 

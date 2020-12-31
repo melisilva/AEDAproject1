@@ -5,14 +5,12 @@ Club::Club() {
     vector<Member> temp;
     vector<tuple<int, Date, int>> temp2, temp3,temp4;
     Catalog temp5;
-    //BStores temp6;
 
     members = temp;
     lendings = temp2;
     lendRequests = temp4;
     delays = temp3;
     catalog = temp5;
-    //b=temp6;
 }
 
 void Club::run(){
@@ -566,7 +564,6 @@ void Club::updatePerson() {
     if (per == -1){
         nonmembers[isnonMem(nif)].updateData(name, quantity, eMail);
     } else {
-        
         updateTable(members[per].getEmail(),eMail);
         members[per].updateData(name, quantity, eMail);
     }
@@ -703,7 +700,9 @@ bool Club::makeLending() {
             }
         }
         else{
-            cout<<"O livro solicitado foi requisitado foi pedido por um membro. Terá de aguardar a sua vez."<<endl;
+            colorText('C');
+            cout<<"O livro solicitado foi requisitado/pedido por um membro. Terá de aguardar a sua vez."<<endl;
+            colorText('F');
         }
     }
     return true;
@@ -802,9 +801,7 @@ bool Club::renovateLending(){
                         return true;
                     } else {
                         colorText('C');
-                        cout
-                                << "A renovação de livros só é possível a três ou menos dias antes do fim do prazo do seu empréstimo."
-                                << endl;
+                        cout<< "A renovação de livros só é possível a três ou menos dias antes do fim do prazo do seu empréstimo." << endl;
                         colorText('F');
                     }
                 }
@@ -1291,11 +1288,11 @@ void Club::removeBook(tuple<int, Date, int> lostBook) {
 
 void Club::showMembers(){
     for (int i = 0; i < members.size(); i++){
-        cout << "Nome: " << members[i].getName() << endl << "NIF: "<< members[i].getNIF() << endl <<setprecision(2)<<members[i].getBalance()<<" euros"<<endl<< "Livros:" << endl;
+        cout << "Nome: " << members[i].getName() << endl << "NIF: "<< members[i].getNIF() << endl <<"e-mail: "<<members[i].getEmail()<<endl<<setprecision(2)<<members[i].getBalance()<<" euros"<<endl<< "Livros:" << endl;
         vector<Book>books;
-        for(int i=0;i<catalog.books.size();i++){
-            if(catalog.books[i].getOwner() == members[i].getNIF()){
-                books.push_back(catalog.books[i]);
+        for(int j=0;j<catalog.books.size();j++){
+            if(catalog.books[j].getOwner() == members[i].getNIF()){
+                books.push_back(catalog.books[j]);
             }
         }
 
@@ -1314,10 +1311,10 @@ void Club::showFrequentant(int nif){
     }
     if(i1==-1){
         int index=isnonMem(nif);
-        cout << "Nome: " << nonmembers[i2].getName() << endl << "NIF: "<< nonmembers[i2].getNIF() << endl <<setprecision(2)<<nonmembers[i2].getBalance()<<" euros"<<endl;
+        cout << "Nome: " << nonmembers[i2].getName() << endl << "NIF: "<< nonmembers[i2].getNIF() << endl <<"e-mail: "<<nonmembers[i2].getEmail()<<endl<<setprecision(2)<<nonmembers[i2].getBalance()<<" euros"<<endl;
     }
     else{
-        cout << "Nome: " << members[i1].getName() << endl << "NIF: "<< members[i1].getNIF() << endl <<setprecision(2)<<members[i1].getBalance()<<" euros"<<endl<< "Livros:" << endl;
+        cout << "Nome: " << members[i1].getName() << endl << "NIF: "<< members[i1].getNIF() << endl <<"e-mail: "<<members[i1].getEmail()<<endl<<setprecision(2)<<members[i1].getBalance()<<" euros"<<endl<< "Livros:" << endl;
        vector<Book>books;
         for(int i=0;i<catalog.books.size();i++){
             if(catalog.books[i].getOwner() == members[i].getNIF()){
@@ -1351,7 +1348,7 @@ void Club::showAllFrequentants(){
 
 void Club::showNonMembers(){
     for (unsigned int i = 0; i < nonmembers.size(); i++){
-        cout << "Nome: " << nonmembers[i].getName() << endl << "NIF: "<< nonmembers[i].getNIF() << endl<<nonmembers[i].getBalance()<<" euros"<<endl;
+        cout << "Nome: " << nonmembers[i].getName() << endl << "NIF: "<< nonmembers[i].getNIF() << endl <<"e-mail: "<<nonmembers[i].getEmail()<<endl<<setprecision(2)<<nonmembers[i].getBalance()<<" euros"<<endl;
         cout << endl;
     }
 }
@@ -1855,9 +1852,7 @@ bool Club::buyBook(int nif,int code){
             if(isdigit(shop_str[0])){
                 valid=true;
                 id_shop = stoi(shop_str);
-                cout<<id_shop<<endl;
                 if(id_shop<=0 || id_shop> stores.size()){
-                    cout<<"Holo"<<endl;
                     valid=false;
                 }
             }
@@ -1875,15 +1870,11 @@ bool Club::buyBook(int nif,int code){
         }
         }
         }
-        cout<<"I'm still here"<<endl;
         id_shop-=1;
         price=b.sellBook(catalog.books[id],stores[id_shop]);
     }
-    cout<<"Hello again"<<endl;
-    cout<<price<<endl;
         if(price != -1){
             if(members[isMember(nif)].getBalance()-price<=0){
-                cout<<"Negative"<<endl;
                 throw NegativeBalance(nif);
             }
             else{
@@ -1906,7 +1897,6 @@ bool Club::buyBook(int nif,int code){
         }
                 }
                 b.findShop(stores[id_shop],rating);
-                cout<<"Hello"<<endl;
                 return true;
             }
         }
@@ -2223,16 +2213,7 @@ void Club::retrieveData(){
             membs.clear();
             membs << temp;
             balance = stof(temp);
-            /*do {
-                getline(memb_file, temp);
-                membs.str("");
-                membs.clear();
-                membs << temp;
-                membs >> code >> sep;
-                int ind = catalog.searchBook(code);
-            } while (sep != ';');*/
             Member newMem(name, eMail, nif, balance,books_given);
-           //newMem.setBooksGiven(books_given);
             newMem.setBooksTaken(books_taken);
             members.push_back(newMem);
             getline(memb_file, temp);
@@ -2643,17 +2624,13 @@ void Club::updateHeap(int nif){
     }
     else{
          for(int i=0;i<members[isMember(nif)].getlendRequest().size();i++){
-             cout<<"Hello"<<endl;
            if(find(codes.begin(),codes.end(),catalog.searchBook(members[isMember(nif)].getlendRequest()[i].first)) == codes.end()){
               codes.push_back(catalog.searchBook(members[isMember(nif)].getlendRequest()[i].first));
-              cout<<catalog.searchBook(members[isMember(nif)].getlendRequest()[i].first)<<endl;
            }
        }
 
        for(int i=0;i<codes.size();i++){
-           cout<<catalog.books[codes[i]].getTitle()<<endl;
            catalog.books[codes[i]].deleteHeapM(members[isMember(nif)]);
-           showQueues();
            catalog.books[codes[i]].loadHeapMember(members[isMember(nif)]);
        }
     }
